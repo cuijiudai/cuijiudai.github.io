@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -85,8 +85,8 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>a的伪类优先级如下：<br>[code=”css”]<br> 浏览器默认设置（:link,..:active） &lt; a &lt; .class &lt; a:link == .class a&lt; a:visited <a:hover <a:active<.class="" .class2(这是a的类名)<#id="" <="" #id="" a="" [="" code]="" <a="" id="more"><br>有意思的是 a:link 等于 .class a，这个可以改变这个两个的顺序来测试；同时我们常用的reset.css 中如果有对a:link等的定义会影响到.class a，所以我们不应该在reset中有伪类相关的定义。另外ie 6还有特别之处 :link 的威力相当的强大。<br>ie6 下:<strong><br>a:link 的优先级高于 .class .class2 及 .class tag .class2 , 低于 .class .class2 .class3 及 .class tag tag.class2。
-</strong><br>所以这也是要注意的地方。如何合理的利用优先级的关系，做好兼容各个ie6就是个问题？<br>如何解决这个问题，我认为不要定义全局的a:link ,a:visied 和 a:active，对伪类的定义一定要具体。<br>其次，也要注意#id 和 #id a ，会使伪类失效，当然解决方法也简单， 定义  #id:link ，#id a:link就可以了。</a:hover></p>
+        <p>a的伪类优先级如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">浏览器默认设置（:link,..:active） &lt; a &lt; .class &lt; a:link == .class a&lt; a:visited &lt;a:hover &lt;a:active&lt;.class .class2(这是a的类名)&lt;#id &lt; #id a</div></pre></td></tr></table></figure><br><a id="more"></a><br>有意思的是 a:link 等于 .class a，这个可以改变这个两个的顺序来测试；同时我们常用的reset.css 中如果有对a:link等的定义会影响到.class a，所以我们不应该在reset中有伪类相关的定义。另外ie 6还有特别之处 :link 的威力相当的强大。<br>ie6 下:<strong><br>a:link 的优先级高于 .class .class2 及 .class tag .class2 , 低于 .class .class2 .class3 及 .class tag tag.class2。
+</strong><br>所以这也是要注意的地方。如何合理的利用优先级的关系，做好兼容各个ie6就是个问题？<br>如何解决这个问题，我认为不要定义全局的a:link ,a:visied 和 a:active，对伪类的定义一定要具体。<br>其次，也要注意#id 和 #id a ，会使伪类失效，当然解决方法也简单， 定义  #id:link ，#id a:link就可以了。</p>
 <p>如果你感兴趣可以看看 <a href="http://blog.meituo.net/2010/09/08/css-%e7%b1%bb%e7%9a%84%e4%bc%98%e5%85%88%e7%ba%a7%e7%9a%84%e9%97%ae%e9%a2%98/" target="_blank" rel="external"> css 类的优先级的问题 </a> 和 <a href="http://blog.meituo.net/2010/08/29/%e4%b8%8d%e5%8f%af%e4%b8%8d%e7%9f%a5%e7%9a%84javascript%e8%bf%90%e7%ae%97%e7%ac%a6%e4%bc%98%e5%85%88%e7%ba%a7/" target="_blank" rel="external">不可不知的JavaScript运算符优先级 </a> 。</p>
 
       

@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -91,8 +91,8 @@
 <h4 id="方法一-使用cookie"><a href="#方法一-使用cookie" class="headerlink" title="方法一 使用cookie"></a>方法一 使用cookie</h4><p>打开子窗口的时候，子窗口或者父窗口可以写一个cookie来标示子窗口是否打开，然后子窗口关闭的时候删除这个cookie;这样即使父窗口刷新，cookie依然存在，这样父窗口就可以通过检测cookie的存在来检测子窗口是否存在，子窗口和父窗口可以跨子域。</p>
 <h4 id="方法二-本地存储"><a href="#方法二-本地存储" class="headerlink" title="方法二 本地存储"></a>方法二 本地存储</h4><p>方法基本和方法一一样，但是子窗口和父窗口不能跨域，因为本地存储不能跨域,子域也不可以。</p>
 <h4 id="方法三-window-open"><a href="#方法三-window-open" class="headerlink" title="方法三 window.open"></a>方法三 window.open</h4><p>无意发现了这个东东，很好的方法，我试了下兼容性很好，地址：<a href="http://josephj.com/lab/2011/window-open-reconnect/demo.html" target="_blank" rel="external">测试地址</a>;<br>其大体原理如此：<br>window.open(“”,  CHILD_WINDOW_NAME, CHILD_WINDOW_ATTRS);<br>通过open一个相同的window名字且地址为空的窗口，通过判断这个窗口的这个地址是否是”about:blank”，如果是，那么这个窗口已经关闭了（前提是前一个打开的地址不是空的）。</p>
-<p>[code=”js”]<br>            win = window.open(“”,  CHILD_WINDOW_NAME, CHILD_WINDOW_ATTRS);<br>            if (win.location.href === “about:blank”) {<br>                //窗口不存在<br>                win = window.open(CHILD_WINDOW_URL,  CHILD_WINDOW_NAME, CHILD_WINDOW_ATTRS);<br>            } else {<br>                //窗口以已经存在了<br>                win.focus();<br>            }</p>
-<p>[/code]<br>这是个不错的方法，但是打开子窗口的时候，子窗口不能进行重定位，否则ie下会出现 拒绝访问 的错误，具体的方法看看例子吧。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">win = <span class="built_in">window</span>.open(<span class="string">""</span>,  CHILD_WINDOW_NAME, CHILD_WINDOW_ATTRS);</div><div class="line"><span class="keyword">if</span> (win.location.href === <span class="string">"about:blank"</span>) &#123;</div><div class="line">    <span class="comment">//窗口不存在</span></div><div class="line">    win = <span class="built_in">window</span>.open(CHILD_WINDOW_URL,  CHILD_WINDOW_NAME, CHILD_WINDOW_ATTRS);</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="comment">//窗口以已经存在了</span></div><div class="line">    win.focus();</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure>
+<p>这是个不错的方法，但是打开子窗口的时候，子窗口不能进行重定位，否则ie下会出现 拒绝访问 的错误，具体的方法看看例子吧。</p>
 <p>按照需求各取所需吧。</p>
 
       

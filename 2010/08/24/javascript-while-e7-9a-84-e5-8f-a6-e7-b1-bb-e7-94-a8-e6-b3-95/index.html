@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -85,13 +85,9 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>原文来自<a href="”http://james.padolsey.com/javascript/detect-ie-in-js-using-conditional-comments/”">Detect IE in JS using conditional comments</a> ,James Padolsey 的这段代码，用来条件注释检测IE 版本，详细的用法可以看以下注释。<br><a id="more"></a><br>[code=”javascript”]</p>
-<p>// ———————————————————-<br>// A short snippet for detecting versions of IE in JavaScript<br>// without resorting to user-agent sniffing<br>// ———————————————————-<br>// If you’re not in IE (or IE version is less than 5) then:<br>//     ie === undefined<br>// If you’re in IE (&gt;=5) then you can determine which version:<br>//     ie === 7; // IE7<br>// Thus, to detect IE:<br>//     if (ie) {}<br>// And to detect the version:<br>//     ie === 6 // IE6<br>//     ie &gt; 7 // IE8, IE9 …<br>//     ie &lt; 9 // Anything less than IE9<br>// ———————————————————-<br>// UPDATE: Now using Live NodeList idea from @jdalton<br>var ie = (function(){<br>    var undef,<br>        v = 3,j=5<br>        div = document.createElement(‘div’),<br>        all = div.getElementsByTagName(‘i’);<br>    while (<br>        div.innerHTML = ‘<!--[if gt IE ' + (++v) + ']>< ![endif]-->‘,<br>        all[0]<br>    );<br>    return v &gt; 4 ? v : undef;<br>}());</p>
-<p>[/code]</p>
+        <p>原文来自<a href="”http://james.padolsey.com/javascript/detect-ie-in-js-using-conditional-comments/”">Detect IE in JS using conditional comments</a> ,James Padolsey 的这段代码，用来条件注释检测IE 版本，详细的用法可以看以下注释。<br><a id="more"></a><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment">// ---------------------------------------------------------- </span></div><div class="line"><span class="comment">// A short snippet for detecting versions of IE in JavaScript </span></div><div class="line"><span class="comment">// without resorting to user-agent sniffing </span></div><div class="line"><span class="comment">// ---------------------------------------------------------- </span></div><div class="line"><span class="comment">// If you're not in IE (or IE version is less than 5) then: </span></div><div class="line"><span class="comment">//     ie === undefined </span></div><div class="line"><span class="comment">// If you're in IE (&gt;=5) then you can determine which version: </span></div><div class="line"><span class="comment">//     ie === 7; // IE7 </span></div><div class="line"><span class="comment">// Thus, to detect IE: </span></div><div class="line"><span class="comment">//     if (ie) &#123;&#125; </span></div><div class="line"><span class="comment">// And to detect the version: </span></div><div class="line"><span class="comment">//     ie === 6 // IE6 </span></div><div class="line"><span class="comment">//     ie &gt; 7 // IE8, IE9 ... </span></div><div class="line"><span class="comment">//     ie &lt; 9 // Anything less than IE9 </span></div><div class="line"><span class="comment">// ---------------------------------------------------------- </span></div><div class="line"><span class="comment">// UPDATE: Now using Live NodeList idea from @jdalton </span></div><div class="line"><span class="keyword">var</span> ie = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </div><div class="line">    <span class="keyword">var</span> undef, </div><div class="line">        v = <span class="number">3</span>,j=<span class="number">5</span> </div><div class="line">        div = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>), </div><div class="line">        all = div.getElementsByTagName(<span class="string">'i'</span>); </div><div class="line">    <span class="keyword">while</span> ( </div><div class="line">        div.innerHTML = <span class="string">'&lt;!--[if gt IE '</span> + (++v) + <span class="string">']&gt;&lt; ![endif]--&gt;'</span>, </div><div class="line">        all[<span class="number">0</span>] </div><div class="line">    ); </div><div class="line">    <span class="keyword">return</span> v &gt; <span class="number">4</span> ? v : undef; </div><div class="line">&#125;());</div><div class="line"></div></pre></td></tr></table></figure></p>
 <p>真的very cool ，看看<a href="http://blog.meituo.net/wp-content/uploads/testie/testIE.html" target="_blank" rel="external"> demo </a>吧，其中还有while的用法:</p>
-<p>[code=”javascript”]</p>
-<p>while(state); // 注意后面一定要加 “ ; ”</p>
-<p>[/code]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">while</span>(state); <span class="comment">// 注意后面一定要加 “ ; ”</span></div><div class="line"></div></pre></td></tr></table></figure>
 <p>可以在while内执行语句（state）,只要最后一个语句为 true 就会一直执行 <a href="http://blog.meituo.net/wp-content/uploads/testie/testWhile.html" target="_blank" rel="external"> demo </a>。</p>
 
       

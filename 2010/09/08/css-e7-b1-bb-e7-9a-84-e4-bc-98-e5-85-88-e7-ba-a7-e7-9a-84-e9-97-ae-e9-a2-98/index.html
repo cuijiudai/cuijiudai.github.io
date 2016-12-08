@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -85,8 +85,9 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>以前感觉自己很熟悉了，今天才发现一个缺口.问题如下：<br>我们定义两个类<br>[code=”css”]<br>    .r{<br>        color:red;<br>        margin-left:20px;<br>    }<br>    .b{<br>        color:blue;<br>        margin-left:100px;<br>    }<br>[/code]</p>
-<p>[code=”html”]<br>    <div class="b r">美拓blog</div><br>[/code]<br>那么“美拓blog” 是什么颜色？padding-left 是 20px 还是 100px； 在我印象里 应该根据类的顺序class=”b r”那么 r 类应该覆盖 b 类，即” 美拓blog” 应该是红色，padding-left是100px。<br>但这是错误的，实际上是什么样子的？css 类的优先级是根据定义的先后顺序 确定渲染时的优先级，因为 b 类在 r 类后定义，所以 b 类和 r 类同时 应用到同一个元素的时候，b 类将 覆盖 r 类。所以美拓blog是 蓝色，padding-left是100px。<br>感觉自己html，css都不熟，哈哈，记录一下。<br>可以看看例子<a href="http://blog.meituo.net/wp-content/uploads/css_class_priority/css_class_priority.html" target="_blank" rel="external"> 点我 </a></p>
+        <p>以前感觉自己很熟悉了，今天才发现一个缺口.问题如下：<br>我们定义两个类<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.r</span>&#123;</div><div class="line">	<span class="attribute">color</span>:red;</div><div class="line">	<span class="attribute">margin-left</span>:<span class="number">20px</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.b</span>&#123;</div><div class="line">	<span class="attribute">color</span>:blue;</div><div class="line">	<span class="attribute">margin-left</span>:<span class="number">100px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"b r"</span>&gt;</span>美拓blog<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>那么“美拓blog” 是什么颜色？padding-left 是 20px 还是 100px； 在我印象里 应该根据类的顺序class=”b r”那么 r 类应该覆盖 b 类，即” 美拓blog” 应该是红色，padding-left是100px。<br>但这是错误的，实际上是什么样子的？css 类的优先级是根据定义的先后顺序 确定渲染时的优先级，因为 b 类在 r 类后定义，所以 b 类和 r 类同时 应用到同一个元素的时候，b 类将 覆盖 r 类。所以美拓blog是 蓝色，padding-left是100px。<br>感觉自己html，css都不熟，哈哈，记录一下。<br>可以看看例子<a href="http://blog.meituo.net/wp-content/uploads/css_class_priority/css_class_priority.html" target="_blank" rel="external"> 点我 </a></p>
 
       
     </div>

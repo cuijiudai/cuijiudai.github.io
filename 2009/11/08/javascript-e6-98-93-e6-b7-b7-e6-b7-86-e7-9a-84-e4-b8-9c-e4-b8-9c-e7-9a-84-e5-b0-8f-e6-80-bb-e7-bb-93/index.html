@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -116,7 +116,7 @@ _
 可见keypress获得的是Unicode，keydown/keyup获得的是按键的数字代码。只不过IE只用了一个单词keyCode来表示；而Firefox用了charCode表示Unicode，用keyCode表示了数字案件的值。
 </code></pre><p>当鼠标安装不放keydown和keypress会一直触发，直到放开按键触发keyup停止。</p>
 <p>例子就上面那个，没明白么，再点击一次吧。</p>
-<h3 id="4、undefined-null-””-0和false"><a href="#4、undefined-null-””-0和false" class="headerlink" title="4、undefined,null,””,0和false"></a>4、undefined,null,””,0和false</h3><p>请看这里：<a href="http://www.cnblogs.com/birdshome/archive/2005/03/04/111991.html" target="_blank" rel="external">猛点我</a>。<br>[code=”javascript”]<br> typeof(undefined) == ‘undefined’<br> typeof(null) == ‘object’<br> typeof(“”) == ‘string’<br> typeof(0) == ‘number’<br> typeof(false) == ‘boolean’<br> [/code]<br> <em>这五个值作!运算，结果全为：true。if判断就没问题了</em></p>
+<h3 id="4、undefined-null-””-0和false"><a href="#4、undefined-null-””-0和false" class="headerlink" title="4、undefined,null,””,0和false"></a>4、undefined,null,””,0和false</h3><p>请看这里：<a href="http://www.cnblogs.com/birdshome/archive/2005/03/04/111991.html" target="_blank" rel="external">猛点我</a>。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typeof</span>(<span class="literal">undefined</span>) == <span class="string">'undefined'</span></div><div class="line"><span class="keyword">typeof</span>(<span class="literal">null</span>) == <span class="string">'object'</span></div><div class="line"><span class="keyword">typeof</span>(<span class="string">""</span>) == <span class="string">'string'</span></div><div class="line"><span class="keyword">typeof</span>(<span class="number">0</span>) == <span class="string">'number'</span></div><div class="line"><span class="keyword">typeof</span>(<span class="literal">false</span>) == <span class="string">'boolean'</span></div></pre></td></tr></table></figure><br> <em>这五个值作!运算，结果全为：true。if判断就没问题了</em></p>
 
       
     </div>

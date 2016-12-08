@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -110,9 +110,11 @@
 </ol>
 <h4 id="3、color"><a href="#3、color" class="headerlink" title="3、color"></a>3、color</h4><h4 id="4、opacity"><a href="#4、opacity" class="headerlink" title="4、opacity"></a>4、opacity</h4><p>opacity的继承有问题，子元素会继承祖元素的opacity，但是无法更改。</p>
 <h3 id="特殊的font-size"><a href="#特殊的font-size" class="headerlink" title="特殊的font-size"></a>特殊的font-size</h3><pre><code>测试代码：
-[code=&quot;html&quot;]
-</code></pre><p>let us test <em>em element</em>,how about it！</p>
-<pre><code>[/code]
+{% codeblock lang:html %}
+
+let us test _em element_,how about it！
+
+	{% endcodeblock %}
 </code></pre><h4 id="1、百分比"><a href="#1、百分比" class="headerlink" title="1、百分比%"></a>1、百分比%</h4><pre><code>p{font-size:80%}
 em 内的文字和p一样大，并不是p字体大小的80%。
 </code></pre><h4 id="2、pix，em"><a href="#2、pix，em" class="headerlink" title="2、pix，em"></a>2、pix，em</h4><pre><code>p{font-size:14px}
@@ -124,8 +126,7 @@ p{font-size:0.85em}
 <div style="width:425px;text-align:left" id="__ss_1772232"><object style="margin:0px" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=inheritance2-090726204631-phpapp02&rel=0&stripped_title=css-inheritance-a-simple-stepbystep-tutorial"><param name="allowFullScreen" value="true"><param name="allowScriptAccess" value="always"><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=inheritance2-090726204631-phpapp02&rel=0&stripped_title=css-inheritance-a-simple-stepbystep-tutorial" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></object></div>
 
 <h3 id="特殊的line-height"><a href="#特殊的line-height" class="headerlink" title="特殊的line-height"></a>特殊的line-height</h3><p>测试代码：</p>
-<p>[code=”css”]<br>body{<br>    font-size:16px;<br>    line-height:xxx; //xxx用于以下替换<br>}<br>h1{font-size:32px;}<br>p{font-size:16px;}</p>
-<p>#footer{font-size:12px}<br>[/code]</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">body&#123;</div><div class="line">	font-size:16px;</div><div class="line">	line-height:xxx; //xxx用于以下替换</div><div class="line">&#125;</div><div class="line">h1&#123;font-size:32px;&#125;</div><div class="line">p&#123;font-size:16px;&#125;</div><div class="line">#footer&#123;font-size:12px&#125;</div></pre></td></tr></table></figure>
 <h4 id="1、百分比、px"><a href="#1、百分比、px" class="headerlink" title="1、百分比、px"></a>1、百分比、px</h4><pre><code>xxx=120%，即body默认16px*120%=19.2px，
 现在body,h1,p,#footer的line-height=19.2px;
 若xxx=20px；现在body,h1,p,#footer的line-height=20px;

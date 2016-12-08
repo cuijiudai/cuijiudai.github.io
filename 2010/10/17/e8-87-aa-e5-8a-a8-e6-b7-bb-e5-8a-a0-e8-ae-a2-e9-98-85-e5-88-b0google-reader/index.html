@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -85,8 +85,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <p><img src="http://blog.meituo.net/wp-content/uploads/atuo_add_togooglereader/addtogooglereader.png" alt="以后订阅到google的时候再也不用点击 "><a id="more"></a><br>一段简短的js代码，用js改变简化操作是不是挺爽的？一个Greasemonkey的js文件，以前用过，今天又翻了出来，看了一下源码，原来这么简单。。。<br>如果你看不懂或者不清楚如何书写Greasemonkey 插件请查看<a href="http://blog.meituo.net/2010/08/29/%E4%B9%A6%E5%86%99%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%B2%B9%E7%8C%B4greasemonkey%E6%8F%92%E4%BB%B6/" target="_blank" rel="external">书写第一个油猴(Greasemonkey)插件</a>.<br>[code=”js”]<br>// ==UserScript==<br>// @name           Auto add to Google Reader<br>// @namespace      <a href="http://lieschke.net/projects/greasemonkey/" target="_blank" rel="external">http://lieschke.net/projects/greasemonkey/</a><br>// @description    Bypasses the “Add to Google homepage”/“Add to Google Reader” choice, directly adding to Google Reader.<br>// @include        <a href="http://www.google.com/ig/add?feedurl=*" target="_blank" rel="external">http://www.google.com/ig/add?feedurl=*</a><br>// ==/UserScript==</p>
-<p>(function() {<br>    var anchors = document.getElementsByTagName(‘a’);<br>    for (var i = 0; i &lt; anchors.length; i++) {<br>        if (anchors[i].innerHTML == “Add to Google Reader”) {<br>            document.location.href = anchors[i].href;<br>        }<br>    }<br>})();<br>[/code]<br>代码源地址<a target="_blank" href="http://userscripts.org/scripts/show/8390">Auto add to Google Reader</a></p>
+        <p><img src="http://blog.meituo.net/wp-content/uploads/atuo_add_togooglereader/addtogooglereader.png" alt="以后订阅到google的时候再也不用点击 "><a id="more"></a><br>一段简短的js代码，用js改变简化操作是不是挺爽的？一个Greasemonkey的js文件，以前用过，今天又翻了出来，看了一下源码，原来这么简单。。。<br>如果你看不懂或者不清楚如何书写Greasemonkey 插件请查看<a href="http://blog.meituo.net/2010/08/29/%E4%B9%A6%E5%86%99%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%B2%B9%E7%8C%B4greasemonkey%E6%8F%92%E4%BB%B6/" target="_blank" rel="external">书写第一个油猴(Greasemonkey)插件</a>.<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ==UserScript==</span></div><div class="line"><span class="comment">// @name           Auto add to Google Reader</span></div><div class="line"><span class="comment">// @namespace      http://lieschke.net/projects/greasemonkey/</span></div><div class="line"><span class="comment">// @description    Bypasses the "Add to Google homepage"/"Add to Google Reader" choice, directly adding to Google Reader.</span></div><div class="line"><span class="comment">// @include        http://www.google.com/ig/add?feedurl=*</span></div><div class="line"><span class="comment">// ==/UserScript==</span></div><div class="line"></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> anchors = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'a'</span>);</div><div class="line">	<span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; anchors.length; i++) &#123;</div><div class="line">		<span class="keyword">if</span> (anchors[i].innerHTML == <span class="string">"Add to Google Reader"</span>) &#123;</div><div class="line">			<span class="built_in">document</span>.location.href = anchors[i].href;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure><br>代码源地址<a target="_blank" href="http://userscripts.org/scripts/show/8390">Auto add to Google Reader</a></p>
 
       
     </div>

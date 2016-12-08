@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -85,11 +85,12 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>现在css 3 ，html5 无疑是 web 标准最热的项目，我们要尽量使用这些新标准的新属性，做好向前兼容，但你知道css 3 中 属性的顺序要按照一定顺序么？<br>现在推荐的顺序:<br>[code=”css”]<br>.not-a-square {<br>   -webkit-border-radius: 10px;<br>   -moz-border-radius: 10px;<br>   border-radius: 10px;<br>}<br>[/code]<br>也就是将“ 真正”的属性（不带前缀的）的属性写到最后。<br>而这样的书写顺序是错误的<br>[code=”css”]<br>.not-a-square {<br>   border-radius: 10px;<br>   -moz-border-radius: 10px;<br>   -webkit-border-radius: 10px;<br>}<br>[/code]<br>为什么那？<br><a id="more"></a><br>这是因为我们处于特殊的时期：</p>
+        <p>现在css 3 ，html5 无疑是 web 标准最热的项目，我们要尽量使用这些新标准的新属性，做好向前兼容，但你知道css 3 中 属性的顺序要按照一定顺序么？<br>现在推荐的顺序:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line"><span class="selector-class">.not-a-square</span> &#123;</div><div class="line">   <span class="attribute">-webkit-border-radius</span>: <span class="number">10px</span>;</div><div class="line">   <span class="attribute">-moz-border-radius</span>: <span class="number">10px</span>;</div><div class="line">   <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br>也就是将“ 真正”的属性（不带前缀的）的属性写到最后。<br>而这样的书写顺序是错误的<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.not-a-square</span> &#123;</div><div class="line">   <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">   <span class="attribute">-moz-border-radius</span>: <span class="number">10px</span>;</div><div class="line">   <span class="attribute">-webkit-border-radius</span>: <span class="number">10px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br>为什么那？<br><a id="more"></a><br>这是因为我们处于特殊的时期：</p>
 <ol>
 <li>很久以前： 这些属性都没有被支持，顺序没关系</li>
 <li>以前：仅仅有 供营商前缀 的属性被支持，顺序没关系</li>
-<li>现在：有 供营商前缀 和 “ 真正属性”（无供应商前缀的属性） 都被支持，如果前缀在最后它将重写” 真正属性 “4.  以后:只有真正的属性被支持，顺序不是问题<br>或许这张图片更清晰易懂：<br><img src="http://blog.meituo.net/wp-content/uploads/css_property_order/fundamentallyflawed.png" alt="css 3 书写顺序的过去，现在和将来"><br>或许光说还是不够有说服力，那么看看这个例子.<br>[code=”css”]<br>.not-a-square {<br>/<em> 这两个属性干了完全不同的事 </em>/<br>border-radius: 30px 10px;<br>-webkit-border-radius: 30px 10px;<br>}<br>[/code]<br>border-radius: 30px 10px; 的含义是左上角和右下角为30px 的圆角，右上角和左下角的圆角为10px；<br>-webkit-border-radius: 30px 10px; 为四个椭圆的圆角 30px宽，10px 高。<br><img src="http://blog.meituo.net/wp-content/uploads/css_property_order/cornerswrong.png" alt="书写顺序对比"><br>用Safari 4 或者 Safari 5 打开 <a href="http://jsbin.com/efewi4/edit" target="_blank" rel="external">看看例子吧。</a></li>
+<li>现在：有 供营商前缀 和 “ 真正属性”（无供应商前缀的属性） 都被支持，如果前缀在最后它将重写” 真正属性 “4.  以后:只有真正的属性被支持，顺序不是问题<br>或许这张图片更清晰易懂：<br><img src="http://blog.meituo.net/wp-content/uploads/css_property_order/fundamentallyflawed.png" alt="css 3 书写顺序的过去，现在和将来"><br>或许光说还是不够有说服力，那么看看这个例子.<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.not-a-square</span> &#123;</div><div class="line">   <span class="comment">/* 这两个属性干了完全不同的事 */</span></div><div class="line">   <span class="attribute">border-radius</span>: <span class="number">30px</span> <span class="number">10px</span>;</div><div class="line">   <span class="attribute">-webkit-border-radius</span>: <span class="number">30px</span> <span class="number">10px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+border-radius: 30px 10px; 的含义是左上角和右下角为30px 的圆角，右上角和左下角的圆角为10px；<br>-webkit-border-radius: 30px 10px; 为四个椭圆的圆角 30px宽，10px 高。<br><img src="http://blog.meituo.net/wp-content/uploads/css_property_order/cornerswrong.png" alt="书写顺序对比"><br>用Safari 4 或者 Safari 5 打开 <a href="http://jsbin.com/efewi4/edit" target="_blank" rel="external">看看例子吧。</a></li>
 </ol>
 <p>原文 : <a href="http://css-tricks.com/ordering-css3-properties/" target="_blank" rel="external">Ordering CSS3 Properties</a></p>
 

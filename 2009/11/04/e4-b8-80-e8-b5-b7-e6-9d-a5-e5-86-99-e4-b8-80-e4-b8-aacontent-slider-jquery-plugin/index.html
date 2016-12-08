@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -89,113 +89,8 @@
 <p>How to Build a Simple Content Slider jQuery Plugin<br><a id="more"></a><br><strong><a href="http://nettuts.s3.amazonaws.com/478_jwSlider/jwSlider.zip" title="源码" target="_blank" rel="external">源码下载</a> </strong></p>
 <p><strong><a href="http://nettuts.s3.amazonaws.com/478_jwSlider/jwSlider/index.html" title="demo" target="_blank" rel="external"> demo演示</a></strong></p>
 <p>看一下大体框架</p>
-<p>[code=”javascript”]<br>(function(\$) {</p>
-<p>\$.fn.$1 = function(options) {</p>
-<p>var defaults = {<br>$2<br>},</p>
-<p>options = \$.extend(defaults, options);</p>
-<p>this.each(function() {</p>
-<p>var \$this = \$(this);</p>
-<p>$3</p>
-<p>return this;</p>
-<p>}); // end each</p>
-<p>}</p>
-<p>})(jQuery);</p>
-<p>[/code]<br>原文<a href="http://net.tutsplus.com/videos/screencasts/how-to-build-a-simple-content-slider-jquery-plugin/" target="_blank" rel="external">链接</a>里面有视频的，大家可以看一下。<br>还有就是源码列一下<br>[code=”javascript”]<br>(function($) {</p>
-<pre><code>$.fn.jwSlider = function(options) {
-
-    // set default options
-    var defaults = {
-        speed : 1000,
-        pause : 2000,
-        transition : &apos;fade&apos;
-    },
-
-    // Take the options that the user selects, and merge them with defaults.
-    options = $.extend(defaults, options);
-
-    // Needed to fix a tiny bug. If the pause is less than speed, it&apos;ll cause a flickr.
-    // This will check for that, and if it is smaller, it increases it to just about the options.speed.
-    if(options.pause &lt;= options.speed) options.pause = options.speed + 100;
-
-    // for each item in the wrapped set
-    return this.each(function() {
-
-        // cache &quot;this.&quot;
-        var $this = $(this);
-
-        // Wrap &quot;this&quot; in a div with a class of &quot;slider-wrap.&quot;
-        $this.wrap(&apos;&lt;div class=&quot;slider-wrap&quot; /&gt;&apos;);
-
-        // Set the width to a really high number. Adjusting the &quot;left&quot; css values, so need to set positioning.
-        $this.css({
-            &apos;width&apos; : &apos;99999px&apos;,
-            &apos;position&apos; : &apos;relative&apos;,
-            &apos;padding&apos; : 0
-        });
-
-        // If the user chose the &quot;slide&quot; transition...
-        if(options.transition === &apos;slide&apos;) {
-            $this.children().css({
-                &apos;float&apos; : &apos;left&apos;,
-                &apos;list-style&apos; : &apos;none&apos;
-            });
-
-            $(&apos;.slider-wrap&apos;).css({
-                &apos;width&apos; : $this.children().width(),
-                &apos;overflow&apos; : &apos;hidden&apos;
-            });                
-        }
-
-        // If the user chose the &quot;fade&quot; transition, instead pile all of the images on top of each other.
-        if(options.transition === &apos;fade&apos;) {
-            $this.children().css({
-                &apos;width&apos; : $this.children().width(),
-                &apos;position&apos; : &apos;absolute&apos;,
-                &apos;left&apos; : 0
-            });
-
-            // reorder elements to fix z-index issue.
-
-            for(var i = $this.children().length, y = 0; i &gt; 0; i--, y++) {         
-                $this.children().eq(y).css(&apos;zIndex&apos;, i + 99999);
-            }    
-
-            // Call the fade function. 
-            fade();
-        }
-
-        // If the user instead chose the &quot;slide&quot; transition, call the slide function.
-        if(options.transition === &apos;slide&apos;) slide();    
-
-        function slide() {
-            setInterval(function() {
-                // Animate to the left the width of the image/div
-                $this.animate({&apos;left&apos; : &apos;-&apos; + $this.parent().width()}, options.speed, function() {
-                    // Return the &quot;left&quot; CSS back to 0, and append the first child to the very end of the list.
-                    $this
-                       .css(&apos;left&apos;, 0)
-                       .children(&apos;:first&apos;)
-                       .appendTo($this); // move it to the end of the line.
-                })
-            }, options.pause);
-        } // end slide
-
-        function fade() {
-            setInterval(function() {
-                $this.children(&apos;:first&apos;).animate({&apos;opacity&apos; : 0}, options.speed, function() {    
-                    $this
-                       .children(&apos;:first&apos;)
-                       .css(&apos;opacity&apos;, 1) // Return opacity back to 1 for next time.
-                       .css(&apos;zIndex&apos;, $this.children(&apos;:last&apos;).css(&apos;zIndex&apos;) - 1) // Reduces zIndex by 1 so that it&apos;s no longer on top.                    
-                       .appendTo($this); // move it to the end of the line.
-                })
-            }, options.pause);
-        } // end fade            
-
-    }); // end each        
-
-} // End plugin. Go eat cake.
-</code></pre><p>})(jQuery);<br>[/code]<br>很详细的注释，不讲了，我就不多说了，大家看看就理解了，该吃饭了啊</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">\$</span>) </span>&#123;</div><div class="line"></div><div class="line">\$.fn.$<span class="number">1</span> = <span class="function"><span class="keyword">function</span>(<span class="params">options</span>) </span>&#123;</div><div class="line"></div><div class="line"><span class="keyword">var</span> defaults = &#123;</div><div class="line">$<span class="number">2</span></div><div class="line">&#125;,</div><div class="line"></div><div class="line">options = \$.extend(defaults, options);</div><div class="line"></div><div class="line"><span class="keyword">this</span>.each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line"><span class="keyword">var</span> \$<span class="keyword">this</span> = \$(<span class="keyword">this</span>);</div><div class="line"></div><div class="line">$<span class="number">3</span></div><div class="line"></div><div class="line"><span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line"></div><div class="line">&#125;); <span class="comment">// end each</span></div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">&#125;)(jQuery);</div><div class="line"></div></pre></td></tr></table></figure>
+<p>原文<a href="http://net.tutsplus.com/videos/screencasts/how-to-build-a-simple-content-slider-jquery-plugin/" target="_blank" rel="external">链接</a>里面有视频的，大家可以看一下。<br>还有就是源码列一下<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>) </span>&#123;</div><div class="line"></div><div class="line">	$.fn.jwSlider = <span class="function"><span class="keyword">function</span>(<span class="params">options</span>) </span>&#123;</div><div class="line"></div><div class="line">		<span class="comment">// set default options</span></div><div class="line">		<span class="keyword">var</span> defaults = &#123;</div><div class="line">			<span class="attr">speed</span> : <span class="number">1000</span>,</div><div class="line">			<span class="attr">pause</span> : <span class="number">2000</span>,</div><div class="line">			<span class="attr">transition</span> : <span class="string">'fade'</span></div><div class="line">		&#125;,</div><div class="line"></div><div class="line">		<span class="comment">// Take the options that the user selects, and merge them with defaults.</span></div><div class="line">		options = $.extend(defaults, options);</div><div class="line"></div><div class="line">		<span class="comment">// Needed to fix a tiny bug. If the pause is less than speed, it'll cause a flickr.</span></div><div class="line">		<span class="comment">// This will check for that, and if it is smaller, it increases it to just about the options.speed.</span></div><div class="line">		<span class="keyword">if</span>(options.pause &lt;= options.speed) options.pause = options.speed + <span class="number">100</span>;</div><div class="line"></div><div class="line">		<span class="comment">// for each item in the wrapped set</span></div><div class="line">		<span class="keyword">return</span> <span class="keyword">this</span>.each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">			<span class="comment">// cache "this."</span></div><div class="line">			<span class="keyword">var</span> $<span class="keyword">this</span> = $(<span class="keyword">this</span>);</div><div class="line"></div><div class="line">			<span class="comment">// Wrap "this" in a div with a class of "slider-wrap."</span></div><div class="line">			$<span class="keyword">this</span>.wrap(<span class="string">'&lt;div class="slider-wrap" /&gt;'</span>);</div><div class="line"></div><div class="line">			<span class="comment">// Set the width to a really high number. Adjusting the "left" css values, so need to set positioning.</span></div><div class="line">			$<span class="keyword">this</span>.css(&#123;</div><div class="line">				<span class="string">'width'</span> : <span class="string">'99999px'</span>,</div><div class="line">				<span class="string">'position'</span> : <span class="string">'relative'</span>,</div><div class="line">				<span class="string">'padding'</span> : <span class="number">0</span></div><div class="line">			&#125;);</div><div class="line"></div><div class="line">			<span class="comment">// If the user chose the "slide" transition...</span></div><div class="line">			<span class="keyword">if</span>(options.transition === <span class="string">'slide'</span>) &#123;</div><div class="line">				$<span class="keyword">this</span>.children().css(&#123;</div><div class="line">					<span class="string">'float'</span> : <span class="string">'left'</span>,</div><div class="line">					<span class="string">'list-style'</span> : <span class="string">'none'</span></div><div class="line">				&#125;);</div><div class="line"></div><div class="line">				$(<span class="string">'.slider-wrap'</span>).css(&#123;</div><div class="line">					<span class="string">'width'</span> : $<span class="keyword">this</span>.children().width(),</div><div class="line">					<span class="string">'overflow'</span> : <span class="string">'hidden'</span></div><div class="line">				&#125;);				</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="comment">// If the user chose the "fade" transition, instead pile all of the images on top of each other.</span></div><div class="line">			<span class="keyword">if</span>(options.transition === <span class="string">'fade'</span>) &#123;</div><div class="line">				$<span class="keyword">this</span>.children().css(&#123;</div><div class="line">					<span class="string">'width'</span> : $<span class="keyword">this</span>.children().width(),</div><div class="line">					<span class="string">'position'</span> : <span class="string">'absolute'</span>,</div><div class="line">					<span class="string">'left'</span> : <span class="number">0</span></div><div class="line">				&#125;);</div><div class="line"></div><div class="line">				<span class="comment">// reorder elements to fix z-index issue.</span></div><div class="line"></div><div class="line">				<span class="keyword">for</span>(<span class="keyword">var</span> i = $<span class="keyword">this</span>.children().length, y = <span class="number">0</span>; i &gt; <span class="number">0</span>; i--, y++) &#123; 		</div><div class="line">					$<span class="keyword">this</span>.children().eq(y).css(<span class="string">'zIndex'</span>, i + <span class="number">99999</span>);</div><div class="line">				&#125;	</div><div class="line"></div><div class="line">				<span class="comment">// Call the fade function. </span></div><div class="line">				fade();</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="comment">// If the user instead chose the "slide" transition, call the slide function.</span></div><div class="line">			<span class="keyword">if</span>(options.transition === <span class="string">'slide'</span>) slide();	</div><div class="line"></div><div class="line">			<span class="function"><span class="keyword">function</span> <span class="title">slide</span>(<span class="params"></span>) </span>&#123;</div><div class="line">				setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">					<span class="comment">// Animate to the left the width of the image/div</span></div><div class="line">					$<span class="keyword">this</span>.animate(&#123;<span class="string">'left'</span> : <span class="string">'-'</span> + $<span class="keyword">this</span>.parent().width()&#125;, options.speed, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">						<span class="comment">// Return the "left" CSS back to 0, and append the first child to the very end of the list.</span></div><div class="line">						$<span class="keyword">this</span></div><div class="line">						   .css(<span class="string">'left'</span>, <span class="number">0</span>)</div><div class="line">						   .children(<span class="string">':first'</span>)</div><div class="line">						   .appendTo($<span class="keyword">this</span>); <span class="comment">// move it to the end of the line.</span></div><div class="line">					&#125;)</div><div class="line">				&#125;, options.pause);</div><div class="line">			&#125; <span class="comment">// end slide</span></div><div class="line"></div><div class="line">			<span class="function"><span class="keyword">function</span> <span class="title">fade</span>(<span class="params"></span>) </span>&#123;</div><div class="line">				setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">					$<span class="keyword">this</span>.children(<span class="string">':first'</span>).animate(&#123;<span class="string">'opacity'</span> : <span class="number">0</span>&#125;, options.speed, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;	</div><div class="line">						$<span class="keyword">this</span></div><div class="line">						   .children(<span class="string">':first'</span>)</div><div class="line">						   .css(<span class="string">'opacity'</span>, <span class="number">1</span>) <span class="comment">// Return opacity back to 1 for next time.</span></div><div class="line">						   .css(<span class="string">'zIndex'</span>, $<span class="keyword">this</span>.children(<span class="string">':last'</span>).css(<span class="string">'zIndex'</span>) - <span class="number">1</span>) <span class="comment">// Reduces zIndex by 1 so that it's no longer on top.					</span></div><div class="line">						   .appendTo($<span class="keyword">this</span>); <span class="comment">// move it to the end of the line.</span></div><div class="line">					&#125;)</div><div class="line">				&#125;, options.pause);</div><div class="line">			&#125; <span class="comment">// end fade			</span></div><div class="line"></div><div class="line">		&#125;); <span class="comment">// end each		</span></div><div class="line"></div><div class="line">	&#125; <span class="comment">// End plugin. Go eat cake.</span></div><div class="line"></div><div class="line">&#125;)(jQuery);</div></pre></td></tr></table></figure><br>很详细的注释，不讲了，我就不多说了，大家看看就理解了，该吃饭了啊</p>
 
       
     </div>

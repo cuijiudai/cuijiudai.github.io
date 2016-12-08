@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -89,31 +89,7 @@
 <p>Fckeditor 是一个优秀的文本编辑器，我们可以使用它在浏览器中轻松的构建富文本编辑器，他的做法是对一个textarea实行替换，我使用过Fckeditor 3.xx，今天项目需要使用2.xx，并且需要统计输入字数，不熟悉啊！<br>首先上网查到获得Fck的内容要使用var editor = FCKeditorAPI.GetInstance(instanceName)，FCKeditorAPI.GetInstance一直是undefined，然后上网查，又知道要在fck加载完后使用FCKeditorAPI.GetInstance， 也就是使用FCK内置的FCKeditor_OnComplete方法，但是还是不行，FCKeditor_OnComplete不是自动执行的，定义完以后需要你再调用一下：    FCKeditor_OnComplete()，这次还是不行在FCK还没加载下来，FCKeditor_OnComplete()就执行了！还是报错。。。不知道这个方法有什么用，只有使用window.onload了，这次终于好了。别忘了还要用jQuery。</p>
 <p><span id="more-741"></span></p>
 <a id="more"></a>
-<p>[code=’js’]<br>window.onload=function(){</p>
-<pre><code>function FCKeditor_OnComplete()
-{
-       var editor = FCKeditorAPI.GetInstance(&apos;info&apos;) ;
-    editor.Events.AttachEvent(&apos;OnSelectionChange&apos;, editor_keydown);
-}  
-
-function editor_keydown(editor)
-{
-    var maxLength=3; //最大输入字数
-    content= $(editor.EditorDocument.body).text();
-    var len= content.length;
-    var $info =$(&apos;#info&apos;);//存放提示信息
-    if(len &lt; maxLength){
-        .text(&quot;还可以输入 &quot;+(maxLength-len)+&quot;字&quot;);
-    }
-    if(len == maxLength){
-        $info.text(&quot;字数达到上限&quot;);
-    }
-    if(len &gt; maxLength){
-        $info.text(&quot; 输入字符超过&quot;+maxLength+&quot;个,请更改！&quot;);
-    }
-}
-FCKeditor_OnComplete()
-</code></pre><p>}<br>[/code]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.onload=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">FCKeditor_OnComplete</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">   		<span class="keyword">var</span> editor = FCKeditorAPI.GetInstance(<span class="string">'info'</span>) ;</div><div class="line">    	editor.Events.AttachEvent(<span class="string">'OnSelectionChange'</span>, editor_keydown);</div><div class="line">    &#125;  </div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">editor_keydown</span>(<span class="params">editor</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">var</span> maxLength=<span class="number">3</span>; <span class="comment">//最大输入字数</span></div><div class="line">    	content= $(editor.EditorDocument.body).text();</div><div class="line">    	<span class="keyword">var</span> len= content.length;</div><div class="line">    	<span class="keyword">var</span> $info =$(<span class="string">'#info'</span>);<span class="comment">//存放提示信息</span></div><div class="line">    	<span class="keyword">if</span>(len &lt; maxLength)&#123;</div><div class="line">    		.text(<span class="string">"还可以输入 "</span>+(maxLength-len)+<span class="string">"字"</span>);</div><div class="line">    	&#125;</div><div class="line">    	<span class="keyword">if</span>(len == maxLength)&#123;</div><div class="line">    		$info.text(<span class="string">"字数达到上限"</span>);</div><div class="line">    	&#125;</div><div class="line">    	<span class="keyword">if</span>(len &gt; maxLength)&#123;</div><div class="line">    		$info.text(<span class="string">" 输入字符超过"</span>+maxLength+<span class="string">"个,请更改！"</span>);</div><div class="line">    	&#125;</div><div class="line">    &#125;</div><div class="line">    FCKeditor_OnComplete()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>还是看原文好啊， <a href="http://docs.cksource.com/FCKeditor_2.x/Developers_Guide/JavaScript_API" target="_blank" rel="external">/FCKeditor_2.x JavaScript_API</a></p>
 <p>我使用了OnSelectionChange 监听输入，或许有更好的。。。你知道么？</p>
 

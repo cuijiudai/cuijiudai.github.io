@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -87,18 +87,17 @@
       
         <p><span>Posted:</span> 09 Jul 2010 02:16 AM PDT</p><p></p>
 <p>这俩个我们经常见到，废话不多说，看例子</p>
-<p>[code=’js’]<br>$(“a”).click(function() {<br>   $(“body”).append($(this).attr(“href”));<br>   return false;<br>}<br>[/code]<br><a id="more"></a></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"a"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">   $(<span class="string">"body"</span>).append($(<span class="keyword">this</span>).attr(<span class="string">"href"</span>));</div><div class="line">   <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>这个效果大家应该知道，那么他和下例有啥区别：</p>
-<p>[code=’js’]<br>$(“a”).click(function(e) {<br>   $(“body”).append($(this).attr(“href”));<br>   e.preventDefault();<br>}<br>[/code]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"a"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">   $(<span class="string">"body"</span>).append($(<span class="keyword">this</span>).attr(<span class="string">"href"</span>));</div><div class="line">   e.preventDefault();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>思考一下，有啥区别那？？？<span id="more-710"></span></p>
 <p>区别是这样的，<code>return false</code>也阻止了冒泡。</p>
 <p><img src="http://blog.meituo.net/wp-content/uploads/propegationdemo.png" alt="图片示例"></p>
 <div class="download"><a href="http://css-tricks.com/examples/ReturnFalse/" target="_blank" rel="external">This demo.</a></div>
 
 <p>所以可以这样认为：</p>
-<p>[code=’js’]<br>function() {<br>  return false;<br>}</p>
-<p>// 等价于</p>
-<p>function(e) {<br>  e.preventDefault();<br>  e.stopPropagation();<br>}<br>[/code]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 等价于</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">  e.preventDefault();</div><div class="line">  e.stopPropagation();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>当然这个问题没有这么简单，你最好看看这里 <a href="http://www.quirksmode.org/js/events_order.html" target="_blank" rel="external">Event order</a>的介绍。</p>
 <p>原文：<a href="http://css-tricks.com/return-false-and-prevent-default/" target="_blank" rel="external">The difference between ‘return false;’ and ‘e.preventDefault();’</a></p>
 

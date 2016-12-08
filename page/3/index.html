@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Page 3 | 美拓blog | 做个有趣的人</title>
+  <title>第 3 页 | 美拓blog | 做个有趣的人</title>
 
   
   <meta name="author" content="独孤逸辰">
@@ -47,11 +47,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -420,8 +420,7 @@ pre.haml {
   <div class="article-content">
     <div class="entry">
       
-        <p>我们知道iframe遮罩flash 还是可以的，但是windows media player就不行了，需要添加如下参数：<br>[code=’html’]</p>
-<param name="windowlessVideo" value="true"><br>[/code]<br>
+        <p>我们知道iframe遮罩flash 还是可以的，但是windows media player就不行了，需要添加如下参数：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"windowlessVideo"</span> <span class="attr">value</span>=<span class="string">"true"</span>&gt;</span></div></pre></td></tr></table></figure><br>
       
     </div>
   </div>
@@ -538,7 +537,9 @@ pre.haml {
     <div class="entry">
       
         <p>jsdoc是用来批量提取js注释生成文档的工具，很早就听说php等有这些工具，今天查了一下js的，jsdoc还不错，但是使用中遇到了中文乱码问题，先介绍编码问题了。</p>
-<h3 id="中文乱码问题"><a href="#中文乱码问题" class="headerlink" title="中文乱码问题"></a>中文乱码问题</h3><p>如果你的jsdoc出现编码问题，中文是乱码的话可以使用-e参数来制定编码，当然编码要和你的js文件格式一致，如果你的js是utf-8格式，则使用：-e=utf-8。<br>e.g [code=’java’]java -jar jsrun.jar app/run.js -a -e=utf-8 -t=templates/jsdoc test/*.js [/code]<br>以上代码和app目录同级的的test目录下的所有js导出文档。如果不在同级目录则要使用绝对路径。<br>如果你不知道什么是jsdoc请看以下转自：<a href="http://blog.tugai.net/">西风瘦马博客http://blog.tugai.net/</a>的关于jsdoc使用的介绍。
+<h3 id="中文乱码问题"><a href="#中文乱码问题" class="headerlink" title="中文乱码问题"></a>中文乱码问题</h3><p>如果你的jsdoc出现编码问题，中文是乱码的话可以使用-e参数来制定编码，当然编码要和你的js文件格式一致，如果你的js是utf-8格式，则使用：-e=utf-8。<br>e.g <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">java -jar jsrun.jar app/run.js -a -e=utf-<span class="number">8</span> -t=templates/jsdoc test<span class="comment">/*.js </span></div></pre></td></tr></table></figure>
+以上代码和app目录同级的的test目录下的所有js导出文档。如果不在同级目录则要使用绝对路径。
+如果你不知道什么是jsdoc请看以下转自：[西风瘦马博客http://blog.tugai.net/](http://blog.tugai.net/)的关于jsdoc使用的介绍。
       
     </div>
   </div>
@@ -819,10 +820,10 @@ FireBug makes a console object available to all web pages.  This object has the 
 
 <nav class="pagination">
   
-  <a href="/page/2/" class="pagination-prev">Prev</a>
+  <a href="/page/2/" class="pagination-prev">上一页</a>
   
   
-  <a href="/page/4/" class="pagination-next">Next</a>
+  <a href="/page/4/" class="pagination-next">下一页</a>
   
 </nav>
     </main>

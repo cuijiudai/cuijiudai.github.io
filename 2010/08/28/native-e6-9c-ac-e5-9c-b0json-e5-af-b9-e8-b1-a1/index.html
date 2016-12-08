@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -96,10 +96,9 @@
 </pre>
 
 <h3 id="解析JSON形式字符串（JSON-strings）"><a href="#解析JSON形式字符串（JSON-strings）" class="headerlink" title="解析JSON形式字符串（JSON strings）"></a>解析JSON形式字符串（JSON strings）</h3><p>将JSON形式字符串转化转化为js 对象，只需要将JSON传入<code>JSON.parse()</code>,像这样：</p>
-<p>[code=’js’]<br>var jsObject = JSON.parse(jsonString);<br>[/code]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> jsObject = <span class="built_in">JSON</span>.parse(jsonString);</div></pre></td></tr></table></figure>
 <h3 id="转化对象为JSON"><a href="#转化对象为JSON" class="headerlink" title="转化对象为JSON"></a>转化对象为JSON</h3><p>将这个对象传递给<code>JSON.stringify()</code>方法就可以了：</p>
-<p>[code=’js’]<br>var foo = {};<br>foo.bar = “new property”;<br>foo.baz = 3;</p>
-<p>var jsonString = JSON.stringify(foo);<br>[/code]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> foo = &#123;&#125;;</div><div class="line">foo.bar = <span class="string">"new property"</span>;</div><div class="line">foo.baz = <span class="number">3</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> jsonString = <span class="built_in">JSON</span>.stringify(foo);</div></pre></td></tr></table></figure>
 <p>jsonstring  现在是’{”bar”:”new property”,”baz”:3}’。</p>
 <p>本内容涉及特色在 <a href="https://developer.mozilla.org/en/Firefox_3.5.4_for_developers" target="_blank" rel="external">Firefox 3.5.4</a>引入.</p>
 <p>从Firefox 3.5.4，<code>JSON.stringify()</code>提供了一些选择性的参数，形式：</p>
@@ -151,8 +150,7 @@ The `replacer` parameter can be either a function or an array. As a function, it
 </pre>
 
 <p>例子：</p>
-<p>[code=’js’]<br>function censor(key, value) {<br>  if (typeof(value) == “string”) {<br>    return undefined;<br>  }<br>  return value;<br>}</p>
-<p>var foo = {foundation: “Mozilla”, model: “box”, week: 45, transport: “car”, month: 7};<br>var jsonString = JSON.stringify(foo, censor);<br>[/code]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">censor</span>(<span class="params">key, value</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span>(value) == <span class="string">"string"</span>) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">undefined</span>;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> value;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> foo = &#123;<span class="attr">foundation</span>: <span class="string">"Mozilla"</span>, <span class="attr">model</span>: <span class="string">"box"</span>, <span class="attr">week</span>: <span class="number">45</span>, <span class="attr">transport</span>: <span class="string">"car"</span>, <span class="attr">month</span>: <span class="number">7</span>&#125;;</div><div class="line"><span class="keyword">var</span> jsonString = <span class="built_in">JSON</span>.stringify(foo, censor);</div></pre></td></tr></table></figure>
 <p>运行的结果：{”week”:45,”month”:7}.</p>
 <p>如果<code>replacer</code>是一个数组，与数组的值相对应的对象属性才会出现在 JSON 字符串中(过滤作用)。</p>
 <p>原文：<a href="https://developer.mozilla.org/En/Using_native_JSON#vascript%20javascript%20ja" target="_blank" rel="external">Using native JSON</a></p>

@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -85,8 +85,10 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>我们知道iframe遮罩flash 还是可以的，但是windows media player就不行了，需要添加如下参数：<br>[code=’html’]</p>
-<param name="windowlessVideo" value="true"><br>[/code]<br><a id="more"></a><br>如果仍然无效那么就要检查你的param，是否含有<br>[code=’html’]<br><param name="volume" value="100"><br>[/code]<br>如果有就去掉，我就是这个问题，iframe 遮罩 无果。如果你还有问题就去掉 其他 param 试试，应该可以找到那个罪魁祸首。<br><br>参考 :<a href="http://www.funnyapple.com/the-problem-of-windows-media-player-cover-div.html" target="_blank" rel="external">windows media player播放器把div给遮住的问题</a><br><a href="http://stackoverflow.com/questions/1602366/windows-media-player-on-top-other-div" target="_blank" rel="external">Windows Media Player on top other DIV</a><br><br>
+        <p>我们知道iframe遮罩flash 还是可以的，但是windows media player就不行了，需要添加如下参数：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">"windowlessVideo"</span> <span class="attr">value</span>=<span class="string">"true"</span>&gt;</span></div></pre></td></tr></table></figure><br><a id="more"></a><br>如果仍然无效那么就要检查你的param，是否含有<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">param</span> <span class="attr">name</span>=<span class="string">'volume'</span> <span class="attr">value</span>=<span class="string">'100'</span> /&gt;</span></div></pre></td></tr></table></figure><br>如果有就去掉，我就是这个问题，iframe 遮罩 无果。如果你还有问题就去掉 其他 param 试试，应该可以找到那个罪魁祸首。</p>
+<p>参考 :<a href="http://www.funnyapple.com/the-problem-of-windows-media-player-cover-div.html" target="_blank" rel="external">windows media player播放器把div给遮住的问题</a><br><a href="http://stackoverflow.com/questions/1602366/windows-media-player-on-top-other-div" target="_blank" rel="external">Windows Media Player on top other DIV</a></p>
+<p></p>
+
       
     </div>
   </div>

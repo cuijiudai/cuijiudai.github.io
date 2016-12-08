@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -91,20 +91,11 @@
 <p>我从text-shadow实现的阴影效果得到了启发，但这好像和blur不沾边，我还需要文字透明transparent，其实问题的在于它的第三个参数 ：text-shadow:0px 0px 10px #ff33ff;</p>
 <p>我添加了一些jQuery效果使它更酷，当你鼠标远离文字的时候效果出现。</p>
 <h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p><strong>CSS</strong>:</p>
-<p>[code=’css’]<br>.blur{<br>    display: block;<br>    text-decoration: none;<br>    font:  100px Georgia, sans-serif;<br>    letter-spacing: -5px;<br>    text-align: center; </p>
-<pre><code>//these two lines do the magic
-color: transparent;
-text-shadow: 0px 0px 1px #FF33FF;
-</code></pre><p>}</p>
-<p>.blur:hover{<br>   text-shadow: 0px 0px 10px #FF33FF;<br>}<br>[/code]</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">.blur&#123;</div><div class="line">    display: block;</div><div class="line">    text-decoration: none;</div><div class="line">    font:  100px Georgia, sans-serif;</div><div class="line">    letter-spacing: -5px;</div><div class="line">    text-align: center; </div><div class="line"></div><div class="line">    //these two lines do the magic</div><div class="line">    color: transparent;</div><div class="line">    text-shadow: 0px 0px 1px #FF33FF;</div><div class="line">&#125;</div><div class="line"></div><div class="line">.blur:hover&#123;</div><div class="line">   text-shadow: 0px 0px 10px #FF33FF;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>jQuery</strong>:</p>
-<p>[code=’js’]<br>$(document).ready(function() {<br>    $(document).mousemove(function(e) {<br>        if(e.pageY&gt; 230)<br>         $(“#blur”).css({‘text-shadow’: ‘0px 0px ‘+(( e.pageY - 230) / 18)+’px #FF33FF’})<br>        else</p>
-<pre><code>     $(&quot;#blur&quot;).css({&apos;text-shadow&apos;: &apos;0px 0px 0px #FF33FF&apos;});
-});
-</code></pre><p>});<br>[/code]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    $(<span class="built_in">document</span>).mousemove(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(e.pageY&gt; <span class="number">230</span>)</div><div class="line">         $(<span class="string">"#blur"</span>).css(&#123;<span class="string">'text-shadow'</span>: <span class="string">'0px 0px '</span>+(( e.pageY - <span class="number">230</span>) / <span class="number">18</span>)+<span class="string">'px #FF33FF'</span>&#125;)</div><div class="line">        <span class="keyword">else</span></div><div class="line"></div><div class="line">         $(<span class="string">"#blur"</span>).css(&#123;<span class="string">'text-shadow'</span>: <span class="string">'0px 0px 0px #FF33FF'</span>&#125;);</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p><strong>HTML</strong>:</p>
-<p>[code=’html’]<br><a href="http://motyar.blogspot.com" target="_blank" rel="external">With JQuery</a></p>
-<p><a href="http://motyar.blogspot.com" target="_blank" rel="external">Pure CSS ( Hover me )</a><br>[/code]</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[With JQuery](http://motyar.blogspot.com)</div><div class="line"></div><div class="line">[Pure CSS ( Hover me )](http://motyar.blogspot.com)</div></pre></td></tr></table></figure>
 <h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><div class="download"><br>    <a href="http://blog.meituo.net/wp-content/uploads/jquery_css_blur/blur.html" target="_blank" rel="external">示例</a> <a href="http://motyar.blogspot.com/2010/04/blur-effect-with-css-and-jquery.html" target="_blank" rel="external">原文（需要翻墙）</a><br></div>
 
 <p>这个英文站点还有其他很多有趣的文章，推荐一下。</p>

@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -103,29 +103,14 @@
 <p>比如 P 元素，只能包含内联元素，而不能包含块级元素。</p>
 </li>
 </ul>
-<p>[code=”html”]<br>     <!-- 这样做是错误的 --></p>
-<pre><code>&lt;div&gt;一段文字&lt;/div&gt;
-
- &lt;!-- 这样才是王道 b=v= --&gt;
-
-&lt;span&gt;一段文字&lt;/span&gt;
-</code></pre><p>[/code]</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- 这样做是错误的 --&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span>一段文字<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"></div><div class="line"><span class="comment">&lt;!-- 这样才是王道 b=v= --&gt;</span></div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">span</span>&gt;</span>一段文字<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"></div></pre></td></tr></table></figure>
 <pre><code>另一个区别是在显示上。块级元素通常被现实为独立的一块，前后都会和换一行；内联元素则前后不会产生换行，一系列内联元素都在一行内显示。但是，**最终决定页面显示的是样式表，而非元素本身**。这条规则的制定，估计多半是为了让那些先于规范出现的浏览器能自圆其说而已.
 </code></pre><p></p><p>比如我们知道，TABLE 元素的默认显示布局其实是用一套独特的 display: table 规则；而 BR 元素，根本本身就是个换行；哪怕一个DIV，都能用样式表直接指定它 display: inline，所以这条规则也根本等于没用。</p>
 <ul>
 <li><p>那么本质的区别呢？其实最本质的区别在于——<strong>在 Strict 的DTD下，BODY 元素只能包含块级元素，而不能包含内联元素</strong>。或许你要问，不是说BODY包含的元素不是块级就是内联么？怎么没有内联了？很简单——因为在Transitional 的DTD里，BODY也是可以包含内联元素的</p>
 <p>大家来看具体例子：</p>
-<p>[code=”html”]<br>&lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Strict//EN” “<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;" target="_blank" rel="external">http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;</a><br><html xmlns="http://www.w3.org/1999/xhtml"><br><head><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>Block-Level vs Inline Demo</title><br></head><br><body></body></html></p>
-<!-- 这样做是错的 -->
-<p><img src="/SomeImage.png" alt="an image" title="an image"></p>
-<!-- 一定要这样做才可以哟 -->
-<p><img src="/SomeImage.png" alt="an image" title="an image"></p>
-<p><br><br>[/code]</p>
-<p>[code=”html”]<br>&lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" target="_blank" rel="external">http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</a><br><html xmlns="http://www.w3.org/1999/xhtml"><br><head><br><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><br><title>Block-Level vs Inline Demo</title><br></head><br><body></body></html></p>
-<!-- 换了个DTD就都OK了 -->
-<p><img src="/SomeImage.png" alt="an image" title="an image"></p>
-<p><img src="/SomeImage.png" alt="an image" title="an image"></p>
-<p><br><br>[/code]</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/1999/xhtml"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Block-Level vs Inline Demo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 这样做是错的 --&gt;</span></div><div class="line">![an image](/SomeImage.png "an image")</div><div class="line"><span class="comment">&lt;!-- 一定要这样做才可以哟 --&gt;</span></div><div class="line"></div><div class="line">   ![an image](/SomeImage.png "an image")</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/1999/xhtml"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>Block-Level vs Inline Demo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- 换了个DTD就都OK了 --&gt;</span></div><div class="line">![an image](/SomeImage.png "an image")</div><div class="line"></div><div class="line">   ![an image](/SomeImage.png "an image")</div><div class="line"></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="Block-Box-VS-Inline-Box"><a href="#Block-Box-VS-Inline-Box" class="headerlink" title="- Block Box VS Inline Box"></a>- Block Box VS Inline Box</h3><p>大家应该对CSS的盒式模型有些了解了吧。网页上内容的布局，都是靠controlling box来实现的。</p>

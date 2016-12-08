@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -89,11 +89,13 @@
 <p>看了一下Ruby’s Louvre的<a href="http://www.cnblogs.com/rubylouvre/archive/2010/05/15/1736234.html?login=1#commentform" target="_blank" rel="external">一些javascript题目</a>有些不解的问题，记录一下</p>
 <p><span id="more-610"></span><br><a id="more"></a></p>
 <h3 id="不解之一"><a href="#不解之一" class="headerlink" title="不解之一"></a>不解之一</h3><p>在+、 -、 *、 /、 = 、== 、!= 、 &lt;、 &gt; 在这种情况下JavaScript停止了行末自动添加分号</p>
-<p>[code=”js”]<br>function test() {<br>    return 1<br>      +2<br>  }<br>  alert(test())<br>[/code]<br>[code=”js”]<br>function test() {<br>    return 1+<br>      2<br>  }<br>  alert(test())<br>[/code]<br>[code=”js”]<br>//不报错<br>function test() {<br>    return 1 ;+<br>      2<br>  }<br>  alert(test())<br>[/code]</p>
-<h3 id="的作用"><a href="#的作用" class="headerlink" title="[] 的作用"></a>[] 的作用</h3><p>[code=”js”]<br>alert({a: 1, b: 2}[[“b”]])  //弹出 2<br>alert({a: 1, b: 2}[‘b’])   //弹出 2<br>[/code]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span></div><div class="line">      +<span class="number">2</span></div><div class="line">  &#125;</div><div class="line">  alert(test())</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>+</div><div class="line">      <span class="number">2</span></div><div class="line">  &#125;</div><div class="line">  alert(test())</div></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//不报错</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span> ;+</div><div class="line">      <span class="number">2</span></div><div class="line">  &#125;</div><div class="line">  alert(test())</div></pre></td></tr></table></figure>
+<h3 id="的作用"><a href="#的作用" class="headerlink" title="[] 的作用"></a>[] 的作用</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alert(&#123;<span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span>&#125;[[<span class="string">"b"</span>]])  <span class="comment">//弹出 2</span></div><div class="line">alert(&#123;<span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">2</span>&#125;[<span class="string">'b'</span>])   <span class="comment">//弹出 2</span></div></pre></td></tr></table></figure>
 <p>第一个 两对[] 作用？</p>
-<p>[code=”js”]<br>alert(typeof(‘foo’.split(‘’) + []));<br>[/code]</p>
-<h3 id="的作用-1"><a href="#的作用-1" class="headerlink" title="+ 的作用"></a>+ 的作用</h3><p>[code=”js”]<br>alert(‘foo’.split(‘’) + [])  //弹出 f,o,o<br>alert(‘foo’.split(‘’) + [‘t’]) // f,o,ot<br>[/code]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert(<span class="keyword">typeof</span>(<span class="string">'foo'</span>.split(<span class="string">''</span>) + []));</div></pre></td></tr></table></figure>
+<h3 id="的作用-1"><a href="#的作用-1" class="headerlink" title="+ 的作用"></a>+ 的作用</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alert(<span class="string">'foo'</span>.split(<span class="string">''</span>) + [])  <span class="comment">//弹出 f,o,o</span></div><div class="line">alert(<span class="string">'foo'</span>.split(<span class="string">''</span>) + [<span class="string">'t'</span>]) <span class="comment">// f,o,ot</span></div></pre></td></tr></table></figure>
 <p>数组 + 数组 变成string</p>
 <p>原文解释：</p>
 <blockquote>
@@ -107,9 +109,9 @@
 alert(typeof a)   //number
 </code></pre><p>//如果不能转换则返回NaN</p>
 </blockquote>
-<p>[code=”js”]<br>alert(Array(2).join())  //弹出 ,<br>alert(Array(3).join())  //弹出 ,,<br>[/code]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">alert(<span class="built_in">Array</span>(<span class="number">2</span>).join())  <span class="comment">//弹出 ,</span></div><div class="line">alert(<span class="built_in">Array</span>(<span class="number">3</span>).join())  <span class="comment">//弹出 ,,</span></div></pre></td></tr></table></figure>
 <p>和+相同的原理 </p>
-<h3 id="最不解的-的作用"><a href="#最不解的-的作用" class="headerlink" title="最不解的 .. 的作用"></a>最不解的 .. 的作用</h3><p>[code=”js”]<br>alert([1,2,3,4,5][0..toString.length])<br>[/code]</p>
+<h3 id="最不解的-的作用"><a href="#最不解的-的作用" class="headerlink" title="最不解的 .. 的作用"></a>最不解的 .. 的作用</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alert([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>][<span class="number">0.</span>.toString.length])</div></pre></td></tr></table></figure>
 <p>原文解释：</p>
 <blockquote>
 <p>//0..相当于0.0.,这里不能直接写0.toString，</p>
@@ -121,8 +123,7 @@ alert(typeof a)   //number
 <p>fn.length; // 2</p>
 <p>//toString函数的形参为1，自己翻书吧，因此相当于[1,2,3,4,5][1]</p>
 </blockquote>
-<p>[code=”js”]<br>var d;<br>Number.prototype.a =<br>Number.prototype.b =<br>Number.prototype.c =<br>Number.prototype;<br> function f1() { return 1..a.b.c }<br> //alert(a) //a is not defined<br> //alert(e) //e is not defined</p>
-<p> alert(1..a) //弹出 0<br> alert(1..e) //弹出  undefined<br>//alert(d) //弹出  undefined<br>[/code]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> d;</div><div class="line"><span class="built_in">Number</span>.prototype.a =</div><div class="line"><span class="built_in">Number</span>.prototype.b =</div><div class="line"><span class="built_in">Number</span>.prototype.c =</div><div class="line"><span class="built_in">Number</span>.prototype;</div><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123; <span class="keyword">return</span> <span class="number">1.</span>.a.b.c &#125;</div><div class="line"> <span class="comment">//alert(a) //a is not defined</span></div><div class="line"> <span class="comment">//alert(e) //e is not defined</span></div><div class="line"></div><div class="line"> alert(<span class="number">1.</span>.a) <span class="comment">//弹出 0</span></div><div class="line"> alert(<span class="number">1.</span>.e) <span class="comment">//弹出  undefined</span></div><div class="line"><span class="comment">//alert(d) //弹出  undefined</span></div></pre></td></tr></table></figure>
 <p>a 和e 的区别在哪里？</p>
 <p>原文解释：</p>
 <blockquote>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Page 9 | 美拓blog | 做个有趣的人</title>
+  <title>第 9 页 | 美拓blog | 做个有趣的人</title>
 
   
   <meta name="author" content="独孤逸辰">
@@ -47,11 +47,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -196,7 +196,7 @@
       
         <p><span>Posted:</span> 09 Jul 2010 02:16 AM PDT</p></p>
 <p>这俩个我们经常见到，废话不多说，看例子</p>
-<p>[code=’js’]<br>$(“a”).click(function() {<br>   $(“body”).append($(this).attr(“href”));<br>   return false;<br>}<br>[/code]<br>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">"a"</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">   $(<span class="string">"body"</span>).append($(<span class="keyword">this</span>).attr(<span class="string">"href"</span>));</div><div class="line">   <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
   </div>
@@ -247,18 +247,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <p><span>Posted:</span> 13 Jul 2010 07:11 AM PDT</p><br>[code=’js’]<p></p>
-<p><script><br>    $(‘tr span’).click(function() {<br>        var $tag = $(this),<br>            tag = $tag.text(),<br>            type = $tag.closest(‘td’).attr(‘class’);<br>        if ($tag.is(‘.selected’)) {<br>            $(‘.’ + type + ‘ span:contains(‘ + tag + ‘)’).removeClass(‘selected’);<br>        } else {<br>            $(‘.’ + type + ‘ span:contains(‘ + tag + ‘)’).addClass(‘selected’);<br>        }</p>
-<pre><code>    // it&apos;s an AND filter
-    var $trs = $(&apos;.&apos; + type + &apos;:has(span.selected)&apos;).closest(&apos;tr&apos;);
-    if ($trs.length) {//只显示含有span.selected的tr
-        $(&apos;tr&apos;).hide();
-        $trs.show();
-    } else {//全部显示
-        $(&apos;tr&apos;).show();
-    }
-});
-</code></pre><p></script><br>[/code]</p>
+        <p><span>Posted:</span> 13 Jul 2010 07:11 AM PDT</p><br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">	$(<span class="string">'tr span'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	    <span class="keyword">var</span> $tag = $(<span class="keyword">this</span>),</div><div class="line">	        tag = $tag.text(),</div><div class="line">	        type = $tag.closest(<span class="string">'td'</span>).attr(<span class="string">'class'</span>);</div><div class="line">	    <span class="keyword">if</span> ($tag.is(<span class="string">'.selected'</span>)) &#123;</div><div class="line">	        $(<span class="string">'.'</span> + type + <span class="string">' span:contains('</span> + tag + <span class="string">')'</span>).removeClass(<span class="string">'selected'</span>);</div><div class="line">	    &#125; <span class="keyword">else</span> &#123;</div><div class="line">	        $(<span class="string">'.'</span> + type + <span class="string">' span:contains('</span> + tag + <span class="string">')'</span>).addClass(<span class="string">'selected'</span>);</div><div class="line">	    &#125;</div><div class="line"></div><div class="line">	    <span class="comment">// it's an AND filter</span></div><div class="line">	    <span class="keyword">var</span> $trs = $(<span class="string">'.'</span> + type + <span class="string">':has(span.selected)'</span>).closest(<span class="string">'tr'</span>);</div><div class="line">	    <span class="keyword">if</span> ($trs.length) &#123;<span class="comment">//只显示含有span.selected的tr</span></div><div class="line">	        $(<span class="string">'tr'</span>).hide();</div><div class="line">	        $trs.show();</div><div class="line">	    &#125; <span class="keyword">else</span> &#123;<span class="comment">//全部显示</span></div><div class="line">	        $(<span class="string">'tr'</span>).show();</div><div class="line">	    &#125;</div><div class="line">	&#125;);</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure><p></p>
 <p><span id="more-730"></span></p>
 <div class="download"><a href="http://motyarblog.000space.com/jquery_filter.htm" target="_blank" rel="external">demo</a><a href="http://motyar.blogspot.com/2010/07/jquery-data-filter-toggle-jquery-filter.html" target="_blank" rel="external">原文</a></div>
       
@@ -628,10 +617,10 @@
 
 <nav class="pagination">
   
-  <a href="/page/8/" class="pagination-prev">Prev</a>
+  <a href="/page/8/" class="pagination-prev">上一页</a>
   
   
-  <a href="/page/10/" class="pagination-next">Next</a>
+  <a href="/page/10/" class="pagination-next">下一页</a>
   
 </nav>
     </main>

@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -93,48 +93,11 @@
 <a id="more"></a>
 <p>可以说YQL是雅虎给广大开发人员的一个礼物，其背后思想就是将众多的API整合成一个SQL相似的抽象化，（API如flickr feeds，搜索，RSS等）。另外YQL也可以接受HTML,XML,CSV,ATOM等，返回JSON或者XML格式的结构化数据。它能够返回JSON 及 JSONP（关于JSONP可以看看老王的<a href="http://hi.baidu.com/thinkinginlamp/blog/item/d9e0cb13a97b7f2add5401ee.html" target="_blank" rel="external">JQuery中JSON使用扫盲</a>） 意味着跨域的数据查询现在是小菜一碟，我们拥有了从客户端支持的获得整个互联网的能力。你可以查看一下<a href="http://developer.yahoo.com/yql/console/" target="_blank" rel="external">the console</a>,其中也有一些例子。</p>
 <p>下面看看封装吧</p>
-<p>[code=’js’]<br>// YQL serves JSONP (with a callback) so all we have to do<br>// is create a script element with the right ‘src’:<br>function YQLQuery(query, callback) {<br>    this.query = query;<br>    this.callback = callback || function(){};<br>    this.fetch = function() {</p>
-<pre><code>    if (!this.query || !this.callback) {
-        throw new Error(&apos;YQLQuery.fetch(): Parameters may be undefined&apos;);
-    }
-
-    var scriptEl = document.createElement(&apos;script&apos;),
-        uid = &apos;yql&apos; + +new Date(),
-        encodedQuery = encodeURIComponent(this.query.toLowerCase()),
-        instance = this;
-
-    YQLQuery[uid] = function(json) {
-        instance.callback(json);
-        delete YQLQuery[uid];
-        document.body.removeChild(scriptEl);
-    };
-
-    scriptEl.src = &apos;http://query.yahooapis.com/v1/public/yql?q=&apos;
-                 + encodedQuery + &apos;&amp;amp;format=json&amp;amp;callback=YQLQuery.&apos; + uid;
-    document.body.appendChild(scriptEl);
-
-};
-</code></pre><p>}<br>[/code]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// YQL serves JSONP (with a callback) so all we have to do</span></div><div class="line"><span class="comment">// is create a script element with the right 'src':</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">YQLQuery</span>(<span class="params">query, callback</span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.query = query;</div><div class="line">    <span class="keyword">this</span>.callback = callback || <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">    <span class="keyword">this</span>.fetch = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (!<span class="keyword">this</span>.query || !<span class="keyword">this</span>.callback) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'YQLQuery.fetch(): Parameters may be undefined'</span>);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">var</span> scriptEl = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>),</div><div class="line">            uid = <span class="string">'yql'</span> + +<span class="keyword">new</span> <span class="built_in">Date</span>(),</div><div class="line">            encodedQuery = <span class="built_in">encodeURIComponent</span>(<span class="keyword">this</span>.query.toLowerCase()),</div><div class="line">            instance = <span class="keyword">this</span>;</div><div class="line"></div><div class="line">        YQLQuery[uid] = <span class="function"><span class="keyword">function</span>(<span class="params">json</span>) </span>&#123;</div><div class="line">            instance.callback(json);</div><div class="line">            <span class="keyword">delete</span> YQLQuery[uid];</div><div class="line">            <span class="built_in">document</span>.body.removeChild(scriptEl);</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        scriptEl.src = <span class="string">'http://query.yahooapis.com/v1/public/yql?q='</span></div><div class="line">                     + encodedQuery + <span class="string">'&amp;amp;format=json&amp;amp;callback=YQLQuery.'</span> + uid;</div><div class="line">        <span class="built_in">document</span>.body.appendChild(scriptEl);</div><div class="line"></div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>让我感兴趣的是使用了一个生成一个临时的函数 YQLQuery[uid] ，这个函数里再调用callback，然后删除这个函数对象，删除这个用来取数据的script。那么如何使用哪？</p>
-<p>[code=’js’]<br>// Alert the latest post title from Ajaxian.com</p>
-<p>// Construct your query:<br>var query = “select * from rss where url=’feeds2.feedburner.com/ajaxian’ limit 1”;</p>
-<p>// Define your callback:<br>var callback = function(data) {<br>    var post = data.query.results.item;<br>    alert(post.title);<br>};</p>
-<p>// Instantiate with the query:<br>var ajaxianPosts = new YQLQuery(query, callback);</p>
-<p>// If you’re ready then go:<br>ajaxianPosts.fetch(); // Go!!</p>
-<p>/<em> Callback &amp; query can be defined as properties also:<br>   ajaxianPosts.query = ‘select </em> from…’;<br>   ajaxianPosts.callback = function(){}; */<br>[/code]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Alert the latest post title from Ajaxian.com</span></div><div class="line"></div><div class="line"><span class="comment">// Construct your query:</span></div><div class="line"><span class="keyword">var</span> query = <span class="string">"select * from rss where url='feeds2.feedburner.com/ajaxian' limit 1"</span>;</div><div class="line"></div><div class="line"><span class="comment">// Define your callback:</span></div><div class="line"><span class="keyword">var</span> callback = <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> post = data.query.results.item;</div><div class="line">    alert(post.title);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// Instantiate with the query:</span></div><div class="line"><span class="keyword">var</span> ajaxianPosts = <span class="keyword">new</span> YQLQuery(query, callback);</div><div class="line"></div><div class="line"><span class="comment">// If you're ready then go:</span></div><div class="line">ajaxianPosts.fetch(); <span class="comment">// Go!!</span></div><div class="line"></div><div class="line"><span class="comment">/* Callback &amp;amp; query can be defined as properties also:</span></div><div class="line">   ajaxianPosts.query = 'select * from...';</div><div class="line">   ajaxianPosts.callback = function()&#123;&#125;; */</div></pre></td></tr></table></figure>
 <p>如果写成jQuery函数,插件如下：</p>
-<p>[code=’js’]<br>$.YQL = function(query, callback) {</p>
-<pre><code>if (!query || !callback) {
-    throw new Error(&apos;$.YQL(): Parameters may be undefined&apos;);
-}
-
-var encodedQuery = encodeURIComponent(query.toLowerCase()),
-    url = &apos;http://query.yahooapis.com/v1/public/yql?q=&apos;
-        + encodedQuery + &apos;&amp;amp;format=json&amp;amp;callback=?&apos;;
-
-$.getJSON(url, callback);
-</code></pre><p>};</p>
-<p>// Usage:<br>$.YQL(“select * from rss where url=’feeds2.feedburner.com/ajaxian’ limit 1”, function(data) {<br>    var post = data.query.results.item;<br>    alert(post.title);<br>});<br>[/code]</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">$.YQL = <span class="function"><span class="keyword">function</span>(<span class="params">query, callback</span>) </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (!query || !callback) &#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'$.YQL(): Parameters may be undefined'</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> encodedQuery = <span class="built_in">encodeURIComponent</span>(query.toLowerCase()),</div><div class="line">        url = <span class="string">'http://query.yahooapis.com/v1/public/yql?q='</span></div><div class="line">            + encodedQuery + <span class="string">'&amp;amp;format=json&amp;amp;callback=?'</span>;</div><div class="line"></div><div class="line">    $.getJSON(url, callback);</div><div class="line"></div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">// Usage:</span></div><div class="line">$.YQL(<span class="string">"select * from rss where url='feeds2.feedburner.com/ajaxian' limit 1"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> post = data.query.results.item;</div><div class="line">    alert(post.title);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>原文<a href="http://james.padolsey.com/javascript/using-yql-with-jsonp/" target="_blank" rel="external">Using YQL with JSONP</a></p>
 
       

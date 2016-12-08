@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Page 13 | 美拓blog | 做个有趣的人</title>
+  <title>第 13 页 | 美拓blog | 做个有趣的人</title>
 
   
   <meta name="author" content="独孤逸辰">
@@ -47,11 +47,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -199,10 +199,10 @@
 **在IE中：**
 
 每个元素和windows对象都有两个方法：attachEvent（）和detachEvent（）,看名字就知道第一个是添加事件处理函数，第二个是移除。
-[code=&quot;javascript&quot;]
-[object].attachEvent(&quot;name_of_event_handler&quot;,&quot;function_to_attach&quot;)
-[object].detachEvent(&quot;name_of_event_handler&quot;,&quot;function_to_remove&quot;)
-[/code]
+{% codeblock lang:js %}
+	[object].attachEvent("name_of_event_handler","function_to_attach")
+	[object].detachEvent("name_of_event_handler","function_to_remove")
+	{% endcodeblock %}
 这种方法可以添加多个事件处理函数
 </code></pre>
       
@@ -594,7 +594,7 @@
     <div class="entry">
       
         <p>读了一篇文章：<a href="http://www.quirksmode.org/js/this.html">http://www.quirksmode.org/js/this.html</a>，关于this关键字的，网上其实这类的文章挺多的，这篇还是比较好懂点的。自己的一点小感想记录一下。</p>
-<h2 id="归属者"><a href="#归属者" class="headerlink" title="归属者"></a><strong>归属者</strong></h2><p>以dosomething（）函数为例<br>[code=”javascript”]<br>function doSomething() {<br>this.style.color = ‘#cc0000’;<br>}<br>[/code]<br>
+<h2 id="归属者"><a href="#归属者" class="headerlink" title="归属者"></a><strong>归属者</strong></h2><p>以dosomething（）函数为例<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">doSomething</span>(<span class="params"></span>) </span>&#123;</div><div class="line"><span class="keyword">this</span>.style.color = <span class="string">'#cc0000'</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br>
       
     </div>
   </div>
@@ -624,10 +624,10 @@
 
 <nav class="pagination">
   
-  <a href="/page/12/" class="pagination-prev">Prev</a>
+  <a href="/page/12/" class="pagination-prev">上一页</a>
   
   
-  <a href="/page/14/" class="pagination-next">Next</a>
+  <a href="/page/14/" class="pagination-next">下一页</a>
   
 </nav>
     </main>

@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -90,275 +90,74 @@
 <p><span id="more-773"></span></p>
 <a id="more"></a>
 <h3 id="为什么要用-cURL"><a href="#为什么要用-cURL" class="headerlink" title="为什么要用 cURL?"></a>为什么要用 cURL?</h3><p>是的，我们可以通过其他办法获取网页内容。大多数时候，我因为想偷懒，都直接用简单的PHP函数：</p>
-<p>[code=’php’]$content = file_get_contents(“<a href="http://www.nettuts.com" target="_blank" rel="external">http://www.nettuts.com</a>“);</p>
-<p>// or</p>
-<p>$lines = file(“<a href="http://www.nettuts.com" target="_blank" rel="external">http://www.nettuts.com</a>“);</p>
-<p>// or</p>
-<p>readfile(<a href="http://www.nettuts.com);[/code" target="_blank" rel="external">http://www.nettuts.com);[/code</a>]</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$content = file_get_contents(<span class="string">"http://www.nettuts.com"</span>);</div><div class="line"></div><div class="line"><span class="comment">// or</span></div><div class="line"></div><div class="line">$lines = file(<span class="string">"http://www.nettuts.com"</span>);</div><div class="line"></div><div class="line"><span class="comment">// or</span></div><div class="line"></div><div class="line">readfile(http:<span class="comment">//www.nettuts.com);</span></div></pre></td></tr></table></figure>
 <p>不过，这种做法缺乏灵活性和有效的错误处理。而且，你也不能用它完成一些高难度任务&mdash;&mdash;比如处理coockies、验证、表单提交、文件上传等等。</p>
 <blockquote>
 <p>cURL 是一种功能强大的库，支持很多不同的协议、选项，能提供 URL 请求相关的各种细节信息。</p>
 </blockquote>
 <h3 id="基本结构"><a href="#基本结构" class="headerlink" title="基本结构"></a>基本结构</h3><p>在学习更为复杂的功能之前，先来看一下在PHP中建立cURL请求的基本步骤：</p>
 <ol>
-<li><strong>初始化</strong>2.  <strong>设置变量</strong>3.  <strong>执行并获取结果</strong>4.  <strong>释放cURL句柄</strong><br>[code=’php’]// 1. 初始化<br>$ch = curl_init();</li>
+<li><strong>初始化</strong>2.  <strong>设置变量</strong>3.  <strong>执行并获取结果</strong>4.  <strong>释放cURL句柄</strong><figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1\. 初始化</span></div><div class="line">$ch = curl_init();</div><div class="line"></div><div class="line"><span class="comment">// 2\. 设置选项，包括URL</span></div><div class="line">curl_setopt($ch, CURLOPT_URL, <span class="string">"http://www.nettuts.com"</span>);</div><div class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</div><div class="line">curl_setopt($ch, CURLOPT_HEADER, <span class="number">0</span>);</div><div class="line"></div><div class="line"><span class="comment">// 3\. 执行并获取HTML文档内容</span></div><div class="line">$output = curl_exec($ch);</div><div class="line"></div><div class="line"><span class="comment">// 4\. 释放curl句柄</span></div><div class="line">curl_close($ch);</div></pre></td></tr></table></figure>
+</li>
 </ol>
-<p>// 2. 设置选项，包括URL<br>curl_setopt($ch, CURLOPT_URL, “<a href="http://www.nettuts.com" target="_blank" rel="external">http://www.nettuts.com</a>“);<br>curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);<br>curl_setopt($ch, CURLOPT_HEADER, 0);</p>
-<p>// 3. 执行并获取HTML文档内容<br>$output = curl_exec($ch);</p>
-<p>// 4. 释放curl句柄<br>curl_close($ch);<br>[/code]</p>
 <p>第二步（也就是 curl_setopt() ）最为重要，一切玄妙均在此。<a href="http://us3.php.net/manual/en/function.curl-setopt.php" target="_blank" rel="external">有一长串cURL参数</a>可供设置，它们能指定URL请求的各个细节。要一次性全部看完并理解可能比较困难，所以今天我们只试一下那些更常用也更有用的选项。</p>
 <h3 id="检查错误"><a href="#检查错误" class="headerlink" title="检查错误"></a>检查错误</h3><p>你可以加一段检查错误的语句（虽然这并不是必需的）：</p>
-<p>[code=’php’]// …</p>
-<p>$output = curl_exec($ch);</p>
-<p>if ($output === FALSE) {</p>
-<pre><code>echo &quot;cURL Error: &quot; . curl_error($ch);
-</code></pre><p>}</p>
-<p>// …<br>[/code]</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ...</span></div><div class="line"></div><div class="line">$output = curl_exec($ch);</div><div class="line"></div><div class="line"><span class="keyword">if</span> ($output === <span class="keyword">FALSE</span>) &#123;</div><div class="line"></div><div class="line">	<span class="keyword">echo</span> <span class="string">"cURL Error: "</span> . curl_error($ch);</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// ...</span></div></pre></td></tr></table></figure>
 <p>请注意，比较的时候我们用的是“=== FALSE”，而非“== FALSE”。因为我们得区分 空输出 和 布尔值FALSE，后者才是真正的错误。</p>
 <h3 id="获取信息"><a href="#获取信息" class="headerlink" title="获取信息"></a>获取信息</h3><p>这是另一个可选的设置项，能够在cURL执行后获取这一请求的有关信息：</p>
-<p>[code=’php’]// …</p>
-<p>curl_exec($ch);</p>
-<p>$info = curl_getinfo($ch);</p>
-<p>echo ‘获取’. $info[‘url’] . ‘耗时’. $info[‘total_time’] . ‘秒’;</p>
-<p>// …<br>[/code]</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ...</span></div><div class="line"></div><div class="line">curl_exec($ch);</div><div class="line"></div><div class="line">$info = curl_getinfo($ch);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">'获取'</span>. $info[<span class="string">'url'</span>] . <span class="string">'耗时'</span>. $info[<span class="string">'total_time'</span>] . <span class="string">'秒'</span>;</div><div class="line"></div><div class="line"><span class="comment">// ...</span></div></pre></td></tr></table></figure>
 <p>返回的数组中包括了以下信息：</p>
 <ul>
 <li>“url” //资源网络地址<em>   “content_type” //内容编码</em>   “http_code” //HTTP状态码<em>   “header_size” //header的大小</em>   “request_size” //请求的大小<em>   “filetime” //文件创建时间</em>   “ssl_verify_result” //SSL验证结果<em>   “redirect_count” //跳转技术</em>   “total_time” //总耗时<em>   “namelookup_time” //DNS查询耗时</em>   “connect_time” //等待连接耗时<em>   “pretransfer_time” //传输前准备耗时</em>   “size_upload” //上传数据的大小<em>   “size_download” //下载数据的大小</em>   “speed_download” //下载速度<em>   “speed_upload” //上传速度</em>   “download_content_length”//下载内容的长度<em>   “upload_content_length” //上传内容的长度</em>   “starttransfer_time” //开始传输的时间*   “redirect_time”//重定向耗时</li>
 </ul>
 <h3 id="基于浏览器的重定向"><a href="#基于浏览器的重定向" class="headerlink" title="基于浏览器的重定向"></a>基于浏览器的重定向</h3><p>在第一个例子中，我们将提供一段用于侦测服务器是否有基于浏览器的重定向的代码。例如，有些网站会根据是否是手机浏览器甚至用户来自哪个国家来重定向网页。</p>
 <p>我们利用 CURLOPT_HTTPHEADER 选项来设定我们发送出的HTTP请求头信息（http headers），包括user agent信息和默认语言。然后我们来看看这些特定网站是否会把我们重定向到不同的URL。</p>
-<p>[code=’php’]<br>// 测试用的URL<br>&lt;?php<br>// 测试用的URL<br>$urls = array(<br>    “<a href="http://www.google.com" target="_blank" rel="external">http://www.google.com</a>“,<br>    “<a href="http://www.mozilla.com" target="_blank" rel="external">http://www.mozilla.com</a>“,<br>    “<a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a>“<br>);<br>// 测试用的浏览器信息<br>$browsers = array(</p>
-<pre><code>&quot;standard&quot; =&gt; array (
-    &quot;user_agent&quot; =&gt; &quot;Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6 (.NET CLR 3.5.30729)&quot;,
-    &quot;language&quot; =&gt; &quot;en-us,en;q=0.5&quot;
-    ),
-
-&quot;iphone&quot; =&gt; array (
-    &quot;user_agent&quot; =&gt; &quot;Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A537a Safari/419.3&quot;,
-    &quot;language&quot; =&gt; &quot;en&quot;
-    ),
-
-&quot;french&quot; =&gt; array (
-    &quot;user_agent&quot; =&gt; &quot;Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; GTB6; .NET CLR 2.0.50727)&quot;,
-    &quot;language&quot; =&gt; &quot;fr,fr-FR;q=0.5&quot;
-    )
-</code></pre><p>);</p>
-<p>foreach ($urls as $url) {</p>
-<pre><code>echo &quot;URL: $url\n&quot;;
-
-foreach ($browsers as $test_name =&gt; $browser) {
-
-    $ch = curl_init();
-
-    // 设置 url
-    curl_setopt($ch, CURLOPT_URL, $url);
-
-    // 设置浏览器的特定header
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            &quot;User-Agent: {$browser[&apos;user_agent&apos;]}&quot;,
-            &quot;Accept-Language: {$browser[&apos;language&apos;]}&quot;
-        ));
-
-    // 页面内容我们并不需要
-    curl_setopt($ch, CURLOPT_NOBODY, 1);
-
-    // 只需返回HTTP header
-    curl_setopt($ch, CURLOPT_HEADER, 1);
-
-    // 返回结果，而不是输出它
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-
-    $output = curl_exec($ch);
-
-    curl_close($ch);
-
-    // 有重定向的HTTP头信息吗?
-    if (preg_match(&quot;!Location: (.*)!&quot;, $output, $matches)) {
-
-        echo &quot;$test_name: redirects to $matches[1]\n&quot;;
-
-    } else {
-
-        echo &quot;$test_name: no redirection\n&quot;;
-
-    }
-
-}
-echo &quot;\n\n&quot;;
-</code></pre><p>}</p>
-<p>?&gt;<br>[/code]</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 测试用的URL</span></div><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="comment">// 测试用的URL</span></div><div class="line">$urls = <span class="keyword">array</span>(</div><div class="line">	<span class="string">"http://www.google.com"</span>,</div><div class="line">	<span class="string">"http://www.mozilla.com"</span>,</div><div class="line">	<span class="string">"http://www.baidu.com"</span></div><div class="line">);</div><div class="line"><span class="comment">// 测试用的浏览器信息</span></div><div class="line">$browsers = <span class="keyword">array</span>(</div><div class="line"></div><div class="line">	<span class="string">"standard"</span> =&gt; <span class="keyword">array</span> (</div><div class="line">		<span class="string">"user_agent"</span> =&gt; <span class="string">"Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6 (.NET CLR 3.5.30729)"</span>,</div><div class="line">		<span class="string">"language"</span> =&gt; <span class="string">"en-us,en;q=0.5"</span></div><div class="line">		),</div><div class="line"></div><div class="line">	<span class="string">"iphone"</span> =&gt; <span class="keyword">array</span> (</div><div class="line">		<span class="string">"user_agent"</span> =&gt; <span class="string">"Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/420+ (KHTML, like Gecko) Version/3.0 Mobile/1A537a Safari/419.3"</span>,</div><div class="line">		<span class="string">"language"</span> =&gt; <span class="string">"en"</span></div><div class="line">		),</div><div class="line"></div><div class="line">	<span class="string">"french"</span> =&gt; <span class="keyword">array</span> (</div><div class="line">		<span class="string">"user_agent"</span> =&gt; <span class="string">"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; GTB6; .NET CLR 2.0.50727)"</span>,</div><div class="line">		<span class="string">"language"</span> =&gt; <span class="string">"fr,fr-FR;q=0.5"</span></div><div class="line">		)</div><div class="line"></div><div class="line">);</div><div class="line"></div><div class="line"><span class="keyword">foreach</span> ($urls <span class="keyword">as</span> $url) &#123;</div><div class="line"></div><div class="line">	<span class="keyword">echo</span> <span class="string">"URL: $url\n"</span>;</div><div class="line"></div><div class="line">	<span class="keyword">foreach</span> ($browsers <span class="keyword">as</span> $test_name =&gt; $browser) &#123;</div><div class="line"></div><div class="line">		$ch = curl_init();</div><div class="line"></div><div class="line">		<span class="comment">// 设置 url</span></div><div class="line">		curl_setopt($ch, CURLOPT_URL, $url);</div><div class="line"></div><div class="line">		<span class="comment">// 设置浏览器的特定header</span></div><div class="line">		curl_setopt($ch, CURLOPT_HTTPHEADER, <span class="keyword">array</span>(</div><div class="line">				<span class="string">"User-Agent: &#123;$browser['user_agent']&#125;"</span>,</div><div class="line">				<span class="string">"Accept-Language: &#123;$browser['language']&#125;"</span></div><div class="line">			));</div><div class="line"></div><div class="line">		<span class="comment">// 页面内容我们并不需要</span></div><div class="line">		curl_setopt($ch, CURLOPT_NOBODY, <span class="number">1</span>);</div><div class="line"></div><div class="line">		<span class="comment">// 只需返回HTTP header</span></div><div class="line">		curl_setopt($ch, CURLOPT_HEADER, <span class="number">1</span>);</div><div class="line"></div><div class="line">		<span class="comment">// 返回结果，而不是输出它</span></div><div class="line">		curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</div><div class="line"></div><div class="line">		$output = curl_exec($ch);</div><div class="line"></div><div class="line">		curl_close($ch);</div><div class="line"></div><div class="line">		<span class="comment">// 有重定向的HTTP头信息吗?</span></div><div class="line">		<span class="keyword">if</span> (preg_match(<span class="string">"!Location: (.*)!"</span>, $output, $matches)) &#123;</div><div class="line"></div><div class="line">			<span class="keyword">echo</span> <span class="string">"$test_name: redirects to $matches[1]\n"</span>;</div><div class="line"></div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">			<span class="keyword">echo</span> <span class="string">"$test_name: no redirection\n"</span>;</div><div class="line"></div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">echo</span> <span class="string">"\n\n"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
 <p>首先，我们建立一组需要测试的URL，接着指定一组需要测试的浏览器信息。最后通过循环测试各种URL和浏览器匹配可能产生的情况。</p>
 <p>因为我们指定了cURL选项，所以返回的输出内容则只包括HTTP头信息（被存放于 $output 中）。利用一个简单的正则，我们检查这个头信息中是否包含了“Location:”字样。</p>
 <p>运行这段代码应该会返回如下结果：</p>
-<p>[code=’php’]URL: <a href="http://www.google.com" target="_blank" rel="external">http://www.google.com</a><br>standard: redirects to <a href="http://www.google.com.hk/url?sa=p&amp;cki=PREF%3DID%3De8e83c98f4e265f9:FF%3D2:LD%3Dzh-CN:NW%3D1:TM%3D1280330769:LM%3D1280330769:S%3DR4P2g3i9kL-yDhWw&amp;q=http://www.google.com.hk/&amp;ust=1280330799079064&amp;usg=AFQjCNGMiKCFkpYen-PygkdP6pyradMaVQ" target="_blank" rel="external">http://www.google.com.hk/url?sa=p&amp;cki=PREF%3DID%3De8e83c98f4e265f9:FF%3D2:LD%3Dzh-CN:NW%3D1:TM%3D1280330769:LM%3D1280330769:S%3DR4P2g3i9kL-yDhWw&amp;q=http://www.google.com.hk/&amp;ust=1280330799079064&amp;usg=AFQjCNGMiKCFkpYen-PygkdP6pyradMaVQ</a><br>iphone: redirects to <a href="http://www.google.cn/m" target="_blank" rel="external">http://www.google.cn/m</a><br>french: redirects to <a href="http://www.google.com.hk/url?sa=p&amp;cki=PREF%3DID%3D9784ee8743ba5eca:FF%3D2:LD%3Dzh-CN:NW%3D1:TM%3D1280330770:LM%3D1280330770:S%3DWWWoy1LWnP4JaGq3&amp;q=http://www.google.com.hk/&amp;ust=1280330800042327&amp;usg=AFQjCNGq9SfYy7zmc_Sp3ymsy7GFtIa_dQ" target="_blank" rel="external">http://www.google.com.hk/url?sa=p&amp;cki=PREF%3DID%3D9784ee8743ba5eca:FF%3D2:LD%3Dzh-CN:NW%3D1:TM%3D1280330770:LM%3D1280330770:S%3DWWWoy1LWnP4JaGq3&amp;q=http://www.google.com.hk/&amp;ust=1280330800042327&amp;usg=AFQjCNGq9SfYy7zmc_Sp3ymsy7GFtIa_dQ</a></p>
-<p>URL: <a href="http://www.mozilla.com" target="_blank" rel="external">http://www.mozilla.com</a><br>standard: redirects to <a href="http://www.mozilla.com/en-US/" target="_blank" rel="external">http://www.mozilla.com/en-US/</a><br>iphone: redirects to <a href="http://www.mozilla.com/en-US/" target="_blank" rel="external">http://www.mozilla.com/en-US/</a><br>french: redirects to <a href="http://www.mozilla.com/fr/" target="_blank" rel="external">http://www.mozilla.com/fr/</a></p>
-<p>URL: <a href="http://www.baidu.com" target="_blank" rel="external">http://www.baidu.com</a><br>standard: no redirection<br>iphone: redirects to <a href="http://m9.baidu.com/index2.jsp?vit=fps&amp;from=844b" target="_blank" rel="external">http://m9.baidu.com/index2.jsp?vit=fps&amp;from=844b</a><br>french: no redirection<br>[/code]</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">URL: http:<span class="comment">//www.google.com</span></div><div class="line">standard: redirects to http:<span class="comment">//www.google.com.hk/url?sa=p&amp;cki=PREF%3DID%3De8e83c98f4e265f9:FF%3D2:LD%3Dzh-CN:NW%3D1:TM%3D1280330769:LM%3D1280330769:S%3DR4P2g3i9kL-yDhWw&amp;q=http://www.google.com.hk/&amp;ust=1280330799079064&amp;usg=AFQjCNGMiKCFkpYen-PygkdP6pyradMaVQ</span></div><div class="line">iphone: redirects to http:<span class="comment">//www.google.cn/m</span></div><div class="line">french: redirects to http:<span class="comment">//www.google.com.hk/url?sa=p&amp;cki=PREF%3DID%3D9784ee8743ba5eca:FF%3D2:LD%3Dzh-CN:NW%3D1:TM%3D1280330770:LM%3D1280330770:S%3DWWWoy1LWnP4JaGq3&amp;q=http://www.google.com.hk/&amp;ust=1280330800042327&amp;usg=AFQjCNGq9SfYy7zmc_Sp3ymsy7GFtIa_dQ</span></div><div class="line"></div><div class="line">URL: http:<span class="comment">//www.mozilla.com</span></div><div class="line">standard: redirects to http:<span class="comment">//www.mozilla.com/en-US/</span></div><div class="line">iphone: redirects to http:<span class="comment">//www.mozilla.com/en-US/</span></div><div class="line">french: redirects to http:<span class="comment">//www.mozilla.com/fr/</span></div><div class="line"></div><div class="line">URL: http:<span class="comment">//www.baidu.com</span></div><div class="line">standard: no redirection</div><div class="line">iphone: redirects to http:<span class="comment">//m9.baidu.com/index2.jsp?vit=fps&amp;from=844b</span></div><div class="line">french: no redirection</div></pre></td></tr></table></figure>
 <h3 id="用POST方法发送数据"><a href="#用POST方法发送数据" class="headerlink" title="用POST方法发送数据"></a>用POST方法发送数据</h3><p>当发起GET请求时，数据可以通过“查询字串”（query string）传递给一个URL。例如，在google中搜索时，搜索关键即为URL的查询字串的一部分：</p>
-<p>[code=’php’]<a href="http://www.google.com/search?q=nettuts[/code" target="_blank" rel="external">http://www.google.com/search?q=nettuts[/code</a>]</p>
-<p>这种情况下你可能并不需要cURL来模拟。把这个URL丢给“file_get_contents()”就能得到相同结果。 </p>
-<p>不过有一些HTML表单是用POST方法提交的。这种表单提交时，数据是通过 HTTP请求体（request body） 发送，而不是查询字串。例如，当使用<a href="http://codeigniter.com/forums/" target="_blank" rel="external">CodeIgniter论坛</a>的表单，无论你输入什么关键字，总是被POST到如下页面：</p>
-<p>[code=’php’]<a href="http://codeigniter.com/forums/do_search/[/code" target="_blank" rel="external">http://codeigniter.com/forums/do_search/[/code</a>]</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http:<span class="comment">//www.google.com/search?q=nettuts</span></div></pre></td></tr></table></figure>
+
+这种情况下你可能并不需要cURL来模拟。把这个URL丢给“file_get_contents()”就能得到相同结果。
+
+不过有一些HTML表单是用POST方法提交的。这种表单提交时，数据是通过 HTTP请求体（request body） 发送，而不是查询字串。例如，当使用[CodeIgniter论坛](http://codeigniter.com/forums/)的表单，无论你输入什么关键字，总是被POST到如下页面：
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http:<span class="comment">//codeigniter.com/forums/do_search/</span></div></pre></td></tr></table></figure>
 <p>你可以用PHP脚本来模拟这种URL请求。首先，新建一个可以接受并显示POST数据的文件，我们给它命名为post_output.php：</p>
-<p>[code=’php’]print_r($_POST);[/code]</p>
-<p>接下来，写一段PHP脚本来执行cURL请求：</p>
-<p>[code=’php’]<br>&lt;?php<br>if($_POST){<br>print_r($_POST);<br>}else{<br>$url = “<a href="http://localhost/post_output.php" target="_blank" rel="external">http://localhost/post_output.php</a>“;</p>
-<p>$post_data = array (<br>    “foo” =&gt; “bar”,<br>    “query” =&gt; “Nettuts”,<br>    “action” =&gt; “Submit”<br>);</p>
-<pre><code>$ch = curl_init();
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print_r($_POST);</div></pre></td></tr></table></figure>
 
-curl_setopt($ch, CURLOPT_URL, $url);
+接下来，写一段PHP脚本来执行cURL请求：
 
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-// we are doing a POST request
-curl_setopt($ch, CURLOPT_POST, 1);
-// adding the post variables to the request
-curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
-
-$output = curl_exec($ch);
-
-curl_close($ch);
-echo $output;
-</code></pre><p>}</p>
-<p>?&gt;<br>[/code]</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;?php</span></div><div class="line"><span class="keyword">if</span>($_POST)&#123;</div><div class="line">print_r($_POST);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">$url = <span class="string">"http://localhost/post_output.php"</span>;</div><div class="line"></div><div class="line">$post_data = <span class="keyword">array</span> (</div><div class="line">	<span class="string">"foo"</span> =&gt; <span class="string">"bar"</span>,</div><div class="line">	<span class="string">"query"</span> =&gt; <span class="string">"Nettuts"</span>,</div><div class="line">	<span class="string">"action"</span> =&gt; <span class="string">"Submit"</span></div><div class="line">);</div><div class="line"></div><div class="line">	$ch = curl_init();</div><div class="line"></div><div class="line">	curl_setopt($ch, CURLOPT_URL, $url);</div><div class="line"></div><div class="line">	curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</div><div class="line">	<span class="comment">// we are doing a POST request</span></div><div class="line">	curl_setopt($ch, CURLOPT_POST, <span class="number">1</span>);</div><div class="line">	<span class="comment">// adding the post variables to the request</span></div><div class="line">	curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);</div><div class="line"></div><div class="line">	$output = curl_exec($ch);</div><div class="line"></div><div class="line">	curl_close($ch);</div><div class="line">	<span class="keyword">echo</span> $output;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="meta">?&gt;</span></div></pre></td></tr></table></figure>
 <p>执行代码后应该会得到以下结果：</p>
 <p><img src="http://nettuts.s3.cdn.plus.org/534_curl/ss_2.png" alt="原文图片"></p>
 <p>这段脚本发送一个POST请求给 post_output.php ，这个页面 $_POST 变量并返回，我们利用cURL捕捉了这个输出。</p>
 <h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><p>上传文件和前面的POST十分相似。因为所有的文件上传表单都是通过POST方法提交的。</p>
 <p>首先新建一个接收文件的页面，命名为 upload_output.php：</p>
-<p>[code=’php’]print_r($_FILES);[/code]</p>
-<p>以下是真正执行文件上传任务的脚本：</p>
-<p>[code=’php’]<br>if($_POST){<br>print_r($_POST);<br>}else{<br>$url = “<a href="http://localhost/upload_output.php" target="_blank" rel="external">http://localhost/upload_output.php</a>“;</p>
-<p>$post_data = array (<br>    “foo” =&gt; “bar”,<br>    // 要上传的本地文件地址<br>    “upload” =&gt; “@C:/wamp/www/test.zip”<br>);</p>
-<p>$ch = curl_init();</p>
-<p>curl_setopt($ch, CURLOPT_URL, $url);</p>
-<p>curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</p>
-<p>curl_setopt($ch, CURLOPT_POST, 1);</p>
-<p>curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);</p>
-<p>$output = curl_exec($ch);</p>
-<p>curl_close($ch);</p>
-<p>echo $output;</p>
-<p>}<br>[/code]</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">print_r($_FILES);</div></pre></td></tr></table></figure>
+
+以下是真正执行文件上传任务的脚本：
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>($_POST)&#123;</div><div class="line">print_r($_POST);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">$url = <span class="string">"http://localhost/upload_output.php"</span>;</div><div class="line"></div><div class="line">$post_data = <span class="keyword">array</span> (</div><div class="line">	<span class="string">"foo"</span> =&gt; <span class="string">"bar"</span>,</div><div class="line">	<span class="comment">// 要上传的本地文件地址</span></div><div class="line">	<span class="string">"upload"</span> =&gt; <span class="string">"@C:/wamp/www/test.zip"</span></div><div class="line">);</div><div class="line"></div><div class="line">$ch = curl_init();</div><div class="line"></div><div class="line">curl_setopt($ch, CURLOPT_URL, $url);</div><div class="line"></div><div class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</div><div class="line"></div><div class="line">curl_setopt($ch, CURLOPT_POST, <span class="number">1</span>);</div><div class="line"></div><div class="line">curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);</div><div class="line"></div><div class="line">$output = curl_exec($ch);</div><div class="line"></div><div class="line">curl_close($ch);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> $output;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果你需要上传一个文件，只需要把文件路径像一个post变量一样传过去，不过记得在前面加上@符号。执行这段脚本应该会得到如下输出：</p>
 <p><img src="http://nettuts.s3.cdn.plus.org/534_curl/ss_3.png" alt="这是原文图片,漫长的等待，这个例子在我这也失败了"></p>
 <h3 id="cURL批处理（multi-cURL）"><a href="#cURL批处理（multi-cURL）" class="headerlink" title="cURL批处理（multi cURL）"></a>cURL批处理（multi cURL）</h3><p>cURL还有一个高级特性&mdash;&mdash;批处理句柄（handle）。这一特性允许你同时或异步地打开多个URL连接。</p>
 <p>下面是来自<a href="http://us3.php.net/manual/en/function.curl-multi-exec.php" target="_blank" rel="external">来自php.net的示例代码</a>：</p>
-<p>[code=’php’]<br>// 创建两个cURL资源<br>$ch1 = curl_init();<br>$ch2 = curl_init();</p>
-<p>// 指定URL和适当的参数<br>curl_setopt($ch1, CURLOPT_URL, “<a href="http://lxr.php.net/" target="_blank" rel="external">http://lxr.php.net/</a>“);<br>curl_setopt($ch1, CURLOPT_HEADER, 0);<br>curl_setopt($ch2, CURLOPT_URL, “<a href="http://www.php.net/" target="_blank" rel="external">http://www.php.net/</a>“);<br>curl_setopt($ch2, CURLOPT_HEADER, 0);</p>
-<p>// 创建cURL批处理句柄<br>$mh = curl_multi_init();</p>
-<p>// 加上前面两个资源句柄<br>curl_multi_add_handle($mh,$ch1);<br>curl_multi_add_handle($mh,$ch2);</p>
-<p>// 预定义一个状态变量<br>$active = null;</p>
-<p>// 执行批处理<br>do {<br>    $mrc = curl_multi_exec($mh, $active);<br>} while ($mrc == CURLM_CALL_MULTI_PERFORM);</p>
-<p>while ($active &amp;amp;&amp;amp; $mrc == CURLM_OK) {<br>    if (curl_multi_select($mh) != -1) {<br>        do {<br>            $mrc = curl_multi_exec($mh, $active);<br>        } while ($mrc == CURLM_CALL_MULTI_PERFORM);<br>    }<br>}</p>
-<p>// 关闭各个句柄<br>curl_multi_remove_handle($mh, $ch1);<br>curl_multi_remove_handle($mh, $ch2);<br>curl_multi_close($mh);<br>[/code]</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建两个cURL资源</span></div><div class="line">$ch1 = curl_init();</div><div class="line">$ch2 = curl_init();</div><div class="line"></div><div class="line"><span class="comment">// 指定URL和适当的参数</span></div><div class="line">curl_setopt($ch1, CURLOPT_URL, <span class="string">"http://lxr.php.net/"</span>);</div><div class="line">curl_setopt($ch1, CURLOPT_HEADER, <span class="number">0</span>);</div><div class="line">curl_setopt($ch2, CURLOPT_URL, <span class="string">"http://www.php.net/"</span>);</div><div class="line">curl_setopt($ch2, CURLOPT_HEADER, <span class="number">0</span>);</div><div class="line"></div><div class="line"><span class="comment">// 创建cURL批处理句柄</span></div><div class="line">$mh = curl_multi_init();</div><div class="line"></div><div class="line"><span class="comment">// 加上前面两个资源句柄</span></div><div class="line">curl_multi_add_handle($mh,$ch1);</div><div class="line">curl_multi_add_handle($mh,$ch2);</div><div class="line"></div><div class="line"><span class="comment">// 预定义一个状态变量</span></div><div class="line">$active = <span class="keyword">null</span>;</div><div class="line"></div><div class="line"><span class="comment">// 执行批处理</span></div><div class="line"><span class="keyword">do</span> &#123;</div><div class="line">    $mrc = curl_multi_exec($mh, $active);</div><div class="line">&#125; <span class="keyword">while</span> ($mrc == CURLM_CALL_MULTI_PERFORM);</div><div class="line"></div><div class="line"><span class="keyword">while</span> ($active &amp;amp;amp;&amp;amp;amp; $mrc == CURLM_OK) &#123;</div><div class="line">    <span class="keyword">if</span> (curl_multi_select($mh) != <span class="number">-1</span>) &#123;</div><div class="line">        <span class="keyword">do</span> &#123;</div><div class="line">            $mrc = curl_multi_exec($mh, $active);</div><div class="line">        &#125; <span class="keyword">while</span> ($mrc == CURLM_CALL_MULTI_PERFORM);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 关闭各个句柄</span></div><div class="line">curl_multi_remove_handle($mh, $ch1);</div><div class="line">curl_multi_remove_handle($mh, $ch2);</div><div class="line">curl_multi_close($mh);</div></pre></td></tr></table></figure>
 <p>这里要做的就是打开多个cURL句柄并指派给一个批处理句柄。然后你就只需在一个while循环里等它执行完毕。</p>
 <p>这个示例中有两个主要循环。第一个 do-while 循环重复调用 curl_multi_exec() 。这个函数是无隔断（non-blocking）的，但会尽可能少地执行。它返回一个状态值，只要这个值等于常量 CURLM_CALL_MULTI_PERFORM ，就代表还有一些刻不容缓的工作要做（例如，把对应URL的http头信息发送出去）。也就是说，我们需要不断调用该函数，直到返回值发生改变。</p>
 <p>而接下来的 while 循环，只在 $active 变量为 true 时继续。这一变量之前作为第二个参数传给了 curl_multi_exec() ，代表只要批处理句柄中是否还有活动连接。接着，我们调用 curl_multi_select() ，在活动连接（例如接受服务器响应）出现之前，它都是被“屏蔽”的。这个函数成功执行后，我们又会进入另一个 do-while 循环，继续下一条URL。</p>
 <p>还是来看一看怎么把这一功能用到实处吧：</p>
-<h3 id="WordPress-连接检查器"><a href="#WordPress-连接检查器" class="headerlink" title="WordPress 连接检查器"></a>WordPress 连接检查器</h3><p>想象一下你有一个文章数目庞大的博客，这些文章中包含了大量外部网站链接。一段时间之后，因为这样那样的原因，这些链接中相当数量都失效了。要么是被和谐了，要么是整个站点都被功夫网了… </p>
+<h3 id="WordPress-连接检查器"><a href="#WordPress-连接检查器" class="headerlink" title="WordPress 连接检查器"></a>WordPress 连接检查器</h3><p>想象一下你有一个文章数目庞大的博客，这些文章中包含了大量外部网站链接。一段时间之后，因为这样那样的原因，这些链接中相当数量都失效了。要么是被和谐了，要么是整个站点都被功夫网了…</p>
 <p>我们下面建立一个脚本，分析所有这些链接，找出打不开或者404的网站/网页，并生成一个报告。</p>
 <p>请注意，以下并不是一个真正可用的WordPress插件，仅仅是一段独立功能的脚本而已，仅供演示，谢谢。</p>
 <p>好，开始吧。首先，从数据库中读取所有这些链接：</p>
-<p>[code=’php’]<br>// CONFIG<br>$db_host = ‘localhost’;<br>$db_user = ‘root’;<br>$db_pass = ‘’;<br>$db_name = ‘wordpress’;<br>$excluded_domains = array(<br>    ‘localhost’, ‘www.mydomain.com’);<br>$max_connections = 10;<br>// 初始化一些变量<br>$url_list = array();<br>$working_urls = array();<br>$dead_urls = array();<br>$not_found_urls = array();<br>$active = null;</p>
-<p>// 连到 MySQL<br>if (!mysql_connect($db_host, $db_user, $db_pass)) {<br>    die(‘Could not connect: ‘ . mysql_error());<br>}<br>if (!mysql_select_db($db_name)) {<br>    die(‘Could not select db: ‘ . mysql_error());<br>}</p>
-<p>// 找出所有含有链接的文章<br>$q = “SELECT post_content FROM wp_posts<br>    WHERE post_content LIKE ‘%href=%’<br>    AND post_status = ‘publish’<br>    AND post_type = ‘post’”;<br>$r = mysql_query($q) or die(mysql_error());<br>while ($d = mysql_fetch_assoc($r)) {</p>
-<pre><code>// 用正则匹配链接
-if (preg_match_all(&quot;!href=\&quot;(.*?)\&quot;!&quot;, $d[&apos;post_content&apos;], $matches)) {
-
-    foreach ($matches[1] as $url) {
-
-        // exclude some domains
-        $tmp = parse_url($url);
-        if (in_array($tmp[&apos;host&apos;], $excluded_domains)) {
-            continue;
-        }
-
-        // store the url
-        $url_list []= $url;
-    }
-}
-</code></pre><p>}</p>
-<p>// 移除重复链接<br>$url_list = array_values(array_unique($url_list));</p>
-<p>if (!$url_list) {<br>    die(‘No URL to check’);<br>}<br>[/code]</p>
-<p>我们首先配置好数据库，一系列要排除的域名（$excluded_domains），以及最大并发连接数（$max_connections）。然后，连接数据库，获取文章和包含的链接，把它们收集到一个数组中（$url_list）。 </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line">// CONFIG</div><div class="line">$db_host = 'localhost';</div><div class="line">$db_user = 'root';</div><div class="line">$db_pass = '';</div><div class="line">$db_name = 'wordpress';</div><div class="line">$excluded_domains = array(</div><div class="line">	'localhost', 'www.mydomain.com');</div><div class="line">$max_connections = 10;</div><div class="line">// 初始化一些变量</div><div class="line">$url_list = array();</div><div class="line">$working_urls = array();</div><div class="line">$dead_urls = array();</div><div class="line">$not_found_urls = array();</div><div class="line">$active = null;</div><div class="line"></div><div class="line">// 连到 MySQL</div><div class="line">if (!mysql_connect($db_host, $db_user, $db_pass)) &#123;</div><div class="line">	die('Could not connect: ' . mysql_error());</div><div class="line">&#125;</div><div class="line">if (!mysql_select_db($db_name)) &#123;</div><div class="line">	die('Could not select db: ' . mysql_error());</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 找出所有含有链接的文章</div><div class="line">$q = "SELECT post_content FROM wp_posts</div><div class="line">	WHERE post_content LIKE '%href=%'</div><div class="line">	AND post_status = 'publish'</div><div class="line">	AND post_type = 'post'";</div><div class="line">$r = mysql_query($q) or die(mysql_error());</div><div class="line">while ($d = mysql_fetch_assoc($r)) &#123;</div><div class="line"></div><div class="line">	// 用正则匹配链接</div><div class="line">	if (preg_match_all("!href=\"(.*?)\"!", $d['post_content'], $matches)) &#123;</div><div class="line"></div><div class="line">		foreach ($matches[1] as $url) &#123;</div><div class="line"></div><div class="line">			// exclude some domains</div><div class="line">			$tmp = parse_url($url);</div><div class="line">			if (in_array($tmp['host'], $excluded_domains)) &#123;</div><div class="line">				continue;</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			// store the url</div><div class="line">			$url_list []= $url;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// 移除重复链接</div><div class="line">$url_list = array_values(array_unique($url_list));</div><div class="line"></div><div class="line">if (!$url_list) &#123;</div><div class="line">	die('No URL to check');</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们首先配置好数据库，一系列要排除的域名（$excluded_domains），以及最大并发连接数（$max_connections）。然后，连接数据库，获取文章和包含的链接，把它们收集到一个数组中（$url_list）。</p>
 <p>下面的代码有点复杂了，因此我将一小步一小步地详细解释：</p>
-<p>[code=’php’]<br>// 1. 批处理器<br>$mh = curl_multi_init();</p>
-<p>// 2. 加入需批量处理的URL<br>for ($i = 0; $i &lt; $max_connections; $i++) {<br>    add_url_to_multi_handle($mh, $url_list);<br>}</p>
-<p>// 3. 初始处理<br>do {<br>    $mrc = curl_multi_exec($mh, $active);<br>} while ($mrc == CURLM_CALL_MULTI_PERFORM);</p>
-<p>// 4. 主循环<br>while ($active &amp;amp;&amp;amp; $mrc == CURLM_OK) {</p>
-<pre><code>// 5\. 有活动连接
-if (curl_multi_select($mh) != -1) {
-
-    // 6\. 干活
-    do {
-        $mrc = curl_multi_exec($mh, $active);
-    } while ($mrc == CURLM_CALL_MULTI_PERFORM);
-
-    // 7\. 有信息否？
-    if ($mhinfo = curl_multi_info_read($mh)) {
-        // 意味着该连接正常结束
-
-        // 8\. 从curl句柄获取信息
-        $chinfo = curl_getinfo($mhinfo[&apos;handle&apos;]);
-
-        // 9\. 死链么？
-        if (!$chinfo[&apos;http_code&apos;]) {
-            $dead_urls []= $chinfo[&apos;url&apos;];
-
-        // 10\. 404了?
-        } else if ($chinfo[&apos;http_code&apos;] == 404) {
-            $not_found_urls []= $chinfo[&apos;url&apos;];
-
-        // 11\. 还能用
-        } else {
-            $working_urls []= $chinfo[&apos;url&apos;];
-        }
-
-        // 12\. 移除句柄
-        curl_multi_remove_handle($mh, $mhinfo[&apos;handle&apos;]);
-        curl_close($mhinfo[&apos;handle&apos;]);
-
-        // 13\. 加入新URL，干活
-        if (add_url_to_multi_handle($mh, $url_list)) {
-
-            do {
-                $mrc = curl_multi_exec($mh, $active);
-            } while ($mrc == CURLM_CALL_MULTI_PERFORM);
-        }
-    }
-}
-</code></pre><p>}</p>
-<p>// 14. 完了<br>curl_multi_close($mh);</p>
-<p>echo “==Dead URLs==\n”;<br>echo implode(“\n”,$dead_urls) . “\n\n”;</p>
-<p>echo “==404 URLs==\n”;<br>echo implode(“\n”,$not_found_urls) . “\n\n”;</p>
-<p>echo “==Working URLs==\n”;<br>echo implode(“\n”,$working_urls);</p>
-<p>// 15. 向批处理器添加url<br>function add_url_to_multi_handle($mh, $url_list) {<br>    static $index = 0;</p>
-<pre><code>// 如果还剩url没用
-if ($url_list[$index]) {
-
-    // 新建curl句柄
-    $ch = curl_init();
-
-    // 配置url
-    curl_setopt($ch, CURLOPT_URL, $url_list[$index]);
-    // 不想输出返回的内容
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    // 重定向到哪儿我们就去哪儿
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-    // 不需要内容体，能够节约带宽和时间
-    curl_setopt($ch, CURLOPT_NOBODY, 1);
-
-    // 加入到批处理器中
-    curl_multi_add_handle($mh, $ch);
-
-    // 拨一下计数器，下次调用该函数就能添加下一个url了
-    $index++;
-
-    return true;
-} else {
-
-    // 没有新的URL需要处理了
-    return false;
-}
-</code></pre><p>}<br>[/code]</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 1\. 批处理器</span></div><div class="line">$mh = curl_multi_init();</div><div class="line"></div><div class="line"><span class="comment">// 2\. 加入需批量处理的URL</span></div><div class="line"><span class="keyword">for</span> ($i = <span class="number">0</span>; $i &lt; $max_connections; $i++) &#123;</div><div class="line">	add_url_to_multi_handle($mh, $url_list);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 3\. 初始处理</span></div><div class="line"><span class="keyword">do</span> &#123;</div><div class="line">	$mrc = curl_multi_exec($mh, $active);</div><div class="line">&#125; <span class="keyword">while</span> ($mrc == CURLM_CALL_MULTI_PERFORM);</div><div class="line"></div><div class="line"><span class="comment">// 4\. 主循环</span></div><div class="line"><span class="keyword">while</span> ($active &amp;amp;amp;&amp;amp;amp; $mrc == CURLM_OK) &#123;</div><div class="line"></div><div class="line">	<span class="comment">// 5\. 有活动连接</span></div><div class="line">	<span class="keyword">if</span> (curl_multi_select($mh) != <span class="number">-1</span>) &#123;</div><div class="line"></div><div class="line">		<span class="comment">// 6\. 干活</span></div><div class="line">		<span class="keyword">do</span> &#123;</div><div class="line">			$mrc = curl_multi_exec($mh, $active);</div><div class="line">		&#125; <span class="keyword">while</span> ($mrc == CURLM_CALL_MULTI_PERFORM);</div><div class="line"></div><div class="line">		<span class="comment">// 7\. 有信息否？</span></div><div class="line">		<span class="keyword">if</span> ($mhinfo = curl_multi_info_read($mh)) &#123;</div><div class="line">			<span class="comment">// 意味着该连接正常结束</span></div><div class="line"></div><div class="line">			<span class="comment">// 8\. 从curl句柄获取信息</span></div><div class="line">			$chinfo = curl_getinfo($mhinfo[<span class="string">'handle'</span>]);</div><div class="line"></div><div class="line">			<span class="comment">// 9\. 死链么？</span></div><div class="line">			<span class="keyword">if</span> (!$chinfo[<span class="string">'http_code'</span>]) &#123;</div><div class="line">				$dead_urls []= $chinfo[<span class="string">'url'</span>];</div><div class="line"></div><div class="line">			<span class="comment">// 10\. 404了?</span></div><div class="line">			&#125; <span class="keyword">else</span> <span class="keyword">if</span> ($chinfo[<span class="string">'http_code'</span>] == <span class="number">404</span>) &#123;</div><div class="line">				$not_found_urls []= $chinfo[<span class="string">'url'</span>];</div><div class="line"></div><div class="line">			<span class="comment">// 11\. 还能用</span></div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				$working_urls []= $chinfo[<span class="string">'url'</span>];</div><div class="line">			&#125;</div><div class="line"></div><div class="line">			<span class="comment">// 12\. 移除句柄</span></div><div class="line">			curl_multi_remove_handle($mh, $mhinfo[<span class="string">'handle'</span>]);</div><div class="line">			curl_close($mhinfo[<span class="string">'handle'</span>]);</div><div class="line"></div><div class="line">			<span class="comment">// 13\. 加入新URL，干活</span></div><div class="line">			<span class="keyword">if</span> (add_url_to_multi_handle($mh, $url_list)) &#123;</div><div class="line"></div><div class="line">				<span class="keyword">do</span> &#123;</div><div class="line">					$mrc = curl_multi_exec($mh, $active);</div><div class="line">				&#125; <span class="keyword">while</span> ($mrc == CURLM_CALL_MULTI_PERFORM);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 14\. 完了</span></div><div class="line">curl_multi_close($mh);</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"==Dead URLs==\n"</span>;</div><div class="line"><span class="keyword">echo</span> implode(<span class="string">"\n"</span>,$dead_urls) . <span class="string">"\n\n"</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"==404 URLs==\n"</span>;</div><div class="line"><span class="keyword">echo</span> implode(<span class="string">"\n"</span>,$not_found_urls) . <span class="string">"\n\n"</span>;</div><div class="line"></div><div class="line"><span class="keyword">echo</span> <span class="string">"==Working URLs==\n"</span>;</div><div class="line"><span class="keyword">echo</span> implode(<span class="string">"\n"</span>,$working_urls);</div><div class="line"></div><div class="line"><span class="comment">// 15\. 向批处理器添加url</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add_url_to_multi_handle</span><span class="params">($mh, $url_list)</span> </span>&#123;</div><div class="line">	<span class="keyword">static</span> $index = <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="comment">// 如果还剩url没用</span></div><div class="line">	<span class="keyword">if</span> ($url_list[$index]) &#123;</div><div class="line"></div><div class="line">		<span class="comment">// 新建curl句柄</span></div><div class="line">		$ch = curl_init();</div><div class="line"></div><div class="line">		<span class="comment">// 配置url</span></div><div class="line">		curl_setopt($ch, CURLOPT_URL, $url_list[$index]);</div><div class="line">		<span class="comment">// 不想输出返回的内容</span></div><div class="line">		curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</div><div class="line">		<span class="comment">// 重定向到哪儿我们就去哪儿</span></div><div class="line">		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, <span class="number">1</span>);</div><div class="line">		<span class="comment">// 不需要内容体，能够节约带宽和时间</span></div><div class="line">		curl_setopt($ch, CURLOPT_NOBODY, <span class="number">1</span>);</div><div class="line"></div><div class="line">		<span class="comment">// 加入到批处理器中</span></div><div class="line">		curl_multi_add_handle($mh, $ch);</div><div class="line"></div><div class="line">		<span class="comment">// 拨一下计数器，下次调用该函数就能添加下一个url了</span></div><div class="line">		$index++;</div><div class="line"></div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line"></div><div class="line">		<span class="comment">// 没有新的URL需要处理了</span></div><div class="line">		<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>下面解释一下以上代码。列表的序号对应着代码注释中的顺序数字。</p>
 <ol>
 <li>新建一个批处理器。Created a multi handle.2.  稍后我们将创建一个把URL加入批处理器的函数 add_url_to_multi_handle() 。每当这个函数被调用，就有一个新url被加入批处理器。一开始，我们给批处理器添加了10个URL（这一数字由 $max_connections 所决定）。3.  运行 curl_multi_exec()&nbsp; 进行初始化工作是必须的，只要它返回 CURLM_CALL_MULTI_PERFORM 就还有事情要做。这么做主要是为了创建连接，它不会等待完整的URL响应。4.  只要批处理中还有活动连接主循环就会一直持续。5.  curl_multi_select() 会一直等待，直到某个URL查询产生活动连接。6.  cURL的活儿又来了，主要是获取响应数据。7.  检查各种信息。当一个URL请求完成时，会返回一个数组。8.  在返回的数组中有一个 cURL 句柄。我们利用其获取单个cURL请求的相应信息。9.  如果这是一个死链或者请求超时，不会返回http状态码。10.  如果这个页面找不到了，会返回404状态码。11.  其他情况我们都认为这个链接是可用的（当然，你也可以再检查一下500错误之类…）。12.  从该批次移除这个cURL句柄，因为它已经没有利用价值了，关了它！13.  很好，现在可以另外加一个URL进来了。再一次地，初始化工作又开始进行…14.  嗯，该干的都干了。关闭批处理器，生成报告。15.  回过头来看给批处理器添加新URL的函数。这个函数每调用一次，静态变量 $index 就递增一次，这样我们才能知道还剩多少URL没处理。</li>
@@ -367,39 +166,13 @@ if ($url_list[$index]) {
 <p><img src="http://nettuts.s3.cdn.plus.org/534_curl/ss_4.png" alt=""></p>
 <p>共检查约40个URL，只耗费两秒不到。当需要检查更加大量的URL时，其省心省力的效果可想而知！如果你同时打开10个连接，还能再快上10倍！另外，你还可以利用cURL批处理的无隔断特性来处理大量URL请求，而不会阻塞你的Web脚本。</p>
 <h3 id="另一些有用的cURL-选项"><a href="#另一些有用的cURL-选项" class="headerlink" title="另一些有用的cURL 选项"></a>另一些有用的cURL 选项</h3><h3 id="HTTP-认证"><a href="#HTTP-认证" class="headerlink" title="HTTP 认证"></a>HTTP 认证</h3><p>如果某个URL请求需要基于 HTTP 的身份验证，你可以使用下面的代码：</p>
-<p>[code=’php’]<br>$url = “<a href="http://www.somesite.com/members/" target="_blank" rel="external">http://www.somesite.com/members/</a>“;</p>
-<p>$ch = curl_init();</p>
-<p>curl_setopt($ch, CURLOPT_URL, $url);<br>curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</p>
-<p>// 发送用户名和密码<br>curl_setopt($ch, CURLOPT_USERPWD, “myusername:mypassword”);</p>
-<p>// 你可以允许其重定向<br>curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);<br>// 下面的选项让 cURL 在重定向后<br>// 也能发送用户名和密码<br>curl_setopt($ch, CURLOPT_UNRESTRICTED_AUTH, 1);</p>
-<p>$output = curl_exec($ch);</p>
-<p>curl_close($ch);<br>[/code]</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">$url = <span class="string">"http://www.somesite.com/members/"</span>;</div><div class="line"></div><div class="line">$ch = curl_init();</div><div class="line"></div><div class="line">curl_setopt($ch, CURLOPT_URL, $url);</div><div class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</div><div class="line"></div><div class="line"><span class="comment">// 发送用户名和密码</span></div><div class="line">curl_setopt($ch, CURLOPT_USERPWD, <span class="string">"myusername:mypassword"</span>);</div><div class="line"></div><div class="line"><span class="comment">// 你可以允许其重定向</span></div><div class="line">curl_setopt($ch, CURLOPT_FOLLOWLOCATION, <span class="number">1</span>);</div><div class="line"><span class="comment">// 下面的选项让 cURL 在重定向后</span></div><div class="line"><span class="comment">// 也能发送用户名和密码</span></div><div class="line">curl_setopt($ch, CURLOPT_UNRESTRICTED_AUTH, <span class="number">1</span>);</div><div class="line"></div><div class="line">$output = curl_exec($ch);</div><div class="line"></div><div class="line">curl_close($ch);</div></pre></td></tr></table></figure>
 <h3 id="FTP-上传"><a href="#FTP-上传" class="headerlink" title="FTP 上传"></a>FTP 上传</h3><p>PHP 自带有 <a href="http://us.php.net/manual/en/book.ftp.php" target="_blank" rel="external">FTP 类库</a>， 但你也能用 cURL：</p>
-<p>[code=’php’]<br>// 开一个文件指针<br>$file = fopen(“/path/to/file”, “r”);</p>
-<p>// url里包含了大部分所需信息<br>$url = “ftp://username:<a href="mailto:password@mydomain.com" target="_blank" rel="external">password@mydomain.com</a>:21/path/to/new/file”;</p>
-<p>$ch = curl_init();</p>
-<p>curl_setopt($ch, CURLOPT_URL, $url);<br>curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</p>
-<p>// 上传相关的选项<br>curl_setopt($ch, CURLOPT_UPLOAD, 1);<br>curl_setopt($ch, CURLOPT_INFILE, $fp);<br>curl_setopt($ch, CURLOPT_INFILESIZE, filesize(“/path/to/file”));</p>
-<p>// 是否开启ASCII模式 (上传文本文件时有用)<br>curl_setopt($ch, CURLOPT_FTPASCII, 1);</p>
-<p>$output = curl_exec($ch);<br>curl_close($ch);<br>[/code]</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 开一个文件指针</span></div><div class="line">$file = fopen(<span class="string">"/path/to/file"</span>, <span class="string">"r"</span>);</div><div class="line"></div><div class="line"><span class="comment">// url里包含了大部分所需信息</span></div><div class="line">$url = <span class="string">"ftp://username:[password@mydomain.com](mailto:password@mydomain.com):21/path/to/new/file"</span>;</div><div class="line"></div><div class="line">$ch = curl_init();</div><div class="line"></div><div class="line">curl_setopt($ch, CURLOPT_URL, $url);</div><div class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</div><div class="line"></div><div class="line"><span class="comment">// 上传相关的选项</span></div><div class="line">curl_setopt($ch, CURLOPT_UPLOAD, <span class="number">1</span>);</div><div class="line">curl_setopt($ch, CURLOPT_INFILE, $fp);</div><div class="line">curl_setopt($ch, CURLOPT_INFILESIZE, filesize(<span class="string">"/path/to/file"</span>));</div><div class="line"></div><div class="line"><span class="comment">// 是否开启ASCII模式 (上传文本文件时有用)</span></div><div class="line">curl_setopt($ch, CURLOPT_FTPASCII, <span class="number">1</span>);</div><div class="line"></div><div class="line">$output = curl_exec($ch);</div><div class="line">curl_close($ch);</div></pre></td></tr></table></figure>
 <h3 id="翻墙术"><a href="#翻墙术" class="headerlink" title="翻墙术"></a>翻墙术</h3><p>你可以用代理发起cURL请求：</p>
-<p>[code=’php’]<br>$ch = curl_init();</p>
-<p>curl_setopt($ch, CURLOPT_URL,’<a href="http://www.example.com" target="_blank" rel="external">http://www.example.com</a>‘);</p>
-<p>curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);</p>
-<p>// 指定代理地址<br>curl_setopt($ch, CURLOPT_PROXY, ‘11.11.11.11:8080’);</p>
-<p>// 如果需要的话，提供用户名和密码<br>curl_setopt($ch, CURLOPT_PROXYUSERPWD,’user:pass’);</p>
-<p>$output = curl_exec($ch);</p>
-<p>curl_close ($ch);<br>[/code]</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$ch = curl_init();</div><div class="line"></div><div class="line">curl_setopt($ch, CURLOPT_URL,<span class="string">'http://www.example.com'</span>);</div><div class="line"></div><div class="line">curl_setopt($ch, CURLOPT_RETURNTRANSFER, <span class="number">1</span>);</div><div class="line"></div><div class="line"><span class="comment">// 指定代理地址</span></div><div class="line">curl_setopt($ch, CURLOPT_PROXY, <span class="string">'11.11.11.11:8080'</span>);</div><div class="line"></div><div class="line"><span class="comment">// 如果需要的话，提供用户名和密码</span></div><div class="line">curl_setopt($ch, CURLOPT_PROXYUSERPWD,<span class="string">'user:pass'</span>);</div><div class="line"></div><div class="line">$output = curl_exec($ch);</div><div class="line"></div><div class="line">curl_close ($ch);</div></pre></td></tr></table></figure>
 <h3 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h3><p>可以在一个URL请求过程中，让cURL调用某指定的回调函数。例如，在内容或者响应下载的过程中立刻开始利用数据，而不用等到完全下载完。</p>
-<p>[code=’php’]<br>$ch = curl_init();</p>
-<p>curl_setopt($ch, CURLOPT_URL,’<a href="http://net.tutsplus.com" target="_blank" rel="external">http://net.tutsplus.com</a>‘);</p>
-<p>curl_setopt($ch, CURLOPT_WRITEFUNCTION,”progress_function”);</p>
-<p>curl_exec($ch);</p>
-<p>curl_close ($ch);</p>
-<p>function progress_function($ch,$str) {</p>
-<pre><code>echo $str;
-return strlen($str);
-</code></pre><p>}<br>[/code]</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">$ch = curl_init();</div><div class="line"></div><div class="line">curl_setopt($ch, CURLOPT_URL,<span class="string">'http://net.tutsplus.com'</span>);</div><div class="line"></div><div class="line">curl_setopt($ch, CURLOPT_WRITEFUNCTION,<span class="string">"progress_function"</span>);</div><div class="line"></div><div class="line">curl_exec($ch);</div><div class="line"></div><div class="line">curl_close ($ch);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">progress_function</span><span class="params">($ch,$str)</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">echo</span> $str;</div><div class="line">	<span class="keyword">return</span> strlen($str);</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这个回调函数<strong>必须</strong>返回字串的长度，不然此功能将无法正常使用。</p>
 <p>在URL响应接收的过程中，只要收到一个数据包，这个函数就会被调用。</p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>今天我们一起学习了cURL库的强大功能和灵活的扩展性。希望你喜欢。下一次要发起URL请求时，考虑下cURL吧！</p>

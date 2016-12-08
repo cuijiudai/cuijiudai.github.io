@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -86,55 +86,8 @@
     <div class="entry">
       
         <p>博客改版了，以前的博客主题是出自一个外国的网站，随便翻译了一下就拿来用了，现在的这款是出自<a href="http://www.prower.cn" target="_blank" rel="external">Prower</a>,谢谢博主的分享。我对主题作了一下更改，添加了一些js，主要是图片方面，包括图片自动添加背景，圆角，最大尺寸判定,缩略图的鼠标指向放大。在此列一下代码，大家多提意见。下次有机会我会添加更多的js应用。<br><a id="more"></a></p>
-<h3 id="js代码"><a href="#js代码" class="headerlink" title="js代码"></a>js代码</h3><p>[code=”javascript”]</p>
-<p>$(document).ready(function(){<br>    //图片的背景边框效果</p>
-<pre><code>var offsetX = 20;
-var offsetY = 10;
-
-$(&quot;.content img&quot;).each(function(){
-var contentwidth=$(&quot;.content&quot;).width();
-var maxwidth=contentwidth-18; //减去padding和border的宽度
-    $(this).wrap(&quot;&lt;div&gt;&lt;/div&gt;&quot;);
-    $(this).parent().attr(&quot;class&quot;,&quot;addcaption&quot;);
-    $(this).attr(&quot;class&quot;,&quot;&quot;);
-    $(this).parent().append(&quot;&lt;span&gt;&quot;+$(this).attr(&quot;title&quot;)+&quot;&lt;/span&gt;&quot;);
-    thiswidth=$(this).width();
-    if(maxwidth&lt;thiswidth)
-    {
-        thiswidth=maxwidth;   // 图片宽度等于最大宽度
-        $(this).width(thiswidth);
-
-        //鼠标悬停的放大效果
-        if(true)
-        {
-            var $imgsrc=$(this).attr(&quot;src&quot;);
-            $(this).hover(function(e){
-                $(&apos;![big image]()&apos;)
-                .css(&apos;top&apos;,e.pageY +offsetY)
-                .css(&apos;left&apos;, e.pageX + offsetX)
-                .appendTo(&apos;body&apos;);
-
-            }, function() {
-                $(&quot;#largeImage&quot;).remove();
-            });
-
-            $(this).mousemove(function(e) {
-                $(&quot;#largeImage&quot;).css(&apos;top&apos;, e.pageY + offsetY).css(&apos;left&apos;, e.pageX + offsetX);
-            });
-        }
-    }
-    $(this).parent().width(thiswidth);
-    $(this).parent().corner(&quot;5px&quot;);
-});
-</code></pre><p>});</p>
-<p>[/code]</p>
-<h3 id="css代码"><a href="#css代码" class="headerlink" title="css代码"></a>css代码</h3><p>[code=”css”]</p>
-<p>div.addcaption{<br>    display:block;<br>    margin-left:auto;<br>    margin-right:auto;<br>    margin-bottom:1.5em;<br>    padding:8px;<br>    text-align:center;<br>    background:#e0e0e0;<br>    border:1px solid #c1c1c1;<br>    color:#565656;<br>    cursor:hand;<br>}</p>
-<p>div.addcaption span{<br>    display:block;<br>    text-align:center;</p>
-<p>}</p>
-<p>#largeImage {<br>position: absolute;<br>padding: .5em;<br>background: #e3e3e3;<br>border: 1px solid #BFBFBF;</p>
-<p>}<br>[/code]</p>
-
+<h3 id="js代码"><a href="#js代码" class="headerlink" title="js代码"></a>js代码</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="comment">//图片的背景边框效果</span></div><div class="line"></div><div class="line">	<span class="keyword">var</span> offsetX = <span class="number">20</span>;</div><div class="line">	<span class="keyword">var</span> offsetY = <span class="number">10</span>;</div><div class="line"></div><div class="line">	$(<span class="string">".content img"</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> contentwidth=$(<span class="string">".content"</span>).width();</div><div class="line">	<span class="keyword">var</span> maxwidth=contentwidth<span class="number">-18</span>; <span class="comment">//减去padding和border的宽度</span></div><div class="line">		$(<span class="keyword">this</span>).wrap(<span class="string">"&lt;div&gt;&lt;/div&gt;"</span>);</div><div class="line">		$(<span class="keyword">this</span>).parent().attr(<span class="string">"class"</span>,<span class="string">"addcaption"</span>);</div><div class="line">		$(<span class="keyword">this</span>).attr(<span class="string">"class"</span>,<span class="string">""</span>);</div><div class="line">		$(<span class="keyword">this</span>).parent().append(<span class="string">"&lt;span&gt;"</span>+$(<span class="keyword">this</span>).attr(<span class="string">"title"</span>)+<span class="string">"&lt;/span&gt;"</span>);</div><div class="line">		thiswidth=$(<span class="keyword">this</span>).width();</div><div class="line">		<span class="keyword">if</span>(maxwidth&lt;thiswidth)</div><div class="line">		&#123;</div><div class="line">			thiswidth=maxwidth;   <span class="comment">// 图片宽度等于最大宽度</span></div><div class="line">			$(<span class="keyword">this</span>).width(thiswidth);</div><div class="line"></div><div class="line">			<span class="comment">//鼠标悬停的放大效果</span></div><div class="line">			<span class="keyword">if</span>(<span class="literal">true</span>)</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">var</span> $imgsrc=$(<span class="keyword">this</span>).attr(<span class="string">"src"</span>);</div><div class="line">				$(<span class="keyword">this</span>).hover(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">					$(<span class="string">'![big image]()'</span>)</div><div class="line">					.css(<span class="string">'top'</span>,e.pageY +offsetY)</div><div class="line">					.css(<span class="string">'left'</span>, e.pageX + offsetX)</div><div class="line">					.appendTo(<span class="string">'body'</span>);</div><div class="line"></div><div class="line">				&#125;, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">					$(<span class="string">"#largeImage"</span>).remove();</div><div class="line">				&#125;);</div><div class="line"></div><div class="line">				$(<span class="keyword">this</span>).mousemove(<span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">					$(<span class="string">"#largeImage"</span>).css(<span class="string">'top'</span>, e.pageY + offsetY).css(<span class="string">'left'</span>, e.pageX + offsetX);</div><div class="line">				&#125;);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		$(<span class="keyword">this</span>).parent().width(thiswidth);</div><div class="line">		$(<span class="keyword">this</span>).parent().corner(<span class="string">"5px"</span>);</div><div class="line">	&#125;);</div><div class="line"></div><div class="line">&#125;);</div><div class="line"></div></pre></td></tr></table></figure>
+<h3 id="css代码"><a href="#css代码" class="headerlink" title="css代码"></a>css代码</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="selector-tag">div</span><span class="selector-class">.addcaption</span>&#123;</div><div class="line">	<span class="attribute">display</span>:block;</div><div class="line">	<span class="attribute">margin-left</span>:auto;</div><div class="line">	<span class="attribute">margin-right</span>:auto;</div><div class="line">	<span class="attribute">margin-bottom</span>:<span class="number">1.5em</span>;</div><div class="line">	<span class="attribute">padding</span>:<span class="number">8px</span>;</div><div class="line">	<span class="attribute">text-align</span>:center;</div><div class="line">	<span class="attribute">background</span>:<span class="number">#e0e0e0</span>;</div><div class="line">	<span class="attribute">border</span>:<span class="number">1px</span> solid <span class="number">#c1c1c1</span>;</div><div class="line">	<span class="attribute">color</span>:<span class="number">#565656</span>;</div><div class="line">	<span class="attribute">cursor</span>:hand;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-tag">div</span><span class="selector-class">.addcaption</span> <span class="selector-tag">span</span>&#123;</div><div class="line">	<span class="attribute">display</span>:block;</div><div class="line">	<span class="attribute">text-align</span>:center;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-id">#largeImage</span> &#123;</div><div class="line"><span class="attribute">position</span>: absolute;</div><div class="line"><span class="attribute">padding</span>: .<span class="number">5em</span>;</div><div class="line"><span class="attribute">background</span>: <span class="number">#e3e3e3</span>;</div><div class="line"><span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#BFBFBF</span>;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
   </div>

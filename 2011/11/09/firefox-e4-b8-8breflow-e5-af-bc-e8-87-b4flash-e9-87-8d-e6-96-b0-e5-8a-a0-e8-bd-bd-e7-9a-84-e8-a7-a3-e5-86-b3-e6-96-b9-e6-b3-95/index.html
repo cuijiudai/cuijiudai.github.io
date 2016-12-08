@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -93,8 +93,7 @@
 <p>我试着将flash嵌入到iframe中，但是火狐 的reflow 竟然也会导致 iframe内的flash重新加载，再次失败。</p>
 <p>好像已经山穷水尽。</p>
 <p>好吧终于：<a href="http://jser.me" target="_blank" rel="external">大波波</a>找到了解决方法<a href="http://getsatisfaction.com/schillmania/topics/change_body_properties_overflow_troubles_in_firefox" target="_blank" rel="external">change_body_properties_overflow_troubles_in_firefox</a>：<strong>将flash嵌入到body以外。</strong></p>
-<p>[code=’js’]<br>//创建元素<br>var el = document.createElement(‘div’);<br>el.id = ‘flashcon’;<br>document.documentElement.appendChlid(el);<br>//than 嵌入 flash<br>swfobject.embedSWF(‘’);<br>[/code]</p>
-
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//创建元素</span></div><div class="line"><span class="keyword">var</span> el = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</div><div class="line">el.id = <span class="string">'flashcon'</span>;</div><div class="line"><span class="built_in">document</span>.documentElement.appendChlid(el);</div><div class="line"><span class="comment">//than 嵌入 flash</span></div><div class="line">swfobject.embedSWF(<span class="string">''</span>);</div></pre></td></tr></table></figure>
       
     </div>
   </div>

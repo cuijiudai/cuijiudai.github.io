@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Page 4 | 美拓blog | 做个有趣的人</title>
+  <title>第 4 页 | 美拓blog | 做个有趣的人</title>
 
   
   <meta name="author" content="独孤逸辰">
@@ -47,11 +47,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -83,8 +83,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>a的伪类优先级如下：<br>[code=”css”]<br> 浏览器默认设置（:link,..:active） &lt; a &lt; .class &lt; a:link == .class a&lt; a:visited <a:hover <a:active<.class .class2(这是a的类名)<#id < #id a
-[/code]
+        <p>a的伪类优先级如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">浏览器默认设置（:link,..:active） &lt; a &lt; .class &lt; a:link == .class a&lt; a:visited &lt;a:hover &lt;a:active&lt;.class .class2(这是a的类名)&lt;#id &lt; #id a</div></pre></td></tr></table></figure><br>
       
     </div>
   </div>
@@ -432,7 +431,8 @@
   <div class="article-content">
     <div class="entry">
       
-        <h4 id="1"><a href="#1" class="headerlink" title="1:"></a>1:</h4><p>[code=”js”]<br>1 &amp;&amp; 3<br>[/code]<br>返回什么？<br>
+        <h4 id="1"><a href="#1" class="headerlink" title="1:"></a>1:</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">1</span> &amp;&amp; <span class="number">3</span></div></pre></td></tr></table></figure>
+<p>返回什么？<br>
       
     </div>
   </div>
@@ -541,10 +541,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>要求将一个数组去重后，按升序排序后 9 的索引。<br>[code=”js”]<br>//数组去重<br>Array.prototype.distinct = function(){<br>            var filtered= [];<br>                var _a = {};<br>                 for(var i = 0;i&lt;this .length;i++){<br>                         if(!_a[this[i]]) {//如果已经有了就不再添加<br>                                _a[this[i]] = 1;<br>                                filtered.push(this[i])<br>                         }<br>                 }<br>              return filtered;<br>};</p>
-<p>//二分法 寻找索引<br>function search (arr,item,lower,upper){<br>    lower = lower || 0;<br>    upper = upper || arr.length-1;<br>    if(lower == upper){<br>        if(item == arr[upper]){<br>            return upper;<br>        }else{<br>            return -1;<br>        }<br>    }else{<br>        var middle = parseInt((lower+upper)/2);<br>        if(item &gt; a[middle]){<br>            return search (arr,item,middle+1,upper);<br>        }else{<br>           return search (arr,item,lower,middle);<br>        }<br>    }</p>
-<p>}</p>
-<p>var a = [10,15,3,4,5,6,7,8,9,3,8,9];<br>a = a.distinct(); //[10, 15, 3, 4, 5, 6, 7, 8, 9]<br>a.sort(function(a,b){ return a-b;}); //排序 [3, 4, 5, 6, 7, 8, 9, 10, 15]<br>alert(search(a,9)); //6<br>[/code]</p>
+        <p>要求将一个数组去重后，按升序排序后 9 的索引。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//数组去重</span></div><div class="line"><span class="built_in">Array</span>.prototype.distinct = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	        <span class="keyword">var</span> filtered= [];</div><div class="line">	            <span class="keyword">var</span> _a = &#123;&#125;; </div><div class="line">	             <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>;i&lt;<span class="keyword">this</span> .length;i++)&#123;</div><div class="line">           	          <span class="keyword">if</span>(!_a[<span class="keyword">this</span>[i]]) &#123;<span class="comment">//如果已经有了就不再添加 </span></div><div class="line">   	          	           _a[<span class="keyword">this</span>[i]] = <span class="number">1</span>;                     </div><div class="line">   	          	           filtered.push(<span class="keyword">this</span>[i])          </div><div class="line">           	          &#125;    </div><div class="line">	             &#125;</div><div class="line">	          <span class="keyword">return</span> filtered;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//二分法 寻找索引 </span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">search</span> (<span class="params">arr,item,lower,upper</span>)</span>&#123;</div><div class="line">	lower = lower || <span class="number">0</span>;</div><div class="line">	upper = upper || arr.length<span class="number">-1</span>;</div><div class="line">	<span class="keyword">if</span>(lower == upper)&#123;</div><div class="line">		<span class="keyword">if</span>(item == arr[upper])&#123;</div><div class="line">		    <span class="keyword">return</span> upper;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">        &#125;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		<span class="keyword">var</span> middle = <span class="built_in">parseInt</span>((lower+upper)/<span class="number">2</span>);               </div><div class="line">		<span class="keyword">if</span>(item &gt; a[middle])&#123;</div><div class="line">		    <span class="keyword">return</span> search (arr,item,middle+<span class="number">1</span>,upper);</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">		   <span class="keyword">return</span> search (arr,item,lower,middle);</div><div class="line">        &#125;</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> a = [<span class="number">10</span>,<span class="number">15</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">9</span>];</div><div class="line">a = a.distinct(); <span class="comment">//[10, 15, 3, 4, 5, 6, 7, 8, 9]</span></div><div class="line">a.sort(<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123; <span class="keyword">return</span> a-b;&#125;); <span class="comment">//排序 [3, 4, 5, 6, 7, 8, 9, 10, 15]</span></div><div class="line">alert(search(a,<span class="number">9</span>)); <span class="comment">//6</span></div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -627,10 +624,10 @@
 
 <nav class="pagination">
   
-  <a href="/page/3/" class="pagination-prev">Prev</a>
+  <a href="/page/3/" class="pagination-prev">上一页</a>
   
   
-  <a href="/page/5/" class="pagination-next">Next</a>
+  <a href="/page/5/" class="pagination-next">下一页</a>
   
 </nav>
     </main>

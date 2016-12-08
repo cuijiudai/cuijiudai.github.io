@@ -50,11 +50,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -85,11 +85,7 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>常见浏览器的hack ，ie 6,7,8;火狐，Chrome ，Safari，Opera.<a id="more"></a><br>[code=”css”]<br>/<em> hack for IEs</em>/<br>.footwrap .plist{<br>    padding-left:58px<br>    padding-left:58\9; /<em> 所有IE浏览器 </em>/<br>   <em>padding-left:57px; /</em>ie6,7<em>/<br>   _padding-left:56px; /</em>ie6<em>/<br>    padding-left:55px\0; /</em> ie8<em>/<br>}<br>/</em> hack for ie9 <em>/<br>body:not(:target) {<br>        color: red\9; /</em> IE9 */<br>}</p>
-<p>/<em> hack for firefox</em>/<br>@-moz-document url-prefix(){<br>     .footwrap .plist{<br>          padding-left:57px;<br>     }<br>}</p>
-<p>/<em> hack for Chrome and safari</em>/<br>@media screen and (-webkit-min-device-pixel-ratio:0) {<br>     .footwrap .plist{<br>              padding-left:58px;<br>     }<br>}</p>
-<p>/<em> hack for opera </em>/<br>@media all and (min-width:0px){<br>     .footwrap .plist{<br>              padding-left:58px;<br>     }<br>}</p>
-<p>[/code]</p>
+        <p>常见浏览器的hack ，ie 6,7,8;火狐，Chrome ，Safari，Opera.<a id="more"></a><br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">/* hack for IEs*/</div><div class="line">.footwrap .plist&#123;</div><div class="line">    padding-left:58px </div><div class="line">    padding-left:58\9; /* 所有IE浏览器 */ </div><div class="line">   *padding-left:57px; /*ie6,7*/ </div><div class="line">   _padding-left:56px; /*ie6*/</div><div class="line">    padding-left:55px\0; /* ie8*/     </div><div class="line">&#125;</div><div class="line">/* hack for ie9 */</div><div class="line">body:not(:target) &#123;</div><div class="line">        color: red\9; /* IE9 */</div><div class="line">&#125;</div><div class="line"></div><div class="line">/* hack for firefox*/</div><div class="line">@-moz-document url-prefix()&#123;</div><div class="line">     .footwrap .plist&#123;</div><div class="line">          padding-left:57px;</div><div class="line">     &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/* hack for Chrome and safari*/</div><div class="line">@media screen and (-webkit-min-device-pixel-ratio:0) &#123;</div><div class="line">     .footwrap .plist&#123;</div><div class="line">              padding-left:58px;</div><div class="line">     &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/* hack for opera */</div><div class="line">@media all and (min-width:0px)&#123;</div><div class="line">     .footwrap .plist&#123;</div><div class="line">              padding-left:58px;</div><div class="line">     &#125;</div><div class="line">&#125;</div><div class="line"></div></pre></td></tr></table></figure></p>
 
       
     </div>

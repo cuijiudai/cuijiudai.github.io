@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Page 6 | 美拓blog | 做个有趣的人</title>
+  <title>第 6 页 | 美拓blog | 做个有趣的人</title>
 
   
   <meta name="author" content="独孤逸辰">
@@ -47,11 +47,11 @@
   <nav class="site-navigation">
     <ul>
       
-        <li><a href="/">Home</a></li>
+        <li><a href="/">主页</a></li>
       
-        <li><a href="/archives">Archives</a></li>
+        <li><a href="/archives">归档</a></li>
       
-        <li><a href="/about">About</a></li>
+        <li><a href="/about">关于</a></li>
       
     </ul>
   </nav>
@@ -134,19 +134,8 @@
   <div class="article-content">
     <div class="entry">
       
-        <p>[code=’js’]<br>        <script type="text/javascript" charset="utf-8"><br>        function response(obj){<br>            var $list = $(obj);<br>            var $children = $list.children();<br>            var num= $children.size();//$list  总个数<br>            var current=0; //当前选中项<br>            addnow()<br>            $(document).bind(‘keydown’,function(e){<br>                if($list.is(“:visible”)){<br>                    if(e.keyCode == 40){ //向下<br>                        if(current<num -1) current = current +1;                    
-                        addnow()
-                        e.preventDefault();
-                    }else if(e.keyCode ==38 ){//向上
-                        if(current > 0)current= current -1;<br>                        addnow()<br>                        e.preventDefault();<br>                    }else if(e.keyCode == 13){<br>                        var url = $children.eq(current).find(‘a’).attr(‘href’);<br>                        document.location= url;<br>                    }<br>                }else{<br>                    current = 0;<br>                    addnow()<br>                }<br>            });</p>
-<pre><code>    function addnow(){
-        $children.eq(current).addClass(&apos;now&apos;).siblings().removeClass(&apos;now&apos;);
-    }
-
-}
-
-response(&apos;#ul&apos;);
-</code></pre><p>[/code]<br>没有废话，看<a href="http://blog.meituo.net/wp-content/uploads/js_keycode/updown.html">示例</a><br>
+        <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span> charset=<span class="string">"utf-8"</span>&gt;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">response</span>(<span class="params">obj</span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> $list = $(obj);</div><div class="line">	<span class="keyword">var</span> $children = $list.children();</div><div class="line">	<span class="keyword">var</span> num= $children.size();<span class="comment">//$list  总个数</span></div><div class="line">	<span class="keyword">var</span> current=<span class="number">0</span>; <span class="comment">//当前选中项</span></div><div class="line">	addnow()</div><div class="line">	$(<span class="built_in">document</span>).bind(<span class="string">'keydown'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">		<span class="keyword">if</span>($list.is(<span class="string">":visible"</span>))&#123;</div><div class="line">			<span class="keyword">if</span>(e.keyCode == <span class="number">40</span>)&#123; <span class="comment">//向下	</span></div><div class="line">				<span class="keyword">if</span>(current&lt;num <span class="number">-1</span>) current = current +<span class="number">1</span>;					</div><div class="line">				addnow()</div><div class="line">				e.preventDefault();</div><div class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(e.keyCode ==<span class="number">38</span> )&#123;<span class="comment">//向上</span></div><div class="line">				<span class="keyword">if</span>(current &gt; <span class="number">0</span>)current= current <span class="number">-1</span>;</div><div class="line">				addnow()</div><div class="line">				e.preventDefault();</div><div class="line">			&#125;<span class="keyword">else</span> <span class="keyword">if</span>(e.keyCode == <span class="number">13</span>)&#123;</div><div class="line">				<span class="keyword">var</span> url = $children.eq(current).find(<span class="string">'a'</span>).attr(<span class="string">'href'</span>);</div><div class="line">				<span class="built_in">document</span>.location= url;</div><div class="line">			&#125;</div><div class="line">		&#125;<span class="keyword">else</span>&#123;</div><div class="line">			current = <span class="number">0</span>;</div><div class="line">			addnow()</div><div class="line">		&#125;</div><div class="line">	&#125;);</div><div class="line"></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">addnow</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		$children.eq(current).addClass(<span class="string">'now'</span>).siblings().removeClass(<span class="string">'now'</span>);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line">response(<span class="string">'#ul'</span>);</div><div class="line"></div></pre></td></tr></table></figure>
+<p>没有废话，看<a href="http://blog.meituo.net/wp-content/uploads/js_keycode/updown.html">示例</a><br>
       
     </div>
   </div>
@@ -424,7 +413,7 @@ response(&apos;#ul&apos;);
   <div class="article-content">
     <div class="entry">
       
-        <p>现在css 3 ，html5 无疑是 web 标准最热的项目，我们要尽量使用这些新标准的新属性，做好向前兼容，但你知道css 3 中 属性的顺序要按照一定顺序么？<br>现在推荐的顺序:<br>[code=”css”]<br>.not-a-square {<br>   -webkit-border-radius: 10px;<br>   -moz-border-radius: 10px;<br>   border-radius: 10px;<br>}<br>[/code]<br>也就是将“ 真正”的属性（不带前缀的）的属性写到最后。<br>而这样的书写顺序是错误的<br>[code=”css”]<br>.not-a-square {<br>   border-radius: 10px;<br>   -moz-border-radius: 10px;<br>   -webkit-border-radius: 10px;<br>}<br>[/code]<br>为什么那？<br>
+        <p>现在css 3 ，html5 无疑是 web 标准最热的项目，我们要尽量使用这些新标准的新属性，做好向前兼容，但你知道css 3 中 属性的顺序要按照一定顺序么？<br>现在推荐的顺序:<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"> </div><div class="line"><span class="selector-class">.not-a-square</span> &#123;</div><div class="line">   <span class="attribute">-webkit-border-radius</span>: <span class="number">10px</span>;</div><div class="line">   <span class="attribute">-moz-border-radius</span>: <span class="number">10px</span>;</div><div class="line">   <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br>也就是将“ 真正”的属性（不带前缀的）的属性写到最后。<br>而这样的书写顺序是错误的<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.not-a-square</span> &#123;</div><div class="line">   <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">   <span class="attribute">-moz-border-radius</span>: <span class="number">10px</span>;</div><div class="line">   <span class="attribute">-webkit-border-radius</span>: <span class="number">10px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure><br>为什么那？<br>
       
     </div>
   </div>
@@ -482,8 +471,9 @@ response(&apos;#ul&apos;);
   <div class="article-content">
     <div class="entry">
       
-        <p>以前感觉自己很熟悉了，今天才发现一个缺口.问题如下：<br>我们定义两个类<br>[code=”css”]<br>    .r{<br>        color:red;<br>        margin-left:20px;<br>    }<br>    .b{<br>        color:blue;<br>        margin-left:100px;<br>    }<br>[/code]</p>
-<p>[code=”html”]<br>    <div class="b r">美拓blog</div><br>[/code]<br>那么“美拓blog” 是什么颜色？padding-left 是 20px 还是 100px； 在我印象里 应该根据类的顺序class=”b r”那么 r 类应该覆盖 b 类，即” 美拓blog” 应该是红色，padding-left是100px。<br>但这是错误的，实际上是什么样子的？css 类的优先级是根据定义的先后顺序 确定渲染时的优先级，因为 b 类在 r 类后定义，所以 b 类和 r 类同时 应用到同一个元素的时候，b 类将 覆盖 r 类。所以美拓blog是 蓝色，padding-left是100px。<br>感觉自己html，css都不熟，哈哈，记录一下。<br>可以看看例子<a href="http://blog.meituo.net/wp-content/uploads/css_class_priority/css_class_priority.html" target="_blank" rel="external"> 点我 </a></p>
+        <p>以前感觉自己很熟悉了，今天才发现一个缺口.问题如下：<br>我们定义两个类<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.r</span>&#123;</div><div class="line">	<span class="attribute">color</span>:red;</div><div class="line">	<span class="attribute">margin-left</span>:<span class="number">20px</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.b</span>&#123;</div><div class="line">	<span class="attribute">color</span>:blue;</div><div class="line">	<span class="attribute">margin-left</span>:<span class="number">100px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"b r"</span>&gt;</span>美拓blog<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>那么“美拓blog” 是什么颜色？padding-left 是 20px 还是 100px； 在我印象里 应该根据类的顺序class=”b r”那么 r 类应该覆盖 b 类，即” 美拓blog” 应该是红色，padding-left是100px。<br>但这是错误的，实际上是什么样子的？css 类的优先级是根据定义的先后顺序 确定渲染时的优先级，因为 b 类在 r 类后定义，所以 b 类和 r 类同时 应用到同一个元素的时候，b 类将 覆盖 r 类。所以美拓blog是 蓝色，padding-left是100px。<br>感觉自己html，css都不熟，哈哈，记录一下。<br>可以看看例子<a href="http://blog.meituo.net/wp-content/uploads/css_class_priority/css_class_priority.html" target="_blank" rel="external"> 点我 </a></p>
 
       
     </div>
@@ -634,10 +624,10 @@ response(&apos;#ul&apos;);
 
 <nav class="pagination">
   
-  <a href="/page/5/" class="pagination-prev">Prev</a>
+  <a href="/page/5/" class="pagination-prev">上一页</a>
   
   
-  <a href="/page/7/" class="pagination-next">Next</a>
+  <a href="/page/7/" class="pagination-next">下一页</a>
   
 </nav>
     </main>
