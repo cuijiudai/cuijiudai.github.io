@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>PHP如何返回json格式的数据 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="JSON">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="PHP如何返回json格式的数据"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>PHP如何返回json格式的数据</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/09/26/php-e5-a6-82-e4-bd-95-e8-bf-94-e5-9b-9ejson-e6-a0-bc-e5-bc-8f-e7-9a-84-e6-95-b0-e6-8d-ae/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-09-26T10:11:17.000Z">
+          2010-09-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>我们常见一些网站在做ajax时返回JSON格式的数据:<br><img src="http://blog.meituo.net/wp-content/uploads/php_return_json/json.png" alt="返回的是json格式的数据"><br><a id="more"></a><br>这有什么好处那？很显然前端在接到返回的数据时可以直接使用，而不用再用<code>eval(&#39;(+ returnString +)&#39;)</code> 或者<code>$.parseJSON(returnString )</code> （jQuery的函数）来转化为js对象，这样显然为用户省电了。。。<br>在网上搜索了一下，这个问题在搜索中文信息的时候比较少，一些说是返回json的都是在前端进行的转化处理，根本不是返回JSON格式，其实返回json相当的简单。</p>
+<h3 id="原来的数据就是JSON格式"><a href="#原来的数据就是JSON格式" class="headerlink" title="原来的数据就是JSON格式"></a>原来的数据就是JSON格式</h3><p><a href="http://blog.meituo.net/wp-content/uploads/php_return_json/get_json.html" target="_blank" rel="external"> 下例</a>来自《锋利的jQuery》：</p>
+<p>[code=”js”]<br>   $(function(){<br>        $(‘#send’).click(function() {<br>             $.getJSON(‘<a href="http://blog.meituo.net/wp-content/uploads/php_return_json/test.js" target="_blank" rel="external">http://blog.meituo.net/wp-content/uploads/php_return_json/test.js</a>‘, function(data) {<br>                 $(‘#resText’).empty();<br>                  var html = ‘’;<br>                  $.each( data  , function(commentIndex, comment) {<br>                      html += ‘<div class="comment"></div></p>
+<h6 id="‘-comment-‘username’-‘"><a href="#‘-comment-‘username’-‘" class="headerlink" title="‘ + comment[‘username’] + ‘:"></a>‘ + comment[‘username’] + ‘:</h6><p>‘ + comment[‘content’] + ‘<br>‘;<br>                  })<br>                 $(‘#resText’).html(html);<br>            })<br>       })<br>   })<br>[/code]</p>
+<p>你需要做的就是将数据存储为格式正确的 .json或者.js 文件。以下为示例所传送的json格式的数据</p>
+<p>[code=”js”]<br>            [<br>              {<br>                “username”: “张三”,<br>                “content”: “沙发.”<br>              },<br>              {<br>                “username”: “李四”,<br>                “content”: “板凳.”<br>              },<br>              {<br>                “username”: “王五”,<br>                “content”: “地板.”<br>              }<br>            ]<br>[/code]</p>
+<h3 id="php输出JSON格式"><a href="#php输出JSON格式" class="headerlink" title="php输出JSON格式"></a>php输出JSON格式</h3><p>那么php如何输出json格式？php 使用json_encode函数，然后jQuery使用datatype:json 就可以了嘛? 它的输出如下：</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/php_return_json/json_string.png" alt="php 使用json_encode函数，jQuery使用datatype:json的返回类型"><br>显然并非所愿。还是字符串，到底怎么实现？其实很简单，只要在php文件头部加入以下代码:<br> [code=’php’]<br>header(‘Content-type: text/json’);<br>[/code]</p>
+<p>这个头就是告知此文件输出类型为 json，这种形式我们见的最多的是验证码——php输出验证图片，有时php可以输出css文件，js文件等做一些有趣的事情。好的，我们测试一下吧。<a href="http://blog.meituo.net/wp-content/uploads/php_return_json/php_get_json.html" target="_blank" rel="external">查看示例 </a></p>
+<p>示例代码：<br>[code=’php’]<br>&lt; ?php<br>header(‘Content-type: text/json’);</p>
+<p>$fruits = array (<br>    “fruits”  =&gt; array(“a” =&gt; “orange”, “b” =&gt; “banana”, “c” =&gt; “apple”),<br>    “numbers” =&gt; array(1, 2, 3, 4, 5, 6),<br>    “holes”   =&gt; array(“first”, 5 =&gt; “second”, “third”)<br>);<br>echo json_encode($fruits);<br>?&gt;<br>[/code]</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/ajax/">ajax</a>, <a href="/categories/ajax/jQuery/">jQuery</a>, <a href="/categories/ajax/jQuery/PHP/">PHP</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/JSON/">JSON</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

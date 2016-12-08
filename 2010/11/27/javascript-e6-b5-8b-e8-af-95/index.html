@@ -1,0 +1,238 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>javascript测试 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="javascript测试"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>javascript测试</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/11/27/javascript-e6-b5-8b-e8-af-95/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-11-27T05:27:08.000Z">
+          2010-11-27
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h4 id="1"><a href="#1" class="headerlink" title="1:"></a>1:</h4><p>[code=”js”]<br>1 &amp;&amp; 3<br>[/code]<br>返回什么？<br><a id="more"></a><br>&amp;&amp; 寻找false，第一个为true则直接返回后者,欲详细了解js运算符的优先级问题见：<a href="http://blog.meituo.net/2010/08/29/%E4%B8%8D%E5%8F%AF%E4%B8%8D%E7%9F%A5%E7%9A%84javascript%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7/" target="_blank" rel="external">不可不知的JavaScript运算符优先级</a></p>
+<h4 id="2"><a href="#2" class="headerlink" title="2:"></a>2:</h4><p>[code=”js”]<br>1 &amp;&amp; “foo” || 0<br>[/code]<br>返回什么？</p>
+<p>&amp;&amp; 的优先级高</p>
+<h4 id="3"><a href="#3" class="headerlink" title="3:"></a>3:</h4><p>[code=”js”]<br>1 || “foo” &amp;&amp; 0<br>[/code]<br>返回什么？</p>
+<p>&amp;&amp; 的优先级高</p>
+<h4 id="4"><a href="#4" class="headerlink" title="4:"></a>4:</h4><p>[code=”js”]<br>(1,2,3)<br>[/code]<br>返回什么？</p>
+<p>最后一个</p>
+<h4 id="5"><a href="#5" class="headerlink" title="5:"></a>5:</h4><p>[code=”js”]<br>x = {shift:[].shift};<br>x.shift();<br>x.length;<br>[/code]<br>返回什么？</p>
+<h4 id="6"><a href="#6" class="headerlink" title="6:"></a>6:</h4><p>[code=”js”]<br>{foo:1}[0]<br>[/code]<br>返回什么？</p>
+<p>Answer: “0″ or [0]. As {foo:1} is a block (what James described here <a href="http://james.padolsey.com/javascript/labelled-blocks-useful/" target="_blank" rel="external">http://james.padolsey.com/javascript/labelled-blocks-useful/</a>) you can completely ignore it and focus on [0]. E.g. [0].toString() gives “0″. James actually has taken “[0]” as a correct answer probably suggested by the returned value in Firebug. But IMHO it should be “0″.<br>Since JavaScript doesn’t have block scope, using a block anywhere other than in the conventional places (if/while etc.) is almost totally pointless. However, as I mentioned, we could use them to annotate（注释） and contain logically related pieces of code:<br>因为javascript没有块作用域（block scope），所以在除了条件语句(if/while etc.) 以外的任何地方使用块{}都是没有意义的，然而，正如我所说，我们可以用它来做注释、包裹有逻辑关系的代码片段。<br><a href="http://bclary.com/2004/11/07/#a-12.1" target="_blank" rel="external">http://bclary.com/2004/11/07/#a-12.1</a></p>
+<p>12.1 Block<br>Syntax</p>
+<p>Block :<br>{ StatementListopt }<br>StatementList :<br>Statement<br>StatementList Statement<br>Semantics</p>
+<p>The production Block : {} is evaluated as follows:</p>
+<p>1.Return (normal, empty, empty).</p>
+<p>The production Block : { StatementList } is evaluated as follows:</p>
+<p>1.Evaluate StatementList.</p>
+<p>2.Return Result(1).</p>
+<p>The production StatementList : Statement is evaluated as follows:</p>
+<p>1.Evaluate Statement.</p>
+<p>2.If an exception was thrown, return (throw, V, empty) where V is the exception. (Execution now proceeds as if no exception were thrown.)</p>
+<p>3.Return Result(1).</p>
+<p>The production StatementList : StatementList Statement is evaluated as follows:</p>
+<p>1.Evaluate StatementList.</p>
+<p>2.If Result(1) is an abrupt completion, return Result(1).</p>
+<p>3.Evaluate Statement.</p>
+<p>4.If an exception was thrown, return (throw, V, empty) where V is the exception. (Execution now proceeds as if no exception were thrown.)</p>
+<p>5.If Result(3). value is empty, let V = Result(1). value, otherwise let V = Result(3). value.</p>
+<p>6.Return (Result(3). type, V, Result(3). target).</p>
+<h4 id="7"><a href="#7" class="headerlink" title="7:"></a>7:</h4><p>[code=”js”]<br>[true, false][+true, +false]<br>[/code]<br>返回什么？</p>
+<p>7. Answer: true. Again, we meet a comma here, so let’s focus on the last item between second pair of brackets – false evaluated to the number gives 0, so the returned value is true -&gt; [true, false][0]<br>过程：[true, false][+true, +false] =&gt; [true, false][1, 0] =&gt; [true, false][0]</p>
+<h4 id="8"><a href="#8" class="headerlink" title="8:"></a>8:</h4><p>[code=”js”]<br>++’52’.split(‘’)[0]<br>[/code]<br>返回什么？</p>
+<p>8. Answer: 6. ‘52′.split(”) gives an array of two string elements [“5”, “2”]. So [“5”, “2”][0] gives us “5″. ++”5″ converts “5″ to the number and preincrements it so the final result is 6.</p>
+<p>//console.log(++’5’); //报错<br>//console.log(++[‘5’,’2’][0]) ;//Number 6<br>只有变量才能 ++ 而‘5’只是一个字符串</p>
+<p>错误的想法：</p>
+<p>++’52’.split(‘’)[0] =&gt; +52.split(‘’)[0]=&gt;52.split(‘’)[0]=&gt;[5,2][0]<br>注意运算顺序，及运算优先级。</p>
+<h4 id="9"><a href="#9" class="headerlink" title="9:"></a>9:</h4><p>[code=”js”]<br>a: b: c: d: e: f: g: 1, 2, 3, 4, 5;<br>[/code]<br>返回什么？</p>
+<p>Answer: 5. We can completely ignore a: b: c: d: e: f: g: part because it says us we just labelled the statement on the right and nothing more. Then we evaluate a statement: 1, 2, 3, 4, 5, and as you probably now already, x1, x2, xn results with the last element.<br>可以忽略a: b: c: d: e: f: g: 部分，然后 1, 2, 3, 4, 5, （x1,x2,…xn） 执行仅返回最后一个.<br>12.12 Labelled Statements<br>Syntax</p>
+<p>LabelledStatement :<br>Identifier : Statement<br>Semantics</p>
+<p>A Statement may be prefixed by a label. Labelled statements are only used in conjunction with labelled break and continue statements. ECMAScript has no goto statement.</p>
+<p>An ECMAScript program is considered syntactically incorrect if it contains a LabelledStatement that is enclosed by a LabelledStatement with the same Identifier as label. This does not apply to labels appearing within the body of a FunctionDeclaration that is nested, directly or indirectly, within a labelled statement.</p>
+<p>The production Identifier : Statement is evaluated by adding Identifier to the label set of Statement and then evaluating Statement. If theLabelledStatement itself has a non-empty label set, these labels are also added to the label set of Statement before evaluating it. If the result of evaluating Statement is (break, V, L) where L is equal to Identifier, the production results in (normal, V, empty).</p>
+<p>Prior to the evaluation of a LabelledStatement, the contained Statement is regarded as possessing an empty label set, except if it is an IterationStatement or a SwitchStatement, in which case it is regarded as possessing a label set consisting of the single element, empty.</p>
+<p>一个语句（Statement ）可以有labal “前缀”<br><a href="http://bclary.com/2004/11/07/#a-12.12" target="_blank" rel="external">http://bclary.com/2004/11/07/#a-12.12</a></p>
+<h4 id="10"><a href="#10" class="headerlink" title="10:"></a>10:</h4><p>[code=”js”]<br>{a: 1, b: 2}[[“b”]]<br>[/code]<br>返回什么？</p>
+<p>10. Answer: Error. {a: 1, b: 2} – syntax error</p>
+<h4 id="11"><a href="#11" class="headerlink" title="11:"></a>11:</h4><p>[code=”js”]”b” + 45[/code]<br>返回什么？</p>
+<p>string + number = string</p>
+<h4 id="12"><a href="#12" class="headerlink" title="12:"></a>12:</h4><p>[code=”js”]<br>{a:{b:2}}<br>[/code]<br>返回什么？</p>
+<h4 id="13"><a href="#13" class="headerlink" title="13:"></a>13:</h4><p>[code=”js”]<br>(function(){}())<br>[/code]<br>返回什么？</p>
+<p>默认返回undefined</p>
+<h4 id="14"><a href="#14" class="headerlink" title="14:"></a>14:</h4><p>[code=”js”]<br>[1,2,3,4,5][0..toString.length]<br>[/code]<br>返回什么？</p>
+<p>14. Answer: 2. The most tricky part here is 0..toString.length. Why two dots? “0..” means actually “0.0.”. So it is like (0).toString.length. Again, why? JavaScript supports only the number type, so a number could be a float and we cannot write 0.toString – JS is not sure whether to take .toString as a method or a decimal value. Why is “toString.length” equal to 1? We have to know, that .length property used with a function returns a number of declared arguments we expect. E.g.</p>
+<p>:var fn = function(a,b){};<br>fn.length; // 2 as we declared “a” and “b” arguments</p>
+<p><a href="http://blog.meituo.net/2010/11/17/javascript-一些不理解的地方/" target="_blank" rel="external">http://blog.meituo.net/2010/11/17/javascript-一些不理解的地方/</a><br>//0..相当于0.0.,这里不能直接写0.toString，</p>
+<p>//因为如果一个点会提示错误 ，JS引擎无法判断是小数点还是”.”操作符</p>
+<p>//<a href="http://www.cnblogs.com/rubylouvre/archive/2009/11/23/1608601.html" target="_blank" rel="external">http://www.cnblogs.com/rubylouvre/archive/2009/11/23/1608601.html</a></p>
+<p>//接着就是取数字的toString方法的length属性，注意这里并没有执行toString<br>（0.0.toString.length 和 0.0.toString().length，的区别toString并没有运行，只是取了形参的个数）<br>//所有函数都一个length属性，为其形参的个数，如</p>
+<p>var fn = function(a,b){};</p>
+<p>fn.length; // 2</p>
+<p>//toString函数的形参为1，自己翻书吧，因此相当于[1,2,3,4,5][1]</p>
+<h4 id="15"><a href="#15" class="headerlink" title="15:"></a>15:</h4><p>[code=”js”]<br>({} + ‘b’ &gt; {} + ‘a’)<br>[/code]<br>返回什么？</p>
+<p>15. Answer: true. {} gets evaluated to the string -&gt; “[object Object]” and a string concatenation happens then. The rest is just a logic.</p>
+<h4 id="16"><a href="#16" class="headerlink" title="16:"></a>16:</h4><p>[code=”js”]<br>Number.prototype.x = function(){ return this === 123; };<br>[/code]<br>(123).x();<br>返回什么？</p>
+<p>16. Answer: false. We use a strict comparison here, so typeof this === “object” and typeof 123 === “number” are definitely not the same.</p>
+<h4 id="17"><a href="#17" class="headerlink" title="17:"></a>17:</h4><p>[code=”js”]<br>Array(2).join()<br>[/code]<br>返回什么？</p>
+<p>[].toString()+’,’+[].toString()</p>
+<h4 id="18"><a href="#18" class="headerlink" title="18:"></a>18:</h4><p>[code=”js”]<br>vars: var vars = vars;<br>[/code]<br>返回什么？</p>
+<p>18. Answer: undefined. Labelled statement </p>
+<h4 id="19"><a href="#19" class="headerlink" title="19:"></a>19:</h4><p>[code=”js”]<br>{ foo = 123 }<br>[/code]<br>返回什么？</p>
+<p>19. Answer: 123. The block is evaluated.</p>
+<h4 id="20"><a href="#20" class="headerlink" title="20:"></a>20:</h4><p>[code=”js”]<br>x = 1; (function(){return x; var x = 2;}())<br>[/code]<br>返回什么？</p>
+<p>20. Answer: undefined. Introducing a new scope JS scans for every “var” occurrence, reseting each variable value to undefined. It does not matter a variable was defined before</p>
+<h4 id="21"><a href="#21" class="headerlink" title="21:"></a>21:</h4><p>[code=”js”]<br>delete [].length;<br>[/code]<br>返回什么？</p>
+<p>21. Answer: false. <a href="http://perfectionkills.com/understanding-delete/" target="_blank" rel="external">http://perfectionkills.com/understanding-delete/</a></p>
+<h4 id="22"><a href="#22" class="headerlink" title="22:"></a>22:</h4><p>[code=”js”]<br>RegExp.prototype.toString = function() {return this.source};<br>[/code]<br>/3/-/2/;<br>返回什么？</p>
+<p>22. Answer: 1. this.source gives you the regexp pattern content (ignoring slashes of course!). Thus, there is a simple subtraction /3/ – /2/, which evaluates to 3 – 2 and results with 1. <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Regular_Expressions" target="_blank" rel="external">https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Regular_Expressions</a></p>
+<h4 id="23"><a href="#23" class="headerlink" title="23:"></a>23:</h4><p>[code=”js”]<br>{break;4;}<br>[/code]<br>返回什么？</p>
+<p>出错，break必须出现在一个循环中</p>
+<h4 id="24"><a href="#24" class="headerlink" title="24:"></a>24:</h4><p>[code=”js”]<br>‘foo’ == new function(){ return String(‘foo’); };<br>[/code]<br>返回什么？</p>
+<p>24. Answer: false. (new function(){ return String(‘foo’); }).toString() 是”[object Object]”</p>
+<p>构造函数生成的是对象</p>
+<p>详解new function(){}和function(){}()<br>从 PlanABC - 怿飞’s Blog 作者：怿飞<br>情景一：</p>
+<p>var yx01 = new function() {return “圆心”};<br>alert(yx01);</p>
+<p>我们运行情景一代码，将返回显示“[object object] ”，此时该代码等价于：</p>
+<p>function 匿名类(){<br>return “圆心”;<br>}<br>var yx01 = new 匿名类();<br>alert(yx01);<br>我们对情景一的代码进行下面改造：</p>
+<p>var yx01 = new function() {return new String(“圆心”)};<br>alert(yx01);</p>
+<p>我们运行，将会发现返回的是“圆心”，这是为什么呢？</p>
+<p>只要 new 表达式之后的 constructor 返回（return）一个引用对象（数组，对象，函数等），都将覆盖new创建的匿名对象，如果返回（return）一个原始类型（无 return 时其实为 return 原始类型 undefined），那么就返回 new 创建的匿名对象。（谢谢 Lunatic_Sun ，描述更精准点）</p>
+<p>由于 new String 会构造一个对象，而不是一个 string 直接量，且new String(x) 如果带参数，那么alert它的时候就会返回 x。所以 yx01 将返回 new String(”圆心”) 这个对象，而 alert yx01 则显示 “圆心”。</p>
+<p>情景二：</p>
+<p>var yx02 = function() {return “圆心”}();<br>alert(yx02);<br>我们运行情景二代码，将返回显示“圆心”，此时该代码等价于：</p>
+<p>var 匿名函数 = function() {return “圆心”};<br>yx02 = 匿名函数();<br>alert(yx02);<br>很明显，yx02 返回的是匿名函数的执行结果值，即 yx02 为：“圆心”。</p>
+<p>当然匿名函数的执行结果也可以为一个匿名对象。具体常见应用可以看《Javascript的一种模块模式》</p>
+<h4 id="25"><a href="#25" class="headerlink" title="25:"></a>25:</h4><p>[code=”js”]<br>‘foo’.split(‘’) + []<br>[/code]<br>返回什么？</p>
+<p>两个数组相加转化为字符串<br>‘foo’.split(‘’) + [‘a’,’b’,’c’] 返回 “f,o,oa,b,c”<br>类型转换的小乐趣<br>从 PlanABC - 怿飞’s Blog 作者：怿飞<br>在 玉伯 的文章 《一道大题目，嘿嘿》 中有这样一段代码：</p>
+<p>[] == ![]<br>也许很多同学迷惑：咦，这个如何转换呢？</p>
+<p>首先，我们了解下逻辑 NOT（!）运算与等号（==）运算的一些基本规则：</p>
+<p>逻辑 NOT 运算中，如果运算数是对象，返回 fasle；<br>等号运算中，如果一个运算数是 Boolean 值，在运算前，会将其转换成数字：false -&gt; 0，true -&gt; 1；<br>等号运算中，如果一个运算数是对象，另一个是数字，在运算前，会将对象转换成数字。<br>2010年11月2日补充：对象不能直接转换成数字型，可以将其转换成字符型，再将字符型转换成数字型。</p>
+<p>根据上面的一些规则，我们再来看看原来的表达式如何演变：</p>
+<p>Step01: [] == ![] // 由于[]是对象，则 ![] 返回fasle，演变为 Step02。<br>Step02: [] == fasle // 由于 fasle 是 Boolean 值，则转换成数字 0，演变为 Step03。<br>Step03: [] == 0 // 由于 0是数字，[]是对象，[] 转换成数字 Number([]) -&gt; 0，[] 转换成字符型 [].toString() -&gt; “”，”” 再转换成数字型 -&gt; 0 ，演变为 Step04。<br>Step04: 0 == 0 // 返回最终结果：true<br>思考题：</p>
+<p>{} == ! {}; //返回什么值？<br>[] == [] //返回什么值？</p>
+<p>1. Answer: 3. 1 to bool is true, so it goes to 3 and finally returns it as there is nothing more on the right<br>2. Answer: “foo”. Again, 1 converted to bool is true, then we check “foo” which is also true so the remaining alternative is not checked<br>3. Answer: 1. 1 to bool is true and returned, because there is no need to check further conditions (what the logic clearly says  )<br>4. Answer: 3. (x, x1, x2, …, xn) always returns xn<br>5. Answer: 0. Looks like the array internal “shift” function automatically adds the length property to the object.<br>6. Answer: “0″ or [0]. As {foo:1} is a block (what James described here <a href="http://james.padolsey.com/javascript/labelled-blocks-useful/" target="_blank" rel="external">http://james.padolsey.com/javascript/labelled-blocks-useful/</a>) you can completely ignore it and focus on [0]. E.g. [0].toString() gives “0″. James actually has taken “[0]” as a correct answer probably suggested by the returned value in Firebug. But IMHO it should be “0″.<br>7. Answer: true. Again, we meet a comma here, so let’s focus on the last item between second pair of brackets – false evaluated to the number gives 0, so the returned value is true -&gt; [true, false][0]<br>8. Answer: 6. ‘52′.split(”) gives an array of two string elements [“5”, “2”]. So [“5”, “2”][0] gives us “5″. ++”5″ converts “5″ to the number and preincrements it so the final result is 6.<br>9. Answer: 5. We can completely ignore a: b: c: d: e: f: g: part because it says us we just labelled the statement on the right and nothing more. Then we evaluate a statement: 1, 2, 3, 4, 5, and as you probably now already, x1, x2, xn results with the last element.<br>10. Answer: Error. {a: 1, b: 2} – syntax error<br>11. Answer. “b45″. It does not matter where string is – left or right – this kind of concatenation always returns with a new string built by a string and a number<br>12. Answer: 2. <a href="http://bclary.com/2004/11/07/#a-12.1" target="_blank" rel="external">http://bclary.com/2004/11/07/#a-12.1</a> – The block gets evaluated<br>13. Answer: undefined. Empty function execution returns an undefined value by default.<br>14. Answer: 2. The most tricky part here is 0..toString.length. Why two dots? “0..” means actually “0.0.”. So it is like (0).toString.length. Again, why? JavaScript supports only the number type, so a number could be a float and we cannot write 0.toString – JS is not sure whether to take .toString as a method or a decimal value. Why is “toString.length” equal to 1? We have to know, that .length property used with a function returns a number of declared arguments we expect. E.g.:</p>
+<p>var fn = function(a,b){};<br>fn.length; // 2 as we declared “a” and “b” arguments<br>15. Answer: true. {} gets evaluated to the string -&gt; “[object Object]” and a string concatenation happens then. The rest is just a logic.<br>16. Answer: false. We use a strict comparison here, so typeof this === “object” and typeof 123 === “number” are definitely not the same.<br>17. Answer: “,”. Array(2) produces a new array with two elements set on undefined. So if we cast the array to string the result is a pure comma.<br>18. Answer: undefined. Labelled statement again.<br>19. Answer: 123. The block is evaluated.<br>20. Answer: undefined. Introducing a new scope JS scans for every “var” occurrence, reseting each variable value to undefined. It does not matter a variable was defined before.<br>21. Answer: false. <a href="http://perfectionkills.com/understanding-delete/" target="_blank" rel="external">http://perfectionkills.com/understanding-delete/</a><br>22. Answer: 1. this.source gives you the regexp pattern content (ignoring slashes of course!). Thus, there is a simple subtraction /3/ – /2/, which evaluates to 3 – 2 and results with 1. <a href="https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Regular_Expressions" target="_blank" rel="external">https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Regular_Expressions</a><br>23. Answer: ERROR. “break” has to be put inside a loop or switch statement.<br>24. Answer: false. (new function(){ return String(‘foo’); }).toString() != ‘foo’<br>25. Answer: “f,o,o”. Just consider e.g. [1, 2] + [3, 4] and see how arrays are casted to string.</p>
+<p>原文：<a href="http://james.padolsey.com/javascript/another-javascript-quiz/" target="_blank" rel="external">another-javascript-quiz</a></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iframe 遮罩 windows media player 无效的问题 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="css,html">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="iframe 遮罩 windows media player 无效的问题"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>iframe 遮罩 windows media player 无效的问题</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/03/14/iframe-e9-81-ae-e7-bd-a9-windows-media-player-e6-97-a0-e6-95-88-e7-9a-84-e9-97-ae-e9-a2-98/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-03-14T10:24:58.000Z">
+          2011-03-14
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>我们知道iframe遮罩flash 还是可以的，但是windows media player就不行了，需要添加如下参数：<br>[code=’html’]</p>
+<param name="windowlessVideo" value="true"><br>[/code]<br><a id="more"></a><br>如果仍然无效那么就要检查你的param，是否含有<br>[code=’html’]<br><param name="volume" value="100"><br>[/code]<br>如果有就去掉，我就是这个问题，iframe 遮罩 无果。如果你还有问题就去掉 其他 param 试试，应该可以找到那个罪魁祸首。<br><br>参考 :<a href="http://www.funnyapple.com/the-problem-of-windows-media-player-cover-div.html" target="_blank" rel="external">windows media player播放器把div给遮住的问题</a><br><a href="http://stackoverflow.com/questions/1602366/windows-media-player-on-top-other-div" target="_blank" rel="external">Windows Media Player on top other DIV</a><br><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/css/">css</a><a href="/tags/html/">html</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

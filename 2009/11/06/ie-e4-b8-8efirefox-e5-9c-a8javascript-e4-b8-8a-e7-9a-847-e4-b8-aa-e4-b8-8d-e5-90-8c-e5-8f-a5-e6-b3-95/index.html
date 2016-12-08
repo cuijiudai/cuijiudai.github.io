@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>IE与Firefox在JavaScript上的7个不同句法 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="IE,Firefox">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="IE与Firefox在JavaScript上的7个不同句法"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>IE与Firefox在JavaScript上的7个不同句法</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2009/11/06/ie-e4-b8-8efirefox-e5-9c-a8javascript-e4-b8-8a-e7-9a-847-e4-b8-aa-e4-b8-8d-e5-90-8c-e5-8f-a5-e6-b3-95/" rel="bookmark">
+        <time class="entry-date published" datetime="2009-11-06T02:14:10.000Z">
+          2009-11-06
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>尽管那需要用长串的、沉闷的不同分支代码来应付不同浏览器的日子已经过去，偶尔还是有必要做一些简单的区分和目标检测来确保某块代码能在用户的机器上正常运行。在这篇文章中，作者介绍了7个在IE和Firefox中不同的JavaScript句法。<br><img src="http://blog.meituo.net/wp-content/uploads/js-ie-firefox-differ/js-ie-firefox-differ.jpg" alt="firefox and ie"><br><a id="more"></a></p>
+<h3 id="1-CSS-“float”-值"><a href="#1-CSS-“float”-值" class="headerlink" title="1. CSS “float” 值"></a>1. CSS “float” 值</h3><p>访问一个给定CSS 值的最基本句法是：object.style.property，使用驼峰写法来替换有连接符的值，例如，访问某个ID为”header”的</p>
+<p><div>的 background-color值，我们使用如下句法：<br>[code=”javascript”]<br>document.getElementById(“header”).style.backgroundColor= “#ccc”;<br>[/code]<br>但由于”float”这个词是一个JavaScript保留字，因此我们不能用 object.style.float来访问，这里，我们可以在两种浏览器中这么做：</div></p>
+<p>在IE中这样写：<br>[code=”javascript”]<br>document.getElementById(“header”).style.styleFloat = “left”;<br>[/code]<br>在Firefox中这样写：<br>[code=”javascript”]<br>document.getElementById(“header”).style.cssFloat = “left”;<br>[/code]</p>
+<h3 id="2-元素的推算样式"><a href="#2-元素的推算样式" class="headerlink" title="2. 元素的推算样式"></a>2. 元素的推算样式</h3><p>JavaScript可以使用object.style.property句法，方便地在外部访问和修改某个CSS样式，但其限制是这些句法只能取出已设的行内样式或者直接由JavaScript设定的样式。并不能访问某个外部的样式表。为了访问元素的”推算”样式，我们可以使用下面的代码：</p>
+<p>在IE中这样写：<br>[code=”javascript”]<br>var myObject = document.getElementById(“header”);<br>var myStyle = myObject.currentStyle.backgroundColor;<br>[/code]<br>在Firefox中这样写：<br>[code=”javascript”]<br>var myObject = document.getElementById(“header”);<br>var myComputedStyle = document.defaultView.getComputedStyle(myObject, null);<br>var myStyle = myComputedStyle.backgroundColor;<br>[/code]</p>
+<h3 id="3-访问元素的”class”"><a href="#3-访问元素的”class”" class="headerlink" title="3. 访问元素的”class”"></a>3. 访问元素的”class”</h3><p>像”float”一样，”class”是JavaScript的一个保留字，在这两个浏览器中我们使用如下句法来访问”class”。</p>
+<p>在IE中这样写：<br>[code=”javascript”]<br>var myObject = document.getElementById(“header”);<br>var myAttribute = myObject.getAttribute(“className”);<br>[/code]<br>在Firefox中这样写：<br>[code=”javascript”]<br>var myObject = document.getElementById(“header”);<br>var myAttribute = myObject.getAttribute(“class”);<br>[/code]<br>This syntax would also apply using the setAttribute method.</p>
+<h3 id="4-访问标签中的”for”"><a href="#4-访问标签中的”for”" class="headerlink" title="4. 访问标签中的”for”"></a>4. 访问<label>标签中的”for”</label></h3><p>就第3点中所提到的，我们同样需要使用不现的句法区分来访问<label>标签中的”for”：</label></p>
+<p>在IE中这样写：<br>[code=”javascript”]<br>var myObject = document.getElementById(“myLabel”);<br>var myAttribute = myObject.getAttribute(“htmlFor”);<br>[/code]<br>在Firefox中这样写：<br>[code=”javascript”]<br>var = document.getElementById(“myLabel”);<br>var myAttribute = myObject.getAttribute(“for”);<br>[/code]</p>
+<h3 id="5-获取鼠标指针的位置"><a href="#5-获取鼠标指针的位置" class="headerlink" title="5. 获取鼠标指针的位置"></a>5. 获取鼠标指针的位置</h3><p>计算出鼠标指针的位置对你来说可能是非常少见的，不过当你需要的时候，在IE和Firefox中的句法是不同的。这里所写出的代码将是最最基本的，也可能是某个复杂事件处理中的某一个部分。但他们可以解释其中的异同点。同时，必须指出的是结果相对于Firefox，IE会有更在的不同，这种方法本身就是有BUG的。通常，这种不同可以用”拖动位置”来得到补偿，但，那是另外一个主题的文章了: ) !</p>
+<p>在IE中这样写：<br>[code=”javascript”]<br>var myCursorPosition = [0, 0];<br>myCursorPosition[0] = event.clientX;<br>myCursorPosition[1] = event.clientY;<br>[/code]<br>在Firefox中这样写：<br>[code=”javascript”]<br>var myCursorPosition = [0, 0];<br>myCursorPosition[0] = event.pageX;<br>myCursorPosition[1] = event.pageY;<br>[/code]</p>
+<h3 id="6-获取可见区域、窗口的大小"><a href="#6-获取可见区域、窗口的大小" class="headerlink" title="6. 获取可见区域、窗口的大小"></a>6. 获取可见区域、窗口的大小</h3><p>有时，我们会需要找到浏览器的可视位置的大小，通常我们称之为”可见区域”。</p>
+<p>在IE中这样写：<br>[code=”javascript”]<br>var myBrowserSize = [0, 0];<br>myBrowserSize[0] = document.documentElement.clientWidth;<br>myBrowserSize[1] = document.documentElement.clientHeight;<br>[/code]<br>在Firefox中这样写：<br>[code=”javascript”]<br>var myBrowserSize = [0, 0];<br>myBrowserSize[0] = window.innerWidth;<br>myBrowserSize[1] = window.innerHeight;<br>[/code]</p>
+<h3 id="7-Alpha-透明"><a href="#7-Alpha-透明" class="headerlink" title="7. Alpha 透明"></a>7. Alpha 透明</h3><p>好吧，这并不是一个JavaScript句法问题，而是源自于CSS的Alpha透明。但当某个物体需要淡入/出则需要JavaScript来表现，这是通过访问CSS的Alpha透明设置来完成的，通常在一个循环中完成。你需要通过来修改的JavaScript的代码如下：:</p>
+<p>在IE中这样写：<br>[code=”css”]</p>
+<p>#myElement { filter: alpha(opacity=50); }<br>[/code]<br>在Firefox中这样写：<br>[code=”css”]</p>
+<p>#myElement { opacity: 0.5; }<br>[/code]<br>在IE中这样写：<br>[code=”javascript”]<br>var myObject = document.getElementById(“myElement”);<br>myObject.style.filter = “alpha(opacity=80)”;<br>[/code]<br>在Firefox中这样写：<br>[code=”javascript”]<br>var myObject = document.getElementById(“myElement”); myObject.style.opacity = “0.5”;<br>[/code]<br>还有什么不同的吗?</p>
+<p>这是作者（via: 7 JavaScript Differences Between Firefox &amp; IE）个人根据自己的经验整理的，而sofish在JavaScript上依然是一个新手。如果还有更多的不同，欢迎大家提出来，分享出来，共同学习！<br>转自<a href="http://www.happinesz.cn/archives/1097/" target="_blank" rel="external">幸福收藏夹</a><br>文章说的我还是不是很熟悉的，所以转帖到此。稍后我会写一篇的。<!--more--></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/IE/">IE</a><a href="/tags/Firefox/">Firefox</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

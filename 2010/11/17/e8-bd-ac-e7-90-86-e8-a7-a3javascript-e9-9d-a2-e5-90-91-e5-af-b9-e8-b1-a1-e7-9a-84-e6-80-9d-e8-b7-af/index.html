@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[转]理解JavaScript面向对象的思路 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="[转]理解JavaScript面向对象的思路"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>[转]理解JavaScript面向对象的思路</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/11/17/e8-bd-ac-e7-90-86-e8-a7-a3javascript-e9-9d-a2-e5-90-91-e5-af-b9-e8-b1-a1-e7-9a-84-e6-80-9d-e8-b7-af/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-11-17T13:27:51.000Z">
+          2010-11-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>Posted: 24 Jan 2010 03:01 AM PST<br>一般来说大家比较熟悉的面向对象方式是基于类的面向对象，声明一个类，然后在根据类声明的描述去创建对象，通过类与类之间的继承和组合关系来复用代码。大多数情况下，基于类的面向对象语言（C++,C#,Java之类的）都把类整合进自己的类型系统，即每个类（Class）同时也是一个变量类型（Variable Type）,并允许子类类型的值被赋值给父类类型变量。<br><a id="more"></a><br>而JS的设计采用了一种完全不同的思路。首先JS的类型是不可扩展的（就是说，语言的使用者无法添加新的类型）这样就无法采用上述语言的做法。根据语言标准，JS设计了6种用户可以使用的数据类型（因为JS是弱类型的，所以变量没有类型，只有数据有类型）：</p>
+<p>Boolean Number String Null Undefined Object</p>
+<p>为了实现面向对象，JS把所有的对象放到Object类型中,这样，JS就有6种用户可使用的数据类型。除了Undefined,JS为所有的类型提供了字面值（literal）语法，现在来看，JS的Object字面值表示设计的相当成功，现在甚至成为了一种数据交换的格式，这就是大家所熟悉的 JSON。A Sample:</p>
+<p>var aTShirt={color:”yellow”,size:”big”}</p>
+<p>作为动态语言，JS允许使用者对一个已经创建的对象添加或者删除属性。对一个不存在的属性赋值即向其添加属性，delete关键字被用于删除属性。这个delete比较容易跟C++的delete运算符混淆，后者是用来释放不再使用的对象的。</p>
+<p>本来有了这些语法，已经可以做基本的面向对象编程了，但是仅仅如此，JS代码复用性比其它语言弱太多。比如，你甚至无法为一组对象做一个统一的操作，必须通过循环遍历来实现，于是JS引入了原型（prototype）,</p>
+<p>飞林沙的例子奉上：<br>[code=”js”]<br>    <script type="text/javascript"><br>        var Person = function (name, age) {<br>            this.name = name;<br>            this.age = age;<br>            this.Introduce = function () {<br>                alert(“My name is “ + this.name + “.I’m “ + this.age);<br>            };<br>        };<br>        var person1 = new Person(“飞林沙”, 21);<br>        var person2 = new Person(“kym”, 26);<br>        alert(person1.Introduce == person2.Introduce);<br>    </script><br>[/code]<br>结果弹出false。也就是说，这两个对象的方法是不同的方法。那么我们知道，在C#中，每个对象会维护着一个方法表，可是方法表应该指向同一块地址。如果是这样的话，那当我们声明了100个对象，是不是要建立100个对象拷贝，对空间是不是一个很大的浪费呢？<br>于是我们就想了这样的解决办法，用prototype：<br>[code=”js”]<br>    <script type="text/javascript"><br>        var Person = function (name, age) {<br>            this.name = name;<br>            this.age = age;<br>        };<br>        Person.prototype.Introduce = function () {<br>            alert(“My name is “ + this.name + “.I’m “ + this.age);<br>        }<br>        var person1 = new Person(“飞林沙”, 21);<br>        var person2 = new Person(“kym”, 26);<br>        alert(person1.Introduce == person2.Introduce);<br>    </script><br>[/code]<br>原型具体的实现方式是为每个对象规定一个私有属性[[prototype]]，当读取一个对象的属性时，如果对象本身没有这个属性，会尝试访问 [[prototype]]的相应属性。具体实现中，[[prototype]]所指向的对象仍然可以有[[prototype]]，实际的访问就是一个链式的操作，直到找到这个属性或者[[prototype]]为空为止，所以常常听到 [[prototype]]链的说法。为了防止[[prototype]]出现循环，JS引擎会在任何对象的[[prototype]]属性被修改时检查。<br>按照标准，这个[[prototype]]语言使用者是无法访问的，不过FireFox的JS引擎把[[prototype]]暴露出来，作为公有属性”<strong>proto</strong>”，这样，我们就可以通过操作原型对象来控制一组对象的行为。我们可以借用FF提供的便利来了解一下[[prototype]]的工作原理：<br>[code=”js”]<br>var proto={a:1};<br>var m={<strong>proto</strong>:proto};<br>var n={<strong>proto</strong>:proto};<br>alert([m.a,n.a]);<br>proto.a=2;<br>alert([m.a,n.a]);<br>[/code]<br>JS规定了一个内建对象作为所有对象的最终[[prototype]]，也就是说即使用{}创建的对象，也会有[[prototype]]指向这个内建对象。通过这个机制，我们完全可以得到跟基于类的语言相当程度的对象复用能力——但是当然我们还需要函数。在JS中，函数仅仅是一种特殊的对象，JS 设计了()运算符(独孤逸辰：括号代表执行)和function关键字让JS的函数看起来更像是传统的语言。只要实现了私有方法[[call]]的对象都被认为是函数对象(这个 [[call]]跟大家比较熟悉的Function.prototype.call完全是两回事)，类似[[prototype]]，[[call]]也是语言使用者完全无法访问的，这一次FF也没有为我们提供公有属性来替代。</p>
+<p>飞林沙的例子奉上：<br>[code=”js”]<br>    <script type="text/javascript"><br>        var Person = function () { };<br>        var p = new Person();<br>    </script><br>[/code]<br>很简单的一段代码，我们来看看这个new究竟做了什么？我们可以把new的过程拆分成以下三步：</p>
+<p>&lt;1&gt; var p={}; 也就是说，初始化一个对象p。</p>
+<p>&lt;2&gt; p.<strong>proto</strong>=Person.prototype;</p>
+<p>&lt;3&gt; Person.call(p);也就是说构造p，也可以称之为初始化p。</p>
+<p>关键在于第二步，我们来证明一下：<br>[code=”js”]<br>    <script type="text/javascript"><br>        var Person = function () { };<br>        var p = new Person();<br>        alert(p.<strong>proto</strong> === Person.prototype);<br>    </script><br>[/code]<br>这段代码会返回true。说明我们步骤2的正确。</p>
+<p>那么<strong>proto</strong>是什么？我们在这里简单地说下。每个对象都会在其内部初始化一个属性，就是 <strong>proto</strong>，当我们访问一个对象的属性时，如果这个对象内部不存在这个属性，那么他就会去<strong>proto</strong>里找这个属性，这个 <strong>proto</strong>又会有自己的<strong>proto</strong>，于是就这样一直找下去，也就是我们平时所说的原型链的概念。</p>
+<p>按照标准，<strong>proto</strong>是不对外公开的，也就是说是个私有属性，但是Firefox的引擎将他暴露了出来成为了一个共有的属性，我们可以对外访问和设置。</p>
+<p>好，概念说清了，让我们看一下下面这些代码：<br>[code=”js”]<br>    <script type="text/javascript"><br>        var Person = function () { };<br>        Person.prototype.Say = function () {<br>            alert(“Person say”);<br>        }<br>        var p = new Person();<br>        p.Say();<br>    </script><br>[/code]<br>这段代码很简单，相信每个人都这样写过，那就让我们看下为什么p可以访问Person的Say。</p>
+<p>首先var p=new Person()；可以得出p.<strong>proto</strong>=Person.prototype。那么当我们调用p.Say()时，首先p中没有Say这个属性，于是，他就需要到他的<strong>proto</strong>中去找，也就是Person.prototype，而我们在上面定义了 Person.prototype.Say=function(){}; 于是，就找到了这个方法。</p>
+<p>好，接下来，让我们看个更复杂的。<br>[code=”js”]<br>    <script type="text/javascript"><br>        var Person = function () { };<br>        Person.prototype.Say = function () {<br>            alert(“Person say”);<br>        }<br>        Person.prototype.Salary = 50000;<br>        var Programmer = function () { };<br>        Programmer.prototype = new Person();<br>        Programmer.prototype.WriteCode = function () {<br>            alert(“programmer writes code”);<br>        };<br>        Programmer.prototype.Salary = 500;<br>        var p = new Programmer();<br>        p.Say();<br>        p.WriteCode();<br>        alert(p.Salary);<br>    </script><br>[/code]<br>我们来做这样的推导：</p>
+<p>var p=new Programmer()可以得出p.<strong>proto</strong>=Programmer.prototype;</p>
+<p>而在上面我们指定了Programmer.prototype=new Person();我们来这样拆分，var p1=new Person();Programmer.prototype=p1;那么:<br>[code=”js”]<br>p1.<strong>proto</strong>=Person.prototype;</p>
+<p>Programmer.prototype.<strong>proto</strong>=Person.prototype;<br>[/code]<br>由根据上面得到p.<strong>proto</strong>=Programmer.prototype。可以得到p.<strong>proto</strong>.<strong>proto</strong>=Person.prototype。</p>
+<p>好，算清楚了之后我们来看上面的结果,p.Say()。由于p没有Say这个属性，于是去 p.<strong>proto</strong>，也就是Programmer.prototype，也就是p1中去找，由于p1中也没有Say，那就去 p.<strong>proto</strong>.<strong>proto</strong>，也就是Person.prototype中去找，于是就找到了alert(“Person say”)的方法。</p>
+<p>其余的也都是同样的道理。</p>
+<p>这也就是原型链的实现原理。</p>
+<p>最后，其实prototype只是一个假象，他在实现原型链中只是起到了一个辅助作用，换句话说，他只是在new的时候有着一定的价值，而原型链的本质，其实在于<strong>proto</strong>！</p>
+<p>本来到这里为止，JS的面向对象已经很完整了，但是JS为了让自己的语法看起来更像是Java之类的语言，又引入了new关键字，在上面大部分语言中 new都是针对类来做的，而JS没有类，甚至没有声明域，(独孤逸辰：没有达到一定高度是不会理解的！)所以这个new还是要在对象上做文章，new会调用私有方法[[contruct]]，任何实现了 [[construct]]的对象都可以被new接受。然而如何才能让一个对象可以被new呢？JS并没有额外提供构造这种对象方法，所以所有通过 function关键字构造的函数对象被设计成实现了[[construct]]方法。这也就是JS的new很奇怪地针对函数的原因。值得一提的是，并非只有函数可以被new,JS的宿主环境可能提供一些其它对象，典型的例子是IE中的ActiveXObject。</p>
+<p>所有函数的[[construct]]方法都是类似的：创建一个新的对象，将它的[[prototype]]设为函数对象的共有属性prototype，以新对象做为this指针的值，执行函数对象</p>
+<p>这样对同一函数的new运算实际上创建了相似的对象：拥有共同的原型[[prototype]]，被同一函数处理过。这样的new运算就很类似 Class 了，同时由于JS的动态性，所有的”类”在运行时任你宰割，想要模拟继承之类的行为也就很容易了，由于是弱类型且是动态函数，不存在需要多态的问题，JS 完全可以做到基于类的面向对象。</p>
+<p>最后提供几道题，大家茶余饭后写完程序不妨做做，都做对说明你已经理解了protype-based javascript</p>
+<p>(请用FF来看结果)<br>[code=”js”]<br>Function.prototype.prop=1;<br>alert(Object.prop)<br>alert(Function.prop)</p>
+<p>Object.prototype.prop=1;<br>alert(Object.prop)<br>alert(Function.prop)</p>
+<p>Function.<strong>proto</strong>.prop=1;<br>alert(Object.prop)<br>alert(Function.prop)</p>
+<p>function Class(){<br>}<br>Class.prototype=Class;<br>Class.<strong>proto</strong>.prop=1<br>alert((new Class).prop);</p>
+<p>function Class(){}<br>Class.prototype=Class.<strong>proto</strong>;<br>Function.prototype.prop=1;<br>alert((new Class()).prop)</p>
+<p>function Class(){<br>}<br>Class.prototype.<strong>proto</strong>.prop=1;<br>Class.prototype=new Class;<br>alert((new Class).prop);<br>[/code]</p>
+<p>理解JavaScript面向对象的思路 Javascript学习笔记</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

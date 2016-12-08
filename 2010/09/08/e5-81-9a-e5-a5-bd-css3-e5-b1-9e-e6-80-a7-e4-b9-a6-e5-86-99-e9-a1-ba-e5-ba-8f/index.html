@@ -1,0 +1,148 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title> 做好 css3 属性书写顺序  | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="css,css3">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content=" 做好 css3 属性书写顺序 "/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span> 做好 css3 属性书写顺序 </span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/09/08/e5-81-9a-e5-a5-bd-css3-e5-b1-9e-e6-80-a7-e4-b9-a6-e5-86-99-e9-a1-ba-e5-ba-8f/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-09-08T15:11:03.000Z">
+          2010-09-08
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>现在css 3 ，html5 无疑是 web 标准最热的项目，我们要尽量使用这些新标准的新属性，做好向前兼容，但你知道css 3 中 属性的顺序要按照一定顺序么？<br>现在推荐的顺序:<br>[code=”css”]<br>.not-a-square {<br>   -webkit-border-radius: 10px;<br>   -moz-border-radius: 10px;<br>   border-radius: 10px;<br>}<br>[/code]<br>也就是将“ 真正”的属性（不带前缀的）的属性写到最后。<br>而这样的书写顺序是错误的<br>[code=”css”]<br>.not-a-square {<br>   border-radius: 10px;<br>   -moz-border-radius: 10px;<br>   -webkit-border-radius: 10px;<br>}<br>[/code]<br>为什么那？<br><a id="more"></a><br>这是因为我们处于特殊的时期：</p>
+<ol>
+<li>很久以前： 这些属性都没有被支持，顺序没关系</li>
+<li>以前：仅仅有 供营商前缀 的属性被支持，顺序没关系</li>
+<li>现在：有 供营商前缀 和 “ 真正属性”（无供应商前缀的属性） 都被支持，如果前缀在最后它将重写” 真正属性 “4.  以后:只有真正的属性被支持，顺序不是问题<br>或许这张图片更清晰易懂：<br><img src="http://blog.meituo.net/wp-content/uploads/css_property_order/fundamentallyflawed.png" alt="css 3 书写顺序的过去，现在和将来"><br>或许光说还是不够有说服力，那么看看这个例子.<br>[code=”css”]<br>.not-a-square {<br>/<em> 这两个属性干了完全不同的事 </em>/<br>border-radius: 30px 10px;<br>-webkit-border-radius: 30px 10px;<br>}<br>[/code]<br>border-radius: 30px 10px; 的含义是左上角和右下角为30px 的圆角，右上角和左下角的圆角为10px；<br>-webkit-border-radius: 30px 10px; 为四个椭圆的圆角 30px宽，10px 高。<br><img src="http://blog.meituo.net/wp-content/uploads/css_property_order/cornerswrong.png" alt="书写顺序对比"><br>用Safari 4 或者 Safari 5 打开 <a href="http://jsbin.com/efewi4/edit" target="_blank" rel="external">看看例子吧。</a></li>
+</ol>
+<p>原文 : <a href="http://css-tricks.com/ordering-css3-properties/" target="_blank" rel="external">Ordering CSS3 Properties</a></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/css/">css</a><a href="/tags/css3/">css3</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,264 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>如何使用firebug基础篇 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="firebug">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="如何使用firebug基础篇"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>如何使用firebug基础篇</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/11/17/e5-a6-82-e4-bd-95-e4-bd-bf-e7-94-a8firebug-e5-9f-ba-e7-a1-80-e7-af-87/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-11-17T13:44:49.000Z">
+          2010-11-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 16 Apr 2010 09:16 AM PDT</p>
+<p>firebug的“控制台”项主要用来记录（logging），本文涉及下面几点。</p>
+<ul>
+<li>Firebug的log功能</li>
+<li>分组 log信息</li>
+<li>console.dir 和 console.dirxml</li>
+<li>判断提示  ( console.assert() )</li>
+<li>跟踪 ( console.trace() )</li>
+<li>计时 ( Measuring the time of your code)</li>
+<li>Javascript Profiler (An introduction in this tutorial, the details will be covered in next tutorial.)<a id="more"></a></li>
+</ul>
+<p><span id="more-536"></span></p>
+<h3 id="1-Logging-in-Firebug"><a href="#1-Logging-in-Firebug" class="headerlink" title="1 Logging in Firebug"></a>1 Logging in Firebug</h3><p>Firebug支持在“控制台”输出，有了它就不用alert(”something”),或者document.write(”something”)了。</p>
+<ul>
+<li>console.log  : 输出信息（没有图标）.</li>
+<li>console.debug : 向控制台输出信息，包含 指向调用它的哪一行的超级链接</li>
+<li><img src="http://michaelsync.net/wp-content/uploads/2007/09/erroricon.png" alt="错误">  console.error() :向控制台输出带有 “error” 图标 和不同颜色的代码，指向它被调用的那一行。</li>
+<li><img src="http://michaelsync.net/wp-content/uploads/2007/09/infoicon.png" alt="infoicon.png">  console.info() :向控制台输出带有“info” 图标和颜色的代码，指向它被调用的那一行</li>
+<li><img src="http://michaelsync.net/wp-content/uploads/2007/09/warningicon.png" alt="warningicon.png">  console.warn() :向控制台输出带有 “warning”图标和颜色的代码，指向它被调用的那一行</li>
+</ul>
+<p>Example：</p>
+<p>[code=’js’]<br>console.log(‘This is log message’);<br>console.debug(‘This is debug message’);<br>console.error(‘This is error message’);<br>console.info(‘This is info message’);<br>console.warn(‘This is warning message’);<br>[/code]</p>
+<p>你可以看到下面这样的输出，点击到链接，跳转到script 标签并高亮输出信息的那一行。</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/usefirebug/basic-logging-concept.jpg" alt="简单输出"></p>
+<p>consle打印字符串支持字符串替换，使用起来就像c里面的printf(“%s”,a),支持的类型包括：</p>
+<pre><code>* %s        string，字符串
+
+* %d,%i    整型
+
+* %f        浮点
+
+* %o        对象
+</code></pre><p>如果使用%o的话，对象就会用绿色的超链接表示出来，单击后会将你带到DOM视图。</p>
+<p>Example:</p>
+<p>[code=’js’]</p>
+<p>//This is for normal string substitution “ %s, %d, %i, %f”.<br>console.log(“My Name is <strong>%s</strong>. My Date of Birth is <strong>%dth %s, %i</strong>. My height is <strong>%f</strong> m.”, “Nicolas Cage”, 7, ‘January’, 1964, 1.8542);</p>
+<p>function Foo(){<br>this.LeftHand = function(){<br>return “Left Hand”;<br>}<br>this.RightHand = function(){<br>return “Right Hand”;<br>}<br>}</p>
+<p>//This is for object “%o”.<br>var objFoo = new Foo();<br>console.log(‘This is <strong>%o</strong> of Foo class.’, objFoo);</p>
+<p>[/code]</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/usefirebug/console-string-substitution1.jpg" alt=""></p>
+<h3 id="2-分组"><a href="#2-分组" class="headerlink" title="2 分组"></a>2 分组</h3><p>如果某一类的信息特别多时，分组就有利于逻辑的划分。</p>
+<p>使用上很简单，参见代码。</p>
+<p>[code=’js’]<br>function consoleGroup(){<br>    var groupname = “Group 1”;<br>    console.group(“Message group %s”, groupname);<br>    console.log(“This is the 1 message in %s”, groupname);<br>    console.log(“This is the 2 message in %s”, groupname);<br>    console.log(“This is the 3 message in %s”, groupname);<br>    console.groupEnd();</p>
+<pre><code>goupname = &quot;Group 2&quot;;
+console.group(&quot;Message group %s&quot;, goupname);
+console.log(&quot;This is the 1 message in %s&quot;, goupname);
+
+var subgroupname = &quot;Sub group 1&quot;;
+console.group(&quot;Message group %s&quot;,subgroupname);
+console.log(&quot;This is the 1 message in %s&quot;, subgroupname);
+console.log(&quot;This is the 2 message in %s&quot;, subgroupname);
+console.log(&quot;This is the 3 message in %s&quot;, subgroupname);
+console.groupEnd();
+
+console.log(&quot;This is the 2 message in %s&quot;, goupname);
+console.groupEnd();
+</code></pre><p>}<br>[/code]</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/usefirebug/group-message.jpg" alt=""></p>
+<h3 id="3-console-dir和console-dirxml"><a href="#3-console-dir和console-dirxml" class="headerlink" title="3 console.dir和console.dirxml"></a>3 console.dir和console.dirxml</h3><p>console.dir可以将一个对象的所有方法和属性打印出来，这个方法无疑是非常有用的，我们不再需要object.toString这样的方法支持了，只要有firebug，查看对象也变得很轻松同时，我们也可以将页面中的元素作为一个对象打印出来，但是你要小心，因为这将输出众多的信息，可能你会迷失在繁杂的信息中而找不到自己需要的条目。我们可以通过分组将这些大量的信息放入一个分组中，这样可以在逻辑上更清楚一些。</p>
+<p>console.dirxml    打印出HTML元素的XML表示形式.</p>
+<p>Example:</p>
+<p><strong>console.dir</strong></p>
+<p>[code=”js”]<br>function consoleDir(){<br>    function Car(){<br>        this.Model = “Old Model”;<br>       this.getManu = function(){<br>            return “Toyota”;<br>       }<br>     }</p>
+<pre><code>var objCar = new Car();
+console.dir(objCar);
+console.dir(zoo);
+
+var groupname = &quot;Css Style&quot;;
+console.group(&quot;The button Style&quot;, groupname);
+console.dir(document.getElementById(&apos;consoledir&apos;).style, groupname);
+console.groupEnd();
+</code></pre><p>}<br>[/code]</p>
+<p><strong>console.dirxml</strong></p>
+<p>[code=”js”]</p>
+<p><table id="tbl1" cellpadding="0" cellspacing="0" border="0"></table></p>
+<p><tr></tr></p>
+<p><td>A</td></p>
+<p><td>B</td></p>
+<p><td>C</td><br><br></p>
+<p><script language="javascript" type="text/javascript"><br>//Create a class<br>function Car(){<br>this.Model = “Old Model”;</p>
+<p>this.getManufactor = new function(){<br>return “Toyota”;<br>}<br>}</p>
+<p>//Create a object<br>var objCar = new Car();</p>
+<p>//Firebug<br>console.dir(objCar);<br>console.dirxml(document.getElementById(‘tbl1’));<br>[/code]</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/usefirebug/console-dir.jpg" alt=""></p>
+<h3 id="4-console-assert"><a href="#4-console-assert" class="headerlink" title="4 console.assert()"></a>4 console.assert()</h3><p>console.assert()用来判断一个表达式的true或false，如果是false，就输出到console并抛出一个异常。</p>
+<p>Example：</p>
+<p>[code=”js”]<br></script><script language="javascript" type="text/javascript"><br>function whatIsMyAge(year){<br>var currYear = 2007;<br>return currYear - year;<br>}</p>
+<p>var yearOfBirth1 = 1982;<br>var age1 = 25;<br>console.assert(whatIsMyAge(yearOfBirth1) == age1);</p>
+<p>var yearOfBirth2 = 1982;<br>var age2 = 11;<br>console.assert(whatIsMyAge(yearOfBirth2) == age2); //You should get the error here.<br></script><br>[/code]</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/usefirebug/assertion-failure.jpg" alt="表达式为false的才有输出"></p>
+<h3 id="5-console-trace"><a href="#5-console-trace" class="headerlink" title="5 console.trace()"></a>5 console.trace()</h3><p>这个函数很有趣，先看看官方站点里关于它的功能的描述。</p>
+<blockquote>
+<h4 id="console-trace"><a href="#console-trace" class="headerlink" title="console.trace()"></a>console.trace()</h4><pre><code>Prints an interactive stack trace of JavaScript execution at the point where it is called.
+
+The stack trace details the functions on the stack, as well as the values that were passed as arguments to each function. You can click each function to take you to its source in the Script tab, and click each argument value to inspect it in the DOM or HTML tabs.
+</code></pre></blockquote>
+<p>这个函数输出 从开始到结束的路线信息，如果不明白，看看例子吧。</p>
+<p>Example:</p>
+<p>[code=”html”]<br>&lt; !DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" target="_blank" rel="external">http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</a></p>
+<p><html xmlns="http://www.w3.org/1999/xhtml"></html></p>
+<p><head></head></p>
+<p><title>Firebug</title></p>
+<p><script language="javascript" type="text/javascript"><br>function startTrace(str){<br>return method1(100,200);<br>}<br>function method1(arg1,arg2){<br>return method2(arg1 + arg2 + 100);<br>}<br>function method2(arg1){<br>var var1 = arg1 / 100;<br>return method3(var1);<br>}<br>function method3(arg1){<br>console.trace();<br>var total = arg1 * 100;<br>return total;<br>}</p>
+<p></script><br></p>
+<p><body></body></p>
+<p><input type="button" value="Trace" onclick="startTrace('Result');"><br><br><br>[/code]</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/usefirebug/trace.jpg" alt="输出跟踪函数“method3”的结果"></p>
+<p>假设我们想知道函数“method3” 如何被调用的，我们就把“console.trace()”放到这个函数中，然偶执行程序，就得到了上图。我们可以看到“onclick(click clientX=34, clientY=26)”。这表示JavaScript的执行从button 的click 事件开始。……</p>
+<p>这在调试陌生程序而且不知道这个函数为什么被调用时很有用。</p>
+<h3 id="6-console-time-timeName"><a href="#6-console-time-timeName" class="headerlink" title="6 console.time(timeName)"></a>6 console.time(timeName)</h3><p>你可以使用这个函数来测量一段代码或一个函数执行所用时间。如果你想提高JavaScript的性能那么这个就很有用了。</p>
+<p>Example :</p>
+<p>[code=”html”]<br>&lt; !DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" target="_blank" rel="external">http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</a></p>
+<p><html xmlns="http://www.w3.org/1999/xhtml"></html></p>
+<p><head></head></p>
+<p><title>Firebug</title></p>
+<p><script language="javascript" type="text/javascript"><br>function measuretheTime(){<br>var timeName = ‘measuringTime’;<br>console.time(timeName);</p>
+<p>for(var i=0;i&amp;lt;1000;i++){<br>///do something<br>for(var j=0;j&amp;lt;100;j++){<br>//do another thing.<br>}<br>}</p>
+<p>console.timeEnd(timeName);<br>}<br></script><br></p>
+<p><body></body></p>
+<p><input type="button" value="Trace" onclick="measuretheTime();"><br><br><br>[/code]</p>
+<p>Result : measuringTime: 16ms </p>
+<h3 id="7-概况"><a href="#7-概况" class="headerlink" title="7 概况"></a>7 概况</h3><p>我们可以通过代码console.profile(’profileName’)或者单击Profiler标签来进行Javascript代码执行的分析。这个功能有点类似于console.time()，可以帮助我们评估代码的表现，但是能够提供比console.time()更详细的信息。</p>
+<p>英文原文<a href="http://michaelsync.net/2007/09/09/firebug-tutorial-logging-profiling-and-commandline-part-i" target="_blank" rel="external"> Firebug Tutorial &ndash; Logging, Profiling and CommandLine (Part I) </a></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>, <a href="/categories/JavaScript/浏览器/">浏览器</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/firebug/">firebug</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

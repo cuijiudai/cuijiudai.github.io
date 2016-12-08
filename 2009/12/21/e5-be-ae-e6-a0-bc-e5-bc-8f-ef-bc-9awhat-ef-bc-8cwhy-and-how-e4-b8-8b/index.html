@@ -1,0 +1,203 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>微格式：what，why and how(下) | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="css,html">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="微格式：what，why and how(下)"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>微格式：what，why and how(下)</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2009/12/21/e5-be-ae-e6-a0-bc-e5-bc-8f-ef-bc-9awhat-ef-bc-8cwhy-and-how-e4-b8-8b/" rel="bookmark">
+        <time class="entry-date published" datetime="2009-12-21T13:20:22.000Z">
+          2009-12-21
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h4 id="xFolk"><a href="#xFolk" class="headerlink" title="xFolk"></a>xFolk</h4><p>xFolk是为开放的bookmarks发明的，看这里<a href="http://microformats.org/wiki/xfolk" target="_blank" rel="external">docs</a>:</p>
+<blockquote>
+<p>Lack of an open, interoperable data standard is a major issue in using social bookmarking services. An open standard would make it possible to easily collect social bookmark data and remix it to invent new services … An open standard would also make it possible to write JavaScripts that work across services as some currently do for del.icio.us, enabling across-the-board improvements in user experience.<br><a id="more"></a></p>
+</blockquote>
+<p>使用社会性书签服务 （social bookmarking services）的主要问题是缺少开放，共享的数据标准，一个开放的标准将有可能很容易地收集社会书签数据和整合它创造新的服务…一个开放的标准也使Javascript可以跨越不同的服务，像del.icio.us，来全面改善用户体验。</p>
+<p>使用xFolk，给每个包裹bookmark的父元素一个‘xfolkentry’类：</p>
+<pre><code>[code=&apos;html&apos;]
+&lt;li class=&quot;xfolkentry&quot;&gt;
+&lt;/li&gt;
+[/code]
+</code></pre><p>然后添加链接和描述，分别给他们一个‘taggedLink’和‘description’类</p>
+<pre><code>[code=&quot;html&quot;]
+[Nettuts](http://net.tutsplus.com &quot;Nettuts+&quot;), 
+&lt;span class=&quot;description&quot;&gt;the best web development blog on the planet&lt;/span&gt;.
+[/code]
+</code></pre><p>多么简单啊！我想这在博客和网页综述上有用，可以想象一下，这是一个可以让你一次将所有的链接加为书签的工具。</p>
+<h4 id="XFN-XHTML-Friends-Network"><a href="#XFN-XHTML-Friends-Network" class="headerlink" title="XFN (XHTML Friends Network)"></a>XFN (XHTML Friends Network)</h4><p>XFN是一个标记的人际关系的简单方法，使用链接上的rel属性（relationship的缩写），你可以定义你和你要链接的网页的所有者的关系，关系有两部分：其他人和你自己（你自己其他的网页），你可以很容易的定义你的其他网页：</p>
+<pre><code>[code=&quot;html&quot;]
+[My Posterous](http://JohnDoe.posterous.com)
+[My Photos](http://www.flickr.com/JohnDoe)
+[My Tweets](http://twitter.com/JohnDoe)
+[/code]
+</code></pre><p>很简单吧，rel= ‘me’就可以了</p>
+<pre><code>和其他人的“关系”更详细一点，但是不困难，共6个类别：friendship, physical, professional, geographical, family, romantic。
+我的例子里不一一列举，仅给出几个例子：
+
+[code=&quot;html&quot;]
+</code></pre><ul>
+<li><a href="#">Good friend</a></li>
+<li><a href="#">Darling wife</a></li>
+<li><a href="#">Guy next door</a></li>
+<li><a href="#">Co-worker at Envato</a><br>[/code]</li>
+</ul>
+<p>在第一个链接里，从rel属性就可表达出我见过链接页面的所有者并且我们是朋友。第二个是我的妻子（假设），是我的配偶和爱人，同时也是见过的并且给我启发的人。第三个是我的邻居，但是他仅是一个朋友和邻居。最后一个我的同事也是我的朋友。请注意，我从来没有见过他，这将被视为一个虚拟的关系描述。我要指出的是，你不应该使用XFN去连接博客文章或者其他类似的。在你直接指的是人时使用它，所以’名字‘（name）是链接的文本，’href‘是他们的网址。</p>
+<h4 id="VoteLinks"><a href="#VoteLinks" class="headerlink" title="VoteLinks"></a>VoteLinks</h4><p>VoteLinks是一个有趣的想法：当你链接到一篇文章，帖子，产品，任何东西，添加rev属性。rev是相反的rel;而rel描述了链接页面和当前页的关系（如’朋友’或’样式’），rev描述了当前页面是链接页面的什么关系。有了VoteLinks，你可以让你网页’vote-for’, ‘vote-against’, 或者 ‘vote-abstain’。因此，例如：</p>
+<pre><code>[code=&quot;html&quot;]
+</code></pre><p>Check our <a href="#">this great blog post by Collis</a> on the netsetter</p>
+<p>I got terrible service at <a href="#">the Five Seasons Grill</a> last night</p>
+<p>What do I think of <a href="#">his site redesign</a>? </p>
+<pre><code>[/code]
+</code></pre><p>这是怎么用呢？那么，想象一下，如果谷歌（和其他搜索引擎）考虑到了VoteLinks显示的内容。目前，一个网站拥有越多的链接，就越可能被google搜到。但是，如果这些’关系‘的大多数人反对的产品或网页那？那么爬取网页的VoteLinks显示网页的流行度不是更好么？都很有理性，但也可能很有趣。问题是，很多人需要使用他们VoteLinks产生一切效果。</p>
+<h4 id="Geo"><a href="#Geo" class="headerlink" title="Geo"></a>Geo</h4><p>Geo有连个属性：latitude和longitude</p>
+<pre><code>[code=&quot;html&quot;]
+</code></pre><p><strong>Apple :</strong><br>        (<span class="latitude">37.33171397409807</span><br>        <span class="longitude">-122.03051626682281</span>)</p>
+<p><strong>Envato :</strong><br>        <abbr class="latitude" title="-37.812528">-37&deg; 48’ 45.1008”</abbr><br>        <abbr class="longitude" title="144.969076">144&deg; 58’ 8.6736”</abbr>.</p>
+<pre><code>[/code]
+</code></pre><p>就像我们以前看到的，你可以使用abbr元素来标记真实的的值，当然Operator可以识别他们</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/microformat/geo.jpg" alt="geo"></p>
+<h4 id="rel-license"><a href="#rel-license" class="headerlink" title="rel-license"></a>rel-license</h4><p>如果你曾经向公众发表任何东西，你知道它需要有个的许可。当连接到许可证文件时你可以给链接的rel属性一个’license’。</p>
+<pre><code>[code=&quot;html&quot;]
+</code></pre><p><a href="http://creativecommons.org/licenses/by/2.0/" target="_blank" rel="external">cc by 2.0</a><br>    [/code]</p>
+<h4 id="rel-tag"><a href="#rel-tag" class="headerlink" title="rel-tag"></a>rel-tag</h4><p>这是比较有趣的一个，因为每个博主都给自己的博文添加tags。为此微格式，只需添加ral=“tag”。现在，使用我们的 Operator 的插件，我们可以看到使用相同tags的其他网站的内容。重要的是，该标记的名称取自该链接的href，而不是链接的文字。因此，看下面的例子…</p>
+<pre><code>[code=&quot;html&quot;]
+[Client-Side Scripting](http://www.example.com/tag/javascript)
+[/code]
+</code></pre><p>tag是“javascript”，不是“Client-Side Scripting”</p>
+<p>Nettuts 已经使用了这个微格式，如果你是用了Operator，你就会看到</p>
+<p> <img src="http://blog.meituo.net/wp-content/uploads/microformat/reltag.jpg" alt="rel-tag on Nettuts"></p>
+<h4 id="rel-nofollow"><a href="#rel-nofollow" class="headerlink" title="rel-nofollow"></a>rel-nofollow</h4><p>另一种简单有效的标记：加入rel=“nofollow”到链接是为了防止链接影响到搜索引擎的排名。当然，搜索引擎必须装备这个，并且谷歌，雅虎，Bing已经有了。将这个添加到博客评论的链接里是理想的选择，使这些链接不会影响您的网站。</p>
+<h4 id="那么，你将何去何从那？"><a href="#那么，你将何去何从那？" class="headerlink" title="那么，你将何去何从那？"></a>那么，你将何去何从那？</h4><p>我们已经简要地涵盖了几个微格式，但问题依然存在：他们值得你花费时间么？只有你们使用它！微格式是设法使页面数据更容易抽取，但直到他们广泛不会有很多的工具支持他们。虽然这些现在看来毫无意义，希望几年后他们将无处不在。到那时，将有很多工具使它们可用。微格式是绝对值得你的时间：那么容易，非常便宜，非常强大的潜力。</p>
+<p>你会在你的网站使用微格式么？</p>
+<p>我在本教程里隐藏的使用了微格式，你能找到它？</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/css/">css</a><a href="/tags/html/">html</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

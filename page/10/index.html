@@ -1,0 +1,679 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 10 页 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/08/28/python-e6-89-ab-e7-9b-b2-ef-bc-88-e7-ae-80-e4-bb-8b-ef-bc-89/"><span>Python 扫盲（简介）</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/28/python-e6-89-ab-e7-9b-b2-ef-bc-88-e7-ae-80-e4-bb-8b-ef-bc-89/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-28T13:32:36.000Z">
+          2010-08-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 12 Aug 2010 07:05 AM PDT</p></p>
+<p>最近想学一点全能型的语言，c,c++ 太老，java 太火，动态语言显然是我想选的，简单么但是强大，效率不是问题，随着硬件的提高，一门语言的流行更多的是与其简单程度、文档的完备、应用范围有关。我徘徊于Ruby 和 Python 之间，不知道那个更好，而国内国际还是Python 有着更广泛的使用者，Ruby 现在凭借rails框架一统江湖，但只是在web开发领域大方光彩，而Python 各个方面都有着广泛的应用，而google app engine 是Python的，这更促使我先学习一下Python。下文是转载于<a href="http://program-think.blogspot.com/2009/08/why-choose-python-0-overview.html">编程随想的博客</a>（原文需要翻墙，这是一个系列的前三篇，后续还没更新）。</p>
+<p><span id="more-812"></span><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/Python/">Python</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/08/28/e3-80-90-e8-bd-ac-e3-80-91python-e5-85-a5-e9-97-a8-e6-95-99-e7-a8-8b/"><span>【转】Python 入门教程</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/28/e3-80-90-e8-bd-ac-e3-80-91python-e5-85-a5-e9-97-a8-e6-95-99-e7-a8-8b/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-28T13:26:50.000Z">
+          2010-08-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 14 Aug 2010 07:04 AM PDT</p>
+<p>##language:zh</p>
+<p>#pragma section-numbers on</p>
+<p>”’ Python 绝对简明手册 ”’&ndash; <a href="mailto:zsp007@gmail.com">zsp007@gmail.com</a> ::&ndash; ZoomQuiet [&lt;<datetime>&gt;] &lt;<tableofcontents>&gt;</tableofcontents></datetime></p>
+<h2 id="默许导航-请保留"><a href="#默许导航-请保留" class="headerlink" title="默许导航,请保留"></a>默许导航,请保留</h2><p>##[[Include(CPUGnav)]]</p>
+<p>”简述”</p>
+<p>= 阅读须知 =</p>
+<p>文中使用</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<p>&gt;<br>[/code]</p>
+</blockquote>
+</blockquote>
+<p>作为会命令行中的输出信息的前缀</p>
+<p>对于不清楚用用途的函数可以在解释器下面输入</p>
+<p>[code=”py”]<br>help(函数名)<br>[/code]</p>
+<p>来获取相关信息</p>
+<p>另外,自带的文档和google也是不可少的</p>
+<p><span id="more-820"></span></p>
+<p>= 基本语法 =</p>
+<p>== if / elif / else ==</p>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/Python/">Python</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/08/24/javascript-while-e7-9a-84-e5-8f-a6-e7-b1-bb-e7-94-a8-e6-b3-95/"><span>javascript while 的另类用法</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/24/javascript-while-e7-9a-84-e5-8f-a6-e7-b1-bb-e7-94-a8-e6-b3-95/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-24T13:55:05.000Z">
+          2010-08-24
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>原文来自<a href="”http://james.padolsey.com/javascript/detect-ie-in-js-using-conditional-comments/”">Detect IE in JS using conditional comments</a> ,James Padolsey 的这段代码，用来条件注释检测IE 版本，详细的用法可以看以下注释。<br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/03/17/firephp-e7-9a-84-e9-85-8d-e7-bd-ae-e5-8f-8a-e4-bd-bf-e7-94-a8/"><span>firephp 的配置及使用</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/03/17/firephp-e7-9a-84-e9-85-8d-e7-bd-ae-e5-8f-8a-e4-bd-bf-e7-94-a8/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-03-17T15:19:22.000Z">
+          2010-03-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h3 id="1、首先你需要安装FirePHP插件，重启火狐。"><a href="#1、首先你需要安装FirePHP插件，重启火狐。" class="headerlink" title="1、首先你需要安装FirePHP插件，重启火狐。"></a>1、首先你需要安装<a href="https://addons.mozilla.org/en-US/firefox/addon/6149">FirePHP插件</a>，重启火狐。</h3><h3 id="2、安装FirePHP的服务端"><a href="#2、安装FirePHP的服务端" class="headerlink" title="2、安装FirePHP的服务端"></a>2、安装<a href="http://www.firephp.org/HQ/Install.htm">FirePHP的服务端</a></h3><h3 id="3、配置FirePHP的服务端。"><a href="#3、配置FirePHP的服务端。" class="headerlink" title="3、配置FirePHP的服务端。"></a>3、配置FirePHP的服务端。</h3>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/PHP/">PHP</a>, <a href="/categories/PHP/其他/">其他</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/firebug/">firebug</a><a href="/tags/tools/">tools</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/03/10/e4-b8-8d-e8-a6-81-e4-bd-bf-e7-94-a8ie6/"><span>不要使用IE6</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/03/10/e4-b8-8d-e8-a6-81-e4-bd-bf-e7-94-a8ie6/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-03-10T12:48:52.000Z">
+          2010-03-10
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>随着互联网发展，IE6的气数该尽了，但是IE6现在还占据着大量的市场份额，特别是国内，为了配合赶尽杀绝IE6，本博客将对以后访问本博客的IE6出现满屏警告！<br><img src="http://blog.meituo.net/wp-content/uploads/ie6_ban/no-ie6.png" alt="对IE6显示"><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/IE/">IE</a><a href="/tags/翻译/">翻译</a><a href="/tags/IE6/">IE6</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/03/07/e5-88-a4-e6-96-ad-e6-98-af-e5-90-a6-e6-98-afjquery-e7-9a-84ajax-e8-af-b7-e6-b1-82-e7-9a-84-e6-96-b9-e6-b3-95/"><span>判断是否是jquery的ajax请求的方法</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/03/07/e5-88-a4-e6-96-ad-e6-98-af-e5-90-a6-e6-98-afjquery-e7-9a-84ajax-e8-af-b7-e6-b1-82-e7-9a-84-e6-96-b9-e6-b3-95/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-03-07T13:33:50.000Z">
+          2010-03-07
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>当做一个ajax站点时，为核心的功能提供回调是一个很不错的选择，当你判断ajax到位的时候，你会碰到这个问题，那就是这个回调是否是ajax的回调。在大多数情况下，网站通常是先做没有ajax的部分，然后添加ajax功能，所以回调从开始就有了。<br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/翻译/">翻译</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/03/01/e9-85-b7-e8-bd-af-e6-8e-a8-e8-8d-90-e7-ac-ac-e4-b8-80-e5-ad-a3-2/"><span>酷软推荐第一季</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/03/01/e9-85-b7-e8-bd-af-e6-8e-a8-e8-8d-90-e7-ac-ac-e4-b8-80-e5-ad-a3-2/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-03-01T12:08:58.000Z">
+          2010-03-01
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>今天向大家介绍我用的一些你或许没有听说过的实用小软件。</p>
+<ol>
+<li><h4 id="everything-–快速查找工具"><a href="#everything-–快速查找工具" class="headerlink" title="everything –快速查找工具"></a><a href="#everything">everything –快速查找工具</a></h4></li>
+<li><h4 id="dexpot-–虚拟桌面工具"><a href="#dexpot-–虚拟桌面工具" class="headerlink" title="dexpot  –虚拟桌面工具"></a><a href="#dexpot">dexpot  –虚拟桌面工具</a></h4></li>
+<li><h4 id="guaQQ-–挂QQ软件"><a href="#guaQQ-–挂QQ软件" class="headerlink" title="guaQQ –挂QQ软件"></a><a href="#guaQQ">guaQQ –挂QQ软件</a></h4></li>
+<li><h4 id="dropbox-–远程同步软件"><a href="#dropbox-–远程同步软件" class="headerlink" title="dropbox  –远程同步软件"></a><a href="#dropbox">dropbox  –远程同步软件</a></h4></li>
+<li><h4 id="Copy-Hander-–复制，移动工具"><a href="#Copy-Hander-–复制，移动工具" class="headerlink" title="Copy Hander  –复制，移动工具"></a><a href="#Copy">Copy Hander  –复制，移动工具</a></h4></li>
+<li><h4 id="MozBackUp-–火狐（插件、书签等）备份工具"><a href="#MozBackUp-–火狐（插件、书签等）备份工具" class="headerlink" title="MozBackUp  –火狐（插件、书签等）备份工具"></a><a href="#MozBackUp">MozBackUp  –火狐（插件、书签等）备份工具</a></h4></li>
+<li><h4 id="界面仿真器-–vista-win7-mac界面仿真器"><a href="#界面仿真器-–vista-win7-mac界面仿真器" class="headerlink" title="界面仿真器 –vista,win7,mac界面仿真器"></a><a href="#vista">界面仿真器 –vista,win7,mac界面仿真器</a></h4></li>
+<li><h4 id="ultraISO-–虚拟光驱"><a href="#ultraISO-–虚拟光驱" class="headerlink" title="ultraISO  –虚拟光驱"></a><a href="#ultraISO">ultraISO  –虚拟光驱</a></h4></li>
+<li><h4 id="feedDemon-–离线阅读器"><a href="#feedDemon-–离线阅读器" class="headerlink" title="feedDemon  –离线阅读器"></a><a href="#feedDemon">feedDemon  –离线阅读器</a></h4>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/其他/">其他</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/分享/">分享</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/03/01/e5-a3-81-e7-ba-b8-e6-8e-a8-e8-8d-90-e7-ac-ac-e4-b8-80-e5-ad-a3/"><span>壁纸推荐第一季</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/03/01/e5-a3-81-e7-ba-b8-e6-8e-a8-e8-8d-90-e7-ac-ac-e4-b8-80-e5-ad-a3/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-03-01T12:04:00.000Z">
+          2010-03-01
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>上次篇文章推荐了dexpot，今天有几张壁纸，正好给每个桌面，大小为1024<em>768, 本人ps不怎么好，从网上down的图，然后修改成了1024</em>768的，是一个风格的，题为the diffence between art and design。出自web design depot, creat by john O’No!.<br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/其他/">其他</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/分享/">分享</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/02/25/jquery-e6-8f-92-e4-bb-b6mtslider-1-0-e5-8f-91-e5-b8-83/"><span>jQuery 插件mtSlider 1.0 发布</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/02/25/jquery-e6-8f-92-e4-bb-b6mtslider-1-0-e5-8f-91-e5-b8-83/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-02-25T08:32:00.000Z">
+          2010-02-25
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="http://blog.meituo.net/wp-content/uploads/mtslider/mtslider.png" alt="mtSlider图片示例"><br>今天发布一个自己写的jquery插件mtslider，如图，就是一个简单的图片slider，看看 <a href="http://blog.meituo.net/wp-content/uploads/mtslider/">demo</a> 吧<br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/插件/">插件</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/02/25/jquery-e6-8f-92-e4-bb-b6-mttooltip1-0-e5-8f-91-e5-b8-83/"><span>jQuery插件 mtTooltip1.0发布  </span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/02/25/jquery-e6-8f-92-e4-bb-b6-mttooltip1-0-e5-8f-91-e5-b8-83/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-02-25T08:15:19.000Z">
+          2010-02-25
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p> 就是一个简单的提示效果，替代了title的效果，使用方法，特点是可以批量产生,当然这也不是什么特点,如果你想给类名为mydiv的下<strong>所有有title属性的div</strong>添加tooltip，则如下操作<br>[code=”javascript”]<br>        $(“.mydiv”).mtTooltip({<br>            element:’div’<br>        });<br>[/code]<br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/IE/">IE</a><a href="/tags/Firefox/">Firefox</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  <a href="/page/9/" class="pagination-prev">上一页</a>
+  
+  
+  <a href="/page/11/" class="pagination-next">下一页</a>
+  
+</nav>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

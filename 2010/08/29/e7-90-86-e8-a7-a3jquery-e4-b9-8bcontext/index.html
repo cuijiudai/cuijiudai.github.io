@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>理解jQuery之context | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="context">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="理解jQuery之context"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>理解jQuery之context</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/e7-90-86-e8-a7-a3jquery-e4-b9-8bcontext/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:50:46.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><br><br>当使用jQuery选择元素的时候，jQuery提供了一个<a href="http://api.jquery.com/jQuery/#expressioncontext" target="_blank" rel="external">可选的第二个参数</a>，称为context，context提供了一个将搜索在一个特殊的节点（node）的手段。当你在一个巨大的DOM树下查找的时候这就显得特别棒了，例如，你要在一个特定的DOM树下查找&lt;a&gt;标记，我见过很多这方面的文章，通常性能差不多，提醒你需要在选择器中使用context，当然使用context有提升性能的潜力，但大多数人滥用了context。<br><br><a id="more"></a><br><br>### 发现 context<br><br>在jQuery1.3发布后，context作为jQuery集合的一个属性展现了出来，通过下面的代码查看context<br><br><pre><br>$(‘a’).context; // =&gt; document<br></pre><br><br>运行以上代码，显示context是document，实际上，所有jQuery集合（jQuery collections）的默认context都是document(jquery在其中加载),换句话说，选择器默认是在整个document中运行的。<br><br>### 改变context<br><br>context正常情况下需要一个<strong>节点(node)</strong>的。这是常常被忽视的一部分。我曾经也忽略过它。许多实例告诉你，通过传递第二个可选参数给jQuery来充当搜索引用节点。尽管这似乎工作，但仍然对整个文件的搜索。<br><br>看下面的例子，我们传递了第二个参数作为context，通过context属性查看，我们可以发现context依然还是document。<br><br><pre><br>$(‘a’, ‘#myContainer’).context; // =&gt; document<br></pre><br><br>当jQuery遇到另一个选择器，它实际上是将其转换为如下：<br><br><pre><br>$(‘#myContainer’).find(‘a’);<br></pre><br><br>当你将jQuery集合作为context时，实际上也是如上效果。<br><br>现在让我们看看该如何改变jQuery集合的context：<br><br><pre><br>// get the node for the context，<br>//转换为DOM节点，而不是使用jQuery对象<br>var context = $(‘#myContainer’)[0];<br><br>// pass the context as the second argument<br>$(‘a’, context).context; // =&gt; &lt;div id=”myContainer”&gt;<br></pre><br><br>从这个例子中我们看到传递一个节点作为第二个参数真正的改变了jQuery集合的context。<br><br>### jQuery 1.3.3 and .live()<br><br>在jQuery 1.3.x，live()方法将事件绑定到了document，在1.3.3后live()方法将事件绑定到了jQuery集合的context，这意味着live方法可以更精确更快速。<br><br>英文原文：<a href="http://brandonaaron.net/blog/2009/06/24/understanding-the-context-in-jquery" target="_blank" rel="external">Understanding the Context in jQuery</a><br></div>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/context/">context</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

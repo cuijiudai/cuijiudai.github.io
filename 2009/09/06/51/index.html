@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JQuery -- this 和 $(this) 的区别 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="JQuery -- this 和 $(this) 的区别"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>JQuery -- this 和 $(this) 的区别</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2009/09/06/51/" rel="bookmark">
+        <time class="entry-date published" datetime="2009-09-06T02:07:55.000Z">
+          2009-09-06
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>起初以为this和$(this)就是一模子刻出来。但是我在阅读时，和coding时发现,总不是一回事。<br>What is “this”?</p>
+<pre><code>In many object-oriented programming languages, this (or self) is a keyword which can be used in instance methods to refer to the object on which the currently executing method has been invoked.
+</code></pre><a id="more"></a>
+<p> [code=”javascript”]</p>
+<p>$(“#textbox”).hover(<br>      function() {<br>           this.title = “Test”;<br>      },<br>      fucntion() {<br>          this.title = “OK”;<br>      }<br>);<br>[/code]<br>这里的this其实是一个Html 元素(textbox)，textbox有text属性，所以这样写是完全没有什么问题的。<br>但是如果将this换成$(this)就不是那回事了，Error–报了。</p>
+<pre><code>Error Code：
+</code></pre><p>[code=”javascript”]<br>    $(“#textbox”).hover(<br>           function() {<br>              $(this).title ＝ “Test”;<br>           },<br>           function() {<br>              $(this).title = “OK”;<br>           }<br>    );<br>[/code]<br>这里的$(this)是一个JQuery对象，而jQuery对象沒有title 属性，因此这样写是错误的。</p>
+<p>JQuery拥有attr()方法可以get/set DOM对象的属性，所以正确的写法应该是这样：</p>
+<pre><code>正确的代码：
+</code></pre><p>[code=”javascript”]<br>    $(“#textbox”).hover(<br>          function() {<br>             $(this).attr(’title’, ‘Test’);<br>          },<br>          function() {<br>             $(this).attr(’title’, ‘OK’);<br>          }<br>    );<br>[/code]<br>使用JQuery的好处是它包裝了各种浏览器版本对DOM对象的操作，因此统一使用$(this)而不再用this应该是比较不错的选择。</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

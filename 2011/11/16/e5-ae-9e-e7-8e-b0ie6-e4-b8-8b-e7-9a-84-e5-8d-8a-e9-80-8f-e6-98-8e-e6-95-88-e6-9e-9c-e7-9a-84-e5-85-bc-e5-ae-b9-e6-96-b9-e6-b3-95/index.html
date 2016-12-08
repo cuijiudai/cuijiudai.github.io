@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>实现IE6下的半透明效果的兼容方法 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="css,IE6">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="实现IE6下的半透明效果的兼容方法"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>实现IE6下的半透明效果的兼容方法</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/11/16/e5-ae-9e-e7-8e-b0ie6-e4-b8-8b-e7-9a-84-e5-8d-8a-e9-80-8f-e6-98-8e-e6-95-88-e6-9e-9c-e7-9a-84-e5-85-bc-e5-ae-b9-e6-96-b9-e6-b3-95/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-11-15T18:05:22.000Z">
+          2011-11-16
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>IE6一直是我们前端的老大难问题，不论js，css都有大量的兼容和支持的问题，所以前端的工作量加大了，前端的价值体现了！！<br>或许火狐下作完一个网页后才完成了工作量的一半，因为还有IE系列等着你！！<br><a id="more"></a><br>今天要说的就是IE6的半透明效果。<br>关于图片，gif，和ps导出的png8是支持全透的，但有设计在完成工作的时候，图片边缘总是不经意的带些半透明，当导出png8的时候图片就有毛边。所以我们不得不用ps将边缘的半透明全部擦掉，好端端的一个图，边缘变得很僵硬了！！没有办法，只是因为ie6不支持png24，为了兼容，不得不出此下策！！当然你可以做两套图，ie使用png8，而其他使用png24。<br>但实际上我们还是有办法实现png24在ie6下的半透明，那就是将图片作为背景图然后使用滤镜 。<br>[code=”css”]<br>    _filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src=”<a href="http://a.xnimg.cn/xnapp/music/images/dot_2.png" target="_blank" rel="external">http://a.xnimg.cn/xnapp/music/images/dot_2.png</a>“);<br>    _background: none;<br>[/code]</p>
+<p>嗯，没有问题可以实现，但有时我们不得不去兼容滤镜带来的后遗症！！</p>
+<p>前些日子有幸看到<a href="http://weibo.com/divli" target="_blank" rel="external">@前端的那点破事</a>说的:</p>
+<blockquote>
+<p>png8 alpha透明PS是无法输出的，但可以用FW或者pngnq的命令行工具实现。此种png8 alpha透明图片在IE6以上及其他标准浏览器中可以显示正常的alpha透明度。在IE6中就忽略掉有alpha透明度的颜色，都作为全透明处理。</p>
+</blockquote>
+<p>关于ps下的png和fireworks下的png的区别可以看看：<a href="http://www.cnblogs.com/rainman/archive/2011/09/11/2173597.html" target="_blank" rel="external"><br>PNG图片详解</a>。</p>
+<p>其实早就看到了，今天才有空试一下。效果如下：</p>
+<iframe width="100%" scrolling="no" height="800" frameborder="0" marginheight="0" marginwidth="0" src="http://blog.meituo.net/wp-content/uploads/pngalpha"></iframe>
+
+<p>所以注意：在fireworks里一定要使用<strong>导出</strong>alpha 透明的png8，而不是<strong>保存</strong>alpha 透明的png8。<br>步骤：<br> <pre><br> Fireworks &gt;&gt;文件&gt;&gt;导出向导<br></pre><br>然后一步步往下会得到下图界面，保存就好了：</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/pngalpha/ex.jpg" alt="" title="图示"></p>
+<p>用这个保存方法解决了毛边的问题，这样就不会有是使用png8坚硬的边缘或者使用png24的蓝底问题了。但图片的半透都成了全透，所以如果图片有半透的，并且半透是需要保留的，那么现在我的办法只有使用png24格式在IE6下使用滤镜，</p>
+<p>还有一种vml的解决方案，应该是很nice的解决方案，<a href="http://www.dillerdesign.com/experiment/DD_belatedPNG/" target="_blank" rel="external">DD_belatedPNG</a>，看到美团网在用，自己还没用过。</p>
+<p>还有什么其他的好办法么？</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>, <a href="/categories/css-html/IE/">IE</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/css/">css</a><a href="/tags/IE6/">IE6</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

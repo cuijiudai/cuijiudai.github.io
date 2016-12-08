@@ -1,0 +1,366 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jsdoc 介绍及中文乱码问题 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="java">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="jsdoc 介绍及中文乱码问题"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>jsdoc 介绍及中文乱码问题</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/03/03/jsdoc-e4-bb-8b-e7-bb-8d-e5-8f-8a-e4-b8-ad-e6-96-87-e4-b9-b1-e7-a0-81-e9-97-ae-e9-a2-98/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-03-03T03:17:01.000Z">
+          2011-03-03
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>jsdoc是用来批量提取js注释生成文档的工具，很早就听说php等有这些工具，今天查了一下js的，jsdoc还不错，但是使用中遇到了中文乱码问题，先介绍编码问题了。</p>
+<h3 id="中文乱码问题"><a href="#中文乱码问题" class="headerlink" title="中文乱码问题"></a>中文乱码问题</h3><p>如果你的jsdoc出现编码问题，中文是乱码的话可以使用-e参数来制定编码，当然编码要和你的js文件格式一致，如果你的js是utf-8格式，则使用：-e=utf-8。<br>e.g [code=’java’]java -jar jsrun.jar app/run.js -a -e=utf-8 -t=templates/jsdoc test/*.js [/code]<br>以上代码和app目录同级的的test目录下的所有js导出文档。如果不在同级目录则要使用绝对路径。<br>如果你不知道什么是jsdoc请看以下转自：<a href="http://blog.tugai.net/" target="_blank" rel="external">西风瘦马博客http://blog.tugai.net/</a>的关于jsdoc使用的介绍。<a id="more"></a></p>
+<h3 id="jsdoc-简介"><a href="#jsdoc-简介" class="headerlink" title="jsdoc 简介"></a>jsdoc 简介</h3><p>随着Web2.0的风靡，Javascript已经成为一门被人们重新认识的编程语言，由于大量JS开源框架的出现，利用Javascript开发的项目越来越多，越来越大。同时，也有越来越多Javascript开发问题暴露出来，如性能、网页加载速度等，其中，Javascript文档维护也成为了开发者亟待解决的一个难题。</p>
+<p>许多现代编程语言都有自己的集成化文档生成工具，像Java有<a href="http://java.sun.com/j2se/javadoc/" target="_blank" rel="external">JavaDoc</a>，.NET有<a href="http://ndoc.sourceforge.net/" target="_blank" rel="external">NDoc</a>，PHP有<a href="http://www.phpdoc.org/" target="_blank" rel="external">PHPDoc</a>，这些自动化文档工具可以根据代码中的注释自动生成代码文档。</p>
+<p><a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank" rel="external">JsDoc Toolkit</a>就是这样一个自动化文档工具，它是发布在<a href="http://code.google.com/" target="_blank" rel="external">Google code</a>上的一个开源项目，和其他语言的文档工具一样，它可以自动从Javascript代码中提取注释生成格式化文档。<span id="more-185"></span></p>
+<p><strong>下载地址</strong></p>
+<p><a href="http://code.google.com/p/jsdoc-toolkit/downloads/list" target="_blank" rel="external">http://code.google.com/p/jsdoc-toolkit/downloads/list</a></p>
+<p><strong>运行环境</strong></p>
+<p>JsDoc Toolkit是用Java开发的，运行时需要以下环境：</p>
+<ol>
+<li><strong>WindowXP</strong></li>
+</ol>
+<p>java version “1.6.0_03”</p>
+<p>Java(TM) SE Runtime Environment (build 1.6.0_03-b05)</p>
+<ol>
+<li><strong>Mac OS X 10.5</strong></li>
+</ol>
+<p>java version “1.5.0_19”</p>
+<p>Java(TM) 2 Runtime Environment, Standard Edition (build 1.5.0_19-b02-304)</p>
+<p>其它版本的Java可能导致JsDoc Toolkit运行失败。</p>
+<h3 id="用法"><a href="#用法" class="headerlink" title="用法"></a><strong>用法</strong></h3><p>以下用法介绍很简单，详细一点可以看这篇脚本之家的 <a href="http://www.jb51.net/article/26249.htm" target="_blank" rel="external">JSDoc 介绍使用规范JsDoc的使用介绍</a></p>
+<p>在运行之前，你需要把当前的工作目录切换到JsDoc Toolkit目录，并确保将java.exe所在目录添加到环境变量中。</p>
+<p>[code=’java’]<br>      java -jar jsrun.jar app\run.js -a -t=templates\jsdoc mycode.js<br>[/code]</p>
+<p>mycode.js是需要生成文档的js代码，如果mycode.js和JsDoc不在同一目录，请加上文件的绝对或者相对路径。如果项目中有多个js，可以使用通配符<em>来指定多个js文件(</em>.js)。-e参数指定文档编码，-t参数指定文档模板位置（可以新建或修改模板文件让输出的代码文件更具特色），生成的文档文件在JsDoc目录下的out目录中。为了使用方便，我写了一个批处理文件，你可以将代码保存为run.bat，放到JsDoc目录下：</p>
+<p>[code=’html’]<br>    ::run.bat<br>    @echo off<br>    ::js文件名(换成你的js文件名)<br>    set jsname=jquery.js<br>    ::js文件路径(换成你的js文件路径)<br>    set jspath=C:\test\<br>    echo start…<br>    java -jar jsrun.jar app\run.js -a -e=GBK -t=templates\jsdoc “%jspath%%jsname%.js”<br>    ::out\%jsname%\index.html<br>    echo finished.<br>    pause<br>[/code]</p>
+<h3 id="常用参数"><a href="#常用参数" class="headerlink" title="常用参数"></a>常用参数</h3><p>详细语法请参阅：<a href="http://code.google.com/p/jsdoc-toolkit/w/list" target="_blank" rel="external">JsDoc Toolkit Wiki</a></p>
+<p>@author:作者<br>@argument:参数<br>@augments：参数<br>@class： 类<br>@constant：常数<br>@constructor：构造<br>@constructs： 构造<br>@default：默认值<br>@deprecated： 推荐，说明使用一个变量已不再支持<br>@description：说明<br>@example ：范例<br>@extends： 扩展 ，继承<br>@field：变量（非功能）<br>@fileOverview ：整个文件信息<br>@function： 功能 (表示该变量指向一个功能)<br>@inner || @private : 私有，内部<br>@ignore： 忽视 （文档生成的式后也将忽视这个变量）<br>@event：事件<br>@version：版本<br>@type：类型 描述预期的类型变量的值或返回值的函数<br>@throws :可能抛出的异常<br>@static： 静态，访问该变量不需要实例<br>@since： 自 （表明某属性特征，是在什么版本之后才有的）<br>@see： 描述相关的资源<br>@scope ||@lends： 作用域<br>@return ||@returns<br>@requires： 描述必须需要的资源<br>@public： 说明内在变量是公开的<br>@property ： 属性<br>@param：参数<br>@namespace： 命名空间<br>较多用法如下：<br>eg:<br>/** </p>
+<ul>
+<li>@fileOverview 功能接口调用 </li>
+<li>@author ChenJianxiang </li>
+<li>@constructor BlogJava.Data </li>
+<li>@description [数据结构]命名空间 </li>
+<li>@see The <a href="http://www.example.com" target="_blank" rel="external">Example Project</a>. </li>
+<li>@param  {NULL_PARAMETER} objNull </li>
+<li>@param  {Function} [fnCallback=”null”] :如果不是函数类型,则进行同步调用 </li>
+<li>@return {Boolean} json ：作为回调参数返回 </li>
+<li>@example new KxEFileMon.Data.NULL_PARAMETER(“a”)<br>*/</li>
+</ul>
+<h3 id="以下是官方提示的示例代码："><a href="#以下是官方提示的示例代码：" class="headerlink" title="以下是官方提示的示例代码："></a>以下是官方提示的示例代码：</h3><p>[code=’js’]<br>/**</p>
+<ul>
+<li>@fileoverview This file is to be used for testing the JSDoc parser</li>
+<li>It is not intended to be an example of good JavaScript OO-programming,</li>
+<li>nor is it intended to fulfill any specific purpose apart from</li>
+<li>demonstrating the functionality of the</li>
+<li><a href="http://sourceforge.net/projects/jsdoc" target="_blank" rel="external">JSDoc</a> parser<br>*</li>
+<li>@author Gabriel Reid gab_reid@users.sourceforge.net</li>
+<li>@version 0.1<br><em>/<br>/*</em></li>
+<li>Construct a new Shape object.</li>
+<li>@class This is the basic Shape class.</li>
+<li>It can be considered an abstract class, even though no such thing</li>
+<li>really existing in JavaScript</li>
+<li>@constructor</li>
+<li>@throws MemoryException if there is no more memory</li>
+<li>@throws GeneralShapeException rarely (if ever)</li>
+<li>@return A new shape<br><em>/<br>function Shape(){<br>/*</em><ul>
+<li>This is an example of a function that is not given as a property</li>
+<li>of a prototype, but instead it is assigned within a constructor.</li>
+<li>For inner functions like this to be picked up by the parser, the</li>
+<li>function that acts as a constructor <strong>must</strong> be denoted with</li>
+<li>the <strong>@constructor</strong> tag in its comment.</li>
+<li>@type String<br><em>/<br>this.getClassName = function(){<br>return “Shape”;<br>}<br>/*</em></li>
+<li>This is a private method, just used here as an example<br><em>/<br>function addReference(){<br> // Do nothing…<br>}<br>}<br>/*</em></li>
+</ul>
+</li>
+<li>Create a new Hexagon instance.</li>
+<li>@extends Shape</li>
+<li>@class Hexagon is a class that is a <em>logical</em> sublcass of</li>
+<li><a href="Shape.html#">Shape</a> (thanks to the <code>@extends</code> tag), but in</li>
+<li>reality it is completely unrelated to Shape.</li>
+<li>@param {int} sideLength The length of one side for the new Hexagon<br><em>/<br>function Hexagon(sideLength) {<br>}<br>/*</em></li>
+<li>This is an unattached (static) function that adds two integers together.</li>
+<li>@param {int} One The first number to add</li>
+<li>@param {int <a href="http://jsdoc.sourceforge.net/}" target="_blank" rel="external">http://jsdoc.sourceforge.net/}</a> Two The second number to add</li>
+<li>@author Gabriel Reid</li>
+<li>@deprecated So you shouldn’t use it anymore!<br><em>/<br>function Add(One, Two){<br> return One + Two;<br>}<br>/*</em></li>
+<li>The color of this shape</li>
+<li>@type Color<br><em>/<br>Shape.prototype.color = null;<br>/*</em></li>
+<li>The border of this shape.</li>
+<li>@type int<br><em>/<br>Shape.prototype.border = null;<br>/</em></li>
+<li>The assignment of function implementations for Shape, documentation will</li>
+<li>be taken over from the method declaration.<br><em>/<br>Shape.prototype.getCoords = Shape_GetCoords;<br>Shape.prototype.getColor = Shape_GetColor;<br>Shape.prototype.setCoords = Shape_SetCoords;<br>Shape.prototype.setColor = Shape_SetColor;<br>/</em></li>
+<li>These are all the instance method implementations for Shape<br><em>/<br>/*</em></li>
+<li>Get the coordinates of this shape. It is assumed that we’re always talking</li>
+<li>about shapes in a 2D location here.</li>
+<li>@requires Shape The shape class</li>
+<li>@returns A Coordinate object representing the location of this Shape</li>
+<li>@type Coordinate<br><em>/<br>function Shape_GetCoords(){<br>return this.coords;<br>}<br>/*</em></li>
+<li>Get the color of this shape.</li>
+<li>@see #setColor</li>
+<li>@type Color<br><em>/<br>function Shape_GetColor(){<br>return this.color;<br>}<br>/*</em></li>
+<li>Set the coordinates for this Shape</li>
+<li>@param {Coordinate} coordinates The coordinates to set for this Shape<br><em>/<br>function Shape_SetCoords(coordinates){<br>this.coords = coordinates;<br>}<br>/*</em></li>
+<li>Set the color for this Shape</li>
+<li>@param {Color} color The color to set for this Shape</li>
+<li>@param other There is no other param, but it can still be documented if</li>
+<li>optional parameters are used</li>
+<li>@throws NonExistantColorException (no, not really!)</li>
+<li>@see #setColor<br><em>/<br>function Shape_SetColor(color){<br>this.color = color;<br>}<br>/*</em></li>
+<li>Clone this shape</li>
+<li>@returns A copy of this shape</li>
+<li>@type Shape</li>
+<li>@author Gabriel Reid<br><em>/<br>Shape.prototype.clone = function(){<br>return new Shape();<br>}<br>/*</em></li>
+<li>Create a new Rectangle instance.</li>
+<li>@class A basic rectangle class, inherits from Shape.</li>
+<li>This class could be considered a concrete implementation class</li>
+<li>@constructor</li>
+<li>@param {int} width The optional width for this Rectangle</li>
+<li>@param {int} height Thie optional height for this Rectangle</li>
+<li>@author Gabriel Reid</li>
+<li>@see Shape Shape is the base class for this<br>*/<br>function Rectangle(width, // This is the width<pre><code>height // This is the height
+){
+</code></pre>if (width){<br>   this.width = width;<br>   if (height){<br>  this.height = height;<br>   }<br>}<br>}<br>/<em> Inherit from Shape </em>/<br>Rectangle.prototype = new Shape();<br>/**</li>
+<li>Value to represent the width of the Rectangle.</li>
+<li>Text in <strong>bold</strong> and <em>italic</em> and a</li>
+<li>link to <a href="http://sf.net" target="_blank" rel="external">SourceForge</a></li>
+<li>@private</li>
+<li>@type int<br><em>/<br>Rectangle.prototype.width = 0;<br>/*</em></li>
+<li>Value to represent the height of the Rectangle</li>
+<li>@private</li>
+<li>@type int<br><em>/<br>Rectangle.prototype.height = 0;<br>/*</em></li>
+<li>Get the type of this object.</li>
+<li>@type String<br><em>/<br>Rectangle.prototype.getClassName= function(){<br> return “Rectangle”;<br>}<br>/</em></li>
+<li>These are all the instance method implementations for Rectangle<br><em>/<br>Rectangle.prototype.getWidth = Rectangle_GetWidth;<br>Rectangle.prototype.getHeight = Rectangle_GetHeight;<br>Rectangle.prototype.setWidth = Rectangle_SetWidth;<br>Rectangle.prototype.setHeight = Rectangle_SetHeight;<br>Rectangle.prototype.getArea = Rectangle_GetArea;<br>/*</em></li>
+<li>Get the value of the width for the Rectangle</li>
+<li>@type int</li>
+<li>@see #setWidth<br><em>/<br>function Rectangle_GetWidth(){<br>return this.width;<br>}<br>/*</em></li>
+<li>Get the value of the height for the Rectangle.</li>
+<li>Another getter is the <a href="Shape.html#getColor">Shape.getColor()</a> method in the</li>
+<li><a href="Shape.html#">base Shape class</a>.</li>
+<li>@return The height of this Rectangle</li>
+<li>@type int</li>
+<li>@see #setHeight<br><em>/<br>function Rectangle_GetHeight(){<br> return this.height;<br>}<br>/*</em></li>
+<li>Set the width value for this Rectangle.</li>
+<li>@param {int} width The width value to be set</li>
+<li>@see #setWidth<br><em>/<br>function Rectangle_SetWidth(width){<br>this.width = width;<br>}<br>/*</em></li>
+<li>Set the height value for this Rectangle.</li>
+<li>@param {int} height The height value to be set</li>
+<li>@see #getHeight<br><em>/<br>function Rectangle_SetHeight(height){<br>this.height = height;<br>}<br>/*</em></li>
+<li>Get the value for the total area of this Rectangle</li>
+<li>@return total area of this Rectangle</li>
+<li>@type int<br><em>/<br>function Rectangle_GetArea(){<br>return width </em> height;<br>}<br>/**</li>
+<li>Create a new Square instance.</li>
+<li>@class A Square is a subclass of <a href="Rectangle.html#">Rectangle</a></li>
+<li>@param {int} width The optional width for this Rectangle</li>
+<li>@param {int} height The optional height for this Rectangle<br><em>/<br>function Square(width, height){<br>if (width){<br>   this.width = width;<br>   if (height){<br>  this.height = height;<br>   }<br>}<br>}<br>/</em> Square is a subclass of Rectangle <em>/<br>Square.prototype = new Rectangle();<br>/</em></li>
+<li>The assignment of function implementation for Shape.<br><em>/<br>Square.prototype.setWidth = Square_SetWidth;<br>Square.prototype.setHeight = Square_SetHeight;<br>/*</em></li>
+<li>Set the width value for this Square.</li>
+<li>@param {int} width The width value to be set</li>
+<li>@see #getWidth<br><em>/<br>function Square_SetWidth(width){<br>this.width = this.height = width;<br>}<br>/*</em></li>
+<li>Set the height value for this Square</li>
+<li>Sets the <a href="Rectangle.html#height">height</a> attribute in the Rectangle.</li>
+<li>@param {int} height The height value to be set<br><em>/<br>function Square_SetHeight(height){<br>this.height = this.width = height;<br>}<br>/*</em></li>
+<li>Create a new Circle instance based on a radius.</li>
+<li>@class Circle class is another subclass of Shape</li>
+<li>@param {int} radius The optional radius of this Circle<br><em>/<br>function Circle(radius){<br>if (radius){<br>   this.radius = radius;<br>}<br>}<br>/</em> Circle inherits from Shape <em>/<br>Circle.prototype = new Shape();<br>/*</em></li>
+<li>The radius value for this Circle</li>
+<li>@private</li>
+<li>@type int<br><em>/<br>Circle.prototype.radius = 0;<br>/*</em></li>
+<li>A very simple class (static) field that is also a constant</li>
+<li>@final</li>
+<li>@type float<br><em>/<br>Circle.PI = 3.14;<br>Circle.createCircle = Circle_CreateCircle;<br>Circle.prototype.getRadius = Circle_GetRadius;<br>Circle.prototype.setRadius = Circle_SetRadius;<br>/*</em></li>
+<li>Get the radius value for this Circle</li>
+<li>@type int</li>
+<li>@see #setRadius<br><em>/<br>function Circle_GetRadius(){<br>return this.radius;<br>}<br>/*</em></li>
+<li>Set the radius value for this Circle</li>
+<li>@param {int} radius The radius value to set</li>
+<li>@see #getRadius<br><em>/<br>function Circle_SetRadius(radius){<br>this.radius = radius;<br>}<br>/*</em></li>
+<li>An example of a  class (static) method that acts as a factory for Circle</li>
+<li>objects. Given a radius value, this method creates a new Circle.</li>
+<li>@param {int} radius The radius value to use for the new Circle.</li>
+<li>@type Circle<br><em>/<br>function Circle_CreateCircle(radius){<br> return new Circle(radius);<br>}<br>/*</em></li>
+<li>Create a new Coordinate instance based on x and y grid data.</li>
+<li>@class Coordinate is a class that can encapsulate location information.</li>
+<li>@param {int} x The optional x portion of the Coordinate</li>
+<li>@param {int} y The optinal y portion of the Coordinate<br><em>/<br>function Coordinate(x, y){<br>if (x){<br>   this.x = x;<br>   if (y){<br>  this.y = y;<br>   }<br>}<br>}<br>/*</em></li>
+<li>The x portion of the Coordinate</li>
+<li>@type int</li>
+<li>@see #getX</li>
+<li>@see #setX<br><em>/<br>Coordinate.prototype.x = 0;<br>/*</em></li>
+<li>The y portion of the Coordinate</li>
+<li>@type int</li>
+<li>@see #getY</li>
+<li>@see #setY<br><em>/<br>Coordinate.prototype.y = 0;<br>Coordinate.prototype.getX = Coordinate_GetX;<br>Coordinate.prototype.getY = Coordinate_GetY;<br>Coordinate.prototype.setX = Coordinate_SetX;<br>Coordinate.prototype.setY = Coordinate_SetY;<br>/*</em></li>
+<li>Gets the x portion of the Coordinate.</li>
+<li>@type int</li>
+<li>@see #setX<br><em>/<br>function Coordinate_GetX(){<br>return this.x;<br>}<br>/*</em></li>
+<li>Get the y portion of the Coordinate.</li>
+<li>@type int</li>
+<li>@see #setY<br><em>/<br>function Coordinate_GetY(){<br>return this.y;<br>}<br>/*</em></li>
+<li>Sets the x portion of the Coordinate.</li>
+<li>@param {int} x The x value to set</li>
+<li>@see #getX<br><em>/<br>function Coordinate_SetX(x){<br>this.x = x;<br>}<br>/*</em></li>
+<li>Sets the y portion of the Coordinate.</li>
+<li>@param {int} y The y value to set</li>
+<li>@see #getY<br><em>/<br>function Coordinate_SetY(y){<br>this.y = y;<br>}<br>/*</em></li>
+<li>@class This class exists to demonstrate the assignment of a class prototype</li>
+<li>as an anonymous block.<br><em>/<br>function ShapeFactory(){<br>}<br>ShapeFactory.prototype = {<br>/*</em><ul>
+<li>Creates a new <a href="Shape.html#">Shape</a> instance.</li>
+<li>@return A new <a href="Shape.html#">Shape</a></li>
+<li>@type Shape<br><em>/<br>createShape: function(){<br>return new Shape();<br>}<br>}<br>/*</em></li>
+</ul>
+</li>
+<li>An example of a singleton class<br><em>/<br>MySingletonShapeFactory = new function(){<br>/*</em><ul>
+<li>Get the next <a href="Shape.html#">Shape</a></li>
+<li>@type Shape</li>
+<li>@return A new <a href="Shape.html#">Shape</a><br><em>/<br>this.getShape = function(){<br>return null;<br>}<br>}<br>/*</em></li>
+</ul>
+</li>
+<li>Create a new Foo instance.</li>
+<li>@class This is the Foo class. It exists to demonstrate ‘nested’ classes.</li>
+<li>@constructor</li>
+<li>@see Foo.Bar<br><em>/<br>function Foo(){}<br>/*</em></li>
+<li>Creates a new instance of Bar.</li>
+<li>@class This class exists to demonstrate ‘nested’ classes.</li>
+<li>@constructor</li>
+<li>@see Foo.Bar<br><em>/<br>function Bar(){}<br>/*</em></li>
+<li>Nested class</li>
+<li>@constructor<br>*/<br>Foo.Bar = function(){this.x = 2;}<br>Foo.Bar.prototype = new Bar();<br>Foo.Bar.prototype.y = ‘3’;</li>
+</ul>
+<p>[/code]<br>参考文章:</p>
+<ul>
+<li><a href="http://blog.tugai.net/2010/01/08/jsdoc-toolkit-usage/" target="_blank" rel="external">JsDoc Toolkit:Javascript文档利器 </a></li>
+<li><a href="http://www.zhuoqun.net/html/y2009/1363.html" target="_blank" rel="external">JsDoc Toolkit 简介</a></li>
+<li><a href="http://www.juspace.com/post/30.html" target="_blank" rel="external">JsDoc js文档自动生成工具使用详解</a>       </li>
+</ul>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/java/">java</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

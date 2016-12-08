@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>我所知道的nodejs异步  | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="我所知道的nodejs异步 "/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>我所知道的nodejs异步 </span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/04/20/e6-88-91-e6-89-80-e7-9f-a5-e9-81-93-e7-9a-84nodejs-e5-bc-82-e6-ad-a5/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-04-20T15:31:12.000Z">
+          2011-04-20
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>插播广告：最近在用ubuntu 10.10 ，老是卡死，快捷键还可以，每次都要重启gdm，估计是显卡的问题，谁用华硕的双显卡机器装过ubuntu10.10，网上的办法试尽了，依然没有解决。。。</p>
+<p>平时使用js不会感觉js很牛x，但是如何说用js来完成后台语言和服务器的工作就令人惊讶了，也就是实现http通信和server服务，而<a href="http://nodejs.org" target="_blank" rel="external">nodeJS</a>做到了，所以令前端们激动的事情发生了！！有人预测<a href="http://article.yeeyan.org/view/220069/187029" target="_blank" rel="external">我们进入nodejs 的时代</a>,这是有原因的，因为很多测评者发现了nodejs优良的特性。<a id="more"></a><br>虽然做前端对js懂点，但是对于真正实现一个server我还是不敢想象，并充满了好奇。我下载了<a href="http://chat.nodejs.org/" target="_blank" rel="external">官方的聊天室的例子</a>，看了一下他的实现，其实用的就是异步机制，也就是 setTimeout 和 serInterval， 这俩真是好东西！！这就是nodejs包括js实现异步的核心。</p>
+<p>很简单的几个文件：</p>
+<pre>
+fu.js 实现了路由机制
+server.js 当然是后台
+client.js 实现了客户端
+index.html 一切动态语言都是浮云，以后可以用js做输出了，哈哈。
+style.css
+</pre>
+
+<p>其实现原理是这样的：</p>
+<p><strong>用户定时去服务器取状态，当用户来服务端取聊天内容时 带来一个时间since ，如果有since时间 以前的聊天内容就返回聊天内容(内容存储于 message 数组，数组最大长度200)并更新 session（其用于标示在线用户的对象）的时间，如果没有新信息则将回调函数（用于返回对话信息）加入callbacks数组，这时连接就会“进入等待”。如果有新留言（或者状态）则立刻触发 callbacks 数组存储的所有回调函数返回内容，“等待”结束。如果30秒内没有新的数据，回调也会被执行（setInterval 实现），返回空数组，就是这样的延迟返回实现了长连接。</strong></p>
+<p>好吧，有兴趣你可以看看，欢迎交流。</p>
+<p>关于windows安装nodejs，很简单啊，我当时几分钟搞定了，因为<a href="http://blog.meituo.net/tag/e-texteditor/" target="_blank" rel="external">E-texteditor </a>我已经安装了cygwin,所以当时在xp下很没有遇到什么问题。在linux下安装就简单了，不说了。</p>
+<p>window下的入门看看这里吧<a href="http://www.cnblogs.com/rubylouvre/archive/2010/07/15/1778403.html" target="_blank" rel="external">node.js入门</a>其他的中文网站<a href="http://cnodejs.org" target="_blank" rel="external">一个中文nodejs社区</a>还算不错。</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>, <a href="/categories/JavaScript/nodeJS/">nodeJS</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

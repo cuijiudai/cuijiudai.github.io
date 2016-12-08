@@ -1,0 +1,791 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【转】Python 入门教程 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="【转】Python 入门教程"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>【转】Python 入门教程</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/28/e3-80-90-e8-bd-ac-e3-80-91python-e5-85-a5-e9-97-a8-e6-95-99-e7-a8-8b/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-28T13:26:50.000Z">
+          2010-08-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 14 Aug 2010 07:04 AM PDT</p>
+<p>##language:zh</p>
+<p>#pragma section-numbers on</p>
+<p>”’ Python 绝对简明手册 ”’&ndash; <a href="mailto:zsp007@gmail.com" target="_blank" rel="external">zsp007@gmail.com</a> ::&ndash; ZoomQuiet [&lt;<datetime>&gt;] &lt;<tableofcontents>&gt;</tableofcontents></datetime></p>
+<h2 id="默许导航-请保留"><a href="#默许导航-请保留" class="headerlink" title="默许导航,请保留"></a>默许导航,请保留</h2><p>##[[Include(CPUGnav)]]</p>
+<p>”简述”</p>
+<p>= 阅读须知 =</p>
+<p>文中使用</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<p>&gt;<br>[/code]</p>
+</blockquote>
+</blockquote>
+<p>作为会命令行中的输出信息的前缀</p>
+<p>对于不清楚用用途的函数可以在解释器下面输入</p>
+<p>[code=”py”]<br>help(函数名)<br>[/code]</p>
+<p>来获取相关信息</p>
+<p>另外,自带的文档和google也是不可少的</p>
+<p><span id="more-820"></span></p>
+<p>= 基本语法 =</p>
+<p>== if / elif / else ==</p>
+<a id="more"></a>
+<p>[code=”py”]<br>x=int(raw_input(“Please enter an integer:”))#获取行输入</p>
+<p>if x&gt;0:<br>    print ‘正数’<br>elif x==0:<br>    print ‘零’<br>else:<br>    print ‘负数’<br>[/code]</p>
+<p>此外C语言中类似”xxx?xxx:xxx”在Python中可以这样写</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>number=8<br>print “good” if 8==number else “bad” #当满足if条件时返回”good”,否则返回”bad”<br>good<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>==  in ==</p>
+<p>in判断 一个数 是否在 一个集合(如:元组,列表等) 中</p>
+<p>[code=”py”]<br>if ‘yes’ in  (‘y’,’ye’,’yes’):print  ‘ok’<br>[/code]</p>
+<p>== for … in ==</p>
+<p>python中没有类似C中的for循环,而是使用for…in来对集合中的每一个元素进行操作</p>
+<p>[code=”py”]<br>a=[‘cat’,’door’,’example’]<br>for x in a:<br>    print x<br>[/code]</p>
+<p>如果要修改a的内容，请用a的副本循环(否则不安全)，如：</p>
+<p>[code=”py”]<br>a=[“cat”,”<a href="mailto:zsp007@gmail.com" target="_blank" rel="external">zsp007@gmail.com</a>“]<br>for x in a[:]:<br>    if len(x)&gt;6:a.insert(0,x)</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a<br>[‘<a href="mailto:zsp007@gmail.com" target="_blank" rel="external">zsp007@gmail.com</a>‘, ‘cat’, ‘<a href="mailto:zsp007@gmail.com" target="_blank" rel="external">zsp007@gmail.com</a>‘]<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>若需要得到循环的次数,参见 函数 range 的用法</p>
+<p>== break / continue ==</p>
+<p>这两个的用法和C中相同</p>
+<p>[code=”py”]<br>for i in range(10):<br>    if 2==i:continue #结束当前循环,进入下一步循环<br>    if 6==i:break #跳出循环<br>    print i<br>[/code]</p>
+<p>输出</p>
+<p>[code=”py”]<br>0<br>1<br>3<br>4<br>5<br>[/code]</p>
+<p>== while / pass ==</p>
+<p>[code=”py”]<br>while True:<br>    pass #什么也不做<br>[/code]</p>
+<p>== is ==</p>
+<p>用来比较两个变量是否指向同一内存地址(也就是两个变量是否等价)</p>
+<p>而 == 是用来比较两个变量是否逻辑相等</p>
+<p>[code=”py”]<br>a=[1,2]<br>b=[1,2]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a is b<br>False<br>a == b<br>True<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>== del ==</p>
+<p>用于删除元素</p>
+<p>[code=”py”]<br>a=[1,2,3,4,5,6]</p>
+<p>del a[0]<br>a</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>[2,3,4,5,6]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>del a[2:4]<br>a</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>[2,3,6]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>del a[:]<br>a</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>[]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>del a<br>a</p>
+<p>#抛出异常</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>NameError: name ‘a’ is not defined<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>== try … except … finally / raise ==</p>
+<p>try … except用于异常处理</p>
+<p>[code=”py”]<br>try:<br>    x=int(raw_input(“请输入数字:”))<br>except ValueError: #可以同时捕获多个异常,写法如except(RuntimeError,ValueError):</p>
+<pre><code>#当输入非数字时
+print&quot;您输入不是数字&quot;
+</code></pre><p>except: #省略异常名,可以匹配所有异常,慎用<br>    pass<br>else:#当没有异常时<br>    print ‘result=’,result<br>finally:#和Java中类似。一般用于释放资源，如文件，网络连接。<br>   print ‘finish’<br>[/code]</p>
+<p>raise用于抛出异常,可以为自定义的异常类</p>
+<p>惯例是以Error结尾的类，同类的异常一般派生自同一个基类(如Exception)</p>
+<p>[code=”py”]<br>class MyError(Exception):<br>    def <strong>init</strong>(self,value):<br>        self.value=value<br>    def <strong>str</strong>(self):<br>        return reper(self.value)<br>[/code]</p>
+<p>基类异常可以匹配派生类异常</p>
+<p>[code=”py”]<br>try:<br>    raise Exception(“spam”,”egg”)<br>except Exception,inst:#inst为该异常类的实例,为可选项<br>    print type(inst) #异常的类型<br>    print inst<br>[/code]</p>
+<p>= 内建类型 =</p>
+<p>== None  ==</p>
+<p>None    表示该值不存在,比如 没有定义返回值 的函数就 返回None</p>
+<p>== Ture / False ==</p>
+<p>布尔类型,Ture等价于1,False等价于0</p>
+<p>== List ==</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>test=[1,2,”yes”]<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>=== 内建函数 ===</p>
+<p>append(x)    追加到链尾 </p>
+<p>extend(L)    追加一个列表,等价于+=</p>
+<p>insert(i,x)   在位置i插入x</p>
+<p>remove(x)   删除第一个值为x的元素,如果不存在会抛出异常</p>
+<p>reverse()   反转序列</p>
+<p>pop([i])   返回并删除位置为i的元素,i默认为最后一个元素(i两边的[]表示i为可选的,实际不用输入)</p>
+<p>index(x)    返回第一个值为x的元素,不存在则抛出异常</p>
+<p>count(x)   返回x出现的次数</p>
+<p>sort()   排序</p>
+<p>例子:</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>test=[1,2,”yes”]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>&gt;&gt;&gt;test.append(1) #追加到链尾<br>&gt;&gt;&gt;test<br>[1, 2, ‘yes’, 1]</p>
+<p>&gt;&gt;&gt;test.extend([ ‘no’,’maybe’]) #追加一个列表<br>&gt;&gt;&gt;test<br>[1, 2, ‘yes’, 1, ‘no’, ‘maybe’]</p>
+<p>&gt;&gt;&gt; test.insert(0,’never’) #在位置0插入’never’<br>&gt;&gt;&gt; test<br>[‘never’, 1, 2, ‘yes’, 1, ‘no’, ‘maybe’]</p>
+<p>&gt;&gt;&gt; test.remove(‘no’) #删除第一个值为”no”的元素,如果不存在会抛出异常<br>&gt;&gt;&gt; test<br>[‘never’, 1, 2, ‘yes’, 1, ‘maybe’]</p>
+<p>&gt;&gt;&gt; test.reverse() #反转序列<br>&gt;&gt;&gt; test<br>[‘maybe’, 1, ‘yes’, 2, 1, ‘never’]</p>
+<p>&gt;&gt;&gt; test.pop() #返回并删除位置为i的元素,i默认为最后一个元素<br>‘never’<br>&gt;&gt;&gt; test<br>[‘maybe’, 1, ‘yes’, 2, 1]</p>
+<p>&gt;&gt;&gt; test.index(‘yes’) #返回第一个值为’yes’的元素,不存在则抛出异常<br>2</p>
+<p>&gt;&gt;&gt; test.count(1) #返回1出现的次数<br>2</p>
+<p>&gt;&gt;&gt;test.sort() #排序<br>&gt;&gt;&gt; test<br>[1, 1, 2, ‘maybe’, ‘yes’]<br>[/code]</p>
+<p>=== 切片 ===</p>
+<p>从序列中抽取一部分</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>test=[‘never’, 1, 2, ‘yes’, 1, ‘no’, ‘maybe’]</p>
+<p>test[0:3] #包括test[0],不包括test[3]<br>[‘never’, 1, 2]</p>
+<p>test[0:6:2] #包括test[0],不包括test[6],而且步长为2<br>[‘never’, 2, 1]</p>
+<p>test[:-1] #包括开始,不包括最后一个<br>[‘never’, 1, 2, ‘yes’, 1, ‘no’]</p>
+<p>test[-3:] #抽取最后3个<br>[1, ‘no’, ‘maybe’]</p>
+<p>test[::-1] #倒序排列<br>[‘maybe’, ‘no’, 1, ‘yes’, 2, 1, ‘never’]<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>=== 列表推导式 ===</p>
+<p>可以直接通过for循环生成一个list</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>freshfruit=[‘  banana  ‘,’   loganberry  ‘]<br>[weapon.strip() for weapon in freshfruit]<br>[‘banana’, ‘loganberry’]<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>说明:strip()是去除字符串两端多于空格,该句是去除序列中的所有字串两端多余的空格</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>vec=[2,4,6]<br>[3<em>x for x in vec if x&gt;3]<br>[12, 18]<br>[/code]<br>[code=”py”]<br>[(x,x*</em>2) for x in vec]</p>
+<p>#循环变量要是一个sequence,而[x,x**2 for x in vec]是错误的<br>[(2,4),(4,16),(6,36)]<br>[/code]<br>[code=”py”]<br>vec2=[4,3,-9]</p>
+<p>[x*y for x in vec for y in vec2]<br>[8, 6, -18, 16, 12, -36, 24, 18, -54]</p>
+<p>[vec[i]+vec2[i] for i in range(len(vec))]<br>[6, 7, -3]<br>[/code]<br>[code=”py”]<br>[str(round(355/113.0,i)) for i in range(1,6)]</p>
+<p>#str()是转换类型为可以打印的字符</p>
+<p>#round(x,n)表示对x保留n位小数(四舍五入)<br>[‘3.1’, ‘3.14’, ‘3.142’, ‘3.1416’, ‘3.14159’]<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>== 元组 ==</p>
+<p>一旦初始化便不能更改的数据结构,速度比list快</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>t=1234,5567,’hello’ #t=(1234,5567,’hello’)的简写</p>
+<p>x,y,z=t    #拆分操作可以应用于所有sequence<br>x<br>1234</p>
+<p>u=t,(1,2,3)<br>u<br>((1234,5567,’hello’),(1,2,3))</p>
+<p>empty=() #空元组<br>singleton=’hi’, #单个元素的元组,注意逗号<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>通过元组可以很简单的进行数据交换.</p>
+<p>比如:</p>
+<p>[code=”py”]<br>a=1<br>b=2<br>a,b=b,a<br>[/code]</p>
+<p>== set ==</p>
+<p>set（集合）：无序不重复的元素集</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>basket = [‘apple’,’orange’,’apple’,’pear’,’apple’,’banana’]</p>
+<p>fruit=set(basket)</p>
+<p>fruit<br>set([‘orange’, ‘pear’, ‘apple’, ‘banana’])</p>
+<p>‘orange’ in fruit<br>True</p>
+<p>a=set(‘abracadabew’)<br>a<br>set([‘a’, ‘c’, ‘b’, ‘e’, ‘d’, ‘r’, ‘w’])</p>
+<p>b=set(‘wajgwaoihwb’)<br>b<br>set([‘a’, ‘b’, ‘g’, ‘i’, ‘h’, ‘j’, ‘o’, ‘w’])</p>
+<p>a-b    #差<br>set([‘c’, ‘r’, ‘e’, ‘d’])</p>
+<p>a|b   #并<br>set([‘a’, ‘c’, ‘b’, ‘e’, ‘d’, ‘g’, ‘i’, ‘h’, ‘j’, ‘o’, ‘r’, ‘w’])</p>
+<p>a&amp;amp;b   #交<br>set([‘a’, ‘b’, ‘w’])</p>
+<p>a^b   #(并-交)<br>set([‘c’, ‘e’, ‘d’, ‘g’, ‘i’, ‘h’, ‘j’, ‘o’, ‘r’])<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>== dict ==</p>
+<p>字典:关键字为不可变类型,如字符串,整数,只包含不可变对象的元组.</p>
+<p>列表等不可以作为关键字.</p>
+<p>如果列表中存在关键字对,可以用dict()直接构造字典.而这样的列表对通常是由列表推导式生成的.</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>tel={‘jack’:4098,’sape’:4139}</p>
+<p>tel[‘guido’]=4127</p>
+<p>tel<br>{‘sape’: 4139, ‘jack’: 4098, ‘guido’: 4127}</p>
+<p>tel[‘jack’] #如果jack不存在,会抛出KeyError<br>4098<br>a.get(“zsp”,5000) #如果”zsp”为tel的键则返回其值,否则返回5000</p>
+<p>del tel[‘sape’] #删除键’sape’和其对应的值<br>tel.keys() #复制一份键的副本,同理tel.items()为值的副本<br>[‘jack’, ‘guido’]</p>
+<p>“jack” in tel #判断”jack”是否tel的键<br>True<br>“zsp” not in tel<br>True</p>
+<p>for k,v in tel.iteritems():print k,v  #同理tel.iterkeys()为键的迭代器,tel.itervalues()为值的迭代器<br>jack 4098<br>guido 4127</p>
+<p>tel.copy() #复制一份tel<br>{‘jack’: 4098, ‘guido’: 4127}</p>
+<p>tel.fromkeys([1,2],0) #从序列生成并返回一个字典,其值为第二个参数(默认为None),不改变当前字典<br>{1: 0, 2: 0}</p>
+<p>tel.popitem() #弹出一项<br>(‘jack’, 4098)<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>= 函数相关 =</p>
+<p>== 函数定义 / 参数默认值 ==</p>
+<p>[code=”py”]<br>def fib(n=2,a=1):#参数可以有默认值<br>    “””这里给函数写文档注释”””<br>    for i in range(n):<br>        print a</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>f=fib #可以用一个变量表示函数<br>f(3)<br>1<br>1<br>1</p>
+<p>fib(a=2) #多个可选参数赋值可以直接写”参数变量名＝值”来快速赋值<br>2<br>2<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>== Lambda函数 ==</p>
+<p>一种无名函数的速写法</p>
+<p>[code=”py”]<br>def make_incrementor(n):<br>    return lambda x: x+n</p>
+<p>f=make_incrementor(n)</p>
+<p>#f等价于</p>
+<p>#def f(x):</p>
+<h1 id="return-x-n"><a href="#return-x-n" class="headerlink" title="return x+n"></a>return x+n</h1><p>[/code]</p>
+<p>== 不定长参数 <em>para,*</em>para ==</p>
+<p>参数格式为 *para 表示接受一个元组</p>
+<p>为 **para 表示接受一个字典</p>
+<p><em>para要在*</em>para之前</p>
+<p>[code=”py”]<br>def test(<em>args,*</em>dic):<br>    for arg in args :<br>        print arg<br>    for k,v in dic.iteritems():<br>        print k ,’:’,v</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>test(“yes”,1,2,me=”张沈鹏”,where=”中国”) #”yes”,1,2传递给元组;me=”张沈鹏”,where=”中国”传递给字典<br>yes<br>1<br>2<br>me : 张沈鹏<br>where : 中国<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>== @ 装饰器 ==</p>
+<p>@A</p>
+<p>def B:pass</p>
+<p>等价于</p>
+<p>def B:pass</p>
+<p>B=A(B)</p>
+<p>即将函数B作为参数传给参数A</p>
+<p>[code=”py”]<br>from time import time</p>
+<p>#测试运行时间<br>def cost_time(func):<br>    def result(<em>args,**dic):<br>        beign=time()<br>        func(</em>args,**dic)<br>        print “cost time : “,time()-beign<br>    return result</p>
+<p>@cost_time<br>def show(n):<br>    for x in range(n):print x</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>show(10)<br>0<br>1<br>2<br>3<br>4<br>5<br>6<br>7<br>8<br>9<br>cost time :  0.0469999313354<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>== 生成器表达式 ==</p>
+<p>生成器表达式:类似于没有中括号的列表推导式,可用在参数中</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>sum(i*i for i in range(10))<br>285</p>
+<p>unique_words=set(word for line in page for word in line.split())#page为打开的文件</p>
+<p>data=’golf’</p>
+<p>list(data[i] for i in range(len (data)-1,-1,-1))<br>[‘f’,’l’,’o’,’g’]<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>== yield ==</p>
+<p>每次调用返回一个值,并记录当前执行位置所有的变量</p>
+<p>[code=”py”]<br>def reverse(data):<br>    for index in range(len(data)-1,-1,-1):<br>        yield data[index]</p>
+<p>for char in reverse(“golf”):<br>    print char,<br>[/code]</p>
+<p>输出</p>
+<p>[code=”py”]<br>f l o g<br>[/code]</p>
+<p>= 常用函数 =</p>
+<p>== eval ==</p>
+<p>对字符串参数运算,求值</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>eval(“1 + 2*3”) #可以方便的用来做四则运算<br>7<br>a=1<br>eval(‘a+1’) #可以访问变量<br>2<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>== exec ==</p>
+<p>将字符串参数作为python脚本执行</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>exec(‘a=”Zsp”‘)<br>a<br>‘Zsp’<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>== execfile ==</p>
+<p>和exec类似,不过是用来打开一个文件,并作为python脚本执行</p>
+<p>== dir ==</p>
+<p>显示对象的所有属性(即可以用”.”操作直接访问)</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>dir([])<br>[‘<strong>add</strong>‘, ‘<strong>class</strong>‘, ‘<strong>contains</strong>‘, ‘<strong>delattr</strong>‘, ‘<strong>delitem</strong>‘, ‘<strong>delslice</strong>‘, ‘<strong>doc</strong>‘, ‘<strong>eq</strong>‘, ‘<strong>ge</strong>‘, ‘<strong>getattribute</strong>‘, ‘<strong>getitem</strong>‘, ‘<strong>getslice</strong>‘, ‘<strong>gt</strong>‘, ‘<strong>hash</strong>‘, ‘<strong>iadd</strong>‘, ‘<strong>imul</strong>‘, ‘<strong>init</strong>‘, ‘<strong>iter</strong>‘, ‘<strong>le</strong>‘, ‘<strong>len</strong>‘, ‘<strong>lt</strong>‘, ‘<strong>mul</strong>‘, ‘<strong>ne</strong>‘, ‘<strong>new</strong>‘, ‘<strong>reduce</strong>‘, ‘<strong>reduce_ex</strong>‘, ‘<strong>repr</strong>‘, ‘<strong>reversed</strong>‘, ‘<strong>rmul</strong>‘, ‘<strong>setattr</strong>‘, ‘<strong>setitem</strong>‘, ‘<strong>setslice</strong>‘, ‘<strong>str</strong>‘, ‘append’, ‘count’, ‘extend’, ‘index’, ‘insert’, ‘pop’, ‘remove’, ‘reverse’, ‘sort’]<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>== help ==</p>
+<p>help(类/函数) 返回相应对象的文档字符串</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>help(vars)<br>Help on built-in function vars in module <strong>builtin</strong>:</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>vars(…)<br>    vars([object]) -&gt; dictionary</p>
+<pre><code>Without arguments, equivalent to locals().
+With an argument, equivalent to object.__dict__.
+</code></pre><p>[/code]</p>
+<p>== len ==</p>
+<p>返回序列/字典的长度</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>len([1,2,3])<br>3<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>== print ==</p>
+<p>输出字符串</p>
+<p>用法演示:</p>
+<p>[code=”py”]<br>print “Today “, #加逗号,输出后不换行</p>
+<p>name=”ZSP”</p>
+<p>print name,”cost $”,10 #输出多个变量</p>
+<p>print “hello,%s!”%name #%s 表示用str转化为字符串</p>
+<p>for x in xrange(1,11):<br>    print ‘%2d %3d’ % (x,x*x) #小数输出如   %5.3f<br>[/code]</p>
+<p>对于字典可以用变量名来直接格式化,如:</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>table={‘Sjoerd’:4127,’Jack’:4098,’Dcab’:8637678}<br>print ‘Jack:%(Jack)d; Sjoerd:%(Sjoerd)d; Dcab:%(Dcab)d’ %<br>table<br>Jack:4098; Sjoerd:4127; Dcab:8637678<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>同时,函数vars()返回包含所有变量的字典,配合使用,无坚不摧!</p>
+<p>== raw_input ==</p>
+<p>[code=”py”]<br>x=raw_input(“Please enter an sentence:”) #将输入的内容赋值给x<br>[/code]</p>
+<p>== range ==</p>
+<p>[code=”py”]<br>range(10,0,-3)#参数的含义为起点(默认为0),终点(不含终点),步长(默认为1)</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>[10,7,4,1]<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>和for…in配合使用</p>
+<p>[code=”py”]<br>a=[‘cat’,’door’,’example’]<br>for i in range(len(a)):#len()函数为求序列的长度<br>    print i,a[i]<br>[/code]</p>
+<p>== filter ==</p>
+<p>filter(function , sequence)</p>
+<p>返回序列,为原序列中能使function返回true的值</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a=[1,2,3,4]<br>filter(lambda x:x%2,a)<br>[1, 3]<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>== map ==</p>
+<p>map(function,sequence,[sequence…])</p>
+<p>返回序列,为对原序列每个元素分别调用function获得的值.</p>
+<p>可以传入多个序列,但function也要有相应多的参数,如</p>
+<p>map(lambda x,y,z:x+y+z,range(1,3),range(3,5),range(5,7))</p>
+<p>计算过程为</p>
+<p>1+3+5=9</p>
+<p>2+4+6=12</p>
+<p>返回[9,12]</p>
+<p>== reduce ==</p>
+<p>reduce(function,sequence,[init]) </p>
+<p>返回一个单值为,计算步骤为 :</p>
+<ul>
+<li><p>第1个结果=function(sequence[0],sequence[1])</p>
+</li>
+<li><p>第2个结果=function(第1个结果,sequence[2])</p>
+</li>
+<li><p>返回最后一个计算得值</p>
+</li>
+<li><p>如果有init,则先调用</p>
+</li>
+</ul>
+<p>[code=”py”]function(init,sequence[0])<br>[/code]</p>
+<ul>
+<li>sequence只有一个元素时,返回该元素,为空时抛出异常.</li>
+</ul>
+<p>如</p>
+<p>[code=”py”]reduce(lambda x,y:x+y,range(3),99)<br>[/code]</p>
+<p>的计算为</p>
+<p>99+0=99 =&gt; 99+1=100 =&gt; 100+2=102</p>
+<p>返回102</p>
+<p>注:实际使用中用内建函数sum来完成这个累加更合适,如这里等价sum(range(3),99)</p>
+<p>== zip ==</p>
+<p>zip用于多个sequence的循环</p>
+<p>[code=”py”]<br>questions=[‘name’,’quest’,’favorite color’]<br>answers=[‘lancelot’,’the holy grail’,’blue’]</p>
+<p>for q,a in zip(questions,answers):<br>    print ‘What is your %s ? It is %s.’%(q,a)<br>[/code]</p>
+<p>输出:</p>
+<p>[code=”py”]<br>What is your name ? It is lancelot.<br>What is your quest ? It is the holy grail.<br>What is your favorite color ? It is blue.<br>[/code]</p>
+<p>== reversed反向循环 ==</p>
+<p>[code=”py”]<br>for i in reversed(range(1,4)):<br>    print i<br>[/code]</p>
+<p>输出:</p>
+<p>[code=”py”]<br>3<br>2<br>1<br>[/code]</p>
+<p>== sorted排序 ==</p>
+<p>返回一个有序的新序列</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>sorted([2,5,1,4])<br>[1, 2, 4, 5]<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>== enumerate 返回索引位置和对应的值 ==</p>
+<p>[code=”py”]<br>for i,v in enumerate([‘tic’,’tac’,’toe’])<br>    print i,v<br>[/code]</p>
+<p>输出:</p>
+<p>[code=”py”]<br>0 tic<br>1 tac<br>2 toe<br>[/code]</p>
+<p>== open/文件操作 ==</p>
+<p>f=open(’/tmp/hello’,’w’)</p>
+<p>#open(路径+文件名,读写模式)</p>
+<p>#读写模式:r只读,r+读写,w新建(会覆盖原有文件),a追加,b二进制文件.常用模式</p>
+<p>如:’rb’,’wb’,’r+b’等等</p>
+<p>f.read([size])    size未指定则返回整个文件,如果文件大小&gt;2倍内存则有问题.f.read()读到文件尾时返回””(空字串)</p>
+<p>file.readline()   返回一行</p>
+<p>file.readline([size])    返回包含size行的列表,size 未指定则返回全部行</p>
+<p>for line in f: print line #通过迭代器访问</p>
+<p>f.write(”hello\n”)    #如果要写入字符串以外的数据,先将他转换为字符串.</p>
+<p>f.tell()   返回一个整数,表示当前文件指针的位置(就是到文件头的比特数).</p>
+<p>f.seek(偏移量,[起始位置])</p>
+<p>用来移动文件指针</p>
+<p>偏移量:单位:比特,可正可负</p>
+<p>起始位置:0-文件头,默认值;1-当前位置;2-文件尾</p>
+<p>f.close()    关闭文件</p>
+<p>= 模块化 =</p>
+<p>== 导入模块 ==</p>
+<p>模块的查找路径</p>
+<p>1.当前的目录</p>
+<p>2.环境变量PYTHONPATH所指的目录列表</p>
+<p>3.python解释器的安装目录</p>
+<p>如将代码保存上述的一个目录中的的fibo.py文件中,便可以</p>
+<p>[code=”py”]<br>import fibo<br>fibo.function()<br>[/code]</p>
+<p>如果想直接使用fibo.function可以重命名这个函数,如</p>
+<p>[code=”py”]<br>f=fibo.function<br>f()<br>[/code]</p>
+<p>也可以</p>
+<p>[code=”py”]<br>form fibo import function<br>function()<br>[/code]</p>
+<p>甚至可以</p>
+<p>[code=”py”]form fibo import *<br>[/code]</p>
+<p>可以</p>
+<p>[code=”py”]form 包.子包.模块 imort 函数<br>[/code]</p>
+<p>然后就直接使用该函数,不需要加前缀</p>
+<p>== 包 ==</p>
+<p>引用推荐写法为</p>
+<p>[code=”py”]form 包 import 模块<br>[/code]</p>
+<p>几个功能类似的模块可以组合成一个包,</p>
+<p>比如一个可以处理.wav,.mp3,.wma等音频文件的有类似如下结构:</p>
+<p>[code=”py”]<br>Sound/<br>        <strong>init</strong>.py<br>        Formats/<br>                <strong>init</strong>.py<br>                wavread.py<br>                wavwrite.py<br>                mp3read.py<br>                mp3write.py<br>                wmaread.py<br>                wmawrite.py<br>        Effects/<br>                <strong>init</strong>.py<br>                echo.py<br>                surround.py<br>                reverse.py<br>[/code]</p>
+<p>只有当<strong>init</strong>.py存在时python才将该文件夹视为一个包.</p>
+<p>该文件可以为空文件 一般在<strong>init</strong>.py文件中定义一个<strong>all</strong>列表,包含要import *时要导入的模块. 如Sound/Effects/<strong>init</strong>.py可以有如下内容</p>
+<p>[code=”py”]<strong>all</strong>=[“echo”,”surround”,”reverse”]<br>[/code]</p>
+<p>包的作者在发布包时可以更新这个列表,也可以根据需要让某个模块不支持import *</p>
+<p>对于包中同一个文件夹下的模块可以把</p>
+<p>[code=”py”]form 包.子包 imort 模块<br>[/code]</p>
+<p>简写为</p>
+<p>[code=”py”]imort 模块<br>[/code]</p>
+<p>== 面向对象 ==</p>
+<p>=== 概要 ===</p>
+<p>[code=”py”]<br>class ClassName:<br>    “类文档,可以通过类名.<strong>doc</strong>访问”<br>    def f(self):#self为每个类函数的必要的一个参数,可以通过它来访问当前实例<br>        return self.content</p>
+<pre><code>def __init__(self,word=&apos;&apos;):#构造函数
+    #构造函数,可以初始化变量,可以有参数&quot;
+    self.content=word
+    self.__name=word #私有变量,以&quot;__&quot;开头,不以&quot;__&quot;结尾的变量
+</code></pre><p>[/code]</p>
+<p>创建类实例</p>
+<p>[code=”py”]x=ClassName(“good”)<br>[/code]</p>
+<p>=== 类继承 ===</p>
+<p>class DerivedClassName(BassClassName):</p>
+<pre><code>pass
+</code></pre><p>如果基类定义在另一个模块中, 要写成</p>
+<p>modname.BaseClassName</p>
+<p>派生类的函数会覆盖基类的同名函数</p>
+<p>如果想扩充而不是改写基类的函数,可以这样调用基类函数</p>
+<p>BaseClassName.methodname(self,arguments)</p>
+<p>注意:该基类要在当前全局域或被导入</p>
+<p>[code=”py”]<br>class A:<br>    def hi(self):<br>        print “A”<br>class B:<br>    def hi(self):<br>        A.hi(self)<br>        super(B).hi() #通过super关键字可以获得当前类的基类<br>        print “B”</p>
+<p>B().hi()<br>[/code]</p>
+<p>输出</p>
+<p>[code=”py”]<br>A<br>B<br>[/code]</p>
+<p>=== 多重继承 ===</p>
+<p>类多继承</p>
+<p>[code=”py”]<br>class DerivedClassName(Base1,Base2,Base3):<br>    pass<br>[/code]</p>
+<p>对于该类函数的解析规则是深度优先,先是Base1,然后是Base1的基类,诸如此类.</p>
+<p>[code=”py”]<br>class A:<br>    def hi(self):<br>        print “A”</p>
+<p>class B:<br>    def hi(self):<br>        print “B”</p>
+<p>class C(A,B):<br>    pass</p>
+<p>C().hi()<br>[/code]</p>
+<p>输出:</p>
+<p>[code=”py”]<br>A<br>[/code]</p>
+<p>== 操作符重载 ==</p>
+<p>通过定义类的一些约定的以”__”开头并结尾的函数,可以到达重载一些特定操作的目的,下面是是一些常用的重载</p>
+<p>=== <strong>str</strong> / <strong>unicode</strong> ===</p>
+<p>当print一个对象实例时,实际是print该实例<strong>str</strong>()函数的返回值.</p>
+<p>[code=”py”]<br>class A:<br>    def <strong>str</strong>(self):<br>        return “A”<br>    def <strong>unicode</strong>(self):<br>        return “uA”</p>
+<p>print A()<br>print unicode(A())<br>[/code]</p>
+<p>输出</p>
+<p>[code=”py”]<br>A<br>uA<br>[/code]</p>
+<p><strong>unicode</strong>和<strong>str</strong>类似,不过返回Unicode字符串.</p>
+<p>=== 比较操作 ===</p>
+<p>x<y x.__lt__=""></y></p>
+<p>x&lt;=y    x.<strong>le</strong>(y)</p>
+<p>x==y    x.<strong>eq</strong>(y)</p>
+<p>x!=y 或 x&lt;&gt;y    x.<strong>ne</strong>(y)</p>
+<p>x&gt;y     x.<strong>gt</strong>(y)</p>
+<p>x&gt;=y    x.<strong>ge</strong>(y)</p>
+<p><strong>cmp</strong>( self, other)</p>
+<p>用来简化比较函数的定义</p>
+<p>self <other返回负数>other时返回正数</other返回负数></p>
+<p>[code=”py”]<br>class A:<br>    def <strong>init</strong>(self,i):<br>        self.i=i<br>    def <strong>cmp</strong>(self,other):<br>        return self.i-other.i</p>
+<p>print A(1)&gt;A(2)<br>[/code]</p>
+<p>输出</p>
+<p>[code=”py”]<br>False<br>[/code]</p>
+<p>=== <strong>iter</strong> ===</p>
+<p>for … in 循环即就是通过这个函数遍历当前容器的对象实例</p>
+<p>可配合yield方便的编写这个函数(参见基本语法yield)</p>
+<p>[code=”py”]<br>class A:<br>   def <strong>init</strong>(self,n):<br>       self.n=n<br>   def <strong>iter</strong>(self):<br>       n=self.n<br>       while n:<br>           m=n%2<br>           n/=2<br>           yield m</p>
+<p>for i in A(5):<br>    print i,<br>[/code]</p>
+<p>输出</p>
+<p>[code=”py”]<br>1 0 1<br>[/code]</p>
+<p>另有一种繁琐的实现:</p>
+<p>返回一个可以通过next()函数遍历的对象,当结束时抛出StopIteration异常</p>
+<p>== 类相关函数 ==</p>
+<p>=== type ===</p>
+<p>返回对象的类型</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>type(“”)</p>
+<p><type 'str'=""><br>type(“”)==str<br>True</type></p>
+<p>type([])</p>
+<p><type 'list'=""><br>type([])==list<br>True</type></p>
+<p>type({})</p>
+<type 'dict'="">
+
+<p>type(())</p>
+<type 'tuple'="">
+
+<p>class A:pass</p>
+<p>type(A)</p>
+<type 'classobj'="">
+
+<p>type(A())</p>
+<type 'instance'="">
+
+<p>import types #在types模块中有许多类型的定义</p>
+<p>type(A)==types.ClassType<br>True<br>[/code]</p>
+</type></type></type></type></blockquote>
+</blockquote>
+</blockquote>
+<p>=== getattr / hasattr /delattr ===</p>
+<p>getattr:通过类实例和一个字符串动态的调用类函数/属性</p>
+<p>[code=”py”]<br>class A:<br>    def name(self):<br>        return “ZSP”<br>    def hello(self):<br>        return “nice to meet me .”</p>
+<p>def say(obj,attr):<br>    print getattr(obj,attr)()</p>
+<p>a=A()<br>say(a,”name”)<br>say(a,”hello”)<br>[/code]</p>
+<p>输出</p>
+<p>[code=”py”]<br>ZSP<br>nice to meet me .<br>[/code]</p>
+<p>hasattr 用来判断实例有无该函数/属性</p>
+<p>delattr 用来删除实例的函数/属性</p>
+<p>=== property ===</p>
+<p>通过值的方式调用实例无参函数</p>
+<p>[code=”py”]<br>class A(object):<br>    def <strong>init</strong>(self): self._x = None<br>    def getx(self): return self._x<br>    def setx(self, value): self._x = value<br>    def delx(self): self._x=None<br>    x = property(getx, setx, delx, “I’m the ‘x’ property.”)<br>a=A()<br>print a.x</p>
+<p>a.x=”ZSP”<br>print a.x</p>
+<p>del a.x<br>print a.x<br>[/code]</p>
+<p>输出</p>
+<p>[code=”py”]<br>None<br>ZSP<br>None<br>[/code]</p>
+<p>可以方便的定义一个只读属性</p>
+<p>[code=”py”]<br>class A(object):<br>    @property<br>    def x(self): return “Property”<br>[/code]</p>
+<p>调用</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>a=A()</p>
+<p>print a.x<br>Property</p>
+<p>a.x=”ZSP” #只读属性,不能更改<br>Traceback (most recent call last):<br>  File “D:\Profile\Untitled 2.py”, line 9, in <module><br>    a.x=”ZSP”<br>AttributeError: can’t set attribute<br>[/code]</module></p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>=== isinstance( object, classinfo) ===</p>
+<p>判断一个对象是否是一个类的实例</p>
+<p>[code=”py”]</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>class A:pass</p>
+<p>class B:pass</p>
+<p>a=A()</p>
+<p>isinstance(a,A)<br>True</p>
+<p>isinstance(a,B)<br>False<br>[/code]</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/Python/">Python</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[转]使用YUI Compressor和DOS批处理脚本压缩JavaScript和CSS | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="JavaScript,Compressor">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="[转]使用YUI Compressor和DOS批处理脚本压缩JavaScript和CSS"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>[转]使用YUI Compressor和DOS批处理脚本压缩JavaScript和CSS</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/e8-bd-ac-e4-bd-bf-e7-94-a8yui-compressor-e5-92-8cdos-e6-89-b9-e5-a4-84-e7-90-86-e8-84-9a-e6-9c-ac-e5-8e-8b-e7-bc-a9javascript-e5-92-8ccss/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:15:56.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>对于大量使用JavaScript和CSS的AJAX应用来说，如果JavaScript和CSS大小很大，则传输到客户端的时间会很久，网站性能不佳。而压缩JavaScript和CSS是自然的事情，本文使用YUI Compressor和DOS批处理脚本压缩JavaScript和CSS，加上IIS的GZIP，加起来能得到85%左右的压缩率。（其中<strong>YUI Compressor的压缩率大约为50%</strong>）</p>
+<a id="more"></a>
+<p>YUI Compressor &ndash; The Yahoo! JavaScript and CSS Compressor （Yahoo的JS和CSS压缩工具，具本人对比测试比较好用）</p>
+<p>Download 下载地址 :<a href="http://www.julienlecomte.net/yuicompressor/" target="_blank" rel="external"> http://www.julienlecomte.net/yuicompressor/</a></p>
+<p>The YUI Compressor requires Java version &gt;= 1.4. （机器需要Java 1.4以上的环境）</p>
+<h3 id="常用示例（在cmd中执行）"><a href="#常用示例（在cmd中执行）" class="headerlink" title="常用示例（在cmd中执行）"></a>常用示例（在cmd中执行）</h3><pre>
+  java -jar D:\yuicompressor-2.4.2\build\yuicompressor-2.4.2.jar --charset UTF-8 D:\my.js -o D:\my-min.js 
+
+  java -jar D:\yuicompressor-2.4.2\build\yuicompressor-2.4.2.jar --charset UTF-8 D:\my.css -o D:\my-min.css 
+</pre>
+
+<p>如果没有给定charset参数，则字符集默认是系统的，此处指定了UTF-8，更加你的实际需要修改。具体语法和其他参数参考：<a href="http://www.julienlecomte.net/yuicompressor/" target="_blank" rel="external">http://www.julienlecomte.net/yuicompressor/</a></p>
+<h3 id="使用DOS批处理脚本批量压缩JavaScript和CSS"><a href="#使用DOS批处理脚本批量压缩JavaScript和CSS" class="headerlink" title="使用DOS批处理脚本批量压缩JavaScript和CSS"></a>使用DOS批处理脚本批量压缩JavaScript和CSS</h3><p>通常会把项目用到的js和css都按照模块放在专门的目录下：</p>
+<p>例如：</p>
+<p><img src="http://images.cnblogs.com/cnblogs_com/mainz/js.PNG" alt="示例"></p>
+<p>所以需要建立一个DOS批处理脚本来自动处理目录和子目录下的所有js和css文件。</p>
+<p>新建一个批处理文件，例如myCompressor.bat，文件内容如下：</p>
+<pre>
+  @echo off
+
+  ::设置YUI Compressor启动目录
+
+  SET YUIFOLDER=D:\yuicompressor-2.4.2\build
+
+  ::设置你的JS和CSS根目录，脚本会自动按树层次查找和压缩所有的JS和CSS
+
+  SET JSFOLDER=D:\mySite\myJS
+
+  echo 正在查找 JavaScript, CSS ...
+
+  chdir /d %JSFOLDER%
+
+  for /r . %%a in (*.js *.css) do (
+
+  @echo 正在压缩 %%~a ...
+
+  @java -jar %YUIFOLDER%\yuicompressor-2.4.2.jar --charset UTF-8 %%~fa -o %%~fa
+
+  )
+
+  echo 完成!
+
+  pause &amp; exit
+</pre>
+
+<h3 id="文件示例，压缩前后对比"><a href="#文件示例，压缩前后对比" class="headerlink" title="文件示例，压缩前后对比"></a>文件示例，压缩前后对比</h3><p>原文件：</p>
+<pre>
+  //this is desc
+  function test(value)
+  {
+      //this is comment
+      //this is comment
+      //this is comment
+      alert ( value );
+  }
+
+  function test2(value)
+  {
+          //this is comment
+          //this is comment
+          //this is comment
+          alert ( value );
+          //this is comment
+          //this is comment
+          //this is comment
+  }
+  function test3(value)
+
+  {
+          alert ( value );
+  }
+  function test4(value)
+  {
+          alert ( value );
+  }
+  //this is comment
+  //this is comment
+  //this is comment
+  function test5(value)
+  {
+          alert ( value );
+  }
+  //this is comment
+  //this is comment
+  //this is comment
+
+  function test6(value)
+  {
+          alert ( value );
+  }
+  function test7(value)
+  {
+          alert ( value );
+  }
+
+  function test8(value)
+ {
+      alert ( value );
+  }
+  //this is comment
+  //this is comment
+  //this is comment
+  function test9(value)
+  {
+      alert ( /*This is inline comment*/value );
+      var abc = function(v) {//this is a desc
+          //this is another desc
+          alert(v);
+      };
+  }
+
+  function test10(value)
+  {
+
+  //this is comment
+  //this is comment
+  //this is comment
+
+  alert ( value );
+  }
+</pre>
+
+<p>压缩后：</p>
+<pre>
+  function test(a){alert(a)}function test2(a){alert(a)}function test3(a){alert(a)}function test4(a){alert(a)}function test5(a){alert(a)}function test6(a){alert(a)}function test7(a){alert(a)}function test8(a){alert(a)}function test9(b){alert(b);var a=function(c){alert(c)}}function test10(a){alert(a)};
+</pre>
+
+<p>使用YUI Compressor和DOS批处理脚本压缩JavaScript和CSS，加上IIS的GZIP，加起来能得到85%左右的压缩率。（其中YUI Compressor的压缩率大约为50%）也可以修改参数获得更多的压缩率。</p>
+<p>转自：老蒋的技术博客<a href="http://www.cnblogs.com/Mainz/archive/2009/04/10/1432990.html" target="_blank" rel="external">使用YUI Compressor和DOS批处理脚本压缩JavaScript和CSS</a></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/JavaScript/">JavaScript</a><a href="/tags/Compressor/">Compressor</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

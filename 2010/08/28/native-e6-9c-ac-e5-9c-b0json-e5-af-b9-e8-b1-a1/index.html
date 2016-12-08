@@ -1,0 +1,212 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>native(本地)JSON对象 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="JSON">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="native(本地)JSON对象"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>native(本地)JSON对象</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/28/native-e6-9c-ac-e5-9c-b0json-e5-af-b9-e8-b1-a1/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-28T15:14:52.000Z">
+          2010-08-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 09 Jul 2010 01:52 AM PDT</p><p></p>
+<p>前文<a href="http://blog.meituo.net/2010/07/08/javascript-%e7%bc%93%e5%ad%98cache%e7%b1%bb/" target="_blank" rel="external">JavaScript 缓存(Cache)类</a>中提到了native JSON,这里稍微翻译一下，好多名词不知道如何翻译，如果看不懂，请看原文（链接在下方）。</p>
+<a id="more"></a>
+<div style="border: 1px solid maroon; margin: 10px 0px; padding: 0px 10px; overflow: hidden; background-color: rgb(254, 244, 156); font-weight: bold; text-align: center;"><br><br>Introduced in Gecko 1.9.1<br><br>(Firefox 3.5 / Thunderbird 3 / SeaMonkey 2)<br></div>
+
+<p>本文使用了ECMAScript 5 在Gecko 1.9.1添加的本地JSON对象， 在Firefox的老版本中关于使用JSON的基本信息见<a href="https://developer.mozilla.org/en/JSON" target="_blank" rel="external">JSON</a>.</p>
+<p>本地JSON对象包含两个方法，<code>JSON.parse()</code>方法解析JSON形式的字符串，重建原生的JavaScript 对象；JSON.stringify() 方法接受JavaScript对象并返回相对应的JSON。<span id="more-705"></span></p>
+<pre>    **注意：**JSON不支持包含方法的对象，如果尝试转化这种对象为JSON格式会有`TypeError`异常。
+</pre>
+
+<h3 id="解析JSON形式字符串（JSON-strings）"><a href="#解析JSON形式字符串（JSON-strings）" class="headerlink" title="解析JSON形式字符串（JSON strings）"></a>解析JSON形式字符串（JSON strings）</h3><p>将JSON形式字符串转化转化为js 对象，只需要将JSON传入<code>JSON.parse()</code>,像这样：</p>
+<p>[code=’js’]<br>var jsObject = JSON.parse(jsonString);<br>[/code]</p>
+<h3 id="转化对象为JSON"><a href="#转化对象为JSON" class="headerlink" title="转化对象为JSON"></a>转化对象为JSON</h3><p>将这个对象传递给<code>JSON.stringify()</code>方法就可以了：</p>
+<p>[code=’js’]<br>var foo = {};<br>foo.bar = “new property”;<br>foo.baz = 3;</p>
+<p>var jsonString = JSON.stringify(foo);<br>[/code]</p>
+<p>jsonstring  现在是’{”bar”:”new property”,”baz”:3}’。</p>
+<p>本内容涉及特色在 <a href="https://developer.mozilla.org/en/Firefox_3.5.4_for_developers" target="_blank" rel="external">Firefox 3.5.4</a>引入.</p>
+<p>从Firefox 3.5.4，<code>JSON.stringify()</code>提供了一些选择性的参数，形式：</p>
+<pre>jsonString = JSON.stringify(value [, replacer [, space]])</pre>
+<dl>
+<dt>value</dt>
+<dd>
+        要转化为JSON 字符串的javascript对象
+    </dd>
+<dt>replacer</dt>
+<dd>
+        A function that alters the behavior of the stringification process, or an array of String and Number objects that serve as a whitelist for selecting the properties of the value object to be included in the JSON string. If this value is null or not provided, all properties of the object are included in the resulting JSON string.
+    </dd>
+<dt>space</dt>
+<dd>
+        A String or Number object that’s used to insert white space into the output JSON string for readability purposes. If this is a Number, it indicates the number of space characters to use as white space; this number is capped at 10 if it’s larger than that. Values less than 1 indicate that no space should be used. If this is a String, the string (or the first 10 characters of the string, if it’s longer than that) is used as white space. If this parameter is not provided (or is null), no white space is used.
+    </dd>
+</dl>
+
+#### replacer 参数
+
+The `replacer` parameter can be either a function or an array. As a function, it takes two parameters, the key and the value being stringified. Initially it gets called with an empty key representing the object being stringified, and it then gets called for each property on the object or array being stringified. It should return the value that should be added to the JSON&nbsp;string, as follows:
+
+`replacer `可以是一个函数或者数组，当是一个函数时，函数有两个参数，要stringified的索引（key）和值（value）。初始调用时会传递一个空的索引代表将要 stringified 的对象，然后会根据要 stringified 的对象或者数组的属性逐个被调用。函数返回值会添加到 JSON string 中，如下：
+
+*   If you return a Number, the string corresponding to that number is used as the value for the property when added to the JSON string.
+
+        如果返回 Number ，那么和这个数字相对应的字符串会作为JSON string 的一个属性值。
+
+*   If you return a [`String`](https://developer.mozilla.org/en/Core_JavaScript_1.5_Guide/Predefined_Core_Objects/String), that string is used as the property’s value when adding it to the JSON string.
+
+        如果返回一个String(字符串),这个字符串会作为JSON string的一个属性的值。
+
+*   If you return a [`Boolean`](https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Global_Objects/Boolean), “true” or “false” is used as the property’s value, as appropriate, when adding it to the JSON string.
+
+        如果返回一个Boolean（布尔）值，“true”或“false” 会作为属性的值。
+
+*   If you return any other object, the object is recursively stringified into the JSON string, calling the `replacer` function on each property, unless the object is a function, in which case nothing is added to the JSON string.
+
+        如果返回其他任何对象，每一个此类对象会被递归的stringified 转化为JSON string 并调用`replacer` 函数，除非这个对象是函数，这样才不会为JSON string添加任何属性。
+
+*   If you return `undefined`, the property is not included in the output JSON string.
+
+         如果返回`undefined`,这个属性将不会包含到输出的JSON string中。
+<pre>    **Note:** 这里 Gecko 1.9.1有一个 bug (
+[ bug 509184](https://bugzilla.mozilla.org/show_bug.cgi?id=509184)) 在`replacer`函数中对象索引不能正确执行.
+</pre>
+<pre>**Note:**你不能使用 `replacer`函数来移除数组中值，如果返回`undefined`或者函数，那么会返回 `null`.
+</pre>
+
+<p>例子：</p>
+<p>[code=’js’]<br>function censor(key, value) {<br>  if (typeof(value) == “string”) {<br>    return undefined;<br>  }<br>  return value;<br>}</p>
+<p>var foo = {foundation: “Mozilla”, model: “box”, week: 45, transport: “car”, month: 7};<br>var jsonString = JSON.stringify(foo, censor);<br>[/code]</p>
+<p>运行的结果：{”week”:45,”month”:7}.</p>
+<p>如果<code>replacer</code>是一个数组，与数组的值相对应的对象属性才会出现在 JSON 字符串中(过滤作用)。</p>
+<p>原文：<a href="https://developer.mozilla.org/En/Using_native_JSON#vascript%20javascript%20ja" target="_blank" rel="external">Using native JSON</a></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/JSON/">JSON</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

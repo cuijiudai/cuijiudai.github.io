@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jQuery Autocomplete 和中文输入法在火狐下的bug | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="jQuery,Autocomplete,输入法">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="jQuery Autocomplete 和中文输入法在火狐下的bug"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>jQuery Autocomplete 和中文输入法在火狐下的bug</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/jquery-autocomplete-e5-92-8c-e4-b8-ad-e6-96-87-e8-be-93-e5-85-a5-e6-b3-95-e5-9c-a8-e7-81-ab-e7-8b-90-e4-b8-8b-e7-9a-84bug/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:12:41.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="http://blog.meituo.net/wp-content/uploads/jquery_autocomplete/chinese_ime.jpg" alt=""></p>
+<p>本文三个关键词是 火狐，中文输入法，atuocomplete。</p>
+<a id="more"></a>
+<p>当中文输入法开启时，输入事件的捕捉问题，在ie8和chrome下是可以捕捉输入法开启时的输入事件，但在firefox下无效，这就导致了在Firefox下当使用中文输入法时，autocomplete会进行两次ajax请求，这是不能容忍的。</p>
+<p>上网搜了一下是keyup事件的问题,可以看看<a href="http://parkeffect.com/coding/chinese-ime-input-listening-with-jquery/" target="_blank" rel="external">jQuery捕捉中文输入法事件 (firefox下keyup无效)</a>和<a href="http://www.javaeye.com/topic/233038" target="_blank" rel="external">从谷歌的一个Bug说起，谈谈键盘事件的兼容性</a>.</p>
+<p><span></span></p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/jquery_autocomplete/request_twice.png" alt="火狐下发送了两次请求"></p>
+<p>可以看到两个请求的事件的时间间隔非常短，只有20ms，那个我们就可以延迟发送来解决这个问题，即setTimeout，clearTimeout，在autocomplete中使用了onChange函数。</p>
+<pre>
+    clearTimeout(timeout);
+    timeout = setTimeout(onChange, options.delay);
+</pre>
+
+<p><code>onChange(crap, skipPrevCheck)</code>有一个参数 skipPrevCheck 来设置是否检查前后输入的差别，因为作者默认将其设为了true，也就是不检查，所以就出问题了.</p>
+<p>源代码：</p>
+<pre>
+.bind("input", function(){
+    // @hack by liqt:support for inputing  chinese characters  in firefox
+    onChange(0, true);
+});
+</pre>
+
+<p>作者使用的是英语，但是他已经为我们提供了火狐的input 事件的绑定，并做了注释，遗憾的是他将skipPrevCheck 设为了true。插件的<a href="http://bassistance.de/jquery-plugins/jquery-plugin-autocomplete/" target="_blank" rel="external">作者的博客</a>评论已经关闭，我没给他留言，但给他发邮件了，希望他默认将此项设为false，那么新手再次使用autocomplete时就不会遇到类似的bug了。</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/jQuery/">jQuery</a><a href="/tags/Autocomplete/">Autocomplete</a><a href="/tags/输入法/">输入法</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jQuery 文字动画（ fontsize animate ） | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="jQuery 文字动画（ fontsize animate ）"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>jQuery 文字动画（ fontsize animate ）</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/28/jquery-e6-96-87-e5-ad-97-e5-8a-a8-e7-94-bb-ef-bc-88-fontsize-animate-ef-bc-89/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-28T14:48:56.000Z">
+          2010-08-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 30 Jul 2010 07:33 AM PDT</p>
+<p>这个动画将使用hash来作为动画的文字，这个教程里我们将学习一下<code>jquery animate opacity</code>.</p>
+<p>他是如何工作的呢？</p>
+<ol>
+<li>产生随即颜色和文字（来自hash）</li>
+<li>将它添加到body</li>
+<li>文字逐渐变大</li>
+<li>渐隐<a id="more"></a>
+</li>
+</ol>
+<p><span id="more-787"></span></p>
+<h4 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h4><p>[code=”css”]<br> body{<br>   background:black;<br>   overflow:hidden;<br>   font-family:Cambria,….;<br>   }<br>.typoText {<br>   position:absolute;<br>   top:-50px;<br>   left:-50px;<br>}<br>[/code]<br>[code=”javascript”]<br>    function typo(){<br>  //generating Random rgb colors;<br>  var color = ‘rgb(‘+Math.floor(Math.random()<em>255)+’,’+<br>                      Math.floor(Math.random()</em>255)+’,’+<br>                      Math.floor(Math.random()<em>255)+’)’;<br> //generating random position X and Y according to window size<br>  var x = Math.floor(Math.random()</em>($(window).width() - 200));<br>  var y = Math.floor(Math.random()*$(window).height());</p>
+<p>var text = ‘’;<br>//Getting text from the HASH<br>if(window.location.hash) {<br>     text = (window.location.hash).substring(1);<br>} else {<br>//if there is no HASH<br>     text = ‘Typography Animation using Jquery’;<br>}</p>
+<p>//generating TypoText<br>TypoText = $(‘<span>‘)<br>             .html(“<strong>“+text+”</strong>“)<br>             .attr({class: ‘typoText’})<br>             .hide();//appending TypoText to BODY–&gt;Apply Style–&gt;Animate–&gt;Fade</span></p>
+<p>$(document.body).append(TypoText);<br>          TypoText<br>          .css({<br>                  ‘color’:color,<br>                   top: y,    //offsets<br>                   left: x //offsets<br>                 })<br>          .show()<br>          .animate({<br>                    fontSize:’200px’,<br>                    opacity: 0.2,<br>                    top: y-200,    //offsets<br>                    left: x-200<br>                   }, 833 <em> 5)<br>          .fadeOut(833 </em> 10);</p>
+<p>//Calling Typo after particular time<br> window.setTimeout(‘typo()’,833);<br> }</p>
+<p>$(document).ready(function() {<br>    //Calling Typo First time<br>     typo();<br>});<br>[/code]</p>
+<p>这个太费cpu了，我的电脑受不了！！！</p>
+<p>原文 : <a href="http://motyar.blogspot.com/2010/07/typography-animation-using-jquery.html" target="_blank" rel="external">typography-animation-using-jquery</a>(需要翻墙).</p>
+<p></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jquery 数据过滤器 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="jquery 数据过滤器"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>jquery 数据过滤器</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/28/jquery-e6-95-b0-e6-8d-ae-e8-bf-87-e6-bb-a4-e5-99-a8/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-28T15:07:08.000Z">
+          2010-08-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 13 Jul 2010 07:11 AM PDT</p><br>[code=’js’]<p></p>
+<p><script><br>    $(‘tr span’).click(function() {<br>        var $tag = $(this),<br>            tag = $tag.text(),<br>            type = $tag.closest(‘td’).attr(‘class’);<br>        if ($tag.is(‘.selected’)) {<br>            $(‘.’ + type + ‘ span:contains(‘ + tag + ‘)’).removeClass(‘selected’);<br>        } else {<br>            $(‘.’ + type + ‘ span:contains(‘ + tag + ‘)’).addClass(‘selected’);<br>        }</p>
+<pre><code>    // it&apos;s an AND filter
+    var $trs = $(&apos;.&apos; + type + &apos;:has(span.selected)&apos;).closest(&apos;tr&apos;);
+    if ($trs.length) {//只显示含有span.selected的tr
+        $(&apos;tr&apos;).hide();
+        $trs.show();
+    } else {//全部显示
+        $(&apos;tr&apos;).show();
+    }
+});
+</code></pre><p></script><br>[/code]</p>
+<p><span id="more-730"></span></p>
+<div class="download"><a href="http://motyarblog.000space.com/jquery_filter.htm" target="_blank" rel="external">demo</a><a href="http://motyar.blogspot.com/2010/07/jquery-data-filter-toggle-jquery-filter.html" target="_blank" rel="external">原文</a></div>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

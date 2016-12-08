@@ -1,0 +1,639 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 7 页 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/08/29/e5-8f-91-e9-80-81html-e9-82-ae-e4-bb-b6/"><span>发送html邮件</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/e5-8f-91-e9-80-81html-e9-82-ae-e4-bb-b6/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:53:32.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><br><br><img src="http://blog.meituo.net/wp-content/uploads/html_mail/html_mail.png" alt="我的简历"><br><br>最近在发简历，找工作，感觉将简历做成html的邮件比较有创意，看起来也方便美观、毕竟自己是做前端的，在网上搜索了一下总结了一下，就是126和雅虎总是把我的邮件当成垃圾邮件，无语中……，<br><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/css/">css</a><a href="/tags/html/">html</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/08/29/jquery-live-e5-92-8cdelegate-e7-9a-84-e4-b8-8d-e5-90-8c/"><span>jQuery live()和delegate()的不同</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/jquery-live-e5-92-8cdelegate-e7-9a-84-e4-b8-8d-e5-90-8c/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:51:42.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><pre><br>&lt;ul id=”items”&gt;<br>    &lt;li&gt; Click Me &lt;/li&gt;<br>&lt;/ul&gt;<br></pre><br><br><span></span><br><br><pre><br>// Bind attaches an event handler only to the elements<br>// that match a particular selector. This, expectedly,<br>// excludes any dynamically generated elements.<br>//仅将事件句柄绑定到符合特定选择的元素，显然不包括任何动态生成的元素。<br>$(“#items li”).click(function() {<br>    $(this).parent().append(“&lt;li&gt;New Element&lt;/li&gt;”);<br>});<br><br>// Live(), introduced in 1.3, allows for the binding<br>// of event handlers to all elements that match a<br>// selector, including those created in the future.<br>// It does this by attaching the handler to the document.<br>// Unfortunately, it does not work well with chaining.<br>// Don’t expect to chain live() after calls like<br>// children().next()…etc.<br>//live()方法在1.3引进，提供将事件句柄添加到所有符合选择条件的元素，<br>//包含后来生成的匹配元素，他是靠将事件句柄绑定到document实现的，<br>//不幸的是，在链式操作时不起作用，别想在children().next()等后再调用live()<br><br>//正常的使用方法<br>$(“li”).live(“click”, function() {<br>    $(this).parent().append(“&lt;li&gt;New Element&lt;/li&gt;”);<br>});<br><br>//失败的例子<br>$(‘#myContainer’).children(‘table’).find(‘tr’).live(‘click’, function(event) {<br>    /<strong><em> does not work! </em></strong>/<br>});<br><br>// Delegate, new to version 1.4, perhaps should have been a complete<br>// replacement for Live(). However, that obviously<br>// would have broken a lot of code! Nonetheless,<br>// delegate remedies many of the short-comings<br>// found in live(). It attaches the event handler<br>// directly to the context, rather than the document.<br>// It also doesn’t suffer from the chaining issues<br>// that live does. There are many performance benefits<br>// to using this method over live().<br>//delegate()是在1.4引进的，或许他会完全替代live,但是这显然会打乱很多代码！<br>//虽然如此 ，delegate补救了live的很多不足，他将事件直接绑定到了context，而不是document。<br>//他也能在链式操作中使用，在性能上比live强很多。<br>$(‘#items’).delegate(‘li’, ‘click’, function() {<br>    $(this).parent().append(‘&lt;li&gt;New Element&lt;/li&gt;’);<br>});<br><br>// By passing a DOM element as the context of our selector, we can make<br>// Live() behave (almost) the same way that delegate()<br>// does. It attaches the handler to the context, not<br>// the document - which is the default context.<br>// The code below is equivalent to the delegate() version shown above.<br>//通过给选择器传递一个 DOM 元素作为选择范围，live()就基本上和delegate()差不多了，<br>//下面的代码和用delegates()是等效的<br>$(“li”, $(“#items”)[0]).live(“click”, function() {<br>    $(this).parent().append(“&lt;li&gt;New Element&lt;/li&gt;”);<br>});<br></pre><br><br>英文原文:<a href="http://net.tutsplus.com/tutorials/javascript-ajax/quick-tip-the-difference-between-live-and-delegate/" target="_blank" rel="external">Quick Tip: The Difference Between Live() and Delegate() </a><br></div>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/08/29/e7-90-86-e8-a7-a3jquery-e4-b9-8bcontext/"><span>理解jQuery之context</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/e7-90-86-e8-a7-a3jquery-e4-b9-8bcontext/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:50:46.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><br><br>当使用jQuery选择元素的时候，jQuery提供了一个<a href="http://api.jquery.com/jQuery/#expressioncontext">可选的第二个参数</a>，称为context，context提供了一个将搜索在一个特殊的节点（node）的手段。当你在一个巨大的DOM树下查找的时候这就显得特别棒了，例如，你要在一个特定的DOM树下查找&lt;a&gt;标记，我见过很多这方面的文章，通常性能差不多，提醒你需要在选择器中使用context，当然使用context有提升性能的潜力，但大多数人滥用了context。<br><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/context/">context</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/08/29/google-map-e5-ad-a6-e4-b9-a0-e7-a4-ba-e4-be-8b/"><span>google map学习示例</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/google-map-e5-ad-a6-e4-b9-a0-e7-a4-ba-e4-be-8b/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:47:56.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><br><br>工作了一个多星期了，公司有一个前端，那就是我，对，只有我一个，自己面向对象不是怎么好，看到真么长（如下）的js类看懂就不错了，别说写了，这是好租网的google map 的一个类，是用prototype写的，<del>自己有一个地方没看懂那就是当marker不在当前视图时是如何从地图上删除的？要命没找到，在getJsonMarkers类里没看到对此的操作，有高人给指点一下，不胜感激。</del><ins>我找到了，mapMarkers存储的是引用。</ins><a href="http://code.google.com/intl/zh-CN/apis/maps/documentation/reference.html">google 的函数</a>解释晦涩难懂啊仅仅google官方的例子没发现类此的。<br><br>如果有google开发的资料可以发给我，呵呵，不胜感激，我的qq邮箱。cuijiudai@qq.com<br><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/google-map/">google map</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/08/29/e4-b8-8d-e5-8f-af-e4-b8-8d-e7-9f-a5-e7-9a-84javascript-e8-bf-90-e7-ae-97-e7-ac-a6-e4-bc-98-e5-85-88-e7-ba-a7/"><span>不可不知的JavaScript运算符优先级</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/e4-b8-8d-e5-8f-af-e4-b8-8d-e7-9f-a5-e7-9a-84javascript-e8-bf-90-e7-ae-97-e7-ac-a6-e4-bc-98-e5-85-88-e7-ba-a7/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:46:36.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><br><br>### 相同优先级顺序执行<br><br>[code=”js”]<br>        var a = 1 &amp;&amp; 2 &amp;&amp; 3  // 3，1 &amp;&amp; 2  1为真返回2；2 || 3， 2为真返回3 ；<br>        var b = 1 || 2 || 3  // 1 ，1 || 2  1为真返回1；1 || 3 ，1为真返回1；<br>[/code]<br><br>         “&amp;&amp;” 寻找false。例如： a &amp;&amp; b ,如果 a 为true，直接返回b，而不管b为true或者false 。<br><br> “||” 寻找true。 与&amp;&amp;同理，例如：a || b ,如果 a 为false，直接返回b，而不管b为true或者false 。<br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/优先级/">优先级</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/08/29/javascript-e6-b1-82-e6-95-b0-e7-bb-84-e7-9a-84-e6-9c-80-e5-a4-a7-e5-80-bc-e5-92-8c-e6-9c-80-e5-b0-8f-e5-80-bc-e7-9a-84-e8-b6-85-e7-ae-80-e6-b4-81-e4-bb-a3-e7-a0-81/"><span>JavaScript 求数组的最大值和最小值的超简洁代码</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/javascript-e6-b1-82-e6-95-b0-e7-bb-84-e7-9a-84-e6-9c-80-e5-a4-a7-e5-80-bc-e5-92-8c-e6-9c-80-e5-b0-8f-e5-80-bc-e7-9a-84-e8-b6-85-e7-ae-80-e6-b4-81-e4-bb-a3-e7-a0-81/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:45:30.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><div class="item-body"><div><br><br><a href="http://ejohn.org/apps/learn/">How can we find the Min/Max number in an array?</a><br><br>看<a href="http://ejohn.org/">John Resig</a>的Secrets of the JavaScript Ninja，被震了一下，原来Math.min和Math.max可以这么用。。<br><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/08/29/e5-bc-80-e5-90-af-e8-bf-85-e9-9b-b7-e4-bc-9a-e5-91-98-e5-8e-bb-e5-b9-bf-e5-91-8a-e5-8a-9f-e8-83-bd/"><span>开启迅雷会员去广告功能</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/e5-bc-80-e5-90-af-e8-bf-85-e9-9b-b7-e4-bc-9a-e5-91-98-e5-8e-bb-e5-b9-bf-e5-91-8a-e5-8a-9f-e8-83-bd/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:44:27.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div class="entry-body"><div><div class="item-body"><div><br><br>以下操作将去掉头部广告，弹出广告，下载弹出框的广告，开启换肤功能。<br><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/去广告/">去广告</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/08/29/js-e4-b9-a6-e7-ad-be-e5-ae-9e-e7-8e-b0wordpress-e8-af-84-e8-ae-ba-e4-bf-a1-e6-81-af-e8-87-aa-e5-8a-a8-e5-ae-8c-e6-88-90/"><span>js书签实现WordPress评论信息自动完成</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/js-e4-b9-a6-e7-ad-be-e5-ae-9e-e7-8e-b0wordpress-e8-af-84-e8-ae-ba-e4-bf-a1-e6-81-af-e8-87-aa-e5-8a-a8-e5-ae-8c-e6-88-90/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:43:11.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><br><br>将以下代码放到书签里，<img src="http://blog.meituo.net/wp-content/uploads/js_bookmark/js_bookmark.png" alt="书签"><br><br>在WordPress的博客浏览文章时，如果要书写评论，点击一下书签，就自动填写好了你的信息。<br><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>, <a href="/categories/JavaScript/浏览器/">浏览器</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Autocomplete/">Autocomplete</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/08/29/e4-b9-a6-e5-86-99-e7-ac-ac-e4-b8-80-e4-b8-aa-e6-b2-b9-e7-8c-b4greasemonkey-e6-8f-92-e4-bb-b6/"><span>书写第一个油猴(Greasemonkey)插件</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/e4-b9-a6-e5-86-99-e7-ac-ac-e4-b8-80-e4-b8-aa-e6-b2-b9-e7-8c-b4greasemonkey-e6-8f-92-e4-bb-b6/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:41:45.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><br><br><img src="http://blog.meituo.net/wp-content/uploads/Greasemonkey/Greasemonkey.png" alt="油猴"><br><br>### 油猴插件简介<br><br><em>Greasemonkey</em>是<a href="http://blog.meituo.net/zh-cn/Mozilla_Firefox" title="Mozilla Firefox">Mozilla Firefox</a>的一个附加组件。它让用户安装一些<a href="http://blog.meituo.net/zh-cn/%E8%85%B3%E6%9C%AC%E8%AA%9E%E8%A8%80" title="脚本语言">脚本</a>使大部分HTML为主的<a href="http://blog.meituo.net/zh-cn/%E7%B6%B2%E9%A0%81" title="网页">网页</a>于用户端直接改变得更方便易用。随着Greasemonkey脚本常驻于浏览器，每次随着目的网页打开而自动做修改，使得运行脚本的用户印象深刻地享受其固定便利性。<br><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/浏览器/">浏览器</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/油猴/">油猴</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/08/29/e5-85-b3-e4-ba-8eu-e7-9b-98-e3-80-81mp3-e5-86-85-e7-9a-84-e6-96-87-e4-bb-b6-e9-9a-90-e8-97-8f-e7-9a-84-e9-97-ae-e9-a2-98/"><span>关于U盘、mp3内的文件隐藏的问题</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/e5-85-b3-e4-ba-8eu-e7-9b-98-e3-80-81mp3-e5-86-85-e7-9a-84-e6-96-87-e4-bb-b6-e9-9a-90-e8-97-8f-e7-9a-84-e9-97-ae-e9-a2-98/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:32:10.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><br><br>原来在我百度博客的，现在转载过来。<br><br> 经常用U盘的人几乎都遇到过这个问题，那就是U盘内的文件突然都不见了，但空间还是被占用着。我们都知道U盘的文件其实都还在，但我们通过<em>“工具”&mdash;&ndash;“文件夹选项”&mdash;&ndash;“查看”</em>。选择”<em>显示所有的文件和文件夹</em>“，但依然没用，文件依然不可见。杀毒后文件依然不可见。<br><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/杀毒/">杀毒</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  <a href="/page/6/" class="pagination-prev">上一页</a>
+  
+  
+  <a href="/page/8/" class="pagination-next">下一页</a>
+  
+</nav>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

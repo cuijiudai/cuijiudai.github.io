@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Haml 使用介绍 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="翻译,Haml">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Haml 使用介绍"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>Haml 使用介绍</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/03/27/haml-e4-bd-bf-e7-94-a8-e4-bb-8b-e7-bb-8d/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-03-26T16:11:41.000Z">
+          2011-03-27
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <style>
+pre.erb, pre.html {
+    background-color: #E5E5E5;
+    border-color: #777777;
+}
+pre.haml {
+    background-color: #FFEEE0;
+    border-color: #FF3836;
+}
+</style>
+
+<p>如果你不知道Haml是什么东西，没关系，我也不知道，但我们可以借鉴学习一下他的一些实现方式，还是比较有趣的.好的翻译开始！！</p>
+<div id="main"><br><br>在这个教程开始之前, 我想说清一件事.当你看完这个后, 将你的一个 <acronym title="嵌入式Ruby">ERB</acronym>文件转换为Haml.试一下. 就是打开文件点击delete键(作者意思是表达haml代码的精简). 就试一下.如果你不喜欢可以删除它.但是你看完这个教程后一定要试一下,就尝试一个文件试试.(好啰嗦)<br><br>        <a id="more"></a><br><br>或许开始的前20分钟你感觉不习惯, 但往后<strong>你会变得更快</strong>.<br><br>### 让我们开始<br><br>首先, <a href="http://haml-lang.com/download.html" target="_blank" rel="external">获得haml</a> 并 <a href="/docs/yardoc/file.HAML_REFERENCE.html#plugin">安装这个插件</a>(这个教程假设你使用rails，虽然其他框架也可以使用或者也可以单独使用Haml).<br>        Haml是ERB的一个替代品.也就是说在<code>app/views</code>文件夹下的任何文件都可以通过修改拓展名转换成Haml<br><br>    app/views/account/login.html.erb → app/views/account/login.html.haml<br><br>现在当你浏览这个页面的时候,不要使用ERB文件作为模板,使用Haml替代它吧，你可以在你整个网站中混合使用ERB和Haml文件<br><br>### 如何转换<br><br>让我们从一些最基本的ERB文件开始转换<br><br><small>ERB</small><br><br>        <pre class="erb">&lt;strong&gt;&lt;%= item.title %&gt;&lt;/strong&gt;</pre><br><br><small>Haml</small><br><br>        <pre class="haml">%strong= item.title</pre><br><br>在Haml中, 标签是由百分号和标签名顺序组成的. 例如 <code>%strong</code>, <code>%div</code>, <code>%body</code>, <code>%html</code>; 等等你想要使用的一切标签.然后,在标签名之后是 <code>=</code>, 它告诉Haml 在右边计算Ruby 代码并将打印返回值作为标签的内容. 和以上ERB 不同, Haml 将自动检测返回值的新行并合理的格式化标签.<br><br>简单的标签都可以，那么如果要向标签中加属性呢？<br><br><small>HTML</small><br><br>        <pre class="html">&lt;strong class=”code” id=”message”&gt;Hello, World!&lt;/strong&gt;</pre><br><br><small>Haml</small><br><br>        <pre class="haml">%strong{:class =&gt; “code”, :id =&gt; “message”} Hello, World!</pre><br><br>属性就是标准的Ruby hash. <code>class</code> 属性值是 “code”, <code>id</code> 属性值是 “message”. 注意在这个例子中,我们没有使用 <code>=</code>, 所以 “Hello, World!” 是一个简单的字符串, 而不是Ruby 代码.<br><br>在 Haml 中有一个更简单的定义这个标签的方式, 因为 <code>class</code> 和<br>        <code>id</code> 是很常见的属性并且设计师(和程序员) 都熟悉 CSS, 我们可以使用相似的符号来描述这个标签.<br><br><small>Haml</small><br><br>        <pre class="haml">%strong.code#message Hello, World!</pre><br><br>不仅如此, 又因为 <code>div</code> 标签是太常见了,你可以省略标签定义，它默认是<code>%div</code>.<br><br><small>Haml</small><br><br>        <pre class="haml">.content Hello, World!</pre><br><br><small>HTML</small><br><br>        <pre class="html">&lt;div class=’content’&gt;Hello, World!&lt;/div&gt;</pre><br><br>现在如果要更复杂一些那?<br><br><small>ERB</small><br><br>        <pre class="erb">&lt;div class=’item’ id=’item&lt;%= item.id %&gt;’&gt;<br>  &lt;%= item.body %&gt;<br>&lt;/div&gt;</pre><br><br>很基本的. 这或许是一个partial的一部分或者其他.让我们将它转换文Haml。<br><br><small>Haml</small><br><br>        <pre class="haml">.item{:id =&gt; “item#{item.id}”}= item.body</pre><br><br>这个很有意思！<br><br>现在,嵌套 Haml 可以通过空白来实现.<br><br><small>ERB</small><br><br>        <pre class="erb">&lt;div id=’content’&gt;<br>  &lt;div class=’left column’&gt;<br>    &lt;h2&gt;Welcome to our site!&lt;/h2&gt;<br>    &lt;p&gt;&lt;%= print_information %&gt;&lt;/p&gt;<br>  &lt;/div&gt;<br>  &lt;div class=”right column”&gt;<br>    &lt;%= render :partial =&gt; “sidebar” %&gt;<br>  &lt;/div&gt;<br>&lt;/div&gt;</pre><br><br><small>Haml</small><br><br>        <pre class="haml">#content<br>  .left.column<br>    %h2 Welcome to our site!<br>    %p= print_information<br>  .right.column<br>    = render :partial =&gt; “sidebar”</pre><br><br>看到这些，你的嘴角是否露出一丝微笑?<br><br>还有其他很多要学习, 所以我强烈推荐你查看 <a href="http://haml-lang.com/docs/yardoc/file.HAML_REFERENCE.html" target="_blank" rel="external">参考</a>. 其中充满了棒极了的技巧.通过这些我们可以使用Haml 将网站建设的更加有趣.<br><br>      </div>
+
+<p>译自<a href="http://haml-lang.com/tutorial.html" target="_blank" rel="external">Haml 官方使用介绍</a></p>
+<p>兄弟文章见<a href="http://blog.meituo.net/2011/03/27/sass-%e4%bd%bf%e7%94%a8%e4%bb%8b%e7%bb%8d/" target="_blank" rel="external">Sass 使用介绍</a></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/Ruby/">Ruby</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/翻译/">翻译</a><a href="/tags/Haml/">Haml</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

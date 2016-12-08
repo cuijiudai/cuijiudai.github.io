@@ -1,0 +1,185 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>YQL 的一个封装 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="YQL 的一个封装"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>YQL 的一个封装</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/28/yql-e7-9a-84-e4-b8-80-e4-b8-aa-e5-b0-81-e8-a3-85/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-28T14:38:57.000Z">
+          2010-08-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 25 Jul 2010 07:30 AM PDT</p><p></p>
+<p>知道YQL么? 感觉比较新潮。看了看，还是不错的。。。<a href="http://developer.yahoo.com/yql/guide/index.html" target="_blank" rel="external">YQL</a>(Yahoo Query Language) 基本上就是一种基于 SQL 的查询语言，允许以标准的方式从多个服务中查询和检索结构化数据。但 YQL 也是一种由 Yahoo! 托管的查询引擎，在 REST 端点公开。YQL 使用人们熟悉的表格与行的关系数据库模型。但数据在内部是以 XML 的形式解释和结构化的。如果底层数据源未提供 XML 数据，YQL 会进行转换。它以 XML 或 JSON 的形式返回响应（您可在调用服务时指定）。此外，如果您向服务请求 JSON 数据，还可指定回调函数。这使 YQL 服务成为了一种 JSONP 服务，最重要的是：它为众多 Web 服务引入了自动化 JSONP 支持。</p>
+<p><span id="more-769"></span></p>
+<p>YQL 可理解和支持的数据源包括：RSS、Atom、JSON、XML、CSV、HTML、Flickr、Yahoo! Finance、Weather 等。由于 YQL 也支持外部数据源（Yahoo! 以外的数据源），因而就有了构建 mashup 应用程序的无限种可能性。可以说，它在单独一个界面内将 Web 与您的应用程序相连.</p>
+<p>如果你想深入了解YQL，可以看看官方教程：<a href="http://developer.yahoo.com/yql/guide/yql-tutorials.html#yql_insert_delete" target="_blank" rel="external">YQL Tutorials</a>,入门的<a href="An API for the Web: Learning YQL">http://net.tutsplus.com/tutorials/other/an-api-for-the-web-learning-yql/</a>,这里还有个中文的<a href="http://www.joycen.com/pc/20100311/jsajax-72480.html" target="_blank" rel="external">使用 JSONP 实现跨域通信，第 2 部分: 使用 JSONP、jQuery 和 Ya</a>.</p>
+<a id="more"></a>
+<p>可以说YQL是雅虎给广大开发人员的一个礼物，其背后思想就是将众多的API整合成一个SQL相似的抽象化，（API如flickr feeds，搜索，RSS等）。另外YQL也可以接受HTML,XML,CSV,ATOM等，返回JSON或者XML格式的结构化数据。它能够返回JSON 及 JSONP（关于JSONP可以看看老王的<a href="http://hi.baidu.com/thinkinginlamp/blog/item/d9e0cb13a97b7f2add5401ee.html" target="_blank" rel="external">JQuery中JSON使用扫盲</a>） 意味着跨域的数据查询现在是小菜一碟，我们拥有了从客户端支持的获得整个互联网的能力。你可以查看一下<a href="http://developer.yahoo.com/yql/console/" target="_blank" rel="external">the console</a>,其中也有一些例子。</p>
+<p>下面看看封装吧</p>
+<p>[code=’js’]<br>// YQL serves JSONP (with a callback) so all we have to do<br>// is create a script element with the right ‘src’:<br>function YQLQuery(query, callback) {<br>    this.query = query;<br>    this.callback = callback || function(){};<br>    this.fetch = function() {</p>
+<pre><code>    if (!this.query || !this.callback) {
+        throw new Error(&apos;YQLQuery.fetch(): Parameters may be undefined&apos;);
+    }
+
+    var scriptEl = document.createElement(&apos;script&apos;),
+        uid = &apos;yql&apos; + +new Date(),
+        encodedQuery = encodeURIComponent(this.query.toLowerCase()),
+        instance = this;
+
+    YQLQuery[uid] = function(json) {
+        instance.callback(json);
+        delete YQLQuery[uid];
+        document.body.removeChild(scriptEl);
+    };
+
+    scriptEl.src = &apos;http://query.yahooapis.com/v1/public/yql?q=&apos;
+                 + encodedQuery + &apos;&amp;amp;format=json&amp;amp;callback=YQLQuery.&apos; + uid;
+    document.body.appendChild(scriptEl);
+
+};
+</code></pre><p>}<br>[/code]</p>
+<p>让我感兴趣的是使用了一个生成一个临时的函数 YQLQuery[uid] ，这个函数里再调用callback，然后删除这个函数对象，删除这个用来取数据的script。那么如何使用哪？</p>
+<p>[code=’js’]<br>// Alert the latest post title from Ajaxian.com</p>
+<p>// Construct your query:<br>var query = “select * from rss where url=’feeds2.feedburner.com/ajaxian’ limit 1”;</p>
+<p>// Define your callback:<br>var callback = function(data) {<br>    var post = data.query.results.item;<br>    alert(post.title);<br>};</p>
+<p>// Instantiate with the query:<br>var ajaxianPosts = new YQLQuery(query, callback);</p>
+<p>// If you’re ready then go:<br>ajaxianPosts.fetch(); // Go!!</p>
+<p>/<em> Callback &amp; query can be defined as properties also:<br>   ajaxianPosts.query = ‘select </em> from…’;<br>   ajaxianPosts.callback = function(){}; */<br>[/code]</p>
+<p>如果写成jQuery函数,插件如下：</p>
+<p>[code=’js’]<br>$.YQL = function(query, callback) {</p>
+<pre><code>if (!query || !callback) {
+    throw new Error(&apos;$.YQL(): Parameters may be undefined&apos;);
+}
+
+var encodedQuery = encodeURIComponent(query.toLowerCase()),
+    url = &apos;http://query.yahooapis.com/v1/public/yql?q=&apos;
+        + encodedQuery + &apos;&amp;amp;format=json&amp;amp;callback=?&apos;;
+
+$.getJSON(url, callback);
+</code></pre><p>};</p>
+<p>// Usage:<br>$.YQL(“select * from rss where url=’feeds2.feedburner.com/ajaxian’ limit 1”, function(data) {<br>    var post = data.query.results.item;<br>    alert(post.title);<br>});<br>[/code]</p>
+<p>原文<a href="http://james.padolsey.com/javascript/using-yql-with-jsonp/" target="_blank" rel="external">Using YQL with JSONP</a></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,659 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 6 页 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/10/04/e4-b8-a4-e6-ae-b5javascript-e4-bb-a3-e7-a0-81/"><span>两段Javascript代码</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/10/04/e4-b8-a4-e6-ae-b5javascript-e4-bb-a3-e7-a0-81/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-10-04T15:46:10.000Z">
+          2010-10-04
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>以下两段代码的区别在哪？<br>以下代码片段出自lifesinger的<a href="http://lifesinger.org/blog/2010/10/a-quiz/">一道小题目</a><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/09/26/e5-93-8d-e5-ba-94-e4-b8-8a-e3-80-81-e4-b8-8b-e9-94-aeenter-e9-94-ae-e5-85-b6-e5-ae-9e-e5-be-88-e7-ae-80-e5-8d-95/"><span>响应上、下键enter键其实很简单</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/09/26/e5-93-8d-e5-ba-94-e4-b8-8a-e3-80-81-e4-b8-8b-e9-94-aeenter-e9-94-ae-e5-85-b6-e5-ae-9e-e5-be-88-e7-ae-80-e5-8d-95/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-09-26T11:19:42.000Z">
+          2010-09-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>[code=’js’]<br>        <script type="text/javascript" charset="utf-8"><br>        function response(obj){<br>            var $list = $(obj);<br>            var $children = $list.children();<br>            var num= $children.size();//$list  总个数<br>            var current=0; //当前选中项<br>            addnow()<br>            $(document).bind(‘keydown’,function(e){<br>                if($list.is(“:visible”)){<br>                    if(e.keyCode == 40){ //向下<br>                        if(current<num -1) current = current +1;                    
+                        addnow()
+                        e.preventDefault();
+                    }else if(e.keyCode ==38 ){//向上
+                        if(current > 0)current= current -1;<br>                        addnow()<br>                        e.preventDefault();<br>                    }else if(e.keyCode == 13){<br>                        var url = $children.eq(current).find(‘a’).attr(‘href’);<br>                        document.location= url;<br>                    }<br>                }else{<br>                    current = 0;<br>                    addnow()<br>                }<br>            });</p>
+<pre><code>    function addnow(){
+        $children.eq(current).addClass(&apos;now&apos;).siblings().removeClass(&apos;now&apos;);
+    }
+
+}
+
+response(&apos;#ul&apos;);
+</code></pre><p>[/code]<br>没有废话，看<a href="http://blog.meituo.net/wp-content/uploads/js_keycode/updown.html">示例</a><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/09/26/php-e5-a6-82-e4-bd-95-e8-bf-94-e5-9b-9ejson-e6-a0-bc-e5-bc-8f-e7-9a-84-e6-95-b0-e6-8d-ae/"><span>PHP如何返回json格式的数据</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/09/26/php-e5-a6-82-e4-bd-95-e8-bf-94-e5-9b-9ejson-e6-a0-bc-e5-bc-8f-e7-9a-84-e6-95-b0-e6-8d-ae/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-09-26T10:11:17.000Z">
+          2010-09-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>我们常见一些网站在做ajax时返回JSON格式的数据:<br><img src="http://blog.meituo.net/wp-content/uploads/php_return_json/json.png" alt="返回的是json格式的数据"><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/ajax/">ajax</a>, <a href="/categories/ajax/jQuery/">jQuery</a>, <a href="/categories/ajax/jQuery/PHP/">PHP</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/JSON/">JSON</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/09/23/e5-88-a9-e7-94-a8google-localsearch-e6-89-b9-e9-87-8f-e8-8e-b7-e5-8f-96-e5-8c-ba-e5-9f-9f-e5-9d-90-e6-a0-87/"><span>利用google LocalSearch 批量获取区域坐标</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/09/23/e5-88-a9-e7-94-a8google-localsearch-e6-89-b9-e9-87-8f-e8-8e-b7-e5-8f-96-e5-8c-ba-e5-9f-9f-e5-9d-90-e6-a0-87/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-09-23T10:46:50.000Z">
+          2010-09-23
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>废话不多说直接看效果<a href="http://blog.meituo.net/wp-content/uploads/google_get_latlng/demo.html">示例</a>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/google-map/">google map</a><a href="/tags/google/">google</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/09/15/javascript-core/"><span>JavaScript core</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/09/15/javascript-core/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-09-15T13:20:55.000Z">
+          2010-09-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div class="entrytext"><br><div class="ds-toc"><br><br>1.  <a href="#an-object" title="An object">An object</a><br>2.  <a href="#a-prototype-chain" title="A prototype chain">A prototype chain</a><br>3.  <a href="#constructor" title="Constructor">Constructor</a><br>4.  <a href="#execution-context-stack" title="Execution context stack">Execution context stack</a><br>5.  <a href="#execution-context" title="Execution context">Execution context</a><br>6.  <a href="#variable-object" title="Variable object">Variable object</a><br>7.  <a href="#activation-object" title="Activation object">Activation object</a><br>8.  <a href="#scope-chain" title="Scope chain">Scope chain</a><br>9.  <a href="#closures" title="Closures">Closures</a><br>10.  <a href="#this-value" title="This value">This value</a><br>11.  <a href="#conclusion" title="Conclusion">Conclusion</a><br></div><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/09/15/ecma-262-e6-a0-b8-e5-bf-83/"><span>ECMA-262 核心</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/09/15/ecma-262-e6-a0-b8-e5-bf-83/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-09-14T16:49:47.000Z">
+          2010-09-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>翻译了半天发现早已有人翻译了，前四章是本人翻译的，翻译的不怎么样，第五章以后出自 remember2015的<a href="http://remember2015.info/blog/?p=141">[译] JavaScript核心指南(JavaScript Core)</a></p>
+<p><pre><br>An object — 对象,A prototype chain — 原型链,Constructor — 构造器,Scope chain — 作用域链<br>execution context stack – 执行上下文栈<br></pre></p>
+<div class="entrytext"><br><style type="text/css" media="screen"><br>.definition {<br>    border-left:2px solid #284A66;<br>    color:#444444;<br>    font-size:1em;<br>    margin:0 30px;<br>    padding-left:10px;<br>    padding-right:10px;<br>}<br></style><br><div class="ds-toc"><br><br>1.  <a href="#an-object">对象(An Object)</a>2.  <a href="#a-prototype-chain">原型链(A Prototype Chain)</a>3.  <a href="#constructor">构造函数(Constructor)</a>4.  <a href="#execution-context-stack">执行上下文栈(Execution Context Stack)</a>5.  <a href="#execution-context">执行上下文(Execution Context)</a>6.  <a href="#variable-object">变量对象(Variable Object)</a>7.  <a href="#activation-object">活动对象(Activation Object)</a>8.  <a href="#scope-chain">作用域链(Scope Chain)</a>9.  <a href="#closures">闭包(Closures)</a>10.  <a href="#this-value">this指针(This Value)</a>11.  <a href="#conclusion">总结(Conclusion)</a><br></div><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/ECMA-262/">ECMA-262</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/09/08/e5-81-9a-e5-a5-bd-css3-e5-b1-9e-e6-80-a7-e4-b9-a6-e5-86-99-e9-a1-ba-e5-ba-8f/"><span> 做好 css3 属性书写顺序 </span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/09/08/e5-81-9a-e5-a5-bd-css3-e5-b1-9e-e6-80-a7-e4-b9-a6-e5-86-99-e9-a1-ba-e5-ba-8f/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-09-08T15:11:03.000Z">
+          2010-09-08
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>现在css 3 ，html5 无疑是 web 标准最热的项目，我们要尽量使用这些新标准的新属性，做好向前兼容，但你知道css 3 中 属性的顺序要按照一定顺序么？<br>现在推荐的顺序:<br>[code=”css”]<br>.not-a-square {<br>   -webkit-border-radius: 10px;<br>   -moz-border-radius: 10px;<br>   border-radius: 10px;<br>}<br>[/code]<br>也就是将“ 真正”的属性（不带前缀的）的属性写到最后。<br>而这样的书写顺序是错误的<br>[code=”css”]<br>.not-a-square {<br>   border-radius: 10px;<br>   -moz-border-radius: 10px;<br>   -webkit-border-radius: 10px;<br>}<br>[/code]<br>为什么那？<br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/css/">css</a><a href="/tags/css3/">css3</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/09/08/css-e7-b1-bb-e7-9a-84-e4-bc-98-e5-85-88-e7-ba-a7-e7-9a-84-e9-97-ae-e9-a2-98/"><span>css 类的优先级的问题</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/09/08/css-e7-b1-bb-e7-9a-84-e4-bc-98-e5-85-88-e7-ba-a7-e7-9a-84-e9-97-ae-e9-a2-98/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-09-08T14:03:30.000Z">
+          2010-09-08
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>以前感觉自己很熟悉了，今天才发现一个缺口.问题如下：<br>我们定义两个类<br>[code=”css”]<br>    .r{<br>        color:red;<br>        margin-left:20px;<br>    }<br>    .b{<br>        color:blue;<br>        margin-left:100px;<br>    }<br>[/code]</p>
+<p>[code=”html”]<br>    <div class="b r">美拓blog</div><br>[/code]<br>那么“美拓blog” 是什么颜色？padding-left 是 20px 还是 100px； 在我印象里 应该根据类的顺序class=”b r”那么 r 类应该覆盖 b 类，即” 美拓blog” 应该是红色，padding-left是100px。<br>但这是错误的，实际上是什么样子的？css 类的优先级是根据定义的先后顺序 确定渲染时的优先级，因为 b 类在 r 类后定义，所以 b 类和 r 类同时 应用到同一个元素的时候，b 类将 覆盖 r 类。所以美拓blog是 蓝色，padding-left是100px。<br>感觉自己html，css都不熟，哈哈，记录一下。<br>可以看看例子<a href="http://blog.meituo.net/wp-content/uploads/css_class_priority/css_class_priority.html" target="_blank" rel="external"> 点我 </a></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/css/">css</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/08/30/wordpress-e6-94-b9-e5-9f-9f-e5-90-8d-e6-8d-a2-e7-a9-ba-e9-97-b4-e5-90-8e-e7-bd-91-e7-ab-99-e5-a4-87-e4-bb-bd-e7-9a-84-e6-81-a2-e5-a4-8d/"><span>wordpress改域名换空间后网站备份的恢复</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/30/wordpress-e6-94-b9-e5-9f-9f-e5-90-8d-e6-8d-a2-e7-a9-ba-e9-97-b4-e5-90-8e-e7-bd-91-e7-ab-99-e5-a4-87-e4-bb-bd-e7-9a-84-e6-81-a2-e5-a4-8d/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-30T15:41:26.000Z">
+          2010-08-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>原来的免费空间挂了，很多图片及附加丢失，所以不好意思，博客中有很多死连，从即日起<a href="http://blog.meituo.net">美拓blog</a>启用新的域名 <a href="http://blog.meituo.net.感谢">http://blog.meituo.net.感谢</a> <a href="http://www.piscean.net/">碧海蓝天</a>友情提供空间。大家更换定义链接吧。。。。博客稳定了，以后要好好写博客，thinks！<br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/WordPress/">WordPress</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2010/08/29/css-e4-b9-8bafter-after/"><span>css之:after ::after </span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/css-e4-b9-8bafter-after/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T04:17:54.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>css之:after ::after </p>
+<h3 id="after-的用法"><a href="#after-的用法" class="headerlink" title=":after 的用法"></a>:after 的用法</h3><p>CSS :after <dfn>伪元素(pseudo-element)</dfn>（后面有<a href="#wei">解释</a>）<br>定义</p>
+<pre>:after 伪元素在元素内容之后插入内容。</pre>
+
+<p>这个伪元素允许创作人员在元素内容的最后面插入生成内容。默认地，这个伪元素是行内元素，不过可以使用属性 display 改变这一点。<br>例子：<br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/jQuery/">jQuery</a><a href="/tags/翻译/">翻译</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  <a href="/page/5/" class="pagination-prev">上一页</a>
+  
+  
+  <a href="/page/7/" class="pagination-next">下一页</a>
+  
+</nav>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

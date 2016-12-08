@@ -1,0 +1,138 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>js 数组去重，排序，寻找索引 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="js 数组去重，排序，寻找索引"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>js 数组去重，排序，寻找索引</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/11/22/js-e6-95-b0-e7-bb-84-e5-8e-bb-e9-87-8d-ef-bc-8c-e6-8e-92-e5-ba-8f-ef-bc-8c-e5-af-bb-e6-89-be-e7-b4-a2-e5-bc-95/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-11-22T05:22:40.000Z">
+          2010-11-22
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>要求将一个数组去重后，按升序排序后 9 的索引。<br>[code=”js”]<br>//数组去重<br>Array.prototype.distinct = function(){<br>            var filtered= [];<br>                var _a = {};<br>                 for(var i = 0;i&lt;this .length;i++){<br>                         if(!_a[this[i]]) {//如果已经有了就不再添加<br>                                _a[this[i]] = 1;<br>                                filtered.push(this[i])<br>                         }<br>                 }<br>              return filtered;<br>};</p>
+<p>//二分法 寻找索引<br>function search (arr,item,lower,upper){<br>    lower = lower || 0;<br>    upper = upper || arr.length-1;<br>    if(lower == upper){<br>        if(item == arr[upper]){<br>            return upper;<br>        }else{<br>            return -1;<br>        }<br>    }else{<br>        var middle = parseInt((lower+upper)/2);<br>        if(item &gt; a[middle]){<br>            return search (arr,item,middle+1,upper);<br>        }else{<br>           return search (arr,item,lower,middle);<br>        }<br>    }</p>
+<p>}</p>
+<p>var a = [10,15,3,4,5,6,7,8,9,3,8,9];<br>a = a.distinct(); //[10, 15, 3, 4, 5, 6, 7, 8, 9]<br>a.sort(function(a,b){ return a-b;}); //排序 [3, 4, 5, 6, 7, 8, 9, 10, 15]<br>alert(search(a,9)); //6<br>[/code]</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,844 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第 3 页 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2011/03/27/sass-e4-bd-bf-e7-94-a8-e4-bb-8b-e7-bb-8d/"><span>Sass 使用介绍</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/03/27/sass-e4-bd-bf-e7-94-a8-e4-bb-8b-e7-bb-8d/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-03-27T05:36:36.000Z">
+          2011-03-27
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <pre><code>&lt;style&gt; 
+ .compare pre.sass, .compare pre.scss {
+float: left;
+}
+pre.sass, pre.scss {
+    background-color: #FFEEFF;
+    border-color: #CE4DD6;
+}
+.compare pre.css {
+float: right;
+}
+pre.css {
+    background-color: #E0E0E0;
+    border-color: #777777;
+}
+.compare {
+        display: block;
+}
+.compare {
+    overflow: hidden;
+    position: relative;
+}
+&lt;/style&gt;
+   如果你对上一篇Haml感兴趣，那么下面要介绍的Sass你也不能错过。Sass将改变你css的书写方式。
+</code></pre><h3 id="Sass和Scss的关系"><a href="#Sass和Scss的关系" class="headerlink" title="Sass和Scss的关系"></a>Sass和Scss的关系</h3><p>Sass 有两种语法规则(syntaxes),目前新的语法规则（从 <a href="http://sass-lang.com/docs/yardoc/file.SASS_CHANGELOG.html#3-0-0" target="_blank" rel="external">Sass 3</a>开始）被称为 “SCSS”( 时髦的css（Sassy CSS）),它是css3语法的的拓展级，就是说每一个语法正确的CSS3文件也是合法的SCSS文件，SCSS文件使用.scss作为拓展名。<br>第二种语法别成为缩进语法（或者 Sass），它受到了 Haml的简洁精炼的启发，它是为了人们可以用和css相近的但是更精简的方式来书写css而诞生的。它没有括号，分号，它使用 行缩进 的方式来指定 css 块，虽然sass不是最原始的语法，但是缩进语法将继续被支持，在缩进语法的文件以 .sass 为拓展名。</p>
+<h3 id="安装Ruby-和-Sass"><a href="#安装Ruby-和-Sass" class="headerlink" title="安装Ruby 和 Sass"></a>安装Ruby 和 Sass</h3><p>首先，让我们获得Sass并搭配环境.如果你使用 OS X,那么你已经安装了Ruby. Windows 用户可以通过<a href="http://rubyinstaller.org/download.html" target="_blank" rel="external">Windows安装程序</a>来安装, Linux可以通过包管理(apt-get)来安装.</p>
+<p>当Ruby安装好后,你可以安装 Sass 了，运行：</p>
+<pre><code>    &lt;!--more--&gt;
+
+gem install haml`&lt;/pre&gt;
+
+#### 你的第一个Sass样式文件
+
+我们可以开始了，先创建一个简单的SCSS 文件.因为 SCSS是CSS3 的一个拓展, 我们的第一个文件将从普通的 CSS开始.在你的[编辑器](http://sass-lang.com/editors.html)中创建一个名为**`style.scss`** 的文件,添加下面的代码:
+
+        &lt;pre class=&quot;block sass&quot;&gt;/* style.scss */
+#navbar {
+  width: 80%;
+  height: 23px;
+}&lt;/pre&gt;
+
+如何将这个Sass文件转换为CSS 文件？,运行：
+
+        &lt;pre&gt;`sass --watch style.scss:style.css`&lt;/pre&gt;
+
+现在无论何时你修改`style.scss`, Sass 都会自动的更新 `style.css` 文件的改变.以后当你有多个Sass文件的时候，你可以监听整个文件夹:
+
+        &lt;pre&gt;`sass --watch stylesheets/sass:stylesheets/compiled
+</code></pre><h3 id="特点"><a href="#特点" class="headerlink" title="特点"></a>特点</h3><p>虽然每一个 css 文件都是合法的Sass 文件是一件不错的事, 但这显然不是你学习SCSS 的原因.你学习它是因为它提供的比CSS <em>更多</em>. SCSS 在CSS 的基础上提供了所有各种有用的特性. 这个教程将带领你学习一些最基础的, 另外还提供一些示例，你可以将它添加到 <code>style.scss</code> 并动手测试一下.</p>
+<h4 id="嵌套"><a href="#嵌套" class="headerlink" title="嵌套"></a>嵌套</h4><p>当你书写 CSS时,你会经常遇到一些选择器有相同的开头. 比如，你或许要写 “#navbar ul”, “#navbar li”, and “#navbar li a”的样式. 重复一遍遍书写开头的代码很是无聊啊, 特别是它还很长的时候.</p>
+<p>Sass 可以让你避免这些问题，他是通过将子选择器嵌套到父选择器实现的.</p>
+<pre><code>&lt;div class=&quot;compare&quot;&gt;
+  &lt;pre class=&quot;sass&quot;&gt;/* style.scss */
+</code></pre><p>#navbar {<br>  width: 80%;<br>  height: 23px;</p>
+<p>  ul { list-style-type: none; }<br>  li {<br>    float: left;<br>    a { font-weight: bold; }<br>  }<br>}<br><br>          <pre class="css">/<em> style.css </em>/</pre></p>
+<p>#navbar {<br>  width: 80%;<br>  height: 23px; }</p>
+<p>  #navbar ul {<br>    list-style-type: none; }</p>
+<p>  #navbar li {<br>    float: left; }</p>
+<pre><code>#navbar li a {
+  font-weight: bold; }
+</code></pre><p><br>        </p>
+<p>注意输出是如何格式化来反映原来的选择器嵌套的.这是默认的CSS样式,对所有种类的 CSS 格式化可以查看<a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#output_style" target="_blank" rel="external">其他样式参考</a>甚至有一个是专门用来压缩css的！！</p>
+<p>你也可以嵌套属性,<br>        所以你就不用一直重复书写像 “<code>border-left-</code>“ 一样的东东了.</p>
+<pre><code>&lt;div class=&quot;compare&quot;&gt;
+  &lt;pre class=&quot;sass&quot;&gt;/* style.scss */
+</code></pre><p>.fakeshadow {<br>  border: {<br>    style: solid;<br>    left: {<br>      width: 4px;<br>      color: #888;<br>    }<br>    right: {<br>      width: 2px;<br>      color: #ccc;<br>    }<br>  }<br><br>          <pre class="css">/<em> style.css </em>/</pre></p>
+<p>.fakeshadow {<br>  border-style: solid;<br>  border-left-width: 4px;<br>  border-left-color: #888;<br>  border-right-width: 2px;<br>  border-right-color: #ccc; }<br><br>        </p>
+<h4 id="父选择器引用"><a href="#父选择器引用" class="headerlink" title="父选择器引用"></a>父选择器引用</h4><p>伪类如何,像<code>:hover</code>? 它和它得到父选择器之间没有空格, 但仍然可以嵌套他们.你使用Sass 的特殊字符<code>&amp;amp;</code>就可以了.在一个选择器里, <code>&amp;amp;</code>将会逐字被父选择器替换</p>
+<pre><code>&lt;div class=&quot;compare&quot;&gt;
+  &lt;pre class=&quot;sass&quot;&gt;/* style.scss */
+</code></pre><p>a {<br>  color: #ce4dd6;<br>  &amp;:hover { color: #ffb3ff; }<br>  &amp;:visited { color: #c458cb; }<br>}<br><br>          <pre class="css">/<em> style.css </em>/</pre></p>
+<p>a {<br>  color: #ce4dd6; }<br>  a:hover {<br>    color: #ffb3ff; }<br>  a:visited {<br>    color: #c458cb; }<br><br>        </p>
+<h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>Sass允许你定义整个样式表可用的变量. 变量以 <code>$</code>开始，变量声明像属性似的.他们可以被赋值任何css允许使用的属性值 , 像颜色,数字(带有 单位),或文本.</p>
+<pre><code>&lt;div class=&quot;compare&quot;&gt;
+  &lt;pre class=&quot;sass&quot;&gt;/* style.scss */
+</code></pre><p>$main-color: #ce4dd6;<br>$style: solid;</p>
+<p>#navbar {<br>  border-bottom: {<br>    color: $main-color;<br>    style: $style;<br>  }<br>}</p>
+<p>a {<br>  color: $main-color;<br>  &amp;:hover { border-bottom: $style 1px; }<br>}<br><br>          <pre class="css">/<em> style.css </em>/</pre></p>
+<p>#navbar {<br>  border-bottom-color: #ce4dd6;<br>  border-bottom-style: solid; }</p>
+<p>a {<br>  color: #ce4dd6; }<br>  a:hover {<br>    border-bottom: solid 1px; }<br><br>        </p>
+<p>变量可以使你重复使用 颜色，大小,和其他值. 这意味着改变将是最小的.如：改变颜色或者大小可以一次完成，而不是在整个样式表中多次更改</p>
+<h4 id="Operations-and-Functions"><a href="#Operations-and-Functions" class="headerlink" title="Operations and Functions"></a>Operations and Functions</h4><p>除了仅仅使用定义的变量值, 你还可以使用预定义函数更改和一起使用它们.这允许你动态的计算元素的尺寸或者颜色.</p>
+<p>数字可以使用标准的数学符号 (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, and <code>%</code>) , 即使他们有单位. 对于颜色, 有各种有用的函数来改变 <a href="http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html#lighten-instance_method" target="_blank" rel="external">亮度</a>, <a href="http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html#adjust_hue-instance_method" target="_blank" rel="external">色调</a>, <a href="http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html#saturate-instance_method" target="_blank" rel="external">饱和度</a>, 和 <a href="/docs/yardoc/Sass/Script/Functions.html">更多</a>.</p>
+<pre><code>&lt;div class=&quot;compare&quot;&gt;
+  &lt;pre class=&quot;sass&quot;&gt;/* style.scss */
+</code></pre><p>#navbar {<br>  $navbar-width: 800px;<br>  $items: 5;<br>  $navbar-color: #ce4dd6;</p>
+<p>  width: $navbar-width;<br>  border-bottom: 2px solid $navbar-color;</p>
+<p>  li {<br>    float: left;<br>    width: $navbar-width/$items - 10px;</p>
+<pre><code>background-color:
+  lighten($navbar-color, 20%);
+&amp;amp;:hover {
+  background-color:
+    lighten($navbar-color, 10%);
+}
+</code></pre><p>  }<br>}<br><br>          <pre class="css">/<em> style.css </em>/</pre></p>
+<p>#navbar {<br>  width: 800px;<br>  border-bottom: 2px solid #ce4dd6; }</p>
+<p>  #navbar li {<br>    float: left;<br>    width: 150px;<br>    background-color: #e5a0e9; }</p>
+<pre><code>#navbar li:hover {
+  background-color: #d976e0; }
+</code></pre><p><br>        </p>
+<h4 id="插值"><a href="#插值" class="headerlink" title="插值"></a>插值</h4><p>变量不仅可以可以被属性使用.你可以用 <code>#{}</code> 将他们插入到属性名或选择器.</p>
+<pre><code>&lt;div class=&quot;compare&quot;&gt;
+  &lt;pre class=&quot;sass&quot;&gt;/* style.scss */
+</code></pre><p>$side: top;<br>$radius: 10px;</p>
+<p>.rounded- {<br>  border-#{$side}-radius: $radius;<br>  -moz-border-radius-#{$side}: $radius;<br>  -webkit-border-#{$side}-radius: $radius;<br>}<br><br>          <pre class="css">/<em> style.css </em>/</pre></p>
+<p>.rounded-top {<br>  border-top-radius: 10px;<br>  -moz-border-radius-top: 10px;<br>  -webkit-border-top-radius: 10px; }<br><br>        </p>
+<h4 id="Mixins"><a href="#Mixins" class="headerlink" title="Mixins"></a>Mixins</h4><p>Mixins 是Sass 的一个最强大的特征之一. 它允许你重复使用 &ndash; 属性和选择器 &ndash;从而不用重复的复制粘贴它们或者将它们放到一个没有语义的类里.</p>
+<p>Mixins 使用“<code>@mixin</code>” 来定义,它可以接受成块的样式，然后可以在其他选择器使用 “<code>@include</code>”来引用它们.</p>
+<pre><code>&lt;div class=&quot;compare&quot;&gt;
+  &lt;pre class=&quot;sass&quot;&gt;/* style.scss */
+</code></pre><p>@mixin rounded-top {<br>  $side: top;<br>  $radius: 10px;</p>
+<p>  border-#{$side}-radius: $radius;<br>  -moz-border-radius-#{$side}: $radius;<br>  -webkit-border-#{$side}-radius: $radius;<br>}</p>
+<p>#navbar li { @include rounded-top; }</p>
+<p>#footer { @include rounded-top; }<br><br>          <pre class="css">/<em> style.css </em>/</pre></p>
+<p>#navbar li {<br>  border-top-radius: 10px;<br>  -moz-border-radius-top: 10px;<br>  -webkit-border-top-radius: 10px; }</p>
+<p>#footer {<br>  border-top-radius: 10px;<br>  -moz-border-radius-top: 10px;<br>  -webkit-border-top-radius: 10px; }<br><br>        </p>
+<h3 id="Arguments"><a href="#Arguments" class="headerlink" title="Arguments"></a>Arguments</h3><p>当你给mixins 传递arguments的时候他的强大才展现出来. Arguments 是用括号包围的一组使用逗号分隔的变量列表.每次使用mixins的时候arguments 中的变量可以被赋予不用的值</p>
+<p>mixin arguments 亦可以有默认值，就像你平常定义他们一样. 然后使用 mixin 的时候可以选择不传递值.</p>
+<pre><code>&lt;div class=&quot;compare&quot;&gt;
+  &lt;pre class=&quot;sass&quot;&gt;/* style.scss */
+</code></pre><p>@mixin rounded($side, $radius: 10px) {<br>  border-#{$side}-radius: $radius;<br>  -moz-border-radius-#{$side}: $radius;<br>  -webkit-border-#{$side}-radius: $radius;<br>}</p>
+<p>#navbar li { @include rounded(top); }</p>
+<p>#footer { @include rounded(top, 5px); }</p>
+<p>#sidebar { @include rounded(left, 8px); }<br><br>          <pre class="css">/<em> style.css </em>/</pre></p>
+<p>#navbar li {<br>  border-top-radius: 10px;<br>  -moz-border-radius-top: 10px;<br>  -webkit-border-top-radius: 10px; }</p>
+<p>#footer {<br>  border-top-radius: 5px;<br>  -moz-border-radius-top: 5px;<br>  -webkit-border-top-radius: 5px; }</p>
+<p>#sidebar {<br>  border-left-radius: 8px;<br>  -moz-border-radius-left: 8px;<br>  -webkit-border-left-radius: 8px; }<br><br>        </p>
+<h4 id="import"><a href="#import" class="headerlink" title="@import"></a><code>@import</code></h4><p>样式表文件可能会变得很大. CSS 有一个 <code>@import</code> 允许你将样式分割到多个样式表文件, 但这样每一个样式表会占用一个HTTP 请求，这就是 Sass的 <code>@import</code> 指令为什么直接将将其他样式表融入到当前样式表的原因. 不仅如此,使用<code>@import</code>引入的文件中定义变量和 mixin 可以在当前文件中使用</p>
+<p>Sass 对于要引入的文件有命名上的规范 (称为 “partials”):它们以下划线开始.让我们创建一个 partial <strong><code>_rounded.scss</code></strong> 来包含 <code>rounded</code> mixin.</p>
+<p>为了都支持 <code>.scss</code> 和 <code>.sass</code>文件, Sass 允许被引入的文件没有后缀名.这意味着我们可以仅仅引入 <code>&quot;rounded&quot;</code>, 而不是 <code>&quot;rounded.scss&quot;</code>.</p>
+<pre><code>&lt;div class=&quot;compare&quot;&gt;
+  &lt;pre class=&quot;sass&quot;&gt;/* _rounded.scss */
+</code></pre><p>@mixin rounded($side, $radius: 10px) {<br>  border-#{$side}-radius: $radius;<br>  -moz-border-radius-#{$side}: $radius;<br>  -webkit-border-#{$side}-radius: $radius;<br>}<br><br>          <pre class="css">/<em> style.css </em>/</pre></p>
+<p>#navbar li {<br>  border-top-radius: 10px;<br>  -moz-border-radius-top: 10px;<br>  -webkit-border-top-radius: 10px; }</p>
+<p>#footer {<br>  border-top-radius: 5px;<br>  -moz-border-radius-top: 5px;<br>  -webkit-border-top-radius: 5px; }</p>
+<p>#sidebar {<br>  border-left-radius: 8px;<br>  -moz-border-radius-left: 8px;<br>  -webkit-border-left-radius: 8px; }<br><br>          <pre class="sass">/<em> style.scss </em>/</pre></p>
+<p>@import “rounded”;</p>
+<p>#navbar li { @include rounded(top); }</p>
+<p>#footer { @include rounded(top, 5px); }</p>
+<p>#sidebar { @include rounded(left, 8px); }<br><br>        </p>
+<h3 id="更深层次的学习"><a href="#更深层次的学习" class="headerlink" title="更深层次的学习"></a>更深层次的学习</h3><p>以上这些介绍足够你开始使用Sass了, 其实还有很多值的探索:查看 <a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html" target="_blank" rel="external">Sass 参考</a> 来知道Sass 可以干的一切东西, 包括所有 <a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#options" target="_blank" rel="external">你可以设置的选项</a> 和 <a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#plugin" target="_blank" rel="external">如何将它作为一个 Rails/Rack 插件使用</a>.</p>
+<p>如果你需要帮助或者探讨 Sass,可以到 #sass IRC 频道<a href="http://webchat.freenode.net/" target="_blank" rel="external">irc.freenode.net</a> (如果没有,  #haml 频道可以尝试的一个不错的地方). 在 <a href="http://groups.google.com/group/haml" target="_blank" rel="external">the Haml/Sass mailing list</a>的提问可以得到回答.</p>
+<p>译自<a href="http://sass-lang.com/tutorial.html" target="_blank" rel="external">Sass 官方教程</a><br>兄弟文章见<a href="http://blog.meituo.net/2011/03/27/haml-%e4%bd%bf%e7%94%a8%e4%bb%8b%e7%bb%8d/" target="_blank" rel="external"> Haml 使用介绍</a><br>另外还有python写的 <a href="http://sandbox.pocoo.org/clevercss/" target="_blank" rel="external"> CleverCSS</a><br>:the pythonic way of webdesign,和这个类似。</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>, <a href="/categories/css-html/Ruby/">Ruby</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/翻译/">翻译</a><a href="/tags/Sass/">Sass</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2011/03/27/haml-e4-bd-bf-e7-94-a8-e4-bb-8b-e7-bb-8d/"><span>Haml 使用介绍</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/03/27/haml-e4-bd-bf-e7-94-a8-e4-bb-8b-e7-bb-8d/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-03-26T16:11:41.000Z">
+          2011-03-27
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <style>
+pre.erb, pre.html {
+    background-color: #E5E5E5;
+    border-color: #777777;
+}
+pre.haml {
+    background-color: #FFEEE0;
+    border-color: #FF3836;
+}
+</style>
+
+<p>如果你不知道Haml是什么东西，没关系，我也不知道，但我们可以借鉴学习一下他的一些实现方式，还是比较有趣的.好的翻译开始！！</p>
+<div id="main"><br><br>在这个教程开始之前, 我想说清一件事.当你看完这个后, 将你的一个 <acronym title="嵌入式Ruby">ERB</acronym>文件转换为Haml.试一下. 就是打开文件点击delete键(作者意思是表达haml代码的精简). 就试一下.如果你不喜欢可以删除它.但是你看完这个教程后一定要试一下,就尝试一个文件试试.(好啰嗦)<br><br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/Ruby/">Ruby</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/翻译/">翻译</a><a href="/tags/Haml/">Haml</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2011/03/23/sizzle-e4-bd-bf-e7-94-a8-e4-bb-8b-e7-bb-8d-ef-bc-88-e8-af-91-e8-87-aa-sizzle-wiki-ef-bc-89/"><span>Sizzle 使用介绍（译自 Sizzle Wiki）</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/03/23/sizzle-e4-bd-bf-e7-94-a8-e4-bb-8b-e7-bb-8d-ef-bc-88-e8-af-91-e8-87-aa-sizzle-wiki-ef-bc-89/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-03-23T15:59:24.000Z">
+          2011-03-23
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><style type="text/css" media="screen"><br>code{<br>     -moz-border-radius: 3px 3px 3px 3px;<br>    background-color: #F8F8F8;<br>    border: 1px solid #DEDEDE;<br>    font-size: 13px;<br>    padding: 0 4px;<br>}<br>pre, code {<br>    font: 12px Monaco,”Courier New”,”DejaVu Sans Mono”,”Bitstream Vera Sans Mono”,monospace;<br>}<br></style></p>
+<p><div id="wiki-content"><br>  <div class="wrap"><br>  <div class="gollum-textile-content instapaper_body" id="wiki-body"><br>    <div id="template"></p>
+<p>这个文档是关于Sizzle选择器引擎的.其他更多信息请访问:</p>
+<ul>
+<li><a href="http://sizzlejs.com/">Sizzle 项目首页</a></li>
+<li><a href="http://github.com/jeresig/sizzle/">Sizzle 源码仓库</a></li>
+<li><a href="http://groups.google.com/group/sizzlejs">Sizzle 讨论组（好像google小组被墙了）</a></li>
+</ul>
+<h3 id="选择器"><a href="#选择器" class="headerlink" title="选择器"></a>选择器</h3><p>Sizzle差不多支持所有的<a href="http://www.w3.org/TR/css3-selectors/"><span class="caps">CSS</span> 3 选择器</a> &ndash; 甚至包含一些被很少浏览器支持的，例如转义选择器 (“.foo\+bar”), Unicode 选择器, 返回的结果也是在元素在文档中的顺序. 当然也有一些常见的 css 3 选择器没有被支持， (关于这个决定的原因可以 <a href="http://ejohn.org/blog/selectors-that-people-actually-use/">在这里找到</a></p>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/翻译/">翻译</a><a href="/tags/Sizzle/">Sizzle</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2011/03/14/iframe-e9-81-ae-e7-bd-a9-windows-media-player-e6-97-a0-e6-95-88-e7-9a-84-e9-97-ae-e9-a2-98/"><span>iframe 遮罩 windows media player 无效的问题</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/03/14/iframe-e9-81-ae-e7-bd-a9-windows-media-player-e6-97-a0-e6-95-88-e7-9a-84-e9-97-ae-e9-a2-98/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-03-14T10:24:58.000Z">
+          2011-03-14
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>我们知道iframe遮罩flash 还是可以的，但是windows media player就不行了，需要添加如下参数：<br>[code=’html’]</p>
+<param name="windowlessVideo" value="true"><br>[/code]<br>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/css/">css</a><a href="/tags/html/">html</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2011/03/14/e5-b8-b8-e8-a7-81-e6-b5-8f-e8-a7-88-e5-99-a8-e7-9a-84hack/"><span>常见浏览器的hack</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/03/14/e5-b8-b8-e8-a7-81-e6-b5-8f-e8-a7-88-e5-99-a8-e7-9a-84hack/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-03-14T07:17:12.000Z">
+          2011-03-14
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>常见浏览器的hack ，ie 6,7,8;火狐，Chrome ，Safari，Opera.
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>, <a href="/categories/css-html/浏览器/">浏览器</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/hack/">hack</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2011/03/03/jsdoc-e4-bb-8b-e7-bb-8d-e5-8f-8a-e4-b8-ad-e6-96-87-e4-b9-b1-e7-a0-81-e9-97-ae-e9-a2-98/"><span>jsdoc 介绍及中文乱码问题</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/03/03/jsdoc-e4-bb-8b-e7-bb-8d-e5-8f-8a-e4-b8-ad-e6-96-87-e4-b9-b1-e7-a0-81-e9-97-ae-e9-a2-98/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-03-03T03:17:01.000Z">
+          2011-03-03
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>jsdoc是用来批量提取js注释生成文档的工具，很早就听说php等有这些工具，今天查了一下js的，jsdoc还不错，但是使用中遇到了中文乱码问题，先介绍编码问题了。</p>
+<h3 id="中文乱码问题"><a href="#中文乱码问题" class="headerlink" title="中文乱码问题"></a>中文乱码问题</h3><p>如果你的jsdoc出现编码问题，中文是乱码的话可以使用-e参数来制定编码，当然编码要和你的js文件格式一致，如果你的js是utf-8格式，则使用：-e=utf-8。<br>e.g [code=’java’]java -jar jsrun.jar app/run.js -a -e=utf-8 -t=templates/jsdoc test/*.js [/code]<br>以上代码和app目录同级的的test目录下的所有js导出文档。如果不在同级目录则要使用绝对路径。<br>如果你不知道什么是jsdoc请看以下转自：<a href="http://blog.tugai.net/">西风瘦马博客http://blog.tugai.net/</a>的关于jsdoc使用的介绍。
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/java/">java</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2011/02/15/firebug-docs-e9-a1-b5-e9-9d-a2-e7-bf-bb-e8-af-91/"><span>firebug docs 页面翻译</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/02/15/firebug-docs-e9-a1-b5-e9-9d-a2-e7-bf-bb-e8-af-91/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-02-15T07:36:12.000Z">
+          2011-02-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h3 id="console-日志函数介绍-Console-Logging-Functions"><a href="#console-日志函数介绍-Console-Logging-Functions" class="headerlink" title="console 日志函数介绍 Console Logging Functions"></a>console 日志函数介绍 Console Logging Functions</h3><pre><code>FireBug 有一个对所有网页可用的`console`对象，它拥有下列函数
+FireBug makes a console object available to all web pages.  This object has the following functions:
+</code></pre>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/Software/">Software</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/firebug/">firebug</a><a href="/tags/翻译/">翻译</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2011/02/02/e6-97-a5-e7-85-a7-e8-be-b0-e7-94-9f-e5-90-8d-e6-9b-b0-e6-99-a8-e6-b1-82-e4-b8-8b-e8-81-94-ef-bc-8c-e9-80-819-e4-bd-8dqq/"><span>“日照辰生名曰晨” 求下联，送9位qq</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/02/02/e6-97-a5-e7-85-a7-e8-be-b0-e7-94-9f-e5-90-8d-e6-9b-b0-e6-99-a8-e6-b1-82-e4-b8-8b-e8-81-94-ef-bc-8c-e9-80-819-e4-bd-8dqq/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-02-02T08:19:39.000Z">
+          2011-02-02
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>过年啦，回家啦，如题 求下联，解释一下，我是山东日照市人，属相为龙（辰即龙），“日”和 “辰”组合 成“晨”，我上网的第一个网名是“晨”。送9位qq太阳号，名额不限，截止正月十五。看看谁最有才<br>ps :qq 没有送出去，悲剧鸟</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/生活/">生活</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2011/01/28/e-texteditor-wiki-faq-e7-bf-bb-e8-af-91/"><span>E-texteditor wiki FAQ 翻译</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/01/28/e-texteditor-wiki-faq-e7-bf-bb-e8-af-91/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-01-28T04:25:48.000Z">
+          2011-01-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><a href="#FAQ"><span class="tocnumber">1.1</span> <span class="toctext">FAQ</span></a></p>
+<ul>
+<li><a href="#E_will_not_start_or_crashes_on_start.2C_what_should_I_do.3F"><span class="tocnumber">1.1.1</span><span class="toctext"E 不启动或启动就崩溃该怎么办？</span></span></a></li>
+<li><a href="#What_does_.22no_such_file_to_load_--_ubygems_.28LoadError.29.22_mean.3F"><span class="tocnumber">1.1.2</span> <span class="toctext"> “no such file to load – ubygems (LoadError)” 是什么意思?</span></a></li>
+<li><a href="#Why_do_I_get_.22cygwin_warning:_MS-DOS_style_path_detected_.5B....5D.22_when_I_run_a_command.3F"><span class="tocnumber">1.1.3</span><span class="toctext">当我运行命令的时候为什么会有 “cygwin warning: MS-DOS style path detected […]”提示?</span></a></li>
+<li><a href="#Where_can_I_download_previous_versions.3F"><span class="tocnumber">1.1.4</span> <span class="toctext">哪里可以得到 E 的更早版本?</span></a></li>
+<li><a href="#Will_there_be_a_Linux_version.3F"><span class="tocnumber">1.1.5</span> <span class="toctext">E 有linux版么?</span></a></li>
+<li><a href="#What_are_the_keyboard_shortcuts.3F"><span class="tocnumber">1.1.6</span><span class="toctext">E 快捷键有哪些 ?</span></a></li>
+<li><a href="#Is_there_a_new_release_RSS_feed.3F"><span class="tocnumber">1.1.7</span> <span class="toctext">我能订阅 E 的更新信息么?</span></a></li>
+<li><a href="#Is_it_possible_to_.22find_in_files.22_or_.22find_in_project.22.3F"><span class="tocnumber">1.1.8</span> <span class="toctext">E 能实现 “在文件中查找” 或者 “在工程中查找”么?</span></a>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/E-texteditor/">E-texteditor</a><a href="/tags/翻译/">翻译</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+  <article >
+
+  
+    
+    <h3 class="article-title"><a href="/2011/01/27/e-texteditor-e5-87-a0-e7-a7-8d-e7-a0-b4-e8-a7-a3-e6-96-b9-e6-b3-95/"><span>E-texteditor 几种破解方法</span></a></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/01/27/e-texteditor-e5-87-a0-e7-a7-8d-e7-a0-b4-e8-a7-a3-e6-96-b9-e6-b3-95/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-01-26T16:32:13.000Z">
+          2011-01-27
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>如果你不知道什么是E-texteditor ，请看这里《<a href="http://blog.meituo.net/2010/10/17/%E6%8E%A8%E8%8D%90%E6%88%91%E5%B8%B8%E7%94%A8%E5%B9%B6%E5%A5%BD%E7%94%A8%E7%9A%84%E4%B8%80%E6%AC%BE%E4%BB%A3%E7%A0%81%E7%BC%96%E8%BE%91%E5%99%A8-e-texteditor/">推荐我常用并好用的一款代码编辑器 e-texteditor</a>》。
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/E-texteditor/">E-texteditor</a><a href="/tags/破解/">破解</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+
+
+
+<nav class="pagination">
+  
+  <a href="/page/2/" class="pagination-prev">上一页</a>
+  
+  
+  <a href="/page/4/" class="pagination-next">下一页</a>
+  
+</nav>
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

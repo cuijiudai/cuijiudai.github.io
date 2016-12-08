@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jQuery live()和delegate()的不同 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="jQuery live()和delegate()的不同"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>jQuery live()和delegate()的不同</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/jquery-live-e5-92-8cdelegate-e7-9a-84-e4-b8-8d-e5-90-8c/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:51:42.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><pre><br>&lt;ul id=”items”&gt;<br>    &lt;li&gt; Click Me &lt;/li&gt;<br>&lt;/ul&gt;<br></pre><br><br><span></span><br><br><pre><br>// Bind attaches an event handler only to the elements<br>// that match a particular selector. This, expectedly,<br>// excludes any dynamically generated elements.<br>//仅将事件句柄绑定到符合特定选择的元素，显然不包括任何动态生成的元素。<br>$(“#items li”).click(function() {<br>    $(this).parent().append(“&lt;li&gt;New Element&lt;/li&gt;”);<br>});<br><br>// Live(), introduced in 1.3, allows for the binding<br>// of event handlers to all elements that match a<br>// selector, including those created in the future.<br>// It does this by attaching the handler to the document.<br>// Unfortunately, it does not work well with chaining.<br>// Don’t expect to chain live() after calls like<br>// children().next()…etc.<br>//live()方法在1.3引进，提供将事件句柄添加到所有符合选择条件的元素，<br>//包含后来生成的匹配元素，他是靠将事件句柄绑定到document实现的，<br>//不幸的是，在链式操作时不起作用，别想在children().next()等后再调用live()<br><br>//正常的使用方法<br>$(“li”).live(“click”, function() {<br>    $(this).parent().append(“&lt;li&gt;New Element&lt;/li&gt;”);<br>});<br><br>//失败的例子<br>$(‘#myContainer’).children(‘table’).find(‘tr’).live(‘click’, function(event) {<br>    /<strong><em> does not work! </em></strong>/<br>});<br><br>// Delegate, new to version 1.4, perhaps should have been a complete<br>// replacement for Live(). However, that obviously<br>// would have broken a lot of code! Nonetheless,<br>// delegate remedies many of the short-comings<br>// found in live(). It attaches the event handler<br>// directly to the context, rather than the document.<br>// It also doesn’t suffer from the chaining issues<br>// that live does. There are many performance benefits<br>// to using this method over live().<br>//delegate()是在1.4引进的，或许他会完全替代live,但是这显然会打乱很多代码！<br>//虽然如此 ，delegate补救了live的很多不足，他将事件直接绑定到了context，而不是document。<br>//他也能在链式操作中使用，在性能上比live强很多。<br>$(‘#items’).delegate(‘li’, ‘click’, function() {<br>    $(this).parent().append(‘&lt;li&gt;New Element&lt;/li&gt;’);<br>});<br><br>// By passing a DOM element as the context of our selector, we can make<br>// Live() behave (almost) the same way that delegate()<br>// does. It attaches the handler to the context, not<br>// the document - which is the default context.<br>// The code below is equivalent to the delegate() version shown above.<br>//通过给选择器传递一个 DOM 元素作为选择范围，live()就基本上和delegate()差不多了，<br>//下面的代码和用delegates()是等效的<br>$(“li”, $(“#items”)[0]).live(“click”, function() {<br>    $(this).parent().append(“&lt;li&gt;New Element&lt;/li&gt;”);<br>});<br></pre><br><br>英文原文:<a href="http://net.tutsplus.com/tutorials/javascript-ajax/quick-tip-the-difference-between-live-and-delegate/" target="_blank" rel="external">Quick Tip: The Difference Between Live() and Delegate() </a><br></div>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

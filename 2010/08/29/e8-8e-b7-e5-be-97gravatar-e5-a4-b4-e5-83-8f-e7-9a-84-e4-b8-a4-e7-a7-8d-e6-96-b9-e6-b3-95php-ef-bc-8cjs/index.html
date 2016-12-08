@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>获得Gravatar头像的两种方法(php，js) | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="获得Gravatar头像的两种方法(php，js)"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>获得Gravatar头像的两种方法(php，js)</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/e8-8e-b7-e5-be-97gravatar-e5-a4-b4-e5-83-8f-e7-9a-84-e4-b8-a4-e7-a7-8d-e6-96-b9-e6-b3-95php-ef-bc-8cjs/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:29:07.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><br><br><img src="http://blog.meituo.net/wp-content/uploads/get_gravatar/gravatar.jpg" alt="gravatar 头像"><br><br><dfn><a href="http://www.gravatar.com" target="_blank" rel="external">Gravatar/&gt;</a></dfn>是我们熟知的全球通用的头像系统，只要注册gravatar邮箱，那么我们的头像就和邮箱绑定了，如在支持gravatar的系统（如WordPress等）中我们在留言时，我们的头像会自动匹配显示出来。在WordPress中我们就有一个函数<code>get_avatar</code>.<br><br><a id="more"></a><br><br>###  WordPress获得Gravatar头像<br><br><pre>    get_avatar($id_or_email, $size, $default, $alt);<br></pre><br><br><em>   $id_or_email, 当然就是id或者email，我们一般都用email，使用<code>get_the_author_meta()</code>来获得email
+</em>   $size,就是头像大小<br><em>   $default,就是默认头像地址,默认是“神秘男人“头像
+</em>   $alt 是头像的alt文字（alternate text）<br><br>详细见<a href="http://www.deluxeblogtips.com/2010/04/wordpress-get-author-avatar-without.html" target="_blank" rel="external">WordPress: Get author avatar without plugins </a>.<br><br>我们先介绍一下gravatar头像的URL：<br><br><pre>    <a href="http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?s=80" target="_blank" rel="external">http://www.gravatar.com/avatar/3b3be63a4c2a439b013787725dfce802.jpg?s=80</a><br></pre><br><br>这个URL由三部分构成<br><br>### php获得Gravatar头像<br><br>那么这就很简单了，php有内置的MD5函数。<br><br><pre><br>echo (“&lt;img src=’<a href="http://www.gravatar.com/avatar/&quot;.MD5(&quot;cuijiudai@gmail.com&quot;).&quot;?s=80&#39;/&amp;gt" target="_blank" rel="external">http://www.gravatar.com/avatar/&quot;.MD5(&quot;cuijiudai@gmail.com&quot;).&quot;?s=80&#39;/&amp;gt</a>;”);<br></pre><br><br>### js获得Gravatar头像<br><br>js就困难了，因为js没有内置MD5函数，所以，我们要先写一个MD5函数。我们使用了<a href="http://www.webtoolkit.info/javascript-md5.html" target="_blank" rel="external">MD5 function from WebToolkit</a>。<br><br>使用YUI压缩过的MD5函数，我们写了一个方法<code>get_gravatar</code>。<br><br><pre><br>function get_gravatar(email, size) {<br><br>    // MD5 (Message-Digest Algorithm) by WebToolkit<br>    // <a href="http://www.webtoolkit.info/javascript-md5.html" target="_blank" rel="external">http://www.webtoolkit.info/javascript-md5.html</a><br><br>    var MD5=function(s){function L(k,d){return(k&lt;&lt;d)|(k&gt;&gt;&gt;(32-d))}function K(G,k){var I,d,F,H,x;F=(G&amp;2147483648);H=(k&amp;2147483648);I=(G&amp;1073741824);d=(k&amp;1073741824);x=(G&amp;1073741823)+(k&amp;1073741823);if(I&amp;d){return(x^2147483648^F^H)}if(I|d){if(x&amp;1073741824){return(x^3221225472^F^H)}else{return(x^1073741824^F^H)}}else{return(x^F^H)}}function r(d,F,k){return(d&amp;F)|((~d)&amp;k)}function q(d,F,k){return(d&amp;k)|(F&amp;(~k))}function p(d,F,k){return(d^F^k)}function n(d,F,k){return(F^(d|(~k)))}function u(G,F,aa,Z,k,H,I){G=K(G,K(K(r(F,aa,Z),k),I));return K(L(G,H),F)}function f(G,F,aa,Z,k,H,I){G=K(G,K(K(q(F,aa,Z),k),I));return K(L(G,H),F)}function D(G,F,aa,Z,k,H,I){G=K(G,K(K(p(F,aa,Z),k),I));return K(L(G,H),F)}function t(G,F,aa,Z,k,H,I){G=K(G,K(K(n(F,aa,Z),k),I));return K(L(G,H),F)}function e(G){var Z;var F=G.length;var x=F+8;var k=(x-(x%64))/64;var I=(k+1)<em>16;var aa=Array(I-1);var d=0;var H=0;while(H&lt;F){Z=(H-(H%4))/4;d=(H%4)</em>8;aa[Z]=(aa[Z]|(G.charCodeAt(H)&lt;&lt;d));H++}Z=(H-(H%4))/4;d=(H%4)<em>8;aa[Z]=aa[Z]|(128&lt;&lt;d);aa[I-2]=F&lt;&lt;3;aa[I-1]=F&gt;&gt;&gt;29;return aa}function B(x){var k=””,F=””,G,d;for(d=0;d&lt;=3;d++){G=(x&gt;&gt;&gt;(d</em>8))&amp;255;F=”0”+G.toString(16);k=k+F.substr(F.length-2,2)}return k}function J(k){k=k.replace(/\r\n/g,”\n”);var d=””;for(var F=0;F&lt;k.length;F++){var x=k.charCodeAt(F);if(x&lt;128){d+=String.fromCharCode(x)}else{if((x&gt;127)&amp;&amp;(x&lt;2048)){d+=String.fromCharCode((x&gt;&gt;6)|192);d+=String.fromCharCode((x&amp;63)|128)}else{d+=String.fromCharCode((x&gt;&gt;12)|224);d+=String.fromCharCode(((x&gt;&gt;6)&amp;63)|128);d+=String.fromCharCode((x&amp;63)|128)}}}return d}var C=Array();var P,h,E,v,g,Y,X,W,V;var S=7,Q=12,N=17,M=22;var A=5,z=9,y=14,w=20;var o=4,m=11,l=16,j=23;var U=6,T=10,R=15,O=21;s=J(s);C=e(s);Y=1732584193;X=4023233417;W=2562383102;V=271733878;for(P=0;P&lt;C.length;P+=16){h=Y;E=X;v=W;g=V;Y=u(Y,X,W,V,C[P+0],S,3614090360);V=u(V,Y,X,W,C[P+1],Q,3905402710);W=u(W,V,Y,X,C[P+2],N,606105819);X=u(X,W,V,Y,C[P+3],M,3250441966);Y=u(Y,X,W,V,C[P+4],S,4118548399);V=u(V,Y,X,W,C[P+5],Q,1200080426);W=u(W,V,Y,X,C[P+6],N,2821735955);X=u(X,W,V,Y,C[P+7],M,4249261313);Y=u(Y,X,W,V,C[P+8],S,1770035416);V=u(V,Y,X,W,C[P+9],Q,2336552879);W=u(W,V,Y,X,C[P+10],N,4294925233);X=u(X,W,V,Y,C[P+11],M,2304563134);Y=u(Y,X,W,V,C[P+12],S,1804603682);V=u(V,Y,X,W,C[P+13],Q,4254626195);W=u(W,V,Y,X,C[P+14],N,2792965006);X=u(X,W,V,Y,C[P+15],M,1236535329);Y=f(Y,X,W,V,C[P+1],A,4129170786);V=f(V,Y,X,W,C[P+6],z,3225465664);W=f(W,V,Y,X,C[P+11],y,643717713);X=f(X,W,V,Y,C[P+0],w,3921069994);Y=f(Y,X,W,V,C[P+5],A,3593408605);V=f(V,Y,X,W,C[P+10],z,38016083);W=f(W,V,Y,X,C[P+15],y,3634488961);X=f(X,W,V,Y,C[P+4],w,3889429448);Y=f(Y,X,W,V,C[P+9],A,568446438);V=f(V,Y,X,W,C[P+14],z,3275163606);W=f(W,V,Y,X,C[P+3],y,4107603335);X=f(X,W,V,Y,C[P+8],w,1163531501);Y=f(Y,X,W,V,C[P+13],A,2850285829);V=f(V,Y,X,W,C[P+2],z,4243563512);W=f(W,V,Y,X,C[P+7],y,1735328473);X=f(X,W,V,Y,C[P+12],w,2368359562);Y=D(Y,X,W,V,C[P+5],o,4294588738);V=D(V,Y,X,W,C[P+8],m,2272392833);W=D(W,V,Y,X,C[P+11],l,1839030562);X=D(X,W,V,Y,C[P+14],j,4259657740);Y=D(Y,X,W,V,C[P+1],o,2763975236);V=D(V,Y,X,W,C[P+4],m,1272893353);W=D(W,V,Y,X,C[P+7],l,4139469664);X=D(X,W,V,Y,C[P+10],j,3200236656);Y=D(Y,X,W,V,C[P+13],o,681279174);V=D(V,Y,X,W,C[P+0],m,3936430074);W=D(W,V,Y,X,C[P+3],l,3572445317);X=D(X,W,V,Y,C[P+6],j,76029189);Y=D(Y,X,W,V,C[P+9],o,3654602809);V=D(V,Y,X,W,C[P+12],m,3873151461);W=D(W,V,Y,X,C[P+15],l,530742520);X=D(X,W,V,Y,C[P+2],j,3299628645);Y=t(Y,X,W,V,C[P+0],U,4096336452);V=t(V,Y,X,W,C[P+7],T,1126891415);W=t(W,V,Y,X,C[P+14],R,2878612391);X=t(X,W,V,Y,C[P+5],O,4237533241);Y=t(Y,X,W,V,C[P+12],U,1700485571);V=t(V,Y,X,W,C[P+3],T,2399980690);W=t(W,V,Y,X,C[P+10],R,4293915773);X=t(X,W,V,Y,C[P+1],O,2240044497);Y=t(Y,X,W,V,C[P+8],U,1873313359);V=t(V,Y,X,W,C[P+15],T,4264355552);W=t(W,V,Y,X,C[P+6],R,2734768916);X=t(X,W,V,Y,C[P+13],O,1309151649);Y=t(Y,X,W,V,C[P+4],U,4149444226);V=t(V,Y,X,W,C[P+11],T,3174756917);W=t(W,V,Y,X,C[P+2],R,718787259);X=t(X,W,V,Y,C[P+9],O,3951481745);Y=K(Y,h);X=K(X,E);W=K(W,v);V=K(V,g)}var i=B(Y)+B(X)+B(W)+B(V);return i.toLowerCase()};<br><br>    var size = size || 80;<br><br>    return ‘<a href="http://www.gravatar.com/avatar/" target="_blank" rel="external">http://www.gravatar.com/avatar/</a>‘ + MD5(email) + ‘.jpg?s=’ + size;<br>}<br></pre><br><br>现在我们可以用下面的js获得gravatar头像了<br><br><pre><br>document.write(‘&lt;img src=”‘ + get_gravatar(‘myemail@mydomain.com’, 50) + ‘“ /&gt;’);<br></pre><br><br>大功告成，看看例子吧。<br><br><div><br>    <a href="http://blog.meituo.net/wp-content/uploads/get_gravatar/gravatar.php" target="_blank" rel="external">demo</a><a href="http://www.deluxeblogtips.com/2010/04/get-gravatar-using-only-javascript.html" target="_blank" rel="external">英文引用</a><br></div></div>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>, <a href="/categories/JavaScript/PHP/">PHP</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

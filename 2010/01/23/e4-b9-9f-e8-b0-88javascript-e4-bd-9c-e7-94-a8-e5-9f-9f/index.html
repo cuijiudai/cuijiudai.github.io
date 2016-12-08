@@ -1,0 +1,295 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>也谈JavaScript作用域 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="作用域">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="也谈JavaScript作用域"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>也谈JavaScript作用域</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/01/23/e4-b9-9f-e8-b0-88javascript-e4-bd-9c-e7-94-a8-e5-9f-9f/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-01-23T01:19:41.000Z">
+          2010-01-23
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>JavaScript真的很特别，令我始终难以理解，今天看了一篇不错的文章，作用域方面，结合以前的看的文章总结一下.</p>
+<h3 id="一个经典的例子"><a href="#一个经典的例子" class="headerlink" title="一个经典的例子"></a>一个经典的例子</h3><p>先来看淘宝前端<span id="yubo">玉伯</span>的总结：<a id="more"></a></p>
+<blockquote>
+<p>JS是一段一段执行的（以&lt;script&gt;标签来分割），执行每一段之前，都有一个“预编译”，预编译干的活是：声明所有var变量（初始为undefined），解析定义式函数语句。</p>
+</blockquote>
+<p>独孤逸辰：“<em>这句话感觉有不对的地方，下面有例子;应该是进入一个<a href="#newyu">新的作用域</a>也会有“预编译”，自定义函数和var声明还不太一样。下面可以验证。</em>”</p>
+<p>司徒正美说的比较准确：(<a href="http://www.cnblogs.com/rubylouvre/archive/2009/08/21/1551270.html" target="_blank" rel="external">这里</a>)</p>
+<blockquote>
+<p>在预编译阶段，它是用函数来划分作用域，然后逐层为其以 var 声明的变量（下略称为var变量）与函数定义开辟内存空间，再然后对var变量进行特殊处理，统统赋初始值为undefined<br>注意下面的例子是在windows作用域下。<br>“window作用域下，a = 1和var a = 1” 的区别的也很经典：</p>
+<pre><code>a = 1相当于window.a = 1，是动态地为window添加一个成员；
+
+var a = 1是在当前作用域（也就是window）下声明一个a，这个声明是在整个作用域内都有效的。
+
+换句话说，其实区别就在于var a = 1比a = 1多了一个声明的行为。
+</code></pre></blockquote>
+<p>再看几个例子：</p>
+<ul>
+<li>1.<br>[code=”javascript”]<br>  alert(t);<br>  alert(‘ok’);<br>  t = 2;<br>[/code]<br>  t未声明，执行报错。</li>
+<li><p>2.<br>[code=”javascript”]<br>  alert(t);<br>  alert(‘ok’);<br>  var t = 2;<br>[/code]</p>
+<p> 弹出undefined和ok。预编译的时候，声明了变量t；执行到alert(t)这行代码的时候，t尚未被赋值，所以弹出undefined。</p>
+</li>
+<li><p>3.</p>
+<p>[code=”javascript”]<br>  a();<br>  function a() {}<br>  alert(‘ok’);<br>[/code]<br>  弹出ok。预编译的时候，解析了定义式函数语句function a() {}，顺利执行。*   4.</p>
+<p>[code=”javascript”]<br>  a();<br>  var a = function() {};<br>  alert(‘ok’);<br>[/code]<br>  a不是函数，执行报错。预编译的时候，声明了变量a = undefined；执行到a()时，a还等于undefined，不是函数，所以执行a()会报错。*   5.<br>[code=”javascript”]<br>  <script type="text/javascript"></p>
+<pre><code>a();
+alert(&apos;first block&apos;);
+</code></pre><p>  </script><br>  <script type="text/javascript"></p>
+<pre><code>alert(&apos;second block&apos;);
+</code></pre><p>  </script><br>[/code]<br>  弹出second block。因为JS是一段一段执行的，第一段执行到a()的时候报错，整个第一段都不会再执行，第二段正常执行。<br>这个例子不错，但是没有涉及新的作用域，看下面的。</p>
+</li>
+</ul>
+<h3 id="那什么是新的作用域？"><a href="#那什么是新的作用域？" class="headerlink" title="那什么是新的作用域？"></a>那什么是新的作用域？</h3><p>在Javascript，全局环境本身就一个对象。在浏览器宿主中这个对象是window，而当Javascript用于其它非浏览器的宿主，如嵌入式的环境中，可能会是其它的对象。<br>在这里也纠正一个观念，有很多人都认为Javascript只在浏览器中使用，其实Javascript也能在很多非Web情况下使用，据介绍Javascript在一些基于嵌入式的应用领域表现得也很出色，<br>当然这些我也只是听过传说而已。言归正传，当我们写下：<br><strong><br>var i=1时，其实就是声明了一个window作用域的一个变量。<br>而当我们写下i=1时，是声明了一个window的属性。
+</strong><br>（独孤逸辰：注意这个i也是在windows作用域下）<br>下面的某些说法有问题，你先看看。<br>看这样一段代码：<br>    [code=”javascript”]<br>    <script type="text/javascript"><br>        var a = “hello”;<br>        b = “world”;<br>        Test();<br>        function Test() {<br>            alert(a + “ “+ b);<br>            var a = “welcome”;<br>            b = “china”;<br>            alert(a + “ “+ b);<br>        }<br>        alert(a + “ “+ b);<br>    </script><br>    [/code]</p>
+<p>这段代码分别输出的结果是：undefined world，welcome china, hello china.</p>
+<p>我们来分别解释：<br>在上文中，我们说过，在Javascript预编译时，会把所有var变量创建，默认值为undefined，我们在这里可以举一个例子：<br>我们可以写这样一段代码：<br>[code=”javascript”]<br>    <script type="text/javascript"><br>       alert(a);<br>        alert(b);<br>        vara = “111”;<br>        b = “111”;<br>    </script><br>[/code]</p>
+<p>当我们执行运行这段脚本时，可以发现，首先弹出undefined，然后回提示脚本错误，提示b不存在。由此 就可以表明，a在预编译的过程中就已经被创建并且初始化为undefined，而b却只能在实际运行时按顺序去解释。其实在预编译后的 Javascript代码可以近乎理解如下：</p>
+<p> [code=”javascript”]<br>    <script type="text/javascript"><br>        var a = undefined;<br>        alert(a);<br>        alert(b);<br>        a = “111”;<br>        b = “111”;<br>    </script><br>[/code]</p>
+<p>接下来我们可以谈一下函数的作用域问题，<strong>每当代码运行进入一个函数时，Javascript引擎就会自动创建一个新的作用域，然后把这个新作用域作为当前作用域的子作用域，然后把当前的代码作用域切换到这个新作用域。当代码退出函数时，这个作用域销毁，把代码作 用域交还给他的父作用域。</strong><br>好，准备工作差不多了，接下来我们就来解释第一个问题：问什么会输出undefined world。<br>首先代码进行在预编译，当进入 Test方法时，开启一个新作用域，然后把全局作用域作为他的父作用域。<br>然后对Test内的方法进行预编译，和上面的代码一样，Test方法被预编译后方法体大致如下：<br>    [code=”javascript”]<br>    function Test() {<br>    vara = undefined;<br>    alert(a + “ “+ b);<br>    var a = “welcome”;<br>    b = “china”;<br>    alert(a + “ “+ b);<br>    }<br>    [/code]<br>当然，在当前作用域下无法找到b，于是他就会到他的父作用域下，也就是全局作用域找到了b=“world”。于是也就产生了这样的结果。<br>第二次弹出welcome china，没什么好说的。<br>第三次，弹出hello china。我们可以这样理解，var a 只是 方法Test的一个局部变量，而b由于事先未声明，因此他会去父作用域中去找到对应的定义。<br>好，接下来，我们再看一下这个方法的若干个变体。<br>        [code=”javascript”]<br>    <script type="text/javascript"><br>        var a = “hello”;<br>        b = “world”;<br>        Test();<br>        function Test() {<br>            alert(a + “ “+ b);<br>            a = “welcome”;<br>            b = “china”;<br>            alert(a + “ “+ b);<br>        }<br>        alert(a + “ “+ b);<br>    </script><br>[/code]</p>
+<p>首先，我们将方法体内的var a改成a，我们先不看答案，直接来分析，首先，在预编译阶段，方法体内几乎没有任何改变，因此此时a和b一样，都要去他们的父作用域中去寻找，因此第一次 出的结果应该是hello world，第二次没什么说的：welcome china，第三次由于a和b在本作用域内都没有事先定义，因此都是再改变父作用域内的值，因此应该输出welcome china.<br>我们继续：<br>[code=”javascript”]<br>   <script type="text/javascript"><br>        var a = “hello”;<br>        b = “world”;<br>        Test();<br>        function Test() {<br>            alert(a + “ “+ b);<br>            var a = “welcome”;<br>            var b = “china”;<br>            alert(a + “ “+ b);<br>        }<br>        alert(a + “ “+ b);<br>    </script><br>[/code]<br>和上面的分析一样，应该输出 undefined undefined，welcome china，hello world.<br>如果按照<a href="#yubo">玉伯的说法</a>以&lt;script&gt;标签来分割的话，第一个alert应该是可以取到父作用域中的a，b的值，即windows作用域的值，也就是alert 出hello  world，但是结果却是undefined undefined。<br>继续：<br>    [code=”javascript”]<br>  <script type="text/javascript"><br>       a = “hello”;<br>        b = “world”;<br>        Test();<br>        function Test() {<br>            alert(a + “ “+ b);<br>            var a = “welcome”;<br>            b = “china”;<br>            alert(a + “ “+ b);<br>        }<br>        alert(a + “ “+ b);<br>    </script></p>
+<p>[/code]<br>应该是undefined world,welcome china,hello china.<br>经试验，都没问题， 不知道你明白了么？<br>因此我们可以得出，每个变量在找不到自己的定义时，都会沿着作用链向上寻找，这样就很可能会出现未预知的错 误，给排错添加了很多困难。更麻烦的是，还可能会对父作用域上的变量值进行修改，因此我们在声明变量时应该尽量加上var，尽管Javascript并不 强迫我们这样做。</p>
+<h3 id="我的总结"><a href="#我的总结" class="headerlink" title="我的总结"></a>我的总结</h3><p>也就是他们的合并，站着巨人的肩膀上，呵呵，<strong> JS是一段一段执行的（以作用域来分割），执行每一段之前，都有一个“预编译”，预编译干的活是：声明所有var变量，初始为化为undefined（相当于copy一份并赋值undefined放到作用域的开始），而非var声明的变量不会被预编译，直到执行到这条语句才被赋值，赋值时要看此作用域是否有本变量的var声明，如果有则是对本作用域内的赋值，否则是对上级作用域链内的此变量的赋值。</strong></p>
+<p>到底什么时候会有新的作用域哪？我也不清楚，可以肯定的是进入函数的时候就进入了一个新的作用域。进入script的时候产生新的作用域。</p><p><br>[code=”javascript”]</p>
+<script type="text/javascript" charset="utf-8">
+var arg= 1;
+</script>
+
+<script type="text/javascript" charset="utf-8">
+alert(arg);
+var arg=2
+</script>
+[/code]
+alert出的是1，不是undefined。和function产生的作用域不同。
+
+对定义式的函数会产生出新的作用域，举个例子
+[code="javascript"]
+    <script type="text/javascript">
+        function Hello() {
+            alert("Hello");
+        }
+        Hello();
+    </script>
+    <script type="text/javascript">
+        function Hello() {
+            alert("Hello World");
+        }
+        Hello();
+    </script>
+    [/code]
+两次的值是不一样的。但是如下
+[code="javascript"]
+    <script type="text/javascript">
+        function Hello() {
+            alert("Hello");
+        }
+        Hello();
+        function Hello() {
+            alert("Hello World");
+        }
+        Hello();
+    </script>
+[/code]    
+alert出的是一样的。说明在同一个script块中定义式函数会被预编译，注意其预编译的形式，这时不会对函数内部变量产生影响，上例相当于
+[code="javascript"]
+  <script type="text/javascript">
+        var Hello = function() {
+            alert("Hello");
+        }
+        Hello = function() {
+            alert("Hello World");
+        }
+        Hello();
+        Hello();
+  </script>
+[/code]    
+感觉是这样的，script下的变量，全局变量，定义式函数是在不同script下分别预编译的，但全局变量可以在不同script中使用，感觉好像是将上一个script中的全局变量放到下一个script编译过的var变量的后面。说的有点乱。
+不知你明白了么.还是看一个script的例子吧
+[code="javascript"]
+var arg= 1;
+function funcTest() { 
+        alert(arg); 
+        arg=2        
+        var arg=3;
+        alert(arg); 
+ }
+alert(arg)
+arg= 10;
+funcTest();
+alert(arg)
+[/code]
+
+依次1，undefined，3，10；
+执行过程如下首先对全局初始化预编译，发现有arg有var声明，相当于在头部有个arg=undefined，然后依次执行，arg=1，函数定义跳过（调用时内部才会被预编译），alert出1，然后arg=10，注意此时全局的arg=10了，然后对函数funTest预编译，发现有var声明，则此作用域内预编译时头部arg=undefined，然后执行时，alert出undefined，然后此作用域内依次赋值arg=2，arg=3,然后alert出3，然后跳出此函数作用域，回到全局作用域，alert全局的arg，此时为10.
+
+<p>其实也就是常说的javascript的作用域机制：词法作用域（lexcical scope）。通俗地讲，_就是javascript变量的作用域是在定义时决定而不是执行时决定_， 也就是说词法作用域取决于源码。</p><p>
+例子如下，
+[code="javascript"]
+var arg= 1;
+function funcTest() { 
+        alert(arg);  
+        var arg= 2;
+ }
+ arg= 10;
+ funcTest();
+[/code]
+
+好的,感觉如何？你感觉懂了么？如果感觉懂了就看一下下面alert出什么吧，不懂的再看一遍
+[code="javascript"]
+<script type="text/javascript" charset="utf-8">
+
+var arg= 1;
+function funcTest() { 
+        alert(arg);   
+        var arg= 2;
+        inone();
+        function inone(){
+            alert(arg);
+            var arg=3;
+            inner();
+            function inner(){
+                alert(arg);
+                arg=4;
+            }
+        } 
+ }
+ arg=4;
+ funcTest();
+
+</script>
+
+</p><p>[/code]<br>alert出来什么那？自己试一下和自己想的是否一样吧，注意词法作用域啊。</p>
+<p></p><p>自己还是在学习，JavaScript用的也不多，更深层次的讨论见司徒正美的博客<a href="http://www.cnblogs.com/rubylouvre/archive/2009/08/21/1551270.html" target="_blank" rel="external">javascript变量的作用域</a>，有多深层次？见下面</p>
+<p>[code=”javascript”]</p>
+<p><script><br>function foo(){<br>  foo.abc = function(){alert(‘def’)}<br>  this.abc = function(){alert(‘xyz’)}<br>  abc = function(){alert(‘@@@@@’)};<br>  var abc = function(){alert(‘$$$$$$’)}<br>}<br>foo.prototype.abc = function(){alert(‘456’);}<br>foo.abc = function(){alert(‘123’);}</p>
+<p>var f = new foo();<br>f.abc();<br>foo.abc();<br>abc();<br></script><br>[/code]<br>不懂的继续学习，呵呵。<br></p>我有什么错误还请指出来，共同探讨。谢谢<p></p><br>参考文献:<a href="http://www.chencheng.org/blog/2009/01/20/javascript-order/" target="_blank" rel="external">陈成的博客</a><a href="http://www.cnblogs.com/kym/archive/2010/01/06/1640043.html" target="_blank" rel="external">为中国IT贡献自己的一份微薄之力</a><a href="http://hi.baidu.com/meteoric_cry/blog/item/7df9af2b92caa2f0e7cd40dd.html" target="_blank" rel="external">【转载】javascript作用域链(Scope Chain)初探</a><a href="http://www.cnblogs.com/rubylouvre/archive/2009/08/21/1551270.html" target="_blank" rel="external">javascript变量的作用域</a><p></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/作用域/">作用域</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

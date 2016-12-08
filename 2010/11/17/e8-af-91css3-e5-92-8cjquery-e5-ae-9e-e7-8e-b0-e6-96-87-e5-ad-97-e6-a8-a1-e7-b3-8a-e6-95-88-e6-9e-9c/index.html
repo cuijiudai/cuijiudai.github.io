@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>[译]css3 和jQuery实现文字模糊效果 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="css3">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="[译]css3 和jQuery实现文字模糊效果"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>[译]css3 和jQuery实现文字模糊效果</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/11/17/e8-af-91css3-e5-92-8cjquery-e5-ae-9e-e7-8e-b0-e6-96-87-e5-ad-97-e6-a8-a1-e7-b3-8a-e6-95-88-e6-9e-9c/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-11-17T14:04:14.000Z">
+          2010-11-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 24 Apr 2010 08:47 PM PDT</p>
+<p>当你要实现鼠标悬停时的文字模糊效果你会怎么做？我也有同样的问题，现在我就分享一下。IE有独有的filter blur属性，我是将text-shadow属性稍微改变了一下来实现这种效果。<span id="more-568"></span><br><a id="more"></a></p>
+<h3 id="效果示例"><a href="#效果示例" class="headerlink" title="效果示例"></a>效果示例</h3><p><img src="http://blog.meituo.net/wp-content/uploads/jquery_css_blur/blur.JPG" alt="text-shadow的blur效果"></p>
+<p>我从text-shadow实现的阴影效果得到了启发，但这好像和blur不沾边，我还需要文字透明transparent，其实问题的在于它的第三个参数 ：text-shadow:0px 0px 10px #ff33ff;</p>
+<p>我添加了一些jQuery效果使它更酷，当你鼠标远离文字的时候效果出现。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p><strong>CSS</strong>:</p>
+<p>[code=’css’]<br>.blur{<br>    display: block;<br>    text-decoration: none;<br>    font:  100px Georgia, sans-serif;<br>    letter-spacing: -5px;<br>    text-align: center; </p>
+<pre><code>//these two lines do the magic
+color: transparent;
+text-shadow: 0px 0px 1px #FF33FF;
+</code></pre><p>}</p>
+<p>.blur:hover{<br>   text-shadow: 0px 0px 10px #FF33FF;<br>}<br>[/code]</p>
+<p><strong>jQuery</strong>:</p>
+<p>[code=’js’]<br>$(document).ready(function() {<br>    $(document).mousemove(function(e) {<br>        if(e.pageY&gt; 230)<br>         $(“#blur”).css({‘text-shadow’: ‘0px 0px ‘+(( e.pageY - 230) / 18)+’px #FF33FF’})<br>        else</p>
+<pre><code>     $(&quot;#blur&quot;).css({&apos;text-shadow&apos;: &apos;0px 0px 0px #FF33FF&apos;});
+});
+</code></pre><p>});<br>[/code]</p>
+<p><strong>HTML</strong>:</p>
+<p>[code=’html’]<br><a href="http://motyar.blogspot.com" target="_blank" rel="external">With JQuery</a></p>
+<p><a href="http://motyar.blogspot.com" target="_blank" rel="external">Pure CSS ( Hover me )</a><br>[/code]</p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><div class="download"><br>    <a href="http://blog.meituo.net/wp-content/uploads/jquery_css_blur/blur.html" target="_blank" rel="external">示例</a> <a href="http://motyar.blogspot.com/2010/04/blur-effect-with-css-and-jquery.html" target="_blank" rel="external">原文（需要翻墙）</a><br></div>
+
+<p>这个英文站点还有其他很多有趣的文章，推荐一下。</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>, <a href="/categories/css-html/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/css3/">css3</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>5个简单有用的css属性 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="css,html">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="5个简单有用的css属性"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>5个简单有用的css属性</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2009/11/13/5-e4-b8-aa-e7-ae-80-e5-8d-95-e6-9c-89-e7-94-a8-e7-9a-84css-e5-b1-9e-e6-80-a7/" rel="bookmark">
+        <time class="entry-date published" datetime="2009-11-13T14:53:12.000Z">
+          2009-11-13
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>译自：<a href="http://www.webdesignerwall.com/tutorials/5-simple-but-useful-css-properties/" target="_blank" rel="external">webdesignerwall</a></p>
+<h3 id="1-CSS-clip裁切属性"><a href="#1-CSS-clip裁切属性" class="headerlink" title="1. CSS clip裁切属性"></a><em>1.</em> CSS clip裁切属性</h3><p>裁切像一个遮罩. 它能让你将目标内容遮罩成长方形. 必须的设置: 将目标物体设置成position:absolute. 然后依次设置clip的top,right,bottom,left值。</p>
+<a id="more"></a>
+<p><img src="http://blog.meituo.net/wp-content/uploads/five_useful_css_property/css-clip.gif" alt="how css clip works"></p>
+<h4 id="图片裁切例子-例子"><a href="#图片裁切例子-例子" class="headerlink" title="图片裁切例子(例子)"></a>图片裁切例子<small>(<a href="http://www.webdesignerwall.com/wp-content/uploads/2009/11/css-clip.html" target="_blank" rel="external">例子</a>)</small></h4><p><strong> 首先将父级div设置为position:relative,然后将&lt;img\&gt;设置为position: absolute</strong>,参见下图</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/five_useful_css_property/img-clip.gif" alt="image clip"><br>[code=”css”]<br>.clip {<br>  position: relative;<br>  height: 130px;<br>  width: 200px;<br>  border: solid 1px #ccc;<br>}<br>.clip img {<br>  position: absolute;<br>  clip: rect(30px 165px 100px 30px);<br>}<br>[/code]</p>
+<h4 id="图片重设大小并裁切-demo"><a href="#图片重设大小并裁切-demo" class="headerlink" title="图片重设大小并裁切 (demo)"></a>图片重设大小并裁切 <small>(<a href="http://www.webdesignerwall.com/wp-content/uploads/2009/11/css-clip.html" target="_blank" rel="external">demo</a>)</small></h4><p> 我想将原来的图片变为原来的 50% 来做一个缩略图.所以, 所以我用width和height来变换图片的大小并用clip来遮罩图像，然后使用 left属性使图像左移5px (博主注释：因为图像宽100px，左右各遮罩了15px，所以左移15px，使图像居中)</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/five_useful_css_property/thumb-gallery.gif" alt="thumb gallery"><br>[code=”css”]<br>.gallery li {<br>  float: left;<br>  margin: 0 10px 0 0;<br>  position: relative;<br>  width: 70px;<br>  height: 70px;<br>  border: solid 1px #000;<br>}<br>.gallery img {<br>  width: 100px;<br>  height: 70px;<br>  position: absolute;<br>  clip: rect(0 85px 70px 15px);<br>  left: -15px;<br>}<br>[/code]</p>
+<h3 id="2-Min-height-demo"><a href="#2-Min-height-demo" class="headerlink" title="2. Min-height (demo)"></a><em>2.</em> Min-height <small>(<a href="http://www.webdesignerwall.com/wp-content/uploads/2009/11/min-height.html" target="_blank" rel="external">demo</a>)</small></h3><p>min-height （博主：这个大家应该很熟悉，不多说了）.</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/five_useful_css_property/job-board.gif" alt="job board"><br>[code=”css”]<br>.with_minheight {<br>  min-height: 550px;<br>}<br>[/code]</p>
+<h4 id="hack-ie6"><a href="#hack-ie6" class="headerlink" title="hack ie6"></a>hack ie6</h4><p>[code=”css”]<br>.with_minheight {<br>  min-height:550px;<br>  height:auto !important;<br>  height:550px;<br>}</p>
+<p>[/code]</p>
+<pre><code>解释：
+</code></pre><p>1、由于IE6对!important的解释存在bug，所以它只识别height:500px这一句，超过500px后，IE6自身会增加盒子的高度；</p>
+<p>2、IE7和其他标准浏览器三句都能识别，虽然定义height:500px，但我们又有了height:auto !important，所以超过500px也能自动增加盒子的高度。</p>
+<h3 id="3-White-space属性-demo"><a href="#3-White-space属性-demo" class="headerlink" title="3. White-space属性 (demo)"></a><em>3.</em> White-space属性 <small>(<a href="http://www.webdesignerwall.com/wp-content/uploads/2009/11/white-space.html" target="_blank" rel="external">demo</a>)</small></h3><p>white-space 属性设置如何处理元素内的空白，值 pre-wrap 和 pre-line 是 CSS 2.1 中新增的，例如white-space: nowrap就规定段落中的文本不进行换行,详情见 <a href="http://www.w3school.com.cn/css/pr_text_white-space.asp" target="_blank" rel="external">
+</a></p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/five_useful_css_property/nowrap.gif" alt="nowrap"></p>
+<p>[code=”css”]<br>em {<br>  white-space: nowrap;<br>}</p>
+<p>[/code]</p>
+<h3 id="4-Cursor属性-demo"><a href="#4-Cursor属性-demo" class="headerlink" title="4. Cursor属性 (demo)"></a><em>4.</em> Cursor属性 <small>(<a href="http://www.webdesignerwall.com/wp-content/uploads/2009/11/cursor.html" target="_blank" rel="external">demo</a>)</small></h3><p>如果你想更改Button的行为，你也应该更改cursor. 例如,当一个Button不可用的，你应该将cursor设置为default(arrow)来指出bottom禁用了，所以cursor属性对web app很有用。</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/five_useful_css_property/cursor.gif" alt="cursor"></p>
+<p>[code=”css”].disabled {<br>  cursor: default;<br>}</p>
+<p>.busy {<br>  cursor: wait;<br>}</p>
+<p>.clickable:hover {<br>  cursor: pointer;<br>}</p>
+<p>[/code]</p>
+<h3 id="5-Display-inline-block-demo"><a href="#5-Display-inline-block-demo" class="headerlink" title="5. Display inline / block (demo)"></a><em>5.</em> Display inline / block <small>(<a href="http://www.webdesignerwall.com/wp-content/uploads/2009/11/display.html" target="_blank" rel="external">demo</a>)</small></h3><p>块元素呈现在一个新行, 而inline元素会呈现在同一行. .</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/five_useful_css_property/display-inline.gif" alt="display: inline or block"></p>
+<p>[code=”css”]<br>.block em {<br>  display: block;<br>}</p>
+<p>.inline h4, .inline p {<br>  display: inline;<br>}</p>
+<p>[/code]</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/css/">css</a><a href="/tags/html/">html</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

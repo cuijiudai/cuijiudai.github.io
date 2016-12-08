@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>MySQL数据类型(基础) | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="MySQL数据类型(基础)"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>MySQL数据类型(基础)</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2009/11/08/mysql-e6-95-b0-e6-8d-ae-e7-b1-bb-e5-9e-8b-e5-9f-ba-e7-a1-80/" rel="bookmark">
+        <time class="entry-date published" datetime="2009-11-08T01:54:55.000Z">
+          2009-11-08
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="http://www.mysql.com/common/logos/logo_mysql_sun_a.gif" alt="MySQL"><br>MySQL跟其他主流数据库一样，能够存储任何类型的数据，比如字符、数值和日期。而且，大多数应用程序中只会用到这3种数据。<br><a id="more"></a></p>
+<h2 id="1-字符数据"><a href="#1-字符数据" class="headerlink" title="1. 字符数据"></a>1. 字符数据</h2><p>1.1 字符数据分为字符型和文本型。字符型又分为两种，一是固定长度字符型（<strong>char</strong>），存储空间为255字节，不足空间以空格填充；另一种是可变长度字符型（<strong>varchar</strong>），存储空间为65 535字节，不足空间不用空格填充。在为表列定义字符类型时，必须指定最大字符数（英文每个字母占一个字节，汉字每个字占两个字节），不能超过相应类型的字节上限，例如：</p>
+<p>char(40)    /<em> 固定长度字符列，最多可以保存40个英文字母或20个汉字 </em>/<br>char(280)    /<em> 无效，超过了255字节 </em>/<br>varchar(280) /<em> 可变长度字符列，最多可以保存280个英文字母或140个汉字 </em>/</p>
+<p>1.2 另外，在为表列指定数据类型的同时，可以同时指定列的字符集，例如：</p>
+<p>varchar(20) <strong>character set</strong> utf8 /<em> UTF-8字符集，可以用于保存汉字等多字节字符 </em>/</p>
+<p>甚至，在创建数据库时也可以直接指定默认的字符集，例如：</p>
+<p>create database myblog <strong>character set</strong> utf8;</p>
+<p>1.3 对于要求存储空间大于64KB（64×1024=65 535字节）的列，就需要声明为文本型了。文本型又分为四种：短文本型（<strong>tinytext</strong>/255）、文本型（<strong>text</strong>/65 535）、中长文本型（<strong>mediumtext</strong>/16 777 215）和长文本型（<strong>longtext</strong>/4 294 967 295）。</p>
+<p>由于MySQL提供了65 535字节长的可变长度字符型（<strong>varchar</strong>），因此短文本型（<strong>tinytext</strong>）和文本型（<strong>text</strong>）并不常用。</p>
+<p>关于文本型数据，有以下说明：<br>（1）如果实际文本超出相应类型指定的最大长度，则多余文本将被截掉；<br>（2）如果实际文本不足相应类型指定的最大长度，则不会删除后面空格；</p>
+<h2 id="2-数值数据"><a href="#2-数值数据" class="headerlink" title="2. 数值数据"></a>2. 数值数据</h2><p>数值数据分为整数和浮点数（带小数点的数，有符号），而整数又分有符号数和无符号数（用于区分正负数）。MySQL中有5种整数数值类型：</p>
+<p>较小整数（<strong>tinyint</strong>/-128~127或0~255）；<br>小整数（<strong>smallint</strong>/-32 768~32 767或0~65 535）；<br>中长整数（<strong>mediumint</strong>/-8 388 608~8 388 607或0~16 777 215）；<br>整数（<strong>int</strong>/-2 147 483 648~2 147 483 647或0~4 294 967 295）；<br>大整数（<strong>bigint</strong>/-9 223 372 036 854 775 808~9 223 372 036 854 775 807或0~18 446 744 073 709 551 615）。</p>
+<p>声明整数类型列时，必须指定该列是有符号（signed）还是无符号（unsigned），例如：</p>
+<p>smallint unsigned  /<em> 表示只保存正整数 </em>/</p>
+<p>有两种浮点数值类型：单精度浮点数，float(p,s)和双精度浮点数，double(p,s)。其中，p表示精度（小数点左右两侧的数字位数和），s表示至少保留几位小数。</p>
+<h2 id="3-时间数据"><a href="#3-时间数据" class="headerlink" title="3.时间数据"></a>3.时间数据</h2><p>时间数据可以是日期、时间、日期加时间。MySQL有5种时间数据类型：</p>
+<p>日期型：<strong>date</strong> YYYY-MM-DD 1000-01-01~9999-12-31<br>日期时间型：<strong>datetime</strong> YYYY-MM-DD HH:MI:SS 1000-01-01 00:00:00~9999-12-31 23:59:59<br>时间戳型：<strong>timestamp</strong> YYYY-MM-DD HH:MI:SS 1970-01-01 00:00:00 to 2037-12-31 23:59:59<br>年型：<strong>year</strong> YYYY 1901 to 2155<br>时间型：<strong>time</strong> HHH:MI:SS -838:59:59 to 838:59:59</p>
+<p>其中，HHH:MI:SS中的HHH表示已经过去的小时数，而其他日期时间组件YYYY（年）、MM（月）、DD（日）的含义是可以一目了然的。</p>
+<p>如果只想在某列中保存日期（年月日），则date即可满足需要；如果想保存日期和时间（年月日时分秒），则要使用<strong>datetime</strong>。<strong>timestamp</strong>与<strong>datatime</strong>的区别除表示的时间范围不同之外，是它的值可以在记录增加或被更新时自动生成。</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/Mysql/">Mysql</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

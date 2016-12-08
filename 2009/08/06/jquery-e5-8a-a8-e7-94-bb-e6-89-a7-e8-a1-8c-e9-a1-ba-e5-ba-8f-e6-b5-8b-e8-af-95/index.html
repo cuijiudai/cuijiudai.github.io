@@ -1,0 +1,181 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Jquery动画执行顺序测试 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Jquery动画执行顺序测试"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>Jquery动画执行顺序测试</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2009/08/06/jquery-e5-8a-a8-e7-94-bb-e6-89-a7-e8-a1-8c-e9-a1-ba-e5-ba-8f-e6-b5-8b-e8-af-95/" rel="bookmark">
+        <time class="entry-date published" datetime="2009-08-05T16:45:24.000Z">
+          2009-08-06
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>最近在学Jquery啊，但是始终没什么动力，也挺累了。今天看了一个Jquery的一个动画，没怎么看懂，特此测试总结。<br>HTML代码<br>[code=”html”]<br>&lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN”<br>“<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;" target="_blank" rel="external">http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt;</a></p>
+<p><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></p>
+<p><html xmlns="http://www.w3.org/1999/xhtml"></html></p>
+<head><br>    <title>测试动画顺序</title><br>    <link rel="stylesheet" href="style.css" type="text/css" media="screen" title="no title" charset="utf-8"><br>    <script src="jquery.js" type="text/javascript" charset="utf-8"></script><br>    <script src="js.js" type="text/javascript" charset="utf-8"></script><br></head>
+
+<p><body><br>    <div id="wrap"><br>        <div id="box1"></div><br>        <div id="box2"></div><br>    </div><br>    <input type="button" value="Click me" id="button"><br></body><br><br>[/code]<br><a id="more"></a><br>CSS代码如图<br>[code=”css”]</p>
+<p>#wrap{<br>    height:500px;<br>    width:500px;<br>    border:1px solid blue;<br>    position:relative;<br>}</p>
+<p>#box1{<br>    height:200px;<br>    width:200px;<br>    background:red;<br>    position:absolute;<br>}</p>
+<p>#box2{<br>    height:200px;<br>    width:200px;<br>    background:green;<br>    position:absolute;<br>    top:200px;<br>}<br>[/code]<br>初试的js代码：<br>[code=’js’]<br>$(function(){<br>    $(‘#button’).click(function(){<br>        $(‘#box1’).animate({left:”200px”},3000)<br>                  .animate({top:”200px”},2000)<br>                  .fadeOut(1000);<br>    })<br>})<br>[/code]</p>
+<p>顺序执行，向左移动200px，向下200px，消失</p>
+<p>[code=’js’]<br>$(function(){<br>    $(‘#button’).click(function(){<br>        $(‘#box1’).animate({left:”200px”},3000)<br>                  .animate({top:”200px”},2000)<br>                  .css(“border”,”5px solid yellow”);<br>    })<br>})[/code]<br>.css不在动画队列中，率先立即执行</p>
+<p>[code=’js’]<br>$(function(){<br>    $(‘#button’).click(function(){<br>        $(‘#box1’).animate({left:”200px”},3000)<br>                  .animate({top:”200px”},2000,function(){<br>                      $(this).css(“border”,”5px solid yellow”);<br>                  })</p>
+<pre><code>})
+</code></pre><p>})[/code]<br>css加入到动画队列中，在前两个动作执行完后执行。<br>[code=’js’]<br>$(function(){<br>    $(‘#button’).click(function(){<br>        $(‘#box1’).animate({left:”200px”},3000)<br>                  .animate({top:”200px”},2000,showBorder);</p>
+<pre><code>    function showBorder(){
+              $(&apos;#box1&apos;).css(&quot;border&quot;,&quot;5px solid yellow&quot;);
+          }
+})
+</code></pre><p>})[/code]<br>顺序执行 ，注意showBorder的调用没有括号。<br>[code=’js’]<br>$(function(){<br>    $(‘#button’).click(function(){<br>        $(‘#box1’).animate({left:”200px”},3000)<br>                  .animate({top:”200px”},2000,showBorder());</p>
+<pre><code>    function showBorder(){
+              $(&apos;#box1&apos;).css(&quot;border&quot;,&quot;5px solid yellow&quot;);
+          }
+})
+</code></pre><p>})<br>[/code]<br>加上括号后，showBorder（）会立刻执行。<br>showBorder和showBoreder()是不同的。showBoreder()也会脱离动画队列立刻执行。<br>[code=’js’]<br>$(function(){<br>    $(‘#button’).click(function(){<br>        $(‘#box1’).animate({left:”200px”},3000)<br>                  .animate({top:”200px”},2000,showBorder())<br>                   .css(“background”,”pink”)</p>
+<pre><code>    function showBorder(){
+              $(&apos;#box1&apos;).css(&quot;border&quot;,&quot;5px solid yellow&quot;);
+          }
+})
+</code></pre><p>})<br>[/code]<br>如上代码，showBorder()和.css(“background”,”pink”)会立刻执行。然后动画执行。</p>
+<p>[code=’js’]<br>$(function(){<br>    $(‘#button’).click(function(){<br>        $(‘#box1’).animate({left:”200px”},3000)<br>                  .animate({top:”200px”},2000,showBorder)<br>                   .css(“background”,”blue”)<br>                   .fadeOut(“fast”)</p>
+<pre><code>    function showBorder(){
+              $(&apos;#box1&apos;).css(&quot;border&quot;,&quot;5px solid yellow&quot;);
+          }
+})
+</code></pre><p>})<br>[/code]<br>看如上代码，先执行.css(“background”,”blue”)，然后动画animate({left:”200px”},3000)<br>                  .animate({top:”200px”},2000,showBorder)<br>执行,然后.fadeOut(“fast”)执行，可见动画队列没有被打破，依然顺序执行。</p>
+<p>再改代码如下<br>[code=’js’]<br>$(function(){<br>    $(‘#button’).click(function(){<br>        $(‘#box1’).animate({left:”200px”},3000)<br>                  .animate({top:”200px”},2000,showBorder)<br>                   .css(“background”,”blue”)<br>                   $(“#box2”).fadeOut(“fast”)</p>
+<pre><code>    function showBorder(){
+              $(&apos;#box1&apos;).css(&quot;border&quot;,&quot;5px solid yellow&quot;);
+          }
+})
+</code></pre><p>})<br>[/code]<br>可见.css(“background”,”blue”)和 $(“#box2”).fadeOut(“fast”)会立刻执行。#box1然后动画执行<br>。即在句柄更换后，动画队列中#box1和#box2各自独立执行。<br>如果再加入#box1的动画<br>[code=’js’]<br>$(function(){<br>    $(‘#button’).click(function(){<br>        $(‘#box1’).animate({left:”200px”},3000)<br>                  .animate({top:”200px”},2000,showBorder)<br>                   $(“#box2”).fadeOut(“fast”)<br>                   $(“#box1”).animate({width:”100px”},2000)</p>
+<pre><code>    function showBorder(){
+              $(&apos;#box1&apos;).css(&quot;border&quot;,&quot;5px solid yellow&quot;);
+          }
+})
+</code></pre><p>})<br>[/code]<br> $(“#box1”).animate({width:”100px”},2000)会加入到box1 的动画中，在showBorder执行完后执行。</p>
+<p><a href="http://net.tutsplus.com/tutorials/javascript-ajax/how-to-load-in-and-animate-content-with-jquery/" target="_blank" rel="external">提高实例</a>,再见啊！！</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

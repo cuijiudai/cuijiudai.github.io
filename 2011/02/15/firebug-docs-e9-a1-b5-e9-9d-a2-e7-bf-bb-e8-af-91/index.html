@@ -1,0 +1,196 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>firebug docs 页面翻译 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="firebug,翻译">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="firebug docs 页面翻译"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>firebug docs 页面翻译</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/02/15/firebug-docs-e9-a1-b5-e9-9d-a2-e7-bf-bb-e8-af-91/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-02-15T07:36:12.000Z">
+          2011-02-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h3 id="console-日志函数介绍-Console-Logging-Functions"><a href="#console-日志函数介绍-Console-Logging-Functions" class="headerlink" title="console 日志函数介绍 Console Logging Functions"></a>console 日志函数介绍 Console Logging Functions</h3><pre><code>FireBug 有一个对所有网页可用的`console`对象，它拥有下列函数
+FireBug makes a console object available to all web pages.  This object has the following functions:
+</code></pre><a id="more"></a>
+<h3 id="基本的-Basic-Logging"><a href="#基本的-Basic-Logging" class="headerlink" title="基本的 Basic Logging"></a>基本的 Basic Logging</h3><div><br>    <strong>console.log(“message” [,objects])</strong> 在console 记录一个字符串，字符串中可以包含下文<a href="#String_Formatting">字符串格式化</a>部分中的任何模式.<br>    e.g:<br>    <pre>console.log(“%d ways to skin a cat.”, 101);</pre><br>    字符串后的对象将被按顺序替换字符串中的模式。<br><br>    <strong>console.log(“message” [,objects])</strong> - Logs a string to the console.  The string may contain any of the patterns described below in the “String Formatting” section.  The objects passed after the string will be substituted for each of the patterns in the string in order.</div>
+
+<h3 id="显示层级-Logging-Levels"><a href="#显示层级-Logging-Levels" class="headerlink" title="显示层级 Logging Levels"></a>显示层级 Logging Levels</h3><pre><code>严格按照层级显示独立的信息是很有用的。我们有四个函数来完成这项任务。除了视觉上的分层，这些函数和`log`的不同点还在于其自动添加了链接到**当前运行代码行**功能。
+It is often useful to separate messages according to different levels of severity.  There are four different functions for this purpose.  In addition to the visual separation, these functions are also different from `log` in that they automatically include a link to the line number in the source where they are called.
+</code></pre><div><strong>console.debug(“message” [,objects])</strong> -显示debug信息； Logs a debug message.</div><br><div><strong>console.info(“message” [,objects])</strong> -显示提供信息； Logs an informative message.</div>
+
+<div><strong>console.warn(“message” [,objects])</strong> -显示一个警告 ； Logs a warning.</div><br><div><strong>console.error(“message” [,objects])</strong>-显示一个错误 ； Logs an error.</div>
+
+<h3 id="Assertions"><a href="#Assertions" class="headerlink" title="Assertions"></a>Assertions</h3><p>//以下功能好像没有，暂不翻译</p>
+<p>Assertions are a great way to enforce rules in your code.  The console object includes a set a common types of assertion functions, and also allows you to write your own.</p>
+<div><strong>console.assert(a, “message” [,objects])</strong> - Asserts that an <code>a</code> is true.</div>
+
+<div><strong>console.assertEquals(a, b, “message” [,objects])</strong> - Asserts that <code>a</code> is equal to <code>b</code>.</div><br><div><strong>console.assertNotEquals(a, b, “message” [,objects])</strong> - Asserts that <code>a</code> is not equal to <code>b</code>.</div>
+
+<div><strong>console.assertGreater(a, b, “message” [,objects])</strong> - Asserts that <code>a</code> is greater than <code>b</code>.</div><br><div><strong>console.assertNotGreater(a, b, “message” [,objects])</strong> - Asserts that <code>a</code> is not greater than <code>b</code>.</div>
+
+<div><strong>console.assertLess(a, b, “message” [,objects])</strong> - Asserts that <code>a</code> is less than <code>b</code>.</div><br><div><strong>console.assertNotLess(a, b, “message” [,objects])</strong> - Asserts that <code>a</code> is not less than <code>b</code>.</div>
+
+<div><strong>console.assertContains(a, b, “message” [,objects])</strong> - Asserts that <code>a</code> is in the array <code>b</code>.</div><br><div><strong>console.assertNotContains(a, b, “message” [,objects])</strong> - Asserts that <code>a</code> is not in the array <code>b</code>.</div>
+
+<div><strong>console.assertTrue(a, “message” [,objects])</strong> - Asserts that <code>a</code> is equal to <code>true</code>.</div><br><div><strong>console.assertFalse(a, “message” [,objects])</strong> - Asserts that <code>a</code> is equal to <code>false</code>.</div>
+
+<div><strong>console.assertNull(a, “message” [,objects])</strong> - Asserts that <code>a</code> is equal to <code>null</code>.</div><br><div><strong>console.assertNotNull(a, “message” [,objects])</strong> - Asserts that <code>a</code> is not equal to <code>null</code>.</div>
+
+<div><strong>console.assertUndefined(a, “message” [,objects])</strong> - Asserts that <code>a</code> is equal to <code>undefined</code>.</div><br><div><strong>console.assertNotUndefined(a, “message” [,objects])</strong> - Asserts that <code>a</code> is not equal to <code>undefined</code>.</div>
+
+<div><strong>console.assertInstanceOf(a, b, “message” [,objects])</strong> - Asserts that <code>a</code> is an instance of type <code>b</code>.</div><br><div><strong>console.assertNotInstanceOf(a, b, “message” [,objects])</strong> - Asserts that <code>a</code> is not an instance of type <code>b</code>.</div>
+
+<div><strong>console.assertTypeOf(a, b, “message” [,objects])</strong> - Asserts that the type of <code>a</code> is equal to the string <code>b</code>.</div><br><div><strong>console.assertNotTypeOf(a, b, “message” [,objects])</strong> - Asserts that the type of <code>a</code> is not equal to the string <code>b</code>.</div>
+
+<h3 id="衡量-Measurement"><a href="#衡量-Measurement" class="headerlink" title="衡量 Measurement"></a>衡量 Measurement</h3><pre><code>以下函数可以让你衡量你代码的某些方面
+The following functions allow you to measure certain aspects of your code.
+</code></pre><div><strong>console.trace()</strong> -显示一个函数的被调用信息 Logs a stack trace showing the point of execution where this is called.</div><br><div><strong>console.time(“name”)</strong> -记录一个开始时间 Begins a timer and gives it a unique name.</div><br><div><strong>console.timeEnd(“name”)</strong> -停止一个名为name的时间记录，显示开始和停止之间的毫秒数； Stops the timer with the given name and logs the number of milliseconds that have ellapsed since it was started.</div>
+
+<div><strong>console.count(“name”)</strong> - Logs the number of times that the line of code where this is called has been executed.</div>
+
+<h3 id="字符串格式化-String-Formatting"><a href="#字符串格式化-String-Formatting" class="headerlink" title="字符串格式化 String Formatting"></a>字符串格式化 String Formatting</h3><p>All of the console logging functions can format a string with any of the following patterns:</p>
+<div><strong>%s</strong> -格式化对象为字符串； Formats the object as a string.</div><br><div><strong>%d, %i, %l, %f</strong> -格式化对象为数字； Formats the object as a number.</div>
+
+<div><strong>%o</strong> -格式化对象为inspector的超级链接<a href="#">var a = document.getElementById(‘header’);console.log(“%o head”,a);</a>； Formats the object as a hyperlink to the inspector.</div><br><div><strong>%1.o, %2.0, etc..</strong>格式化对象的属性为有互相合作的表格； - Formats the object as an interactive table of its properties.</div><br><div><strong>%.o</strong> -格式化对象为属性名组成的数组； Formats the object as an array of its property names.</div><br><div><strong>%x</strong> -格式化对象的属性为一个相互作用的XML标签树；  Formats the object as an interactive XML markup tree.</div><br><div><strong>%1.x, %2.x, etc..</strong> -格式化对象为一个有层级的相互作用的XML标签树； Formats the object as an interactive XML markup tree with <em>n</em> levels expanded.</div>
+
+<pre><code>如果需要包含一个 % 符号，请使用转义的 &quot;\%&quot;；
+If you need to include a real % symbol, you can escape it with a backslash like so: &quot;\%&quot;.
+</code></pre><h3 id="命令行函数-Command-Line-Functions"><a href="#命令行函数-Command-Line-Functions" class="headerlink" title="命令行函数 Command Line Functions"></a>命令行函数 Command Line Functions</h3><pre><code>这些函数可以在命令行调用
+The following built-in functions can be accessed from the command line:
+</code></pre><div><strong>$(“id”)</strong>取得某个id，document.getElementById() 的简写； - A shortcut for document.getElementById().</div><br><div><strong>$$(“css”)</strong> -返回符合css 选择器规则的元素数组； Returns an array of elements that match a CSS selector.</div><br><div><strong>$x(“xpath”)</strong> -返回符合xpath选择器规则的元素数组 Returns an array of elements that match an XPath selector.</div>
+
+<div><strong>$0</strong> -存储最近一次使用inspected查找的对象的变量； Variable containing the most recently inspected object .</div><br><div><strong>$1</strong> - $0 之前的那个对象；Variable containing the next most recently inspected object .</div><br><div><strong>$n(5)</strong> -存储第n次使用inspected查找的对象的变量； Returns the nth most recently inspected object that has been inspected.</div><br><div><strong>inspect(object)</strong> -在检查器中显示这个对象； Displays an object in the Inspector.</div><br><div><strong>dir(object)</strong> -返回 object的的属性数组； Returns an array of property names on an object.</div>
+
+<div><strong>clear()</strong> -清空控制台； Clears the console.</div>
+
+<p>翻译自<a href="http://joehewitt.com/software/firebug/docs.php" target="_blank" rel="external">firebug docs</a><br>如果想详细了解，请看<a href="http://blog.meituo.net/2010/11/17/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8firebug%E5%9F%BA%E7%A1%80%E7%AF%87/" target="_blank" rel="external">如何使用firebug基础篇</a></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/Software/">Software</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/firebug/">firebug</a><a href="/tags/翻译/">翻译</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

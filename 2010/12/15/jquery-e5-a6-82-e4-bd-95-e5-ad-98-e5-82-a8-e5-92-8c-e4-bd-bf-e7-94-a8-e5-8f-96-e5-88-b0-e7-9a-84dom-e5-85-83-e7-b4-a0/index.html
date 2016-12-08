@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jQuery如何存储和使用取到的DOM元素 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="DOM">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="jQuery如何存储和使用取到的DOM元素"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>jQuery如何存储和使用取到的DOM元素</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/12/15/jquery-e5-a6-82-e4-bd-95-e5-ad-98-e5-82-a8-e5-92-8c-e4-bd-bf-e7-94-a8-e5-8f-96-e5-88-b0-e7-9a-84dom-e5-85-83-e7-b4-a0/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-12-15T08:09:20.000Z">
+          2010-12-15
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>测试代码需要安装firebug,jQuery将取到的DOM元素存到哪里了？当然是jquery对象里，也就是取得元素和jquery内的方法是在一起的， 每次$(some)操作都产生一个jquery对象，那么遍历整个对象会不会出问题？jquery的方法会不会也被遍历到，而产生问题？let  see it。。。<br>以下大致模拟一下jQuery产生jquery对象的方法，仅供参考示例：<a id="more"></a><br>[code=”js”]<br>//取得页面所有的a元素，<br>var all = document.getElementsByTagName(‘a’);</p>
+<p>var MT = function(){<br>    return new MT.prototype.init();<br>}<br>     MT.prototype ={<br>        init :function(){//虽然丑了点，俺也是所谓的构造函数啊<br>        this.selector = “body”;<br>            this.length = 2;//将覆盖MT.prototype 的length属性<br>            this[0]=’美拓blog’;//jQuery使用数字索引来存储取到的DOM元素<br>            this[1] = ‘<a href="http://blog.meituo.net" target="_blank" rel="external">http://blog.meituo.net</a>‘;<br>            return this;<br>        },<br>        toArray: function() {<br>            return Array.prototype.slice.call( this, 0 ); //只会返回索引是数字的项<br>        },<br>        length:0,//有了length，看起来好像数组了，吼吼<br>        size:function(){<br>            return this.length;<br>        }<br>    }<br>MT.prototype.init.prototype = MT.prototype;//这样就可以继承MT<br>dd = MT();  //dd继承来自MT的prototype和MT.prototype.init 内的属性<br>console.log(dd.toArray()) //返回 [“美拓blog”, “<a href="http://blog.meituo.net" target="_blank" rel="external">http://blog.meituo.net</a>“]<br>console.log($.merge(dd,all).toArray());</p>
+<p>[/code]</p>
+<p><strong>jQuery实际上将取得的DOM元素或者构建的元素存储到了jquery对象以数字为索引的项中</strong>，在jquery的入口，使用了merge、find方法或者直接存到this[0]来存储DOM对象。</p>
+<p>jQuery的merge方法（出自jquery 1.4.4）<br>[code=”js”]<br>//对first（jquery对象或者数组）进行操作，second的成员不会覆盖first的成员，只是将second的数字索引增加到了first中。<br>    merge: function( first, second ) {<br>        var i = first.length,<br>            j = 0;</p>
+<pre><code>    if ( typeof second.length === &quot;number&quot; ) {
+        for ( var l = second.length; j &lt; l; j++ ) {
+            first[ i++ ] = second[ j ];
+        }
+
+    } else {
+        while ( second[j] !== undefined ) {
+            first[ i++ ] = second[ j++ ];
+        }
+    }
+
+    first.length = i;
+
+    return first;
+}
+</code></pre><p>[/code]<br>以上 i 位数字所以jquery只能增加数字项。<br>jQuery的find实际上是Sizzle选择器.</p>
+<p>[code=”js”]<br>jQuery.find = Sizzle;<br>[/code]</p>
+<p>在jQuery.fn.find中又调用了jQuery.find，比较复杂。我没有看，但大概也是如此，为什么那？因为jQuery中我们常用的一些函数只是取数字索引项进行处理。<br>例如：像这种$(some).addClass(‘someclass’);会对选中的每一个DOM都进行添加是怎么做的？<br>[code=”js”]<br>    addClass: function( value ) {<br>        if ( jQuery.isFunction(value) ) {//可以是函数<br>            return this.each(function(i) {<br>                var self = jQuery(this);//封装一下，过滤掉<br>                self.addClass( value.call(this, i, self.attr(“class”)) );//调用函数处理，函数必须有返回值，函数的两个参数分别是元素索引，元素class名。<br>            });<br>        }</p>
+<pre><code>    if ( value &amp;amp;amp;&amp;amp;amp; typeof value === &quot;string&quot; ) {
+        var classNames = (value || &quot;&quot;).split( rspaces );//addClass 可以是以空格分割的多个class名
+
+        for ( var i = 0, l = this.length; i &lt; l; i++ ) {
+            var elem = this[i];//只取对象中数字索引的元素
+
+            if ( elem.nodeType === 1 ) {//如果是元素
+                if ( !elem.className ) {
+                    elem.className = value;
+
+                } else {
+                    var className = &quot; &quot; + elem.className + &quot; &quot;,
+                        setClass = elem.className;
+
+                    for ( var c = 0, cl = classNames.length; c &lt; cl; c++ ) {
+                        if ( className.indexOf( &quot; &quot; + classNames[c] + &quot; &quot; ) &lt; 0 ) { //是否有这个class了？有了不再添加
+                            setClass += &quot; &quot; + classNames[c];
+                        }
+                    }
+                    elem.className = jQuery.trim( setClass );
+                }
+            }
+        }
+    }
+
+    return this;
+}
+</code></pre><p>[/code]<br>也是只取索引是数字的项。<br>还有常用的each方法为证：<br>[code=”js”]<br>// args is for internal usage only<br>//如果有args，就将orgs作为callback的参数传入（args是数组）,object的每一项都调用callback一次<br>each: function( object, callback, args ) {<br>    var name, i = 0,<br>        length = object.length,<br>        isObj = length === undefined || jQuery.isFunction(object);</p>
+<pre><code>if ( args ) {
+    if ( isObj ) {
+        for ( name in object ) {
+            if ( callback.apply( object[ name ], args ) === false ) {
+                break;
+            }
+        }
+    } else {
+        for ( ; i &lt; length; ) {
+            if ( callback.apply( object[ i++ ], args ) === false ) {
+                break;
+            }
+        }
+    }
+
+// A special, fast, case for the most common use of each
+} else {
+    if ( isObj ) {//非jquery对象、非数组
+        for ( name in object ) {// 跳出 each 的办法，return false 
+            if ( callback.call( object[ name ], name, object[ name ] ) === false ) {
+                break;
+            }
+        }
+    } else {//jquery对象或数组
+        for ( var value = object[0];
+            i &lt; length &amp;amp;amp;&amp;amp;amp; callback.call( value, i, value ) !== false; value = object[++i] ) {}
+    }
+}
+
+return object;
+</code></pre><p>}<br>[/code]</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/DOM/">DOM</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

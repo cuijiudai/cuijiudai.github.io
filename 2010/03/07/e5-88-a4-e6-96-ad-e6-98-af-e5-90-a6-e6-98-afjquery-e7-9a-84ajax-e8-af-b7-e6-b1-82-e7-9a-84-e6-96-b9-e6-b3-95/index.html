@@ -1,0 +1,170 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>判断是否是jquery的ajax请求的方法 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="翻译">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="判断是否是jquery的ajax请求的方法"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>判断是否是jquery的ajax请求的方法</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/03/07/e5-88-a4-e6-96-ad-e6-98-af-e5-90-a6-e6-98-afjquery-e7-9a-84ajax-e8-af-b7-e6-b1-82-e7-9a-84-e6-96-b9-e6-b3-95/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-03-07T13:33:50.000Z">
+          2010-03-07
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>当做一个ajax站点时，为核心的功能提供回调是一个很不错的选择，当你判断ajax到位的时候，你会碰到这个问题，那就是这个回调是否是ajax的回调。在大多数情况下，网站通常是先做没有ajax的部分，然后添加ajax功能，所以回调从开始就有了。<br><a id="more"></a><br>幸运的是，jQuery的判断是否是页面ajax请求的方法却是超级简单。</p>
+<h3 id="X-Requested-With-头（Header）"><a href="#X-Requested-With-头（Header）" class="headerlink" title="X-Requested-With 头（Header）"></a>X-Requested-With 头（Header）</h3><p>如果你观察<a href="http://github.com/jquery/jquery/blob/master/src/ajax.js#L366" target="_blank" rel="external">jQuery的源码</a>，你可以发现jQuery给几乎所有的ajax请求（ <strong>$.ajax(), $.get(), $.getJSON(), $.post()</strong> 和<strong> .load() </strong>方法）添加了一个特殊的HTTP 。<br>[code=”javascript”]<br> if ( !remote ) {</p>
+<pre><code>xhr.setRequestHeader(&quot;X-Requested-With&quot;, &quot;XMLHttpRequest&quot;);
+
+ }
+</code></pre><p>[/code]<br>记住，这个头不是用$.getScript()或$.ajax()和$.getScript()实现的JSONP请求来发送的，因为他们不是technically ajax请求</p>
+<h3 id="服务器端的判断"><a href="#服务器端的判断" class="headerlink" title="服务器端的判断"></a>服务器端的判断</h3><p>通过这个头信息，在服务器端你可以轻松的判断请求是否是通过jquery发送的，每种服务器端语言和服务器的结合将造成访问此头有不同的方式，但让我们看几个。</p>
+<h4 id="PHP判断请求类型"><a href="#PHP判断请求类型" class="headerlink" title="PHP判断请求类型"></a>PHP判断请求类型</h4><p>在PHP，你可以使用这种方法判断请求类型<br>[code=”php”]<br>function is_xhr() {<br>  return @ $_SERVER[ ‘HTTP_X_REQUESTED_WITH’ ] === ‘XMLHttpRequest’;<br>}<br>if( is_xhr() ){<br>  // respond to Ajax request<br>} else {<br>  // respond to normal request<br>}<br>[/code]</p>
+<h4 id="Ruby判断请求类型"><a href="#Ruby判断请求类型" class="headerlink" title="Ruby判断请求类型"></a>Ruby判断请求类型</h4><p><a href="http://www.sinatrarb.com/" target="_blank" rel="external">Sinatra</a> 和<a href="http://rubyonrails.org" target="_blank" rel="external">Ruby on Rails</a>有专门的内置判断方法。<br>[code=”ruby”]<br>if request.xhr?</p>
+<h1 id="respond-to-Ajax-request"><a href="#respond-to-Ajax-request" class="headerlink" title="respond to Ajax request"></a>respond to Ajax request</h1><p>else</p>
+<h1 id="respond-to-normal-request"><a href="#respond-to-normal-request" class="headerlink" title="respond to normal request"></a>respond to normal request</h1><p>end<br>[/code]</p>
+<p>但是由于其他JavaScript库也发送X-Requested-With头，很多服务器端的语言有专门的读取方法，查看一下你最喜爱的服务器端的语言，看看他们是否有既定的方法来判断ajax请求。</p>
+<h3 id="一个小例子"><a href="#一个小例子" class="headerlink" title="一个小例子"></a>一个小例子</h3><p>现在，让我们将这个知识点运用一下：为邮箱注册添加ajax，下面是我们的html：<br>[code=”html”]</p>
+<form id="email_form" action="email.php" method="POST">
+
+ <label for="email">Email Address: </label>
+
+ <input type="text" name="email" id="email" value="">
+
+ <input type="submit" value="Subscribe">
+
+<p></p></form><br>[/code]<p></p>
+<p>下面是email.php（注释：对一个普通的错误，你或许会返回信息或者改变表单的样式，这仅仅是个例子）</p>
+<p>[code=”php”]<br>&lt;?php<br>   $email = trim( @$_POST[‘email’] );<br>   // Call our special email subscribe function<br>   $success  = subscribe( $email );<br>?&gt;<br>&lt;!DOCTYPE html&gt;</p>
+<p><html><br>  <head><br>  <title>Email Signup</title><br>  <style type="text/css"><br>  .success { color: green }<br>  .error   { color: red }<br>  </style><br>  </head><br>  <body><br> &lt;?php if( $success ): ?&gt;<br>   <div class="success">Your Signup Is Successful! Thank you!</div><br> &lt;?php else: ?&gt;<br>   <div class="error">Something went wrong.<br>   Please click your browser’s back button and try again.</div><br> &lt;?php endif; ?&gt;<br>  </body><br></html><br>[/code]<br>通过这两个页面，提供了一个就有了一个简单的没有js或ajax的注册功能<br>现在我们就添加ajax，我们为表单页添加下面的代码：</p>
+<p>[code=”javascript”]</p>
+<p><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script></p>
+<p><script type="text/javascript" charset="utf-8"><br>  jQuery(document).ready(function($) {<br> $(“#email_form”)<br>  .after(“<div id='notice'></div>“)<br>  .submit(function(e){<br>   // Cancel the normal submission of the form<br>   e.preventDefault();<br>   var email = $(“#email”).val();<br>   // perform validation; not shown<br>   // Make our request and expect JSON in return<br>   $.post( ‘email.php’, { email: email }, function(data){<br>  if( data.success ){<br>    $(“#notice”).html(“<div id='success'>Your Signup Is Successful! Thank you!</div>“);<br>  } else {<br>    $(“#notice”).html(“<div id='error'>There was an error. Please make sure your email is valid and try again.</div>“);<br>  }<br>   }, ‘json’);<br> });<br>  });<br></script><br>[/code]<br>最后修改原来的email.php的内容为下面的代码示例，这样我们就可以利用ajax了。<br>[code=”php”]<br>&lt;?php<br>  function is_xhr() {<br> return @ $_SERVER[ ‘HTTP_X_REQUESTED_WITH’ ] === ‘XMLHttpRequest’;<br>  }<br>  $email = trim( $_POST[‘email’] );<br>  // Call our special email subscribe function<br>  $success  = subscribe( $email );<br>  if( is_xhr() ){<br> // Not explicitly needed, but we like being accurate, right?:<br> header(‘Content-type: application/json’);<br> if( $success ){<br>   echo json_encode( array( ‘success’ =&gt; true ) );<br> }  else {<br>   echo json_encode( array( ‘error’ =&gt; true ) );<br> }<br> exit(); // We don’t need to render anything else<br>  }<br>  // … the rest of our original PHP page（可用性）<br>[/code]</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>仅仅几行代码，搞定了<br><a href="http://www.learningjquery.com/2010/03/detecting-ajax-events-on-the-server" target="_blank" rel="external"><br>Detecting Ajax Events on the Server</a> </p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/翻译/">翻译</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

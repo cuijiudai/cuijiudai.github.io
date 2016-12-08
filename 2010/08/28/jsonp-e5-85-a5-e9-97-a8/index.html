@@ -1,0 +1,179 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JSONP 入门 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="JSONP 入门"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>JSONP 入门</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/28/jsonp-e5-85-a5-e9-97-a8/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-28T14:53:44.000Z">
+          2010-08-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 01 Aug 2010 06:54 AM PDT</p>
+<p>JSONP 原理就是在本域内的A内生成一个JS标签，它的SRC指向请求的另外一个域的某个页面B，这个src里面通常会加一个A页面定义好的回调函数，B返回数据即可，可以直接返回调用这个回调函数，这种跨域的通信方式被称为JSONP，此方案存在的缺陷是， script的src属性完成该调用时采取的方式时get方式，如果请求时传递的字符串过大时，可能会无法正常运行。</p>
+<p><span id="more-794"></span></p>
+<a id="more"></a>
+<h3 id="JavaScript的jsonp"><a href="#JavaScript的jsonp" class="headerlink" title="JavaScript的jsonp"></a>JavaScript的jsonp</h3><p>一下例子来自断桥残雪部落格 的<a href="http://www.js8.in/548.html" target="_blank" rel="external">通过JSONP实现完美跨域</a></p>
+<p>最简单的JSONP</p>
+<p>[code=’js’]<br>    var JSONP = document.createElement(“script”) ;<br>    //FF:onload IE:onreadystatechange<br>    JSONP.onload = JSONP.onreadystatechange = function(){<br>        //onreadystatechange，仅IE<br>        if (!this.readyState || this.readyState === “loaded” || this.readyState === “complete”) {<br>            alert($(“#demo”).html());<br>            JSONP.onload = JSONP.onreadystatechange = null//请内存，防止IE memory leaks<br>        }<br>    }<br>    JSONP.type = “text/javascript”;<br>    JSONP.src = “<a href="http://a.pojaaimg.cn/2010/js/jquery.js" target="_blank" rel="external">http://a.pojaaimg.cn/2010/js/jquery.js</a>“;<br>    //在head之后添加js文件<br>    document.getElementsByTagName(“head”)[0].appendChild(JSONP);<br>[/code]</p>
+<p>简单解释：我们通过创建script，然后指定它的src等属性，然后插入到head执行</p>
+<p>建议：onload、onreadystatechange 写在src赋值之前，防止载入js太快而没有给onload、onreadystatechange 赋值（Image对象在IE下具有此类现象）</p>
+<p>JSONP实例</p>
+<p>我们可以首先定义一个函数来执行JSONP返回的数据，然后通过JSONP的src传此函数给后台，进行处理，返回可执行的函数。例如下面代码：</p>
+<p>[code=’js’]<br>    function jsonpHandle(a){<br>        alert(a);<br>    }<br>    var JSONP = document.createElement(“script”) ;<br>    JSONP.type = “text/javascript”;<br>    JSONP.src = “<a href="http://www.js8.in/jsonp.php?callback=jsonpHandle" target="_blank" rel="external">http://www.js8.in/jsonp.php?callback=jsonpHandle</a>“;<br>    //在head之后添加js文件<br>    document.getElementsByTagName(“head”)[0].appendChild(JSONP);</p>
+<p>后台jsonp.php的代码：</p>
+<pre><code>echo $_GET[&quot;callback&quot;].&quot;(&apos;hello,world&apos;)&quot;;
+</code></pre><p>[/code]</p>
+<h3 id="jQuery的-jsonp"><a href="#jQuery的-jsonp" class="headerlink" title="jQuery的 jsonp"></a>jQuery的 jsonp</h3><p>老王 的<a href="http://hi.baidu.com/thinkinginlamp/blog/item/d9e0cb13a97b7f2add5401ee.html" target="_blank" rel="external">JQuery中JSON使用扫盲</a></p>
+<p>本贴仅适合JQuery初学者，属于没有技术含量的水贴，高手们可以忽略。</p>
+<p>先编写json.php：</p>
+<p>[code=’php’]<br>&lt;?php<br>echo json_encode(array(‘foo’ =&gt; ‘bar’));<br>?&gt;<br>[/code]</p>
+<p>再编写json.htm：</p>
+<p>[code=’html’]</p>
+<p><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script></p>
+<p><script><br>$.getJSON(‘/json.php’, function(data){<br>alert(data.foo);<br>});<br></script><br>[/code]</p>
+<p>把两个文件放到根目录下，运行<a href="http://localhost/json.htm，就能看到效果了。" target="_blank" rel="external">http://localhost/json.htm，就能看到效果了。</a></p>
+<p>上面的例子没有什么难度，下面尝试一下在跨域情况下的效果，</p>
+<p>编写C:\WINDOWS\system32\drivers\etc\hosts文件，加入如下映射：</p>
+<p>127.0.0.1 www.foobar.com</p>
+<p>修改json.htm的内容：</p>
+<p>[code=’html’]</p>
+<p><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script></p>
+<p><script><br>$.getJSON(‘<a href="http://www.foobar.com/json.php">http://www.foobar.com/json.php</a>‘, function(data){<br>alert(data.foo);<br>});<br></script><br>[/code]</p>
+<p>此时，重启浏览器后再浏览<a href="http://localhost/json.htm，程序不会运行，会出现Permission" target="_blank" rel="external">http://localhost/json.htm，程序不会运行，会出现Permission</a> denied错误。</p>
+<p>这是因为由于同源策略的限制，XmlHttpRequest只允许请求当前源（域名、协议、端口）的资源。</p>
+<p>如果想规避跨域问题，可以通过使用html的script标记来进行跨域请求，并在响应中返回要执行的script代码。此技术的一种实际应用方式被称为JSONP，<href remote-json-jsonp="" archives="" bob.pythonmac.org="">Remote JSON &ndash; JSONP一文对其原理做了介绍。</href></p>
+<p>先修改json.htm的内容：</p>
+<p>[code=’html’]</p>
+<p><script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script></p>
+<p><script><br>$.getJSON(‘<a href="http://www.foobar.com/json.php?callback=?">http://www.foobar.com/json.php?callback=?</a>‘, function(data){<br>alert(data.foo);<br>});<br></script><br>[/code]</p>
+<p>再修改json.php的内容：</p>
+<p>[code=”php’]</p>
+<p>echo $_GET[‘callback’], ‘(‘, json_encode(array(‘foo’ =&gt; ‘bar’)), ‘)’;</p>
+<p>?&gt;</p>
+<p>[/code]</p>
+<p>此时，如果再浏览json.htm，就会发现即便是跨域，程序也能正常运行。</p>
+<p>有了callback=?后，JQuery就会知道你要进行一次JSONP请求，它会自动生成一个回调函数的名字，然后替换callback=?中的问号。callback并不是必须的命名规则，而只是客户端和服务端之间的一种约定，比如说在FlickrAPI里，使用的就不是callback，而是jsoncallback。不管使用什么命名，最后不过是生成一种function_name(json_data)的调用形式而已。 </p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

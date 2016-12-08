@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>人人开放平台api入门介绍 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="开放平台">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="人人开放平台api入门介绍"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>人人开放平台api入门介绍</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2011/05/29/e4-ba-ba-e4-ba-ba-e5-bc-80-e6-94-be-e5-b9-b3-e5-8f-b0api-e5-85-a5-e9-97-a8-e4-bb-8b-e7-bb-8d/" rel="bookmark">
+        <time class="entry-date published" datetime="2011-05-28T17:05:02.000Z">
+          2011-05-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h3 id="啥是开放平台"><a href="#啥是开放平台" class="headerlink" title="啥是开放平台"></a>啥是开放平台</h3><p><def rel="Open Platform">开放平台</def>什么,<a href="http://baike.baidu.com/view/4039572.htm" target="_blank" rel="external">百度百科</a>是这样定义的：</p>
+<blockquote>
+<p>开放平台是指软件系统通过公开其应用程序编程接口（API）或函数（function)来使外部的程序可以增加该软件系统的功能或使用该软件系统的资源，而不需要更改该软件系统的源代码。<br>通俗的是说就是一个网站给你一些可以访问它的资源的方法供你使用，这些资源包括用户信息，产品信息等等。比如我们常见的”使用人人账号登录“，及使用支付宝支付等,使用人人账号登录就是可以使用你人人账号登录一个网站，即使你没有在这个网站注册，你亦可以”使用人人账号登录“来享受注册用户的权利。如果你没有使用过，可以看<a href="http://my.fang.com/login.php" target="_blank" rel="external">中华房产网的登录</a>。<br>随着Facebook通过开放平台而一炮走红，国内众多网站纷纷效仿，人人作为中国最大的SNS社区，同样拥有者最大的<a href="http://dev.renren.com/" target="_blank" rel="external">开放平台</a>(Renren Open Platform)，开发平台是面向开发者的，其拥有丰富的API接口、XNML和XNJS等技术。<a id="more"></a><br>其中最常见的还是使用人人账号登录一个网站，如果你想通过人人网登录是要经过你同意的，这个同意叫做授权，现在用使用最广的授权方式是OAuth2.0协议,我们需要深入了解这个东东，只要知道它是用来认证授权的，如果有兴趣可以看看<a href="http://wiki.dev.renren.com/wiki/Authentication" target="_blank" rel="external">人人网OAuth2.0官方参考文档</a>。<br>授权弹窗就是这个样子：<br><img src="http://blog.meituo.net/renren/images/OAuth.png" alt=""><br>在这里查看<a href="http://app.renren.com/app/editApps/auth?t=1" target="_blank" rel="external">已经授权的应用</a>或者解除授权。</p>
+</blockquote>
+<h3 id="开放平台能干点啥"><a href="#开放平台能干点啥" class="headerlink" title="开放平台能干点啥"></a>开放平台能干点啥</h3><p>有一些不需要认证的<a href="http://widget.renren.com/" target="_blank" rel="external">小部件</a>，比如常见的分享，喜欢等<br>来几个模块的例子：</p>
+<ul>
+<li><a href="http://blog.meituo.net/renren/xn.feed.html" target="_blank" rel="external">自定义新鲜事</a></li>
+<li><a href="http://blog.meituo.net/renren/xn.friends.html" target="_blank" rel="external">获取你的好友</a><em>   <a href="http://blog.meituo.net/renren/xn.index.html" target="_blank" rel="external">自己的大头像</a></em>   <a href="http://blog.meituo.net/renren/xn.invite.html" target="_blank" rel="external">好友选择器</a><em>   <a href="http://blog.meituo.net/renren/xn.login.html" target="_blank" rel="external">登录的样式</a></em>   <a href="http://blog.meituo.net/renren/xn.notice.html" target="_blank" rel="external">发送新鲜事</a>*   <a href="http://blog.meituo.net/renren/xn.share.html" target="_blank" rel="external">分享</a><br>人人提供了<a href="http://wiki.dev.renren.com/wiki/API" target="_blank" rel="external">众多语言的api</a>，以下简介一下js和php接口的例子。</li>
+</ul>
+<h3 id="开始一个简单的应用"><a href="#开始一个简单的应用" class="headerlink" title="开始一个简单的应用"></a>开始一个简单的应用</h3><p>这里有<a href="http://wiki.dev.renren.com/wiki/%E5%BA%94%E7%94%A8%E5%BC%80%E5%8F%91%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B" target="_blank" rel="external">官方的一个小引导例子</a>。<br>首先,你要有一个人人账户，有你的网站，然后到<a href="http://app.renren.com/developers/app/" target="_blank" rel="external">申请一个应用</a>,步骤见：<a href="http://wiki.dev.renren.com/wiki/%E7%94%B3%E8%AF%B7%E5%92%8C%E9%85%8D%E7%BD%AE%E7%AB%99%E5%86%85%E5%BA%94%E7%94%A8" target="_blank" rel="external">申请和配置站内应用</a>，获得获得API Key和Secret，上传头像，填写一些联系信息等。这个简单，几分钟搞定。<br>然后，在用户使用你的应用之前，需要先对你的应用进行授权。需要调用JavaScript Client 弹框授权方法 ，需要一些ajax操作，你要和renren.com进行通信，就要跨域，需要在你的网站放置一个跨域文件，作用是打破同源策略的限制，简单起见，可以将跨域文件建立在你的应用服务器Callback URL的根目录下，即：<a href="http://www.yourdomain.com/renrenapp/xd_receiver.html，当然你可以更改位置。详情见[引导用户授权](http://wiki.dev.renren.com/wiki/%E5%BC%95%E5%AF%BC%E7%94%A8%E6%88%B7%E6%8E%88%E6%9D%83)。" target="_blank" rel="external">http://www.yourdomain.com/renrenapp/xd_receiver.html，当然你可以更改位置。详情见[引导用户授权](http://wiki.dev.renren.com/wiki/%E5%BC%95%E5%AF%BC%E7%94%A8%E6%88%B7%E6%8E%88%E6%9D%83)。</a><br>最后，你可以做一些事情了。那么你要选择其中一个或多个api。</p>
+<h3 id="js-api"><a href="#js-api" class="headerlink" title="js api"></a>js api</h3><p><a href="http://wiki.dev.renren.com/wiki/JavaScript_Client%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3" target="_blank" rel="external">人人官方js api文档</a>,<br>这里有我做的一些<a href="http://blog.meituo.net/renren/xn.jsapi.php" target="_blank" rel="external">测试js api 的例子</a>.<br>注意你不能绑定本地环境在本地测试，必须上传到你申请api的网站，因为要进行一些callback 操作。有了js api 你可以直接和人人进行一些交互，不需要sig一类的认证，当然js接口开放的功能要弱很多。</p>
+<h3 id="php-api"><a href="#php-api" class="headerlink" title="php api"></a>php api</h3><p>首先到bitbucket.org 下载<a href="https://bitbucket.org/renren_platform/" target="_blank" rel="external">php api SDK</a>，填入你的api_key,Secret，call_id等。这样就可以用了,如果出错了，也有比较完备的提示信息。<br>当然人人 api这些接口不都是开放的，一些核心的东西还是需要申请.这里有我做的一些<a href="http://blog.meituo.net/renren/renren_php/phpapi.php" target="_blank" rel="external">测试php api 的例子</a>。<br>接口做的工作就是封装一下一些参数，然后发请求。比如签名机制要<a href="http://wiki.dev.renren.com/wiki/Calculate_signature" target="_blank" rel="external">计算sig</a>;自动封装每次必须发送的api_key，method，call_id，v等。<br>php接口原理是这样的，封装了一些几乎每个函数都要发送的参数，利用了curl做代理，向人人接口来获取数据，然后返回给你使用。</p>
+<p>详细的函数测试可以到这里看看<a href="http://dev.renren.com/tool" target="_blank" rel="external"> API 测试控制台</a>,但返回json格式好像不好用，xml格式是可以的。</p>
+<p>介绍比较粗，有空丰满一下。。。</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>, <a href="/categories/JavaScript/PHP/">PHP</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/开放平台/">开放平台</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

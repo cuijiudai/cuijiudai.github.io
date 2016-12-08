@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>swfupload 2.2 文件最大上传个数的重编译 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="swfupload">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="swfupload 2.2 文件最大上传个数的重编译"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>swfupload 2.2 文件最大上传个数的重编译</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/swfupload-2-2-e6-96-87-e4-bb-b6-e6-9c-80-e5-a4-a7-e4-b8-8a-e4-bc-a0-e4-b8-aa-e6-95-b0-e7-9a-84-e9-87-8d-e7-bc-96-e8-af-91/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:18:39.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><br><br>项目中用到了swfupload 2.2 ，并且有一个需求，就是在上传个数限定的条件下上传文件后可以有一个删除操作，由此我们遇到了问题 ，虽然 file_upload_limit 参数可以控制文件上传总数，但是js在执行删除时，flash内部的参数没有更改，file_upload_limit代表的是文件成功的个数，而不是我们想要的（如果我的问题你还没有明白，比如 我们将file_upload_limit 设为5 ，我们现在成功上传3张，用js 删除其中2张，那么我们现在html中还有一张图片，我们还可以上传2张图片，而不是4张，而我们想要的结果是用户最大可以上传5张，现在用户可能一张也保存不了）。 swfupload 内部的文件个数统计是由flash完成的，我翻看了swfupload.js（我看的是2.5版,并做了些注释，文章下方<a href="#download">提供下载</a>）,证实js对此无能为力。为此我这个as 初学者不得不对swfload.swf进行一点修改。多亏swfupload是开源的，我们可以在<a href="https://code.google.com/p/swfupload/downloads/list" target="_blank" rel="external">google code 下载</a>到源码，源码中没有提供fla文件，我使用SWFDecompiler 对 2.5版进行反编译的时候发现SWFDecompiler 5.6和5.5 在还没有完成的时候就会崩溃掉，而swfupload 2.2则没有这种问题。而项目中用到的正是2.2 ，不用我操心了。<br><br><a id="more"></a><br>2.2版中的fla文件没有什么稀奇，就是一个300 px * 300 px(右击画布在 “文档属性”中设置 ) 的新建文件引入了 swfupload.as （看来反编译都是白费劲了）.<br><br><img src="http://blog.meituo.net/wp-content/uploads/swfupload_delete/swfupload_fla.png" alt="引入swfupload.as"><br><br>为了添加删除操作我们要对handlers.js （位于 swfupload  demo版applicationdemo 文件夹 ）做一点修改 ，我们使用了jQuery 对addImage 函数进行了修改。<br><br><pre><br>function addImage(src,touxiang) {<br>    var newImg = document.createElement(“img”);<br>    newImg.style.margin = “5px”;<br>    var $licon=$(‘&lt;li&gt;&lt;p class=”p_box”&gt;&lt;span&gt;&lt;a href=”#”&gt;删除&lt;/a&gt;&lt;/span&gt;&lt;input type=”radio”&gt;默认显示&lt;/p&gt;&lt;p&gt;&lt;input type=”text” name=””&gt;&lt;/p&gt;&lt;/li&gt;’)<br>    $licon.prepend($(newImg));<br>    document.getElementById(“thumbnails”).appendChild($licon.get(0));<br>    if (newImg.filters) {<br>        try {<br>            newImg.filters.item(“DXImageTransform.Microsoft.Alpha”).opacity = 0;<br>        } catch (e) {<br>            // If it is not set initially, the browser will throw an error.  This will set it if it is not set yet.<br>            newImg.style.filter = ‘progid:DXImageTransform.Microsoft.Alpha(opacity=’ + 0 + ‘)’;<br>        }<br>    } else {<br>        newImg.style.opacity = 0;<br>    }<br><br>    newImg.onload = function () {<br>        fadeIn(newImg, 0);<br>    };<br>    newImg.src = src;<br>}<br></pre><br><br><img src="http://blog.meituo.net/wp-content/uploads/swfupload_delete/upload_image.png" alt="现在上传的图片"><br><br>这是文档结构的，我们还要添加删除操作。<br><br><pre><br>        $(‘.p_box ‘).live(‘click’,function(e){<br>                $(this).parents(‘li’).remove();<br>                e.preventDefault();<br>        });<br></pre><br><br>那么剩下的就是as的事了，如何使用js 控制flash文件上传个数那？<br><br>在swfupload.js中我看到了 callFlash  方法：<br><br><pre><br>SWFUpload.prototype.callFlash = function (functionName, argumentArray) {<br>    argumentArray = argumentArray || [];<br><br>    var movieElement = this.getMovieElement();<br>    var returnValue, returnString;<br><br>    // Flash’s method if calling ExternalInterface methods (code adapted from MooTools).<br>    try {<br>        returnString = movieElement.CallFunction(‘&lt;invoke name=”‘ + functionName + ‘“ returntype=”javascript”&gt;’ + <strong>flash</strong>argumentsToXML(argumentArray, 0) + ‘&lt;/invoke&gt;’);<br>        returnValue = eval(returnString);<br>    } catch (ex) {<br>        throw “Call to “ + functionName + “ failed”;<br>    }<br><br>    // Unescape file post param values<br>    if (returnValue != undefined &amp;amp;amp;&amp;amp;amp; typeof returnValue.post === “object”) {<br>        returnValue = this.unescapeFilePostParams(returnValue);<br>    }<br><br>    return returnValue;<br>};<br></pre><br><br>它使用了如下的方法向flash中传递参数。<br><br><pre><br>movieElement.CallFunction(‘&lt;invoke name=”‘ + functionName + ‘“ returntype=”javascript”&gt;’ + <strong>flash</strong>argumentsToXML(argumentArray, 0) + ‘&lt;/invoke&gt;’);<br></pre><br><br>具体的原理也不知道，CallFunction和invoke 的介绍网上好像不是太多。<br><br>知道了如何传递参数那么我们就可以仿照着写一个函数，我们称为minusNum<br><br><pre><br>SWFUpload.prototype.minusNum = function () {<br>     this.callFlash(“minusNum”);<br>};<br></pre><br><br>swfupload.as 和swfupload.js中定义的函数基本是一一对于的， 这个函数的意思就是要要flash执行minusNum方法。<br><br>下面该干什么那，当然是寻找as中控制上传个数的参数并进行修改了。在尝试了，remaining_uploads和 queue_slots_remaining 后终于找到了真的的参数 successful_uploads 。由于他已经是全局变量，不需要我们修改了，我们要做的是添加方法，在每次js删除操作时减小它的值。<br><br>在SetupExternalInterface 中添加<br><br><pre><br>    ExternalInterface.addCallback(“minusNum”, this.minusNum);<br></pre><br><br>在合适的地方添加方法<br><br><pre><br>private function minusNum():void{<br>            if(this.successful_uploads&gt;0){<br>                this.successful_uploads–;<br>            }<br>        }<br></pre><br><br>好的这样只要我们每次删除时执行一次minusNum方法就可以了，假设我们实例化swfupload为swfu,上方删除操作的代码可以改为：<br><br><pre><br>        $(‘.p_box a’).live(‘click’,function(e){<br>                $(this).parents(‘li’).remove();<br>                swfu.minusNum()<br>                e.preventDefault();<br>        });<br></pre><br><div class="download"><br><a href="http://blog.meituo.net/wp-content/uploads/swfupload_delete/swfupload_2.5.js.zip" target="_blank" rel="external">swfupload.js 2.5注释版</a>    <a href="http://blog.meituo.net/wp-content/uploads/swfupload_delete/swfupload_2.2.swf.zip" target="_blank" rel="external">swfupload2.2修改版</a><br></div><br></div>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/as/">as</a>, <a href="/categories/as/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/swfupload/">swfupload</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

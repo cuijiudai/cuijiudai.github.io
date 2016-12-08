@@ -1,0 +1,409 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>贪吃蛇 JavaScript | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="贪吃蛇 JavaScript"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>贪吃蛇 JavaScript</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2009/09/26/e8-b4-aa-e5-90-83-e8-9b-87-javascript/" rel="bookmark">
+        <time class="entry-date published" datetime="2009-09-26T05:38:10.000Z">
+          2009-09-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>最近做的贪食蛇!<br>有待改进的地方请提意见.呵呵。<br><img src="http://blog.meituo.net/wp-content/uploads/snakefinal/snake.jpg" alt="snake"><br><a href="http://blog.meituo.net/wp-content/uploads/snakefinal/snake.html" target="_blank" rel="external"><strong>玩一下吧</strong></a><strong>请用ie玩
+</strong><br><a id="more"></a><br>[code=”html”]<br>&lt;!DOCTYPE html PUBLIC “-//W3C//DTD XHTML 1.0 Transitional//EN” “<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;" target="_blank" rel="external">http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;</a></p>
+<p><html xmlns="http://www.w3.org/1999/xhtml"></html></p>
+<p><head></head></p>
+<p><meta http-equiv="Content-Type" content="text/html; charset=utf-8"></p>
+<p><title>snake</title></p>
+<style>
+#box{
+    width:500px;
+    height:500px;
+    position:relative;
+    border:3px solid #1e1e1e;
+}
+
+.headdown{ background:url(head.gif) no-repeat -20px 0;}
+.headleft{ background: url(head.gif) no-repeat -40px 0;}
+.headright{ background: url(head.gif) no-repeat 0 0;}
+.headup{ background: url(head.gif) no-repeat ;
+    background-position:top right;
+}
+
+.bodyx{
+    background: url(body.gif) no-repeat -20px 0;
+    position:absolute;
+    width:20px;
+    height:20px;
+
+}
+.body{
+    background:url(body.gif) no-repeat 0 0;
+    position:absolute;
+    width:20px;
+    height:20px;
+
+}
+
+#snake0{
+    position:absolute;
+    width:20px;
+    height:20px;
+    z-index:9999;    
+}
+#food{
+    background:#ff0000;
+    position:absolute;
+    width:20px;
+    height:20px;
+}
+</style>
+
+<p></p>
+<p><body></body></p>
+<div id="box" onkeydown="control(event)"><br>    <div id="snake0" class="headright"></div><br>    <div id="food"></div><br></div><br><div>分数<span id="score"></span></div>
+
+<script type="text/javascript" charset="utf8">
+var snakel=0;
+var snaket=0;
+
+var foodl;
+var foodt;
+
+var score =0;
+
+var pos;
+var time =200;
+var movetime;
+var snaken=0;
+
+var snakesl;
+var snakest;
+
+var checka;
+
+var isclick;
+function gameover(){
+
+if(confirm("game over,would you like  reload the game?")){
+    window.location.reload();
+    document.getElementById("box").focus();
+
+}else{
+    return false;
+}
+
+}
+
+function control(evt)
+{
+    var evt=evt||event;
+    isclick=true;
+    clearTimeout(movetime);
+    switch(event.keyCode)
+    {
+        case 39:
+        if(pos!="left")
+        { 
+            pos="right";
+        }
+        break;
+
+        case 40:
+        if(pos!="up")
+        {
+            pos="down";
+        }
+        break;
+        case 37:
+        if(pos!="right")
+        {
+            pos="left";
+        }
+        break;
+        case 38:
+        if(pos!="down")
+        {
+            pos="up";
+        }
+        break;
+
+        default:return false;
+    }
+    move();
+    //alert(event.keyCode);
+}
+
+function speed(){
+    if(time>10) time-=10;    
+
+}
+
+function food(){
+ foodl =Math.round(Math.random()*24)*20;
+ foodt =Math.round(Math.random()*24)*20;
+ document.getElementById("food").style.top=foodt;
+ document.getElementById("food").style.left=foodl;
+check(foodl,foodt);
+        if(checka=="yes") {
+            food();
+        }
+speed();        
+}
+
+function box(){
+    snaken ++;
+    document.getElementById("box").innerHTML+="<div id='snake"+snaken+"' class='bodyx'></div>";
+}
+
+function eat(){
+    score++;
+    food();
+    document.getElementById("score").innerHTML=score;
+    box();
+}
+
+function check(x,y){
+        for(i=1;i<=snaken;i++)
+        {
+            if(x+'px'==document.getElementById("snake"+i).style.left &amp;amp;&amp;amp; document.getElementById("snake"+i).style.top==y+'px')
+            {
+                checka="yes";
+                return false;
+            }else{
+                checka="no";
+            }
+        }
+}
+
+function inc()
+{
+        for (var j=snaken;j>=1;j--)
+    {    
+        if(j>1)document.getElementById("snake"+j).className=document.getElementById("snake"+(j-1)).className;
+        document.getElementById("snake"+j).style.top=document.getElementById("snake"+(j-1)).style.top;
+
+        document.getElementById("snake"+j).style.left=document.getElementById("snake"+(j-1)).style.left;
+
+    }
+}
+
+function move()
+{
+    if(snakel==foodl&amp;amp;&amp;amp;snaket==foodt)eat();
+
+    if(snakel<=480&amp;amp;&amp;amp;snaket>=0&amp;amp;&amp;amp;snakel>=0&amp;amp;&amp;amp;snaket<=480)
+    {
+
+        switch(pos)
+        {
+            case 'right':
+
+                snakel=snakel+20;
+                if(snakel>480)
+                {
+                gameover();
+                return false;
+                }
+                inc();
+                if(isclick&amp;amp;&amp;amp;snaken>0) {
+                    isclick=false;
+                    document.getElementById("snake1").className="bodyx";
+                }
+                document.getElementById('snake0').className="headright";
+
+                document.getElementById('snake0').style.left=snakel;
+
+                break;
+            case 'left':
+                snakel=snakel-20;
+                if(snakel<0)
+                {
+                    gameover();
+                    return false;
+                }
+                inc();
+                if(isclick&amp;amp;&amp;amp;snaken>0) {
+                    isclick=false;
+                    document.getElementById("snake1").className="bodyx";
+                }
+                document.getElementById('snake0').style.left=snakel;
+                document.getElementById('snake0').className="headleft";
+                break;
+            case 'down':
+                snaket=snaket+20;
+                if(snaket>480)
+                {
+                    gameover();
+                    return false;
+                }
+                inc();
+                    if(isclick&amp;amp;&amp;amp;snaken>0) {
+                    isclick=false;
+                    document.getElementById("snake1").className="body";
+                }
+            document.getElementById('snake0').style.top=snaket;
+            document.getElementById('snake0').className="headdown";
+                break;
+            case 'up':
+                snaket=snaket-20;
+                if(snaket<0)
+                {
+                    gameover();
+                    return false;
+                }
+                inc();    
+                if(isclick&amp;amp;&amp;amp;snaken>0) {
+                    isclick=false;
+                    document.getElementById("snake1").className="body";
+                }
+                document.getElementById('snake0').style.top=snaket;
+                document.getElementById('snake0').className="headup";
+                break;
+
+        }
+
+        check(snakel,snaket);
+        if(checka=="yes") {
+            gameover();
+        }else{
+            movetime=setTimeout(move,time);
+        }
+    }
+
+}
+
+function start()
+{
+//for( i=1;i<20;i++) eat()
+    food();
+    move();
+}
+
+start();
+</script>
+
+<p><br><br>[/code]</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

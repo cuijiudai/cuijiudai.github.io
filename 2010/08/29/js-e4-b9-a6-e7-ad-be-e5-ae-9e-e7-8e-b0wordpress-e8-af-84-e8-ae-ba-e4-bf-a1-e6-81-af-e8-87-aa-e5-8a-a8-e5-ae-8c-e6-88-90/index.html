@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>js书签实现WordPress评论信息自动完成 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="Autocomplete">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="js书签实现WordPress评论信息自动完成"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>js书签实现WordPress评论信息自动完成</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/js-e4-b9-a6-e7-ad-be-e5-ae-9e-e7-8e-b0wordpress-e8-af-84-e8-ae-ba-e4-bf-a1-e6-81-af-e8-87-aa-e5-8a-a8-e5-ae-8c-e6-88-90/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:43:11.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><br><br>将以下代码放到书签里，<img src="http://blog.meituo.net/wp-content/uploads/js_bookmark/js_bookmark.png" alt="书签"><br><br>在WordPress的博客浏览文章时，如果要书写评论，点击一下书签，就自动填写好了你的信息。<br><br><a id="more"></a><br><pre><br> javascript:(function(){<br>     document.getElementById(‘author’).value=”独孤逸辰”;<br>     document.getElementById(‘email’).value=”cuijiudai@gmail.com”;<br>     document.getElementById(‘url’).value=”<a href="http://blog.meituo.net" target="_blank" rel="external">http://blog.meituo.net</a>“;<br>     })()<br></pre><br><br>以火狐为例：<br><br><img src="http://blog.meituo.net/wp-content/uploads/js_bookmark/bookmark_panel.png" alt="书签添加示例"><br><br>如图 如果在 ”关键字”处填写wd，那么在 浏览器的地址栏输入 wd 回车也可以完成自动输入。添加完成后，你可以在我的博客里测试一下。<br><br>这个做法就体现了<dfn>微格式</dfn>的作用（可以参考<a href="http://blog.meituo.net/2009/12/11/%E5%BE%AE%E6%A0%BC%E5%BC%8F%EF%BC%9Awhat%EF%BC%8Cwhy-and-how/" target="_blank" rel="external">这里</a>），如果未来所有的网站的评论字段的昵称统一使用”author”作为id，邮件统一使用”email”，网址统一使用”url”；到那时这个快捷方式就是通用的了，期待互联网的大一统。<br><br>还有就是书签栏也是DOM的一部分，因为执行document.getElementById是可以的，浏览器的地址栏也是DOM的一部分，如js常用的跳转window.location= “url” 或者window.location.href= “url”，状态栏也是DOM的一部分，以前常见到状态栏的跑马灯，也是js来控制的。<br><br>更多<a href="http://blog.xiao3.info/wordpress-information-javascript-tag.html" target="_blank" rel="external">Wordpress自动输入个人信息javascript标签</a><br></div>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>, <a href="/categories/JavaScript/浏览器/">浏览器</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Autocomplete/">Autocomplete</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

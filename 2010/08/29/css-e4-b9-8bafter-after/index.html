@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>css之:after ::after  | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="jQuery,翻译">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="css之:after ::after "/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>css之:after ::after </span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/css-e4-b9-8bafter-after/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T04:17:54.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>css之:after ::after </p>
+<h3 id="after-的用法"><a href="#after-的用法" class="headerlink" title=":after 的用法"></a>:after 的用法</h3><p>CSS :after <dfn>伪元素(pseudo-element)</dfn>（后面有<a href="#wei">解释</a>）<br>定义</p>
+<pre>:after 伪元素在元素内容之后插入内容。</pre>
+
+<p>这个伪元素允许创作人员在元素内容的最后面插入生成内容。默认地，这个伪元素是行内元素，不过可以使用属性 display 改变这一点。<br>例子：<br><a id="more"></a><br>此样式会在每个 h1 元素之后播放一段声音：<br>[code=”css”]<br>h1:after{    content:url(beep.wav);}<br>[/code]</p>
+<p>这里有<a href="http://www.w3schools.com/css/tryit.asp?filename=trycss_after" target="_blank" rel="external">w3schools的例子</a>吧<br>还有一个:after差不多的:before,就是在元素内容之前插入内容，内容当然就是<a href="https://developer.mozilla.org/en/CSS/content" target="_blank" rel="external">content</a>指出的内容如：文字，图片<a href="http://www.quirksmode.org/css/beforeafter.html" target="_blank" rel="external">quirksmode提供的例子</a><br>浏览器IE6，7不支持:after伪类，详细的兼容性列表<a href="http://www.quirksmode.org/css/beforeafter_content.html" target="_blank" rel="external">这里</a></p>
+<h3 id="after-和-after的区别"><a href="#after-和-after的区别" class="headerlink" title=":after 和::after的区别"></a>:after 和::after的区别</h3><p>[code=’css’]<br>element:after  { style properties }  /<em> CSS2 syntax </em>/</p>
+<p>element::after { style properties }  /<em> CSS3 syntax, not supported by IE8 </em>/<br>[/code]<br>见<a href="https://developer.mozilla.org/en/CSS/:after" target="_blank" rel="external">:after | ::after</a></p>
+<blockquote>
+<p>The ::after notation was introduced in CSS 3 in order to establish a discrimination between pseudo-classes and pseudo-elements. Browsers also accept the notation :after introduced in CSS 2.<br>一个冒号专门用来表示伪类，而<dfn>伪元素</dfn>用两个冒号来表示，以示区别,也就是一个是伪类，一个是伪元素。ie8仅支持:after。</p>
+<p><table class="standard-table"> <tbody> <tr> <th>Browser</th> <th>Lowest Version</th> <th>Support of</th> </tr> <tr> <td>Internet Explorer</td> <td>8.0</td> <td><code>:after</code></td> </tr> <tr> <td rowspan="2">Firefox (Gecko)</td> <td>1.0 (1.0)</td> <td><code>:after</code></td> </tr> <tr> <td>1.0 (1.5)</td> <td><code>:after | ::after</code></td> </tr> <tr> <td rowspan="2">Opera</td> <td>4.0</td> <td><code>:after</code></td> </tr> <tr> <td>7.0</td> <td><code>:after | ::after</code></td> </tr> <tr> <td>Safari (WebKit)</td> <td>1.0 (85)</td> <td><code>:after | ::after</code></td> </tr> </tbody></table></p>
+</blockquote>
+<p></p>
+<h3 id="什么是伪类和伪元素"><a href="#什么是伪类和伪元素" class="headerlink" title="什么是伪类和伪元素"></a>什么是伪类和伪元素</h3><p><em>伪类</em>可以独立于文档的元素来分配样式，且可以分配给任何元素，逻辑上和功能上类类似，但是其是预定义的、不存在于文档树中且表达方式也不同，所以叫伪类。<br><em>伪元素</em>所控制的内容和一个元素控制的内容一样，但是伪元素不存在于文档树中，不是真正的元素，所以叫伪元素。<br>伪类和伪元素都不出现在源文件和文档树中。伪元素在firebug下是查看不到的。<br>常见的伪类有：:first-child ，:link:，vistited，:hover:，active:focus，:lang<br>伪元素有：:first-line，:first-letter，:before，:after<br><a href="http://blog.csdn.net/courseware/archive/2007/12/03/1912738.aspx" target="_blank" rel="external">这里中文详细解释</a>, <a href="http://www.w3.org/TR/CSS21/selector.html#pseudo-elements" target="_blank" rel="external">英文</a></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/jQuery/">jQuery</a><a href="/tags/翻译/">翻译</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

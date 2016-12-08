@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于U盘、mp3内的文件隐藏的问题 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="杀毒">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="关于U盘、mp3内的文件隐藏的问题"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>关于U盘、mp3内的文件隐藏的问题</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/e5-85-b3-e4-ba-8eu-e7-9b-98-e3-80-81mp3-e5-86-85-e7-9a-84-e6-96-87-e4-bb-b6-e9-9a-90-e8-97-8f-e7-9a-84-e9-97-ae-e9-a2-98/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:32:10.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><br><br>原来在我百度博客的，现在转载过来。<br><br> 经常用U盘的人几乎都遇到过这个问题，那就是U盘内的文件突然都不见了，但空间还是被占用着。我们都知道U盘的文件其实都还在，但我们通过<em>“工具”&mdash;&ndash;“文件夹选项”&mdash;&ndash;“查看”</em>。选择”<em>显示所有的文件和文件夹</em>“，但依然没用，文件依然不可见。杀毒后文件依然不可见。<br><br><a id="more"></a><br><br>本人经验此问题一般可以这样解决<br><br>总结如下：<br><br> 这种情况一般是这几种情况的：<br><br> 1、文件夹后被加了”.exe“，且文件被隐藏。<br><br> 2、U盘内的文件都被隐藏了。<br><br> 3、U盘内多了autorun.exe文件<br><br> 今天就给大家提供一个方法，首先我们在“<em>工具&mdash;-文件夹选项&mdash;&ndash;查看</em>”，选取”<em>显示所有的文件和文件夹</em>“后取消”<em>隐藏受保护的操作系统文件</em>”选项。<br><br><img src="http://blog.meituo.net/wp-content/uploads/hiddenfile/1.jpg" alt=""><br><br>这时U盘文件可以看到了，说明病毒给我们的文件加了系统属性，好的，现在我们放心了，我的文件都还在！<br><br>现在就将隐藏的文件揪出来吧。右击U盘文件夹，我们看到下图<br><br><img src="http://blog.meituo.net/wp-content/uploads/hiddenfile/2.jpg" alt=""><br><br>显然我们无法编辑此文件夹。怎么办？<br><br>在windows环境下没法编辑。那我们就进入dos吧，不要恐惧是ms-dos。<br><br><em>”开始“&mdash;&mdash;”运行“&mdash;&mdash;&ndash;输入”cmd“</em>，确定。 好的进入dos环境，我们用不了多少命令的，看我如何解决它吧。<br><br>输入你的盘符号，如果你的U盘是J盘那就输入就输入 j: , 然后回车<br><br>如图我用的是L盘<br><br>  <img src="http://blog.meituo.net/wp-content/uploads/hiddenfile/3.jpg" alt=""><br><br>现在输入<code>attrib /s /d -s -h -r</code><br><br>Ok,如果你的盘内文件很多得等待一会。闪动的输入杠蹦出 L：\&gt;,一切搞定了。<br><br> <img src="http://blog.meituo.net/wp-content/uploads/hiddenfile/4.jpg" alt=""><br><br>看看你的文件是不是回来了啊。<br><br>现在恢复一下设置，将你在”<em>工具”&mdash;&ndash;“文件夹选项” </em>设置成原来的，取消“<em>显示所有的文件和文件夹</em>“，选中”<em>隐藏受保护的操作系统文件</em>”选项。<br></div>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/杀毒/">杀毒</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>你每次都会遇到的IE6的css的bugs | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="css,IE">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="你每次都会遇到的IE6的css的bugs"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>你每次都会遇到的IE6的css的bugs</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2009/07/23/e4-bd-a0-e6-af-8f-e6-ac-a1-e9-83-bd-e4-bc-9a-e9-81-87-e5-88-b0-e7-9a-84ie6-e7-9a-84css-e7-9a-84bugs/" rel="bookmark">
+        <time class="entry-date published" datetime="2009-07-23T13:31:00.000Z">
+          2009-07-23
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div class="Section0"><br><br><span style="font-size: 10.5pt; font-family: '宋体';">译自</span><span><a href="http%3A%2F%2Fcss-tricks.com%2Fie-css-bugs-thatll-get-you-every-time"><span class="15" style="color: #0000ff; text-decoration: underline; font-size: 10pt; font-family: '宋体';">css-tricks</span></a></span><span style="font-size: 10.5pt; font-family: '宋体';"></span><br><br><span style="font-size: 10.5pt; font-family: '宋体';">7<span style="font-family: 宋体;">年前当</span><span style="font-family: Times New Roman;">IE</span><span style="font-family: 宋体;">浏览器第一次发布时，他实际上是支持</span><span style="font-family: Times New Roman;">css</span><span style="font-family: 宋体;">最好的。浏览器对</span><span style="font-family: Times New Roman;">css</span><span style="font-family: 宋体;">支持的</span><span style="font-family: Times New Roman;">bugs</span><span style="font-family: 宋体;">仍然经常困扰着我们。我从文章评论人中得知有些人仍拒绝使用任何</span><span style="font-family: Times New Roman;">hacks</span><span style="font-family: 宋体;">来支持</span><span style="font-family: Times New Roman;">IE6</span><span style="font-family: 宋体;">。虽然我一般拒绝迎合</span><span style="font-family: Times New Roman;">IE</span><span style="font-family: 宋体;">的限制，我感觉只要有可能让它正确显示，还是应该让他正确显示，这里就列出你每次都会遇到的</span><span style="font-family: Times New Roman;">IE bugs</span><span style="font-family: 宋体;">。</span></span><span style="font-size: 10.5pt; font-family: '宋体';"></span><br><br><a id="more"></a><br><br><span style="color: #ff0000; font-weight: bold; font-size: 14pt; font-family: '宋体';">盒子模型</span><span style="color: #ff0000; font-weight: bold; font-size: 14pt; font-family: '宋体';"></span><br><br><span style="font-weight: normal; font-size: 10.5pt; font-family: '宋体';">这也许是<span style="font-family: Times New Roman;">IE6</span><span style="font-family: 宋体;">及以下最常见的和最令人沮丧的</span><span style="font-family: Times New Roman;">bug.,</span><span style="font-family: 宋体;">比如说你经常这样声明一个盒子，</span></span><span style="color: #ff0000; font-weight: normal; font-size: 10.5pt; font-family: '宋体';"></span><br><br><span style="font-size: 10.5pt; font-family: 'Times New Roman';">div#box { width: 100px; border: 2px solid black; padding: 10px; }</span><span style="font-size: 10.5pt; font-family: 'Times New Roman';"></span><br><br><span style="font-size: 10.5pt; font-family: 'Times New Roman';">按<span style="font-family: Times New Roman;">IE6</span><span style="font-family: 宋体;">浏览器的宽度计算方法，盒子宽度是</span></span><span style="font-weight: bold; font-size: 10.5pt; font-family: 'Times New Roman';">100px<span style="font-family: 宋体;">。</span></span><span style="font-weight: bold; font-size: 10.5pt; font-family: 'Times New Roman';"></span><br><br><span style="font-size: 10.5pt; font-family: 'Times New Roman';">现代浏览器会计算宽度计算方法，盒子宽度是</span><span style="font-weight: bold; font-size: 10.5pt; font-family: 'Times New Roman';">124px<span style="font-family: 宋体;">。</span></span><span style="font-weight: bold; font-size: 10.5pt; font-family: 'Times New Roman';"></span><br><br><span style="font-size: 10.5pt; font-family: 'Times New Roman';">.<span style="font-family: 宋体;">这种差异可以造成巨大的布局问题，我甚至认为</span><span style="font-family: Times New Roman;">IE</span><span style="font-family: 宋体;">更有逻辑，但事实并非如何规范撰写，</span><span style="font-family: Times New Roman;">IE 6</span><span style="font-family: 宋体;">实际上可以做到正确显示如果你是在标准兼容模式（</span></span><span style="font-size: 10.5pt; font-family: '宋体';">standards-compliant mode</span><span style="font-size: 10.5pt; font-family: 'Times New Roman';">）<span style="font-family: Times New Roman;">,</span></span><span style="font-size: 10.5pt; font-family: '宋体';">那时是很少见的，如果仅仅使用<span style="font-family: Times New Roman;">HTML4.0 transitional doctyle</span><span style="font-family: 宋体;">就会触发怪癖模式（</span><span style="font-family: Times New Roman;">quirks model</span><span style="font-family: 宋体;">）和方块模式（</span><span style="font-family: Times New Roman;">box model</span><span style="font-family: 宋体;">）的问题。</span></span><span style="font-size: 10.5pt; font-family: '宋体';"></span><br><br><span style="font-size: 10.5pt; font-family: '宋体';">这个问题我通常通过不使用<span style="font-family: Times New Roman;">padding</span><span style="font-family: 宋体;">来布局</span><span style="font-family: Times New Roman;">boxes</span><span style="font-family: 宋体;">来解决，如果如果盒子里有个</span><span style="font-family: Times New Roman;">&lt;p&gt;</span><span style="font-family: 宋体;">标签，我会直接把需要的</span><span style="font-family: Times New Roman;">padding</span><span style="font-family: 宋体;">加给</span><span style="font-family: Times New Roman;">&lt;p&gt;</span><span style="font-family: 宋体;">标签，而不是</span><span style="font-family: Times New Roman;">box</span><span style="font-family: 宋体;">。</span></span><span style="font-size: 10.5pt; font-family: '宋体';"></span><br><br><span style="color: #ff0000; font-size: 14pt; font-family: '宋体';">The double margin bug</span><span style="color: #ff0000; font-size: 14pt; font-family: '宋体';"></span><br><br><span style="font-size: 10.5pt; font-family: '宋体';">使用上面的例子，假设我们需要它向右浮动：</span><span style="font-size: 10.5pt; font-family: '宋体';"></span><br><br><span style="font-size: 10.5pt; font-family: 'Times New Roman';">div#box { float: right; margin-right: 20px; }</span><span style="font-size: 10.5pt; font-family: 'Times New Roman';"></span><br><br><span style="font-size: 10.5pt; font-family: 'Times New Roman';">IE6<span style="font-family: 宋体;">将把</span><span style="font-family: Times New Roman;">20px</span><span style="font-family: 宋体;">变成</span><span style="font-family: Times New Roman;">40px</span><span style="font-family: 宋体;">，这将造成巨大的布局差异，经常的做法是将</span><span style="font-family: Times New Roman;">div</span><span style="font-family: 宋体;">设为</span><span style="font-family: Times New Roman;">“display:inline;”,</span><span style="font-family: 宋体;">我不知道这样为什么这么有吸引力，但这真的有点不实际，我们不能为</span><span style="font-family: Times New Roman;">inline</span><span style="font-family: 宋体;">的元素设置静态的</span><span style="font-family: Times New Roman;">width</span><span style="font-family: 宋体;">，现在我们可以做到么？</span></span><span style="font-size: 10.5pt; font-family: 'Times New Roman';"></span><br><br><span style="font-size: 10.5pt; font-family: 'Times New Roman';">这问题不能回避，如果你真的要把这个<span style="font-family: Times New Roman;">div</span><span style="font-family: 宋体;">远离父标签的右边框，你或许可以这样做，给父标签加</span><span style="font-family: Times New Roman;">padding</span><span style="font-family: 宋体;">，这样更好的让你的布局更稳定。不要忘了</span><span style="font-family: Times New Roman;">padding</span><span style="font-family: 宋体;">啊，这个</span><span style="font-family: Times New Roman;">bug</span><span style="font-family: 宋体;">对</span><span style="font-family: Times New Roman;">padding</span><span style="font-family: 宋体;">起作用，所以你能通过加</span><span style="font-family: Times New Roman;">padding</span><span style="font-family: 宋体;">来设置边距来达到同样的效果。（也就是不能同时给元素设定</span><span style="font-family: Times New Roman;">float</span><span style="font-family: 宋体;">：</span><span style="font-family: Times New Roman;">x</span><span style="font-family: 宋体;">；和</span><span style="font-family: Times New Roman;">margin-x</span><span style="font-family: 宋体;">：）</span></span><span style="font-size: 10.5pt; font-family: 'Times New Roman';"></span><br><br><span style="color: #ff6600; font-size: 14pt; font-family: 'Times New Roman';">没有<span style="font-family: Times New Roman;">min widths/min height</span></span><span style="color: #ff6600; font-size: 14pt; font-family: 'Times New Roman';"></span><br><br><span style="font-size: 10.5pt; font-family: 'Times New Roman';">设置<span style="font-family: Times New Roman;">min-width</span><span style="font-family: 宋体;">和</span><span style="font-family: Times New Roman;">min-height</span><span style="font-family: 宋体;">是很自然和符合逻辑的，但我很无奈，有时我不能指望他们，</span><span style="font-family: Times New Roman;">IE6</span><span style="font-family: 宋体;">不是把它们设置错了，而是完全忽视他们。</span><span style="font-family: Times New Roman;">Min-height</span><span style="font-family: 宋体;">是非常有用的，比如</span><span style="font-family: Times New Roman;">footer</span><span style="font-family: 宋体;">，假如你的</span><span style="font-family: Times New Roman;">footer</span><span style="font-family: 宋体;">至少要高</span><span style="font-family: Times New Roman;">100px</span><span style="font-family: 宋体;">，因为你要给</span><span style="font-family: Times New Roman;">footer</span><span style="font-family: 宋体;">使用</span><span style="font-family: Times New Roman;">background image</span><span style="font-family: 宋体;">，但你不想设置固定的高度，因为在</span><span style="font-family: Times New Roman;">footer</span><span style="font-family: 宋体;">的</span><span style="font-family: Times New Roman;">text size </span><span style="font-family: 宋体;">大大增加时你想让</span><span style="font-family: Times New Roman;">footer</span><span style="font-family: 宋体;">增高，这时用</span><span style="font-family: Times New Roman;">min-height</span><span style="font-family: 宋体;">简直是完美的。但仅仅使用它在</span><span style="font-family: Times New Roman;">IE6</span><span style="font-family: 宋体;">以上版本中得不到任何的高度，</span><span style="font-family: Times New Roman;">IE6</span><span style="font-family: 宋体;">把普通的</span><span style="font-family: Times New Roman;">height</span><span style="font-family: 宋体;">当成现代浏览器的</span><span style="font-family: Times New Roman;">min-height</span><span style="font-family: 宋体;">，所以你可以</span><span style="font-family: Times New Roman;">hack</span><span style="font-family: 宋体;">一下，我称他为</span><span style="font-family: Times New Roman;">hack</span><span style="font-family: 宋体;">，但它不是真正的</span><span style="font-family: Times New Roman;">hack</span><span style="font-family: 宋体;">，因为它正好适用。</span></span><span style="font-size: 10.5pt; font-family: 'Times New Roman';"></span><br><br><span style="color: #ff0000; font-size: 14pt; font-family: 'Times New Roman';">Stepdown</span><span style="color: #ff0000; font-size: 14pt; font-family: 'Times New Roman';"></span><br><br><span style="font-size: 10.5pt; font-family: 'Times New Roman';">通常但你<span style="font-family: Times New Roman;">float</span><span style="font-family: 宋体;">元素时，你希望他们竖直排且没有间隙，但</span><span style="font-family: Times New Roman;">IE6</span><span style="font-family: 宋体;">不行，</span><span style="font-family: Times New Roman;">IE6</span><span style="font-family: 宋体;">会在每一个浮动的</span><span style="font-family: Times New Roman;">block</span><span style="font-family: 宋体;">元素上附加</span><span style="font-family: Times New Roman;">a line break effect</span><span style="font-family: 宋体;">，这将导致</span><span style="font-family: Times New Roman;">“stepdown”</span><span style="font-family: 宋体;">，修复的办法是让父标签的</span><span style="font-family: Times New Roman;">line-height</span><span style="font-family: 宋体;">设为</span><span style="font-family: Times New Roman;">0</span><span style="font-family: 宋体;">或者子元素为</span><span style="font-family: Times New Roman;">inline</span><span style="font-family: 宋体;">。</span></span><span style="font-size: 10.5pt; font-family: 'Times New Roman';"></span><br><br><span style="color: #ff0000; font-size: 14pt; font-family: 'Times New Roman';">没有<span style="font-family: Times New Roman;">HOVER</span><span style="font-family: 宋体;">状态</span></span><span style="background: #ff0000 none repeat scroll 0% 0%; font-size: 14pt; font-family: 'Times New Roman';"></span><br><br><span style="font-size: 10.5pt; font-family: 'Times New Roman';">几乎所有的现代浏览器都支持在任何元素上使用<span style="font-family: Times New Roman;">hover States</span><span style="font-family: 宋体;">，但</span><span style="font-family: Times New Roman;">IE6</span><span style="font-family: 宋体;">不行。</span><span style="font-family: Times New Roman;">IE6</span><span style="font-family: 宋体;">仅支持伪类</span><span style="font-family: Times New Roman;">&lt;a&gt;</span><span style="font-family: 宋体;">元素，即使这样如果你的</span></span><span style="font-size: 10.5pt; font-family: '宋体';">&lt;a&gt;<span style="font-family: 宋体;">没有</span><span style="font-family: Times New Roman;">href</span><span style="font-family: 宋体;">的话</span><span style="font-family: Times New Roman;">IE6</span><span style="font-family: 宋体;">仍然不支持。解决的方法是使用</span></span><span><a href="http://www.xs4all.nl/~peterned/csshover.html" target="_blank" rel="external"><span class="15" style="color: #0000ff; text-decoration: underline; font-size: 10.5pt; font-family: '宋体';">proprietary </span></a></span><span style="font-size: 10.5pt; font-family: '宋体';">修复，或者在你想使用<span style="font-family: Times New Roman;">hover</span><span style="font-family: 宋体;">的都不使用了。</span></span><span style="font-size: 10.5pt; font-family: '宋体';"></span><br><br><span style="color: #ff0000; font-size: 14pt; font-family: '宋体';">没有透明的<span style="font-family: Times New Roman;">png</span><span style="font-family: 宋体;">支持</span></span><span style="font-size: 10.5pt; font-family: '宋体';"></span><br><br><span style="font-size: 10.5pt; font-family: '宋体';">IE<span style="font-family: 宋体;">的浏览器不支持</span><span style="font-family: Times New Roman;">png</span><span style="font-family: 宋体;">（直到</span><span style="font-family: Times New Roman;">IE7</span><span style="font-family: 宋体;">），我有</span></span><span><a href="http://css-tricks.com/the-different-techniques-for-applying-the-png-hack" target="_blank" rel="external"><span class="15" style="color: #0000ff; text-decoration: underline; font-size: 10.5pt; font-family: '宋体';">一篇文章</span></a></span><span style="font-size: 10.5pt; font-family: '宋体';">介绍这个，一定记住没有透明的<span style="font-family: Times New Roman;">png</span><span style="font-family: 宋体;">在</span><span style="font-family: Times New Roman;">IE6</span><span style="font-family: 宋体;">里是可以正常显示的而且还经常比</span><span style="font-family: Times New Roman;">gif</span><span style="font-family: 宋体;">还好。</span></span><span style="font-size: 10.5pt; font-family: '宋体';"></span><br><br><span style="color: #ff0000; font-size: 14pt; font-family: '宋体';">所以……</span><span style="color: #ff0000; font-size: 14pt; font-family: '宋体';"></span><br><br><span style="font-size: 10.5pt; font-family: '宋体';">这些<span style="font-family: Times New Roman;">bugs</span><span style="font-family: 宋体;">是可以修复的，但是如果你不测试一下的话你就会犯错误，我的理念是：尽量用最现代的技术去设计，但是要保证他们在老版本中兼容。</span></span><span style="font-size: 10.5pt; font-family: '宋体';"></span><br><br><span style="font-size: 10.5pt; font-family: '宋体';"></span><br><br><span style="font-size: 10.5pt; font-family: '宋体';"></span><br><br></div>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/css/">css</a><a href="/tags/IE/">IE</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

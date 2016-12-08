@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>jQuery重写alert 方法 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="jQuery重写alert 方法"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>jQuery重写alert 方法</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/28/jquery-e9-87-8d-e5-86-99alert-e6-96-b9-e6-b3-95/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-28T15:00:04.000Z">
+          2010-08-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 17 Jul 2010 08:50 AM PDT</p>
+<p>项目需要，只要写出了alert方法，那么confirm，promt方法也就比较容易写了，上网查了一下，没有什么好的资源，自己写一个吧。。。。</p>
+<p>要重写我们可以分几步</p>
+<pre><code>*    [1 创建 alert弹窗 ，遮罩div层铺满浏览器显示](#1)
+
+*    [2 定位 div ，居中显示](#2)
+
+*    [3 响应 enter 和 F5 键](#3)&lt;span id=&quot;more-753&quot;&gt;&lt;/span&gt;
+</code></pre><a id="more"></a>
+<p>当然我们要先引入jQuery，然后基本思路就是</p>
+<p>[code=”js”]<br>//备份一下原始方法<br>window._alert = window.alert;<br>window.alert= function(message){</p>
+<p>}<br>[/code]</p>
+<p>好的，我们先从弹框的结构开始。</p>
+<h3 id="1-创建-alert弹窗-，遮罩div层铺满浏览器显示"><a href="#1-创建-alert弹窗-，遮罩div层铺满浏览器显示" class="headerlink" title="1 创建 alert弹窗 ，遮罩div层铺满浏览器显示"></a>1 创建 alert弹窗 ，遮罩div层铺满浏览器显示</h3><p>好的就是两个div层一个是alert框(.alert)，一个是遮罩层(#dim)：</p>
+<p>[code=”html”]<br>        <div class="alert"><br>             <div class="alert_title"><br>                 提示信息<br>             </div>        </div></p>
+<pre><code>        &lt;div class = &quot;alert_message&quot;&gt;
+
+        &lt;/div&gt;
+        &lt;div class=&quot;alert_sure&quot;&gt;[确定](#)&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id=&quot;dim&quot;&gt;&lt;/div&gt;    
+</code></pre><p>[/code]</p>
+<p>美化一下 添加一些css,如果想预览，请复制粘贴后去掉” display：none;”</p>
+<p>[code=”css”]<br>    body{<br>        padding:0;<br>        margin:0;<br>    }</p>
+<pre><code>#dim{
+    height:100%;
+    width:100%;
+    background:#333;
+    position:absolute;
+    top:0;
+    left:0;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;/** Firefox 3.5即将原生支持opacity属性，所以本条属性只在Firefox3以下版本有效 ***/
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    z-index:100;
+    display:none;
+}
+.alert{
+    height:200px;
+    width:300px;
+    -moz-border-radius: 10px; /* Firefox */
+    -webkit-border-radius: 10px; /* Safari */
+    border-radius:10px;
+    position:absolute;
+    top:0;
+    left:0;
+    background:#eee;
+    opactiy:1;
+    z-index:200;
+    display:none;
+    text-align:center;
+}
+.alert_title{
+    padding:5px 20px;
+    background:#555;
+    -moz-border-radius-topleft: 10px; /* Firefox */
+   -webkit-border-top-left-radius: 10px; /* Safari */
+    border-radius-topleft:10px;
+
+    -moz-border-radius-topright: 10px; /* Firefox */
+    -webkit-border-top-right-radius: 10px; /* Safari */
+    border-radius-topright:10px;
+}
+.alert_sure{
+    text-align:center;
+    margin:0 auto;
+    border:1px solid #555500;
+    width:50px;
+    height:25px;
+    line-height:25px;
+    -moz-border-radius: 3px; /* Firefox */
+    -webkit-border-radius: 3px; /* Safari */
+    border-radius:3px;
+}
+.alert_sure a{
+    display:block;
+    height:100%;
+    width:100%;
+    text-decoration:none;
+
+}
+.alert_sure a:hover{
+    background:#DFA200;
+}
+.alert_message{
+    height:120px;
+    width:250px;
+    margin:0 auto;
+    text-align:center;
+    padding-top:10px;
+}
+</code></pre><p>[/code]</p>
+<h3 id="2-定位-div-，居中显示"><a href="#2-定位-div-，居中显示" class="headerlink" title="2 定位 div ，居中显示"></a>2 定位 div ，居中显示</h3><p>定位css 是不够的 如果想通过width：100%;height:100%; 来使遮罩层铺满浏览器是行不通的，width和height是相对于window的，如果你没有显示滚动条，那是可以的，但是“理想的”状况总是太少，我们需要使用document的width和height。</p>
+<p>[code=”js”]<br>$(‘.alert’).css({<br>    left:$(document).scrollLeft()+$(window).width()/2 -$(‘.alert’).width()/2,<br>    top:$(document).scrollTop()+$(window).height()/2-$(‘.alert’).height()/2,<br>     cursor: “point”<br>})<br>[/code]</p>
+<p>同时我们要绑定窗口大小的resize事件；</p>
+<p>[code=”js”]<br>        $(window).bind(“resize”, function(){<br>             $(“#dim”).css({“height”: $(document).height(),width: $(document).width()});<br>             $(‘.alert’).css({<br>                                left:$(document).scrollLeft()+$(window).width()/2 -$(‘.alert’).width()/2,<br>                                top:$(document).scrollTop()+$(window).height()/2-$(‘.alert’).height()/2,<br>                                cursor: “point”<br>                            })<br>        });<br>[/code]</p>
+<h3 id="3-响应-回车-和-F5-键"><a href="#3-响应-回车-和-F5-键" class="headerlink" title="3 响应 回车 和 F5 键"></a>3 响应 回车 和 F5 键</h3><p>那么我们要监听键盘事件。</p>
+<p>[code=”js”]<br>        $(window).bind(“keydown”, function(e){<br>            //enter 键<br>             if(e.keyCode == 13) {<br>                     if($(“.alert”).css(‘display’) ==’block’){<br>                     yincang();<br>                 }<br>             }<br>             //禁用F5<br>             if(e.keyCode == 116 ) {<br>                 //.alert 正显示 禁用F5<br>                 if($(“.alert”).css(‘display’) ==’block’){<br>                     return false;<br>                 }<br>             }<br>        });<br>[/code]</p>
+<p>要展示的也就这些，刚刚写完，代码还可以 大大的精简优化，同时也可以拓展一下，具体的效果可以看下方demo页。</p>
+<p>可以改进的地方有有弹框时禁用scroll ，以及多个alert循序显示，拖动等</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

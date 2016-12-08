@@ -1,0 +1,184 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript 一些不理解的地方 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="JavaScript 一些不理解的地方"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>JavaScript 一些不理解的地方</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/11/17/javascript-e4-b8-80-e4-ba-9b-e4-b8-8d-e7-90-86-e8-a7-a3-e7-9a-84-e5-9c-b0-e6-96-b9/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-11-17T14:08:16.000Z">
+          2010-11-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 16 May 2010 07:53 PM PDT</p>
+<p>看了一下Ruby’s Louvre的<a href="http://www.cnblogs.com/rubylouvre/archive/2010/05/15/1736234.html?login=1#commentform" target="_blank" rel="external">一些javascript题目</a>有些不解的问题，记录一下</p>
+<p><span id="more-610"></span><br><a id="more"></a></p>
+<h3 id="不解之一"><a href="#不解之一" class="headerlink" title="不解之一"></a>不解之一</h3><p>在+、 -、 *、 /、 = 、== 、!= 、 &lt;、 &gt; 在这种情况下JavaScript停止了行末自动添加分号</p>
+<p>[code=”js”]<br>function test() {<br>    return 1<br>      +2<br>  }<br>  alert(test())<br>[/code]<br>[code=”js”]<br>function test() {<br>    return 1+<br>      2<br>  }<br>  alert(test())<br>[/code]<br>[code=”js”]<br>//不报错<br>function test() {<br>    return 1 ;+<br>      2<br>  }<br>  alert(test())<br>[/code]</p>
+<h3 id="的作用"><a href="#的作用" class="headerlink" title="[] 的作用"></a>[] 的作用</h3><p>[code=”js”]<br>alert({a: 1, b: 2}[[“b”]])  //弹出 2<br>alert({a: 1, b: 2}[‘b’])   //弹出 2<br>[/code]</p>
+<p>第一个 两对[] 作用？</p>
+<p>[code=”js”]<br>alert(typeof(‘foo’.split(‘’) + []));<br>[/code]</p>
+<h3 id="的作用-1"><a href="#的作用-1" class="headerlink" title="+ 的作用"></a>+ 的作用</h3><p>[code=”js”]<br>alert(‘foo’.split(‘’) + [])  //弹出 f,o,o<br>alert(‘foo’.split(‘’) + [‘t’]) // f,o,ot<br>[/code]</p>
+<p>数组 + 数组 变成string</p>
+<p>原文解释：</p>
+<blockquote>
+<p>//参见ECMA3-5th的第9.3节与15.7.1节。如果Number([value])的value不存在，则返回0</p>
+<p>//一个字符串被执行了“+”，“-”等操作，相当于调用了Number(str)，这时亦即相当于调用了toNumber函数</p>
+<p>//这是一个内建函数，只存在于JS引擎中，对于这个str它会执行trim操作，再执行数字转换，</p>
+<p>//如果能转换基本上转换为十进制(如0x12转为18)，如果数字过大会使用指数，</p>
+<p>//如果trim后得到的为Infinity，则直接转换它，如：</p>
+<pre><code>var a = +&apos; Infinity  &apos;;
+
+alert(typeof a)   //number
+</code></pre><p>//如果不能转换则返回NaN</p>
+</blockquote>
+<p>[code=”js”]<br>alert(Array(2).join())  //弹出 ,<br>alert(Array(3).join())  //弹出 ,,<br>[/code]</p>
+<p>和+相同的原理 </p>
+<h3 id="最不解的-的作用"><a href="#最不解的-的作用" class="headerlink" title="最不解的 .. 的作用"></a>最不解的 .. 的作用</h3><p>[code=”js”]<br>alert([1,2,3,4,5][0..toString.length])<br>[/code]</p>
+<p>原文解释：</p>
+<blockquote>
+<p>//0..相当于0.0.,这里不能直接写0.toString，</p>
+<p>//因为如果一个点会提示错误 ，JS引擎无法判断是小数点还是”.”操作符</p>
+<p>//<a href="http://www.cnblogs.com/rubylouvre/archive/2009/11/23/1608601.html" target="_blank" rel="external">http://www.cnblogs.com/rubylouvre/archive/2009/11/23/1608601.html</a></p>
+<p>//接着就是取数字的toString方法的length属性，注意这里并没有执行toString</p>
+<p>//所有函数都一个length属性，为其形参的个数，如</p>
+<p>var fn = function(a,b){};</p>
+<p>fn.length; // 2</p>
+<p>//toString函数的形参为1，自己翻书吧，因此相当于[1,2,3,4,5][1]</p>
+</blockquote>
+<p>[code=”js”]<br>var d;<br>Number.prototype.a =<br>Number.prototype.b =<br>Number.prototype.c =<br>Number.prototype;<br> function f1() { return 1..a.b.c }<br> //alert(a) //a is not defined<br> //alert(e) //e is not defined</p>
+<p> alert(1..a) //弹出 0<br> alert(1..e) //弹出  undefined<br>//alert(d) //弹出  undefined<br>[/code]</p>
+<p>a 和e 的区别在哪里？</p>
+<p>原文解释：</p>
+<blockquote>
+<p>//先看Number.prototype.a =  Number.prototype;</p>
+<p>//Number.prototype为Number的一个实例</p>
+<p>//相当于 new Number 得0</p>
+<p>//相当于1..a为0</p>
+<p>//接着是0..b</p>
+<p>//而b也是Number.prototype.b =  Number.prototype;</p>
+<p>//因此0..b为0</p>
+<p>//最后的0..c为一样，为0</p>
+</blockquote>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

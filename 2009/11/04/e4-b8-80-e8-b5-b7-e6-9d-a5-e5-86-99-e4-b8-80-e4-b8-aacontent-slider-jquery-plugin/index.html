@@ -1,0 +1,252 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>一起来写一个Content Slider jQuery Plugin | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="JavaScript">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="一起来写一个Content Slider jQuery Plugin"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>一起来写一个Content Slider jQuery Plugin</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2009/11/04/e4-b8-80-e8-b5-b7-e6-9d-a5-e5-86-99-e4-b8-80-e4-b8-aacontent-slider-jquery-plugin/" rel="bookmark">
+        <time class="entry-date published" datetime="2009-11-04T04:46:20.000Z">
+          2009-11-04
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>外国的网站真的不错，自己从学css，html起就从外网站学习，外国的技术交流真的不错，博主们都在写博文，分享问题与创新，学习气氛真不错啊。这里就介绍一个本人认为最好的，已经在友情链接里了。今天转载他的博文一篇。</p>
+<p>How to Build a Simple Content Slider jQuery Plugin<br><a id="more"></a><br><strong><a href="http://nettuts.s3.amazonaws.com/478_jwSlider/jwSlider.zip" title="源码" target="_blank" rel="external">源码下载</a> </strong></p>
+<p><strong><a href="http://nettuts.s3.amazonaws.com/478_jwSlider/jwSlider/index.html" title="demo" target="_blank" rel="external"> demo演示</a></strong></p>
+<p>看一下大体框架</p>
+<p>[code=”javascript”]<br>(function(\$) {</p>
+<p>\$.fn.$1 = function(options) {</p>
+<p>var defaults = {<br>$2<br>},</p>
+<p>options = \$.extend(defaults, options);</p>
+<p>this.each(function() {</p>
+<p>var \$this = \$(this);</p>
+<p>$3</p>
+<p>return this;</p>
+<p>}); // end each</p>
+<p>}</p>
+<p>})(jQuery);</p>
+<p>[/code]<br>原文<a href="http://net.tutsplus.com/videos/screencasts/how-to-build-a-simple-content-slider-jquery-plugin/" target="_blank" rel="external">链接</a>里面有视频的，大家可以看一下。<br>还有就是源码列一下<br>[code=”javascript”]<br>(function($) {</p>
+<pre><code>$.fn.jwSlider = function(options) {
+
+    // set default options
+    var defaults = {
+        speed : 1000,
+        pause : 2000,
+        transition : &apos;fade&apos;
+    },
+
+    // Take the options that the user selects, and merge them with defaults.
+    options = $.extend(defaults, options);
+
+    // Needed to fix a tiny bug. If the pause is less than speed, it&apos;ll cause a flickr.
+    // This will check for that, and if it is smaller, it increases it to just about the options.speed.
+    if(options.pause &lt;= options.speed) options.pause = options.speed + 100;
+
+    // for each item in the wrapped set
+    return this.each(function() {
+
+        // cache &quot;this.&quot;
+        var $this = $(this);
+
+        // Wrap &quot;this&quot; in a div with a class of &quot;slider-wrap.&quot;
+        $this.wrap(&apos;&lt;div class=&quot;slider-wrap&quot; /&gt;&apos;);
+
+        // Set the width to a really high number. Adjusting the &quot;left&quot; css values, so need to set positioning.
+        $this.css({
+            &apos;width&apos; : &apos;99999px&apos;,
+            &apos;position&apos; : &apos;relative&apos;,
+            &apos;padding&apos; : 0
+        });
+
+        // If the user chose the &quot;slide&quot; transition...
+        if(options.transition === &apos;slide&apos;) {
+            $this.children().css({
+                &apos;float&apos; : &apos;left&apos;,
+                &apos;list-style&apos; : &apos;none&apos;
+            });
+
+            $(&apos;.slider-wrap&apos;).css({
+                &apos;width&apos; : $this.children().width(),
+                &apos;overflow&apos; : &apos;hidden&apos;
+            });                
+        }
+
+        // If the user chose the &quot;fade&quot; transition, instead pile all of the images on top of each other.
+        if(options.transition === &apos;fade&apos;) {
+            $this.children().css({
+                &apos;width&apos; : $this.children().width(),
+                &apos;position&apos; : &apos;absolute&apos;,
+                &apos;left&apos; : 0
+            });
+
+            // reorder elements to fix z-index issue.
+
+            for(var i = $this.children().length, y = 0; i &gt; 0; i--, y++) {         
+                $this.children().eq(y).css(&apos;zIndex&apos;, i + 99999);
+            }    
+
+            // Call the fade function. 
+            fade();
+        }
+
+        // If the user instead chose the &quot;slide&quot; transition, call the slide function.
+        if(options.transition === &apos;slide&apos;) slide();    
+
+        function slide() {
+            setInterval(function() {
+                // Animate to the left the width of the image/div
+                $this.animate({&apos;left&apos; : &apos;-&apos; + $this.parent().width()}, options.speed, function() {
+                    // Return the &quot;left&quot; CSS back to 0, and append the first child to the very end of the list.
+                    $this
+                       .css(&apos;left&apos;, 0)
+                       .children(&apos;:first&apos;)
+                       .appendTo($this); // move it to the end of the line.
+                })
+            }, options.pause);
+        } // end slide
+
+        function fade() {
+            setInterval(function() {
+                $this.children(&apos;:first&apos;).animate({&apos;opacity&apos; : 0}, options.speed, function() {    
+                    $this
+                       .children(&apos;:first&apos;)
+                       .css(&apos;opacity&apos;, 1) // Return opacity back to 1 for next time.
+                       .css(&apos;zIndex&apos;, $this.children(&apos;:last&apos;).css(&apos;zIndex&apos;) - 1) // Reduces zIndex by 1 so that it&apos;s no longer on top.                    
+                       .appendTo($this); // move it to the end of the line.
+                })
+            }, options.pause);
+        } // end fade            
+
+    }); // end each        
+
+} // End plugin. Go eat cake.
+</code></pre><p>})(jQuery);<br>[/code]<br>很详细的注释，不讲了，我就不多说了，大家看看就理解了，该吃饭了啊</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

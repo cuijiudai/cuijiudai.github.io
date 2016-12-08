@@ -1,0 +1,143 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>自动添加订阅到Google Reader | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="油猴,Greasemonkey">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="自动添加订阅到Google Reader"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>自动添加订阅到Google Reader</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/10/17/e8-87-aa-e5-8a-a8-e6-b7-bb-e5-8a-a0-e8-ae-a2-e9-98-85-e5-88-b0google-reader/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-10-17T13:56:22.000Z">
+          2010-10-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="http://blog.meituo.net/wp-content/uploads/atuo_add_togooglereader/addtogooglereader.png" alt="以后订阅到google的时候再也不用点击 "><a id="more"></a><br>一段简短的js代码，用js改变简化操作是不是挺爽的？一个Greasemonkey的js文件，以前用过，今天又翻了出来，看了一下源码，原来这么简单。。。<br>如果你看不懂或者不清楚如何书写Greasemonkey 插件请查看<a href="http://blog.meituo.net/2010/08/29/%E4%B9%A6%E5%86%99%E7%AC%AC%E4%B8%80%E4%B8%AA%E6%B2%B9%E7%8C%B4greasemonkey%E6%8F%92%E4%BB%B6/" target="_blank" rel="external">书写第一个油猴(Greasemonkey)插件</a>.<br>[code=”js”]<br>// ==UserScript==<br>// @name           Auto add to Google Reader<br>// @namespace      <a href="http://lieschke.net/projects/greasemonkey/" target="_blank" rel="external">http://lieschke.net/projects/greasemonkey/</a><br>// @description    Bypasses the “Add to Google homepage”/“Add to Google Reader” choice, directly adding to Google Reader.<br>// @include        <a href="http://www.google.com/ig/add?feedurl=*" target="_blank" rel="external">http://www.google.com/ig/add?feedurl=*</a><br>// ==/UserScript==</p>
+<p>(function() {<br>    var anchors = document.getElementsByTagName(‘a’);<br>    for (var i = 0; i &lt; anchors.length; i++) {<br>        if (anchors[i].innerHTML == “Add to Google Reader”) {<br>            document.location.href = anchors[i].href;<br>        }<br>    }<br>})();<br>[/code]<br>代码源地址<a target="_blank" href="http://userscripts.org/scripts/show/8390">Auto add to Google Reader</a></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/油猴/">油猴</a><a href="/tags/Greasemonkey/">Greasemonkey</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

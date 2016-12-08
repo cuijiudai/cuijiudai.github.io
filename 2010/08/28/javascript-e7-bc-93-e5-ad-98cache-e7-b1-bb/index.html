@@ -1,0 +1,174 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript 缓存(Cache)类 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="JavaScript 缓存(Cache)类"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>JavaScript 缓存(Cache)类</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/28/javascript-e7-bc-93-e5-ad-98cache-e7-b1-bb/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-28T15:17:38.000Z">
+          2010-08-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 08 Jul 2010 07:46 AM PDT</p><p></p>
+<p>每一个开发人员都知道缓存的重要性，在后台我们有缓存（memcached, xcache,等）来防止数据库被刷爆，在CDN（content delivery networks）中我们有edge caching 希望网页内容被浏览多余一次时，浏览器可以缓存网页内容。这次我们给出了一个JavaScript缓存解决方案，他可以支持<a href="http://dev.w3.org/html5/webstorage/" target="_blank" rel="external"> HTML5的Local Storage</a>，中文Local Storage教程可以参考<a href="http://blog.meituo.net/2010/06/25/web-storage%E5%85%A8%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Web Storage全解析</a>。<span id="more-698"></span></p>
+<a id="more"></a>
+<h3 id="构造的思路"><a href="#构造的思路" class="headerlink" title="构造的思路"></a>构造的思路</h3><p>[code=’js’]<br>function CacheProvider() {<br>  // values will be stored here<br>  this._cache = {};<br>}<br>[/code]</p>
+<h3 id="检测是否支持Local-Storage"><a href="#检测是否支持Local-Storage" class="headerlink" title="检测是否支持Local Storage"></a>检测是否支持Local Storage</h3><p>[code=’js’]<br>try {<br>  CacheProvider.hasLocalStorage = (‘localStorage’ in window) &amp;amp;&amp;amp; window[‘localStorage’] !== null;<br>} catch (ex) {<br>  CacheProvider.hasLocalStorage = false;<br>}<br>[/code]</p>
+<p>我们使用<code>try/catch</code>因为虽然Firefox支持它，但是在<code>about:config</code>设置中默认是禁止的并且会抛出错误。</p>
+<p>然后我们要添加local storage对存储对象的支持，这个可以从 Christopher Blizzard 的嘉文<a href="http://hacks.mozilla.org/2009/06/localstorage/" target="_blank" rel="external">Saving data with local storage </a>，因为你仅可以在local storage中存储字符串。</p>
+<h3 id="JSON-解析"><a href="#JSON-解析" class="headerlink" title="JSON 解析"></a>JSON 解析</h3><p>[code=’js’]<br>if (CacheProvider.hasLocalStorage) {<br>  Storage.prototype.setObject = function(key, value) {<br>    this.setItem(key, JSON.stringify(value));<br>  };</p>
+<p>  Storage.prototype.getObject = function(key) {<br>    return JSON.parse(this.getItem(key));<br>  };<br>}<br>[/code]</p>
+<p>使用了<a href="https://developer.mozilla.org/En/Using_native_JSON" target="_blank" rel="external">native JSON</a>，有了核心方法，我们然后会有get，set和clear……</p>
+<h3 id="功能函数核心类"><a href="#功能函数核心类" class="headerlink" title="功能函数核心类"></a>功能函数核心类</h3><p>[code=’js’]<br>CacheProvider.prototype = {</p>
+<p>  /**</p>
+<pre><code>* {String} k - the key
+* {Boolean} local - get this from local storage?
+* {Boolean} o - is the value you put in local storage an object?
+*/
+</code></pre><p>  get: function(k, local, o) {<br>    if (local &amp;amp;&amp;amp; CacheProvider.hasLocalStorage) {<br>      var action = o ? ‘getObject’ : ‘getItem’;<br>      return localStorage<a href="k">action</a> || undefined;<br>    } else {<br>      return this._cache[k] || undefined;<br>    }<br>  },</p>
+<p>  /**</p>
+<pre><code>* {String} k - the key
+* {Object} v - any kind of value you want to store
+* however only objects and strings are allowed in local storage
+* {Boolean} local - put this in local storage
+*/
+</code></pre><p>  set: function(k, v, local) {<br>    if (local &amp;amp;&amp;amp; CacheProvider.hasLocalStorage) {<br>      if (typeof v !== ‘string’)) {<br>        // make assumption if it’s not a string, then we’re storing an object<br>        localStorage.setObject(k, v);<br>      } else {<br>        try {<br>          localStorage.setItem(k, v);<br>        } catch (ex) {<br>          if (ex.name == ‘QUOTA_EXCEEDED_ERR’) {<br>            // developer needs to figure out what to start invalidating<br>            throw new Exception(v);<br>            return;<br>          }<br>        }<br>      }<br>    } else {<br>      // put in our local object<br>      this._cache[k] = v;<br>    }<br>    // return our newly cached item<br>    return v;<br>  },</p>
+<p>  /**</p>
+<pre><code>* {String} k - the key
+* {Boolean} local - put this in local storage
+* {Boolean} o - is this an object you want to put in local storage?
+*/
+</code></pre><p>  clear: function(k, local, o) {<br>    if (local &amp;amp;&amp;amp; CacheProvider.hasLocalStorage) {<br>      localStorage.removeItem(k);<br>    }<br>    // delete in both caches - doesn’t hurt.<br>    delete this._cache[k];<br>  }</p>
+<p>};</p>
+<p>var i18nCache = new CacheProvider;</p>
+<p>if (i18nCache.get(‘topnav’)) {<br>  $(‘#nav’).html(i18nCache.get(‘topnav’));<br>} else {<br>  ajax(‘top-nav.tmpl’, function(html) {<br>    i18nCache.set(‘topnav’, html);<br>    $(‘#nav’).html(i18nCache.get(‘topnav’));<br>  });<br>}<br>[/code]</p>
+<h3 id="如何使用这个类那"><a href="#如何使用这个类那" class="headerlink" title="如何使用这个类那"></a>如何使用这个类那</h3><p>在getElementsByClassName方法中的使用</p>
+<p>[code=’js’]<br>var cache = new CacheProvider;</p>
+<p>window.getElementsByClassName = getElementsByClassName || function(c) {<br>  var reg = cache.get(c) || cache.set(c, new RegExp(“(?:^|\s+)” + c + “(?:\s+|$)”));<br>  var elements = document.getElementsByTagName(‘*’);<br>  var results = [];<br>  for (var i = 0; i &lt; elements.length; i++) {<br>    if (elements[i].className.match(reg)) {<br>      results.push(elements[i]);<br>    }<br>  }<br>  return results;<br>};<br>[/code]</p>
+<p>当下次我们使用同一个类时，它会使用一个预编译的正则表达式，而不是重新构建一个新的。</p>
+<p>下一个例子，对于需要i18n（国际化）的大型应用，我们可以缓存编译的html字符串。</p>
+<p>[code=’js’]<br>var i18nCache = new CacheProvider;</p>
+<p>if (i18nCache.get(‘topnav’)) {<br>  $(‘#nav’).html(i18nCache.get(‘topnav’));<br>} else {<br>  ajax(‘top-nav.tmpl’, function(html) {<br>    i18nCache.set(‘topnav’, html);<br>    $(‘#nav’).html(i18nCache.get(‘topnav’));<br>  });<br>}<br>[/code]</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

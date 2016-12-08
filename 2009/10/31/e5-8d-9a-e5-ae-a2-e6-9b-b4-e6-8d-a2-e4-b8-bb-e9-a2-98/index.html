@@ -1,0 +1,183 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>博客更换主题 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="博客更换主题"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>博客更换主题</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2009/10/31/e5-8d-9a-e5-ae-a2-e6-9b-b4-e6-8d-a2-e4-b8-bb-e9-a2-98/" rel="bookmark">
+        <time class="entry-date published" datetime="2009-10-31T13:35:07.000Z">
+          2009-10-31
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>博客改版了，以前的博客主题是出自一个外国的网站，随便翻译了一下就拿来用了，现在的这款是出自<a href="http://www.prower.cn" target="_blank" rel="external">Prower</a>,谢谢博主的分享。我对主题作了一下更改，添加了一些js，主要是图片方面，包括图片自动添加背景，圆角，最大尺寸判定,缩略图的鼠标指向放大。在此列一下代码，大家多提意见。下次有机会我会添加更多的js应用。<br><a id="more"></a></p>
+<h3 id="js代码"><a href="#js代码" class="headerlink" title="js代码"></a>js代码</h3><p>[code=”javascript”]</p>
+<p>$(document).ready(function(){<br>    //图片的背景边框效果</p>
+<pre><code>var offsetX = 20;
+var offsetY = 10;
+
+$(&quot;.content img&quot;).each(function(){
+var contentwidth=$(&quot;.content&quot;).width();
+var maxwidth=contentwidth-18; //减去padding和border的宽度
+    $(this).wrap(&quot;&lt;div&gt;&lt;/div&gt;&quot;);
+    $(this).parent().attr(&quot;class&quot;,&quot;addcaption&quot;);
+    $(this).attr(&quot;class&quot;,&quot;&quot;);
+    $(this).parent().append(&quot;&lt;span&gt;&quot;+$(this).attr(&quot;title&quot;)+&quot;&lt;/span&gt;&quot;);
+    thiswidth=$(this).width();
+    if(maxwidth&lt;thiswidth)
+    {
+        thiswidth=maxwidth;   // 图片宽度等于最大宽度
+        $(this).width(thiswidth);
+
+        //鼠标悬停的放大效果
+        if(true)
+        {
+            var $imgsrc=$(this).attr(&quot;src&quot;);
+            $(this).hover(function(e){
+                $(&apos;![big image]()&apos;)
+                .css(&apos;top&apos;,e.pageY +offsetY)
+                .css(&apos;left&apos;, e.pageX + offsetX)
+                .appendTo(&apos;body&apos;);
+
+            }, function() {
+                $(&quot;#largeImage&quot;).remove();
+            });
+
+            $(this).mousemove(function(e) {
+                $(&quot;#largeImage&quot;).css(&apos;top&apos;, e.pageY + offsetY).css(&apos;left&apos;, e.pageX + offsetX);
+            });
+        }
+    }
+    $(this).parent().width(thiswidth);
+    $(this).parent().corner(&quot;5px&quot;);
+});
+</code></pre><p>});</p>
+<p>[/code]</p>
+<h3 id="css代码"><a href="#css代码" class="headerlink" title="css代码"></a>css代码</h3><p>[code=”css”]</p>
+<p>div.addcaption{<br>    display:block;<br>    margin-left:auto;<br>    margin-right:auto;<br>    margin-bottom:1.5em;<br>    padding:8px;<br>    text-align:center;<br>    background:#e0e0e0;<br>    border:1px solid #c1c1c1;<br>    color:#565656;<br>    cursor:hand;<br>}</p>
+<p>div.addcaption span{<br>    display:block;<br>    text-align:center;</p>
+<p>}</p>
+<p>#largeImage {<br>position: absolute;<br>padding: .5em;<br>background: #e3e3e3;<br>border: 1px solid #BFBFBF;</p>
+<p>}<br>[/code]</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/jQuery/">jQuery</a>, <a href="/categories/jQuery/WordPress/">WordPress</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

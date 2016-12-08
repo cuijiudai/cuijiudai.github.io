@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>手机端浏览器 fixed 定位问题 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="android,fixed">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="手机端浏览器 fixed 定位问题"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>手机端浏览器 fixed 定位问题</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2013/07/26/e6-89-8b-e6-9c-ba-e7-ab-af-e6-b5-8f-e8-a7-88-e5-99-a8-fixed-e5-ae-9a-e4-bd-8d-e9-97-ae-e9-a2-98/" rel="bookmark">
+        <time class="entry-date published" datetime="2013-07-26T14:44:14.000Z">
+          2013-07-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>首先说下开发模式，刚刚开始接触，基本沿用web端开发方式，目前开发模式上没有找到的适合的，现在基本这样：</p>
+<p>1，电脑nginx配置服务器<br>3，电脑和手机连同一个局域网，<br>2，android root 和 iphone越狱 来绑hosts，访问电脑配置的环境。</p>
+<p>但是 UC,QQ浏览器缓存严重，根本对hosts的文件的修改无动于衷。。不得每次修改将文件更到外网修改，调试起来相当麻烦。<br><a id="more"></a><br>一个问题是有些根本不支持fix定位，这个只有绑定js touchmove事件兼容了。<br>最令人头疼的是不完全支持。。<br>首先遇到的问题是在fix定位的元素内不能有 position:relative 或者 absolute的元素，如果有，这些元素不会受到fixed的祖先元素的限制，会根据body定位，滚动到最底部的时候才跟着fixed元素一起滚动。这个的解决就是去掉那些定位，换用其他定位方式。。</p>
+<p>另一个问题fix定位后，fix的浮层根本不显示，只有滚动到最底部才显示出来，然后可以正常fixed定位。这个层是js动态添加，我曾经试过在js里 el.style.display = ‘none’;el.style.display = ‘block’; 但是没有任何作用，最终解决方法是在css里设置display:none; 然后动态插入body后设置 style.display = ‘block’;这个问题解决。</p>
+<p>在解决这个问题后，还有一个问题是这个fix的层在没有滚动的时候可以正常点击，但滚动后点击这个层根本没有反应，这个层会被透过就像设置了 : pointer-eventes:none; 一样，点击到了层的下一层。这个的解决是<br>将 在viewport添加 user-scalable=no：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p>变成：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0 user-scalable=no"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<p>恩，fix定位基本这些。。</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/android/">android</a><a href="/tags/fixed/">fixed</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

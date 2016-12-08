@@ -1,0 +1,172 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Fckeditor 字数统计 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="Fckeditor">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Fckeditor 字数统计"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>Fckeditor 字数统计</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/28/fckeditor-e5-ad-97-e6-95-b0-e7-bb-9f-e8-ae-a1/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-28T15:04:14.000Z">
+          2010-08-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 15 Jul 2010 06:29 AM PDT</p><p></p>
+<p>Fckeditor 是一个优秀的文本编辑器，我们可以使用它在浏览器中轻松的构建富文本编辑器，他的做法是对一个textarea实行替换，我使用过Fckeditor 3.xx，今天项目需要使用2.xx，并且需要统计输入字数，不熟悉啊！<br>首先上网查到获得Fck的内容要使用var editor = FCKeditorAPI.GetInstance(instanceName)，FCKeditorAPI.GetInstance一直是undefined，然后上网查，又知道要在fck加载完后使用FCKeditorAPI.GetInstance， 也就是使用FCK内置的FCKeditor_OnComplete方法，但是还是不行，FCKeditor_OnComplete不是自动执行的，定义完以后需要你再调用一下：    FCKeditor_OnComplete()，这次还是不行在FCK还没加载下来，FCKeditor_OnComplete()就执行了！还是报错。。。不知道这个方法有什么用，只有使用window.onload了，这次终于好了。别忘了还要用jQuery。</p>
+<p><span id="more-741"></span></p>
+<a id="more"></a>
+<p>[code=’js’]<br>window.onload=function(){</p>
+<pre><code>function FCKeditor_OnComplete()
+{
+       var editor = FCKeditorAPI.GetInstance(&apos;info&apos;) ;
+    editor.Events.AttachEvent(&apos;OnSelectionChange&apos;, editor_keydown);
+}  
+
+function editor_keydown(editor)
+{
+    var maxLength=3; //最大输入字数
+    content= $(editor.EditorDocument.body).text();
+    var len= content.length;
+    var $info =$(&apos;#info&apos;);//存放提示信息
+    if(len &lt; maxLength){
+        .text(&quot;还可以输入 &quot;+(maxLength-len)+&quot;字&quot;);
+    }
+    if(len == maxLength){
+        $info.text(&quot;字数达到上限&quot;);
+    }
+    if(len &gt; maxLength){
+        $info.text(&quot; 输入字符超过&quot;+maxLength+&quot;个,请更改！&quot;);
+    }
+}
+FCKeditor_OnComplete()
+</code></pre><p>}<br>[/code]</p>
+<p>还是看原文好啊， <a href="http://docs.cksource.com/FCKeditor_2.x/Developers_Guide/JavaScript_API" target="_blank" rel="external">/FCKeditor_2.x JavaScript_API</a></p>
+<p>我使用了OnSelectionChange 监听输入，或许有更好的。。。你知道么？</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/Fckeditor/">Fckeditor</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

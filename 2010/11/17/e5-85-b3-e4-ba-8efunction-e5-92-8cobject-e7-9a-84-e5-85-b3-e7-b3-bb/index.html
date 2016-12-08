@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>关于Function和Object的关系 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="关于Function和Object的关系"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>关于Function和Object的关系</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/11/17/e5-85-b3-e4-ba-8efunction-e5-92-8cobject-e7-9a-84-e5-85-b3-e7-b3-bb/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-11-17T13:35:21.000Z">
+          2010-11-17
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>上次说Boolean Number String Object，都是函数，那么就有矛盾了，Function和object是什么关系？到底谁更根本?</p>
+<p>转载开始：</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/functionAndObject/function_and_object.bmp" alt=""></p>
+<p>之前在网上看到一个问题：</p>
+<pre>var n = new Number(1)
+n.prototype -&gt; undefined
+</pre><a id="more"></a>
+
+为什么n.prototype为undefined?  碰到这个问题我一时也摸不着头脑。因为我们知道new Function().prototype为object.由此问题引发我对Function和Object研究的兴趣。
+
+<span id="more-351"></span>
+
+上图是能够通过代码来验证的Function和Object之间的关系。
+
+*   蓝色线为类的constructor的实例
+*   橙色线为类的实例
+*   绿色线为类的prototype的实例
+*   黑色线为类的constructor的prototype的实例
+
+下面来证明：
+
+<pre style="color: orange;">1.Function instanceof Object -&gt; true
+2.Object instanceof Function -&gt; true
+</pre>
+
+<p>此时橙色关系成立。由此还可得出，Function和Object各为自身的实例。</p>
+<pre style="color: blue;">3.Function.constructor === Function -&gt; true
+4.Object.constructor === Function -&gt; true
+</pre>
+
+<p>由此蓝色关系成立，并得知Object是通过Function进行构造的，而Function则由自己构造自己。</p>
+<pre style="color: green;">5.Function.prototype instanceof Object -&gt; true
+6.Object.prototype instanceof Object -&gt; false
+</pre>
+
+<p>绿色关系成立，因此也就是说，Function的原型对象是Object的实例，可依据3、4、5的关系，得知黑色关系:</p>
+<pre>7.Function.constructor.prototype instanceof Object -&gt; true
+8.Object.constructor.prototype instanceof Object -&gt; true
+</pre>
+
+<p>无论我们创建String\Boolean\Object\Number哪个实例,当你妄图使用new Object().prototype的时候都会得到undefined，说明此实例中并不包含此属性，但实际上是隐含一个内部的 [[Prototype]]的，它的值就是此类型的原型对象，比如：Object.prototype，不过我们没法使用它。但是仍可以通过另一种途径获得：</p>
+<pre>var s = new String();
+s.constructor.prototype -&gt; object
+</pre>
+
+<p>此时得到的就是String的原型对象。</p>
+<pre>s.constructor.prototype.hello = 'hello';
+new String().hello -&gt; 'hello';
+</pre>
+
+<p>这样就可以通过实例去扩展其原型对象了。效果等同于String.prototype.hello = ‘hello’。</p>
+<p>由上面的证明得知，可以通过任意一个实例去访问到Function.prototype。</p>
+<pre>s.constructor.constructor.prototype.newproperty = 'newproperty';
+new Function().newproperty -&gt; 'newproperty';
+</pre>
+
+<p>这样以来你创建的所有Function实例都将拥有这个newproperty了。但是却永远不可能通过实例去得到 Object.prototype(Object类的实例可以通过上述方法得到Object.prototype,比如：new Object().constructor.prototype,但非Object类的实例都无法得到Object.prototype),因为所有实例都不直接拥有prototype的值为Object.prototype的属性，你如果试图使用constructor去获得 Object.prototype,将陷入Function.constructor的循环之中，因为Function的constructor是他自己，这样就保护了Object.prototype,因为所有对象都依它为原型，如果从哪里都可以对它进行访问的话，程序可能会陷入极度混乱之中。</p>
+<p>其实，使用prototype的目的就是为了实现类(Class)的属性共享与继承。我们在prototype对象上进行属性的扩展，其实例和子类型都会拥有这一属性。而对于非同一般的new Function().prototype而言，此处的prototype也不是Object.prototype。规范上有一句可以解释：</p>
+<p>每一个function(Function Object)都会自动创建一个prototype属性，原因是此function(Function Object)可能会被当作constructor。</p>
+<p>也就是说，当你使用new关键字时function就被当作constructor。</p>
+<p>使用new Function().prototype.constructor可以得到一个匿名函数。这个匿名函数实际上就是通过new Function()创建的。new Function()会生成function anonymous(){}。如果你使用这种形式：new new Function();那么将得到anonymous类的一个实例。再来看一段代码：</p>
+<p>function Foo(){}.prototype.constructor -&gt; function Foo(){}</p>
+<p>也就是说，function Foo(){}的prototype对象又有一个指向其本身的constructor属性。更进一步。</p>
+<pre>function Foo(){};
+Foo.prototype.constructor -&gt; function Foo(){}
+new Foo().constructor === Foo.prototype.constructor -&gt; true
+new Foo() instanceof Foo.prototype.constructor -&gt; true
+Foo.prototype instanceof Foo -&gt; false
+</pre>
+
+<p> 因此得知，Foo.prototype的对象并非由Foo进行构造(并非由其本身构造，包括Object.prototype,见证明6)，而是由更高级别的构造机制进行构造的（Object.prototype应该存在一种最高级的构造机制，如果Object.prototype由其本身进行构造，原型链就会陷入循环）。所有类的实例确有其本身进行构造，由此你才能获得new Foo() instanceof Foo -&gt; true 的结果。而所有类(Class)则须通过Function构造，换句话说，也就是所有类都是Function的实例，而Function和Object又互为对方实例，因此所有类也是Object的实例。而所有类的prototype对象也都是Object的实例（如：Foo.prototype instanceof Object -&gt; true，除Object.prototype外），所以所有类的实例也同时为Object的实例（这种描述可能不够准确，因为 Object.prototype不是Object的实例。另，在Object.prototype对象内部的[[prototype]]值为null, 内部的[[Class]]值为Object）。</p>
+<div class="original"><br>引用地址：<a href="http://www.cnblogs.com/siemon/archive/2009/08/02/1537095.html" target="_blank" rel="external"> Javascript中Function和Object之间的关系</a><br></div>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

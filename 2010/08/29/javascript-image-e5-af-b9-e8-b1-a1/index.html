@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript Image对象 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="image">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="JavaScript Image对象"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>JavaScript Image对象</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/javascript-image-e5-af-b9-e8-b1-a1/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:22:32.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><br><br>在<a href="http://imdonkey.com/blog/archives/478/comment-page-1#comment-378" target="_blank" rel="external">I’m Donkey</a>看到<a href="http://imdonkey.com/blog/archives/478/comment-page-1#comment-378" target="_blank" rel="external">倔倔死磕Javascript之放大镜</a> 写的不错，思路很清晰。另外的收获是发现了js的Image对象，他是这么用的：<br><br><pre><br>    function getImageSize(imageEl) {<br>        var i = new Image();<br>        i.src = imageEl.src;<br>        return new Array(i.width, i.height);<br>    }<br></pre><br><br><a id="more"></a><br>他利用这个函数取得imageEl的width和height。真的很新奇，以前居然不知道js还有Image对象，前几天曾见过ECMAScript 5 在Gecko 1.9.1添加的native JSON对象看来真是生有涯，而学无涯啊。<br><br>Image对象在JavaScript 1.1 (i.e. since Netscape Navigator 3.0)引入，我们通过浏览器看到的图像都是通过一个数组显示出来的，这个数组成为<code>images</code>,他是document对象的一个属性。网页中的图像均会被自动看作图像对象，并依顺序，分别表示为<br><br>document.images[0]，document.images[1]… 另外我们可通过给图像一个name属性来访问，如：<br><br><pre>&lt;img src=”img.gif” name=”myImage” width=100 height=100&gt;<br></pre><br><br>这样我们就可以通过document.myImage 或者document.image[“myImage]来访这个对象。<br><br>image对象现在一般常用来预加载一些图片，先将其装入 DOM，等到需要的时候，直接调用，省掉等待的时间，直接显示出来。JavaScript 里的 Image 对象可以很好的实现这一需求，在 FF 下通过 alert(img对象) 可以看到“object HTMLImageElement“内容，Image 对象可以直接利用 append 添加到 body 里面去，调用十分方便。<br><br>#### 图像对象：<br><br>建立图像对象：<br><br><pre>格式：图像对象名称=new Image([宽度],[高度])<br></pre><br><br>图像对象的属性：<br><br><pre>    border complete height hspace lowsrc name src vspace width<br>    </pre><br><br>图像对象的事件：<br><br><pre>    onabort onerror onkeydown onkeypress onkeyup onload<br>    </pre><br><br>    <em>需要注意的是：src 属性一定要写到 onload 的后面，否则程序在 IE 中会出错。</em><br><br>参考代码：<br><br><pre><br>    var img=new Image();<br>    img.onload=function(){alert(“img is loaded”)};<br>    img.onerror=function(){alert(“error!”)};<br>    img.src=”<a href="http://www.abaonet.com/img.gif" target="_blank" rel="external">http://www.abaonet.com/img.gif</a>“;<br>    function show(){alert(“body is loaded”);};<br>    window.onload=show;<br></pre><br><br>运行上面的代码后，在不同的浏览器中进行测试，发现 IE 和 FF 是有区别的，在 FF 中，img 对象的加载包含在 body 的加载过程中，既是 img 加载完之后，body 才算是加载完毕，触发 window.onload 事件。<br><br>在 IE 中，img 对象的加载是不包含在 body 的加载过程之中的，body 加载完毕，window.onload 事件触发时，img 对象可能还未加载结束，img.onload 事件会在 window.onload 之后触发。<br><br>根据上面的问题，考虑到浏览器的兼容性和网页的加载时间，尽量不要在 Image 对象里放置过多的图片，否则在 FF 下会影响网页的下载速度。当然如果你在 window.onload 之后，执行预加载函数，就不会有 FF 中的问题了。<br><br>例子见<a href="http://www.abaonet.com/makeWeb/js/jsList/201001/2537.html" target="_blank" rel="external"> javascript dom中的Image对象&mdash;&mdash;图像预加载</a><br><br>其他参考文章<a href="http://oopweb.com/JavaScript/Documents/jsintro/Volume/part8/part8.htm" target="_blank" rel="external">VOODOO’S INTRODUCTION TO JAVASCRIPT</a><br><br><a href="http://www.javascriptkit.com/jsref/image.shtml" target="_blank" rel="external">Image Object</a><br></div>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/image/">image</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

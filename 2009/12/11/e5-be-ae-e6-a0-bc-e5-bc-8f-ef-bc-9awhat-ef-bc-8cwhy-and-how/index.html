@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>微格式：what，why and how(上) | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="css,html,微格式">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="微格式：what，why and how(上)"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>微格式：what，why and how(上)</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2009/12/11/e5-be-ae-e6-a0-bc-e5-bc-8f-ef-bc-9awhat-ef-bc-8cwhy-and-how/" rel="bookmark">
+        <time class="entry-date published" datetime="2009-12-11T05:28:41.000Z">
+          2009-12-11
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><img src="http://blog.meituo.net/wp-content/uploads/microformat/200.jpg" alt="microformat"></p>
+<p>译自：nettut的 <a href="http://net.tutsplus.com/tutorials/other/microformats-what-why-and-how/?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+nettuts+%28NETTUTS%29&amp;utm_content=Google+Reader" target="_blank" rel="external">Microformats: What, Why, and How；</a>作者：Andrew Burgess</p>
+<p>网上有很多的数据，但是我猜对人们最有用的数据是一些关于怎么取的联系或者如何参加某个活动。这些信息都存储在HTML中，但是在HTML中的数据是不能轻松获得的。那你将怎么获取它呢？微格式就是你要找的。</p>
+<a id="more"></a>
+<h3 id="what"><a href="#what" class="headerlink" title="what?"></a>what?</h3><p>让我们从基础讲起,什么是微格式？<a href="http://microformats.org" target="_blank" rel="external">microformats.org </a>的定义是这样的：</p>
+<p>以人类第一，机器第二的思想，微格式就是建立在已存在的并被广泛应用的标准基础之上的一系列的简单，开放的数据格式。</p>
+<p>原文<br>Designed for humans first and machines second, microformats are a set of simple, open data formats built upon existing and widely adopted standards.</p>
+<p>理解了定义，但我们有更多要澄清的，你可以可以从<a href="http://microformats.org/wiki/what-are-microformats" target="_blank" rel="external">这里</a>找到全部的定义列表，但是总结起来就是:<br><strong>微格式是为了你使用现在已存在的合适的技术轻松抽取你嵌套在网页之中的数据的一系列标准</strong><br>原文<br>microformats are a set of standards for embedding easily extractable data on your pages, using technologies you are comfortable with today.<br>微格式伟大的的地方是你现在的网站内容中或许就有可以使用微格式编码的地方。更伟大的是这仅仅花费几分钟就可以完成。</p>
+<h3 id="why"><a href="#why" class="headerlink" title="why ?"></a>why ?</h3><p>你为什么要使用微格式？使用的目的是什么？如果你认为HTML应该是语义化的，那么微格式就将打动你。如果这样认为，我将劝你：正如我们所知，微格式的整套思想就是标准化数据在网页中的编码，以达到数据可以被轻松的抽出的目的。当今还没有非常多的工具在利用微格式的优点，但是我认为未来会。使用微格式是你为网站的将来着想，那是微格式将得到广泛的采用。这里有<a href="http://microformats.org/wiki/what-can-you-do-with-microformats" target="_blank" rel="external"> 你的网站中什么可以使用微格式</a>的列表。现在已经有火狐插件来抽取微格式，像：<a href="https://addons.mozilla.org/en-US/firefox/addon/4106" target="_blank" rel="external">Operator</a><br><img src="http://blog.meituo.net/wp-content/uploads/microformat/operator.jpg" alt="Operator"></p>
+<p></p><p>其次，<a href="http://www.danwebb.net" target="_blank" rel="external">Dan Web</a> 已经创建了一个 <a href="http://www.github.com/danwrong/sumo" target="_blank" rel="external">简单的JavaScript库: ‘Sumo’</a>来<a href="http://www.danwebb.net/2007/2/9/sumo-a-generic-microformats-parser-for-javascript" target="_blank" rel="external">用JavaScript从微格式抽取数据</a>. 你也可以使用 <a href="http://leftlogic.com/lounge/articles/microformats_bookmarklet/" target="_blank" rel="external">微格式bookmarklet</a>.</p>
+<h3 id="How"><a href="#How" class="headerlink" title="How ?"></a>How ?</h3><p>看到这里，很显然使用微格式是双赢的，所以让我看看如何使用，在这之前，我们看看微格式的一般结构：一般说如果涉及多个元素，就是用类（classes），如果仅一个元素就是用rel属性。</p>
+<h4 id="hCalendar"><a href="#hCalendar" class="headerlink" title="hCalendar"></a>hCalendar</h4><p>hCalendar用来编码事件，我们可以用代码像这样声明我们的事件：<br>[code=”html”]</p>
+<div class="vevent"><br><br></div>
+
+<p>[/code]<br>如果你有多个事件，就将他们用一个带有vcalendar类的div包裹；其实，也并不需要，对于一个事件vcalendar有两个必须的属性开始时间（dtstart）和summary。<br>[code=”html”]</p>
+<div class="vevent"><br><br>This year, our <span class="summary">company holiday dinner</span><br>    will begin at <span class="dtstart">2009-12-18T17:30</span>.<br><br></div>
+
+<p>[/code]</p>
+<p>人类可读的，恩？不是这种格式的data啊，你对了。虽然微格式是人类第一，时间是电脑能够阅读的重要区域之一，通常时间会被abbr标签包裹，且title属性就是那个合适的值。<br>[code=”html”]<br><abbr class="dtstart" title="2009-12-18T17:30">5:30pm on Friday, December 18.</abbr><br>[/code]</p>
+<p>还有其他可选的属性，还有end time那，它的位置在哪?<br>[code=”html”]</p>
+<p>We’ll meet in the <span class="location"> conference room of the Tower Hotel</span>,<br>which we have reserved until <abbr class="dtend" title="2009-12-18T20:30">9:30pm</abbr>.</p>
+<p>[/code]<br>使用Operator工具栏，这个事件已经在我们页面里了，我们可以在几个方面使用它：<br><img src="http://blog.meituo.net/wp-content/uploads/microformat/hcalendar.jpg" alt="hCalenday in Operator"><br><img src="" alt="这个原文少了一张图"><br>如果我选择使用Google Calendar输出，它将完美的输出我们设置的时间。<br><img src="http://nettuts.s3.amazonaws.com/515_micro/gcal.jpg" alt="Google Calendar, importing hCalendar"></p>
+<p>更多关于hCalender的内容看这里<a href="http://microformats.org/wiki/hcalendar" target="_blank" rel="external">hCalendar documentation</a></p>
+<h4 id="hCard"><a href="#hCard" class="headerlink" title="hCard"></a>hCard</h4><p>然我们再看看hCard，hCard比hCalendar复杂得多，但是我们不会深入研究，如果你想学习更多，看着里<a href="http://microformats.org/wiki/hcard" target="_blank" rel="external">the docs</a></p>
+<p>让我们从基础看起：<br>[code=”html”]</p>
+<div class="vcard"><br></div><br>[/code]<br><br>对hCard，只有两个必需属性；名字（n）和格式化得名字（fn），通常他们是同一个元素。<br>[code=”html”]<br><div class="vcard"><br><br>John Doe<br><br></div>
+
+<p>[/code]</p>
+<p>我们不再深入，我注意到应用的这个格式中‘John’是名，而‘Doe’是姓。如果你想分别指定，你可以使用given-name和family-name类：<br>[code=”html”]<br><span class="given-name">John</span><br><span class="family-name">Doe</span></p>
+<p>[/code]<br>当然，你常常想添加更多内容，你可以添加昵称，相片，email，地址，生日，网址，电话号码等。<br>[code=”html”]</p>
+<p>JayDee</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/microformat/avatar.jpg" alt=""></p>
+<ul>
+<li><span class="type">Personal:</span> <span class="value">johndoe@gmail.com</span></li>
+<li><p><span class="type">Work:</span> jdoe@example.com</p>
+</li>
+<li><p><span class="type">Home</span>: <span class="value">(416) 123-4567</span></p>
+</li>
+<li><span class="type">Work</span> 416-987-6543</li>
+</ul>
+<p>January 1, 1980</p>
+<p><a href="http://www.johndoe.com" target="_blank" rel="external">My Website</a></p>
+<address class="adr"><br><br>123 Main Street<br><br><span class="locality">Toronto</span>, <span class="region">Ontario</span> <span class="postal-code">M2W 4R5</span><br><br>Canada<br><br></address>
+
+<p>[/code]</p>
+<p>还有更多需要注释的：</p>
+<ol>
+<li>我这里使用的所有names都是hCard属性。</li>
+<li>一些熟悉，像网址和相片，从他们的href和src取值，而不是文本元素。</li>
+<li>属性像tel和email有两个子属性：type和value。如果仅有type定义了，value将被暗示的（你可以在第二封电子邮件地址和电话号码看见）。<br>用Operator，我能像这样输出Vcard<br><img src="http://blog.meituo.net/wp-content/uploads/microformat/hcard.jpg" alt="hCard in Operator"><br>在Outlook打开</li>
+</ol>
+<p><img src="http://blog.meituo.net/wp-content/uploads/microformat//outlook.jpg" alt="hCard in Outlook"><br>明白了吗？我们定义的一切都在这里</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/css/">css</a><a href="/tags/html/">html</a><a href="/tags/微格式/">微格式</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript 求数组的最大值和最小值的超简洁代码 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="JavaScript 求数组的最大值和最小值的超简洁代码"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>JavaScript 求数组的最大值和最小值的超简洁代码</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/javascript-e6-b1-82-e6-95-b0-e7-bb-84-e7-9a-84-e6-9c-80-e5-a4-a7-e5-80-bc-e5-92-8c-e6-9c-80-e5-b0-8f-e5-80-bc-e7-9a-84-e8-b6-85-e7-ae-80-e6-b4-81-e4-bb-a3-e7-a0-81/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:45:30.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><div class="item-body"><div><br><br><a href="http://ejohn.org/apps/learn/" target="_blank" rel="external">How can we find the Min/Max number in an array?</a><br><br>看<a href="http://ejohn.org/" target="_blank" rel="external">John Resig</a>的Secrets of the JavaScript Ninja，被震了一下，原来Math.min和Math.max可以这么用。。<br><br><a id="more"></a><br><pre><br>    function smallest(array){<br>      return Math.min.apply( Math, array );<br>    }<br>    function largest(array){<br>      return Math.max.apply( Math, array );<br>    }<br>    alert(smallest([0, 1, 2, 3]) == 0, “Locate the smallest value.”);<br>    alert(largest([0, 1, 2, 3]) == 3, “Locate the largest value.”);<br></pre><br><br>Math对象调用Math对象的min方法？不太理解。<br><br><pre><br>function smallest(){<br>  return Math.min.apply( Math, arguments );<br>}<br>function largest(){<br>  return Math.max.apply( Math, arguments );<br>}<br>alert(smallest(0, 1, 2, 3) == 0, “Locate the smallest value.”);<br>alert(largest(0, 1, 2, 3) == 3, “Locate the largest value.”);<br></pre><br><br>链接：<a href="http://blog.meituo.net/" target="_blank" rel="external">http://ejohn.org/apps/learn/#41</a><br></div></div></div>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

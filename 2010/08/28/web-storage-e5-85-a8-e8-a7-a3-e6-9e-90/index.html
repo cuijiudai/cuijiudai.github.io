@@ -1,0 +1,195 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Web Storage全解析 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="html">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="Web Storage全解析"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>Web Storage全解析</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/28/web-storage-e5-85-a8-e8-a7-a3-e6-9e-90/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-28T15:25:28.000Z">
+          2010-08-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 25 Jun 2010 01:54 AM PDT</p><p></p>
+<div class="info">Web应用的发展，使得客户端存储使用得也越来越多，而实现客户端存储的方式则是多种多样。最简单而且兼容性最佳的方案是Cookie，但是作为真正的客户端存储，Cookie则存在很多致命伤。此外，在IE6及以上版本中还可以使用<a href="http://msdn.microsoft.com/en-us/library/ms531424(v=VS.85" target="_blank" rel="external">userData Behavior</a>.aspx)、在Firefox下可以使用<a href="https://developer.mozilla.org/en/dom/storage" target="_blank" rel="external">globalStorage</a>、在有Flash插件的环境中可以使用<a href="http://www.macromedia.com/support/documentation/en/flashplayer/help/help02.html" target="_blank" rel="external">Flash Local Storage</a>，但是这几种方式都存在兼容性方面的局限性，因此真正使用起来并不理想。针对以上情况，HTML5中给出了更加理想的解决方案：假如你需要存储复杂的数据则可以使用<a href="http://dev.w3.org/html5/webdatabase/" target="_blank" rel="external">Web Database</a>，可以像客户端程序一样使用SQL（不过Web Database标准当前正陷于僵局之中，而且目前已经实现的浏览器很有限）；假如你需要存储的只是简单的用key/value对即可解决的数据则可以使用<a href="http://dev.w3.org/html5/webstorage/" target="_blank" rel="external">Web Storage</a>。 本文主要从各个方面介绍一下Web Storage的具体情况。</div>
+
+<p><span id="more-670"></span></p>
+<a id="more"></a>
+<h3 id="sessionStorage与localStorage"><a href="#sessionStorage与localStorage" class="headerlink" title="sessionStorage与localStorage"></a><strong>sessionStorage与localStorage</strong></h3><p>Web Storage实际上由两部分组成：sessionStorage与localStorage。</p>
+<p>sessionStorage用于本地存储一个会话（session）中的数据，这些数据只有在同一个会话中的页面才能访问并且当会话结束后数据也随之销毁。因此sessionStorage不是一种持久化的本地存储，仅仅是会话级别的存储。</p>
+<p>localStorage用于持久化的本地存储，除非主动删除数据，否则数据是永远不会过期的。</p>
+<h3 id="为什么选择Web-Storage而不是Cookie？"><a href="#为什么选择Web-Storage而不是Cookie？" class="headerlink" title="为什么选择Web Storage而不是Cookie？"></a><strong>为什么选择Web Storage而不是Cookie？</strong></h3><p>与Cookie相比，Web Storage存在不少的优势，概括为以下几点：</p>
+<p>1. 存储空间更大：IE8下每个独立的存储空间为10M，其他浏览器实现略有不同，但都比Cookie要大很多。</p>
+<p>2. 存储内容不会发送到服务器：当设置了Cookie后，Cookie的内容会随着请求一并发送的服务器，这对于本地存储的数据是一种带宽浪费。而Web Storage中的数据则仅仅是存在本地，不会与服务器发生任何交互。</p>
+<p>3. 更多丰富易用的接口：Web Storage提供了一套更为丰富的接口，使得数据操作更为简便。</p>
+<p>4. 独立的存储空间：每个域（包括子域）有独立的存储空间，各个存储空间是完全独立的，因此不会造成数据混乱。</p>
+<h3 id="兼容性如何？"><a href="#兼容性如何？" class="headerlink" title="兼容性如何？"></a><strong>兼容性如何？</strong></h3><p>接下来的各种测试是在以下浏览器中进行的：IE8、Firefox3.6、Chrome5、Safari4、Opera10，事实证明各个浏览器在API方面的实现基本上一致，存在一定的兼容性问题，但不影响正常的使用。</p>
+<h3 id="sessionStorage测试"><a href="#sessionStorage测试" class="headerlink" title="sessionStorage测试"></a><strong>sessionStorage测试</strong></h3><p>本节主要针对sessionStorage的一些特性进行了测试，测试的重点在于各个浏览器对于session的定义以及跨域情况。测试方法很简单：打开<a href="http://varnow.org/pages/html5/web_storage/session/sessionStorage_A.html" target="_blank" rel="external">页面A</a>，在页面A中写入当前的session数据，然后通过页面A中的链接或按钮使用不同的方式进入下页面B，如果页面B中能够访问到页面A中的数据则说明浏览器将当前情况的页面A、B视为同一个session。测试的具体结果如表1：</p>
+<p>表1 sessionStorage兼容性测试</p>
+<table cellspacing="0" cellpadding="2" border="0" width="600" style="border-collapse: collapse;"><br><tbody><br><tr><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;"></td><br><td width="140" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">原窗口</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">target=”_blank”</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">window.open</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">ctrl + click</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">跨域访问</td><br></tr><br><tr><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">IE8</td><br><td width="140" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否</td><br></tr><br><tr><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Firefox3.6</td><br><td width="140" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否（null)</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否</td><br></tr><br><tr><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Chrome5</td><br><td width="140" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否（undefined)</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否</td><br></tr><br><tr><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Safari4</td><br><td width="140" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否（undefined)</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否</td><br></tr><br><tr><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Opera10</td><br><td width="140" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否（undefined)</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否</td><br></tr><br></tbody><br></table>
+
+<p>从表1中可以看出，处于安全性考虑所有浏览器下session数据都是不允许跨域访问的，包括跨子域也是不允许的。其他方面主流浏览器中的实现较为一致。</p>
+<h3 id="API测试"><a href="#API测试" class="headerlink" title="API测试"></a><strong>API测试</strong></h3><p>方法包括以下几个：</p>
+<p>setItem(key,value)、removeItem(key)、getItem(key)、clear()、key(index)；</p>
+<p>属性包括length、remainingSpace(非标准)。不过存储数据时可以简单的使用localStorage.key=value的方式。</p>
+<p>测试地址为：<a href="http://varnow.org/pages/html5/web_storage/local/localStorage.html" title="http://varnow.org/pages/html5/web_storage/local/localStorage.html" target="_blank" rel="external">http://varnow.org/pages/html5/web_storage/local/localStorage.html</a></p>
+<p>测试结果另人满意，标准中定义的接口在各个浏览器中都已实现，此外IE8下新增了一个非标准的remainingSpace属性，用于获取存储空间中剩余的空间。结果如表2：</p>
+<p>表2 API测试</p>
+<table cellspacing="0" cellpadding="2" border="0" width="600" style="border-collapse: collapse;"><br><tbody><br><tr><br><td width="48" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;"></td><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">setItem</td><br><td width="74" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">removeItem</td><br><td width="65" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">getItem</td><br><td width="57" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">clear</td><br><td width="70" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">key</td><br><td width="81" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">length</td><br><td width="145" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">remainingSpace</td><br></tr><br><tr><br><td width="48" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">IE8</td><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="74" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="65" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="57" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="70" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="81" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="145" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br></tr><br><tr><br><td width="48" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Firefox3.6</td><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="74" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="65" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="57" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="70" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="81" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="145" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否</td><br></tr><br><tr><br><td width="48" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Chrome5</td><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="74" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="65" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="57" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="70" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="81" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="145" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否</td><br></tr><br><tr><br><td width="48" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Safari4</td><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="74" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="65" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="57" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="70" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="81" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="145" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否</td><br></tr><br><tr><br><td width="48" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Opera10</td><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="74" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="65" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="57" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="70" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="81" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">是</td><br><td width="145" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">否</td><br></tr><br></tbody><br></table>
+
+<p>此外关于setItem(key,value)方法中的value类型，理论上可以是任意类型，不过实际上浏览器会调用value的toString方法来获取其字符串值并存储到本地，因此如果是自定义的类型则需要自己定义有意义的toString方法。</p>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a><strong>事件</strong></h3><p>标准的事件为onstorage，当存储空间中的数据发生变化时触发。此外，IE8中新增了一个onstoragecommit事件，当数据写入的时候触发。onstorage事件中的事件对象应该支持以下属性：</p>
+<blockquote>
+<p>The key attribute represents the key being changed.</p>
+<p>The oldValue attribute represents the old value of the key being changed.</p>
+<p>The newValue attribute represents the new value of the key being changed.</p>
+<p>The url attribute represents the address of the document whose key changed.</p>
+<p>The storageArea attribute represents the Storage object that was affected.</p>
+</blockquote>
+<p>对于这一标准的实现，webkit内核的浏览器（Chrome、Safari）以及Opera是完全遵循标准的，IE8则只实现了url，Firefox下则均未实现。</p>
+<p>测试地址为：<a href="http://varnow.org/pages/html5/web_storage/local/event.html" target="_blank" rel="external">http://varnow.org/pages/html5/web_storage/local/event.html</a></p>
+<p>具体结果见表3。</p>
+<p>表3 onStorage事件对象属性测试</p>
+<table cellspacing="0" cellpadding="2" border="0" width="600" style="border-collapse: collapse;"><br><tbody><br><tr><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;"></td><br><td width="140" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">key</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">oldValue</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">newValue</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">url</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">storageArea</td><br></tr><br><tr><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">IE8</td><br><td width="140" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">无</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">无</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">无</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">无</td><br></tr><br><tr><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Firefox3.6</td><br><td width="140" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">无</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">无</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">无</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">无</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">无</td><br></tr><br><tr><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Chrome5</td><br><td width="140" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br></tr><br><tr><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Safari4</td><br><td width="140" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br></tr><br><tr><br><td width="60" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Opera10</td><br><td width="140" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br><td width="100" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">有</td><br></tr><br></tbody><br></table>
+
+<p>此外，不同的浏览器事件注册的方式以及对象也不一致，具体如表4。</p>
+<p>表4 onStorage事件注册对象</p>
+<table cellspacing="0" cellpadding="2" border="0" width="600" style="border-collapse: collapse;"><br><tbody><br><tr><br><td width="67" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;"></td><br><td width="111" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">事件注册对象</td><br><td width="422" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">备注</td><br></tr><br><tr><br><td width="67" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">IE8</td><br><td width="111" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">document</td><br><td width="422" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;"></td><br></tr><br><tr><br><td width="67" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Firefox3.6</td><br><td width="111" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">document</td><br><td width="422" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">必须使用document.addEventListener注册，否则无效。</td><br></tr><br><tr><br><td width="67" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Chrome5</td><br><td width="111" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">window</td><br><td width="422" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;"></td><br></tr><br><tr><br><td width="67" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Safari4</td><br><td width="111" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">body</td><br><td width="422" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;"></td><br></tr><br><tr><br><td width="67" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">Opera10</td><br><td width="111" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;">window</td><br><td width="422" valign="top" style="border: 1px solid rgb(204, 204, 204); padding: 2px 4px;"></td><br></tr><br></tbody><br></table>
+
+<h3 id="缺陷与不足"><a href="#缺陷与不足" class="headerlink" title="缺陷与不足"></a><strong>缺陷与不足</strong></h3><p>Web Storage的缺陷主要集中在其安全性方面，具体体现在以下两点：</p>
+<p>1. 浏览器会为每个域分配独立的存储空间，即脚本在域A中是无法访问到域B中的存储空间的，但是浏览器却不会检查脚本所在的域与当前域是否相同。即在域B中嵌入域A中的脚本依然可以访问域B中的数据。测试地址：<a href="http://varnow.org/pages/html5/web_storage/local/corss_domain_js_access.html" title="http://varnow.org/pages/html5/web_storage/local/corss_domain_js_access.html" target="_blank" rel="external">http://varnow.org/pages/html5/web_storage/local/corss_domain_js_access.html</a></p>
+<p>2. 存储在本地的数据未加密而且永远不会过期，极易造成隐私泄漏。也许需要像保存密码一样询问用户是在用私人电脑还是公共电脑来决定是否将数据保存在本地。</p>
+<h3 id="跨页面通讯示例"><a href="#跨页面通讯示例" class="headerlink" title="跨页面通讯示例"></a><strong>跨页面通讯示例</strong></h3><p>示例地址：<a href="http://varnow.org/pages/html5/web_storage/app/play.html" target="_blank" rel="external">http://varnow.org/pages/html5/web_storage/app/play.html</a></p>
+<p><a href="http://varnow.org/wordpress/wp-content/uploads/2010/05/ndimension.jpg" target="_blank" rel="external"><img src="http://varnow.org/wordpress/wp-content/uploads/2010/05/ndimension-thumb.jpg" alt="N-Dimension"></a></p>
+<p>玩法很简单：选择 打开多个窗口，页面会自动打开并定位4个新窗口，小球会在多个窗口间运动，在小球运动的过程中可以拖动窗口或者打开新的窗口来控制小球进入新的区域。</p>
+<p>实现原理：每个新打开的窗口会将自己的坐标以及大小写入localStorage，小球在运动到窗口边界时会检测小球将要进入的下一个窗口，如果找到该窗口则将小球坐标写入并通知新窗口接收小球。</p>
+<p>原文：<a href="http://www.baiduux.com/blog/2010/06/21/web-storage%E5%85%A8%E8%A7%A3%E6%9E%90/" target="_blank" rel="external">Web Storage全解析</a></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/html/">html</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

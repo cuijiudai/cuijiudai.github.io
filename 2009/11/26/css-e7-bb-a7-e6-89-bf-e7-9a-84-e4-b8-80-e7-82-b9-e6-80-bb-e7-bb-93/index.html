@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>css 继承的一点总结 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="css">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="css 继承的一点总结"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>css 继承的一点总结</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2009/11/26/css-e7-bb-a7-e6-89-bf-e7-9a-84-e4-b8-80-e7-82-b9-e6-80-bb-e7-bb-93/" rel="bookmark">
+        <time class="entry-date published" datetime="2009-11-26T14:36:24.000Z">
+          2009-11-26
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h3 id="css哪些属性可以继承"><a href="#css哪些属性可以继承" class="headerlink" title="css哪些属性可以继承?"></a>css哪些属性可以继承?</h3><h4 id="1、text-related"><a href="#1、text-related" class="headerlink" title="1、text-related"></a>1、text-related</h4><ol>
+<li>font-family</li>
+<li>font-size</li>
+<li>font-style</li>
+<li>font-variant</li>
+<li>font-weight</li>
+<li>font</li>
+<li>letter-spacing</li>
+<li>line-height</li>
+<li>text-align</li>
+<li>text-indent</li>
+<li>text-transform</li>
+<li>word-spacing</li>
+</ol>
+<p>所有主流浏览器都支持 font-weight 属性。</p>
+<p>注释：任何的版本的 Internet Explorer （包括 IE8）都不支持属性值 “inherit”。</p>
+<a id="more"></a>
+<h4 id="2、list-related"><a href="#2、list-related" class="headerlink" title="2、list-related"></a>2、list-related</h4><ol>
+<li>list-style-image</li>
+<li>list-style-position</li>
+<li>list-style-type</li>
+<li>list-style</li>
+</ol>
+<h4 id="3、color"><a href="#3、color" class="headerlink" title="3、color"></a>3、color</h4><h4 id="4、opacity"><a href="#4、opacity" class="headerlink" title="4、opacity"></a>4、opacity</h4><p>opacity的继承有问题，子元素会继承祖元素的opacity，但是无法更改。</p>
+<h3 id="特殊的font-size"><a href="#特殊的font-size" class="headerlink" title="特殊的font-size"></a>特殊的font-size</h3><pre><code>测试代码：
+[code=&quot;html&quot;]
+</code></pre><p>let us test <em>em element</em>,how about it！</p>
+<pre><code>[/code]
+</code></pre><h4 id="1、百分比"><a href="#1、百分比" class="headerlink" title="1、百分比%"></a>1、百分比%</h4><pre><code>p{font-size:80%}
+em 内的文字和p一样大，并不是p字体大小的80%。
+</code></pre><h4 id="2、pix，em"><a href="#2、pix，em" class="headerlink" title="2、pix，em"></a>2、pix，em</h4><pre><code>p{font-size:14px}
+重写浏览器默认的16px，都是14px
+p{font-size:0.85em}
+</code></pre><p>重写浏览器默认的16px，都是13.6px</p>
+<pre><code>**继承的父元素的大小，而不是比例.**
+</code></pre><p>继承的详细介绍的看视频：</p>
+<div style="width:425px;text-align:left" id="__ss_1772232"><object style="margin:0px" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=inheritance2-090726204631-phpapp02&rel=0&stripped_title=css-inheritance-a-simple-stepbystep-tutorial"><param name="allowFullScreen" value="true"><param name="allowScriptAccess" value="always"><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=inheritance2-090726204631-phpapp02&rel=0&stripped_title=css-inheritance-a-simple-stepbystep-tutorial" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></object></div>
+
+<h3 id="特殊的line-height"><a href="#特殊的line-height" class="headerlink" title="特殊的line-height"></a>特殊的line-height</h3><p>测试代码：</p>
+<p>[code=”css”]<br>body{<br>    font-size:16px;<br>    line-height:xxx; //xxx用于以下替换<br>}<br>h1{font-size:32px;}<br>p{font-size:16px;}</p>
+<p>#footer{font-size:12px}<br>[/code]</p>
+<h4 id="1、百分比、px"><a href="#1、百分比、px" class="headerlink" title="1、百分比、px"></a>1、百分比、px</h4><pre><code>xxx=120%，即body默认16px*120%=19.2px，
+现在body,h1,p,#footer的line-height=19.2px;
+若xxx=20px；现在body,h1,p,#footer的line-height=20px;
+</code></pre><h4 id="2、normal、纯数字"><a href="#2、normal、纯数字" class="headerlink" title="2、normal、纯数字"></a>2、normal、纯数字</h4><pre><code>xxx=1.5
+    body的line-height=16px*1.5=24px
+    h1的line-height=32px*1.5=48px
+    p的line-height=16px*1.5=24px
+    #footer的line-height=12px*1.5=18px
+    而normal约为纯数字1.2，就是将上边的1.5换成1.2。
+</code></pre><p>推荐使用纯数字。</p>
+<p>line-height详细介绍的看视频：</p>
+<div style="width:425px;text-align:left" id="__ss_2470819"><object style="margin:0px" width="425" height="355"><param name="movie" value="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=line-heightcn-091110205256-phpapp02&rel=0&stripped_title=line-height-2470819"><param name="allowFullScreen" value="true"><param name="allowScriptAccess" value="always"><embed src="http://static.slidesharecdn.com/swf/ssplayer2.swf?doc=line-heightcn-091110205256-phpapp02&rel=0&stripped_title=line-height-2470819" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="355"></object></div>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/css-html/">css/html</a>
+    </span>
+    
+
+    
+    
+
+    <span class="post-tags">
+      <i class="icon-tags"></i>
+        <a href="/tags/css/">css</a>
+    </span>
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

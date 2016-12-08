@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>wordpress改域名换空间后网站备份的恢复 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="wordpress改域名换空间后网站备份的恢复"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>wordpress改域名换空间后网站备份的恢复</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/30/wordpress-e6-94-b9-e5-9f-9f-e5-90-8d-e6-8d-a2-e7-a9-ba-e9-97-b4-e5-90-8e-e7-bd-91-e7-ab-99-e5-a4-87-e4-bb-bd-e7-9a-84-e6-81-a2-e5-a4-8d/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-30T15:41:26.000Z">
+          2010-08-30
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p>原来的免费空间挂了，很多图片及附加丢失，所以不好意思，博客中有很多死连，从即日起<a href="http://blog.meituo.net" target="_blank" rel="external">美拓blog</a>启用新的域名 <a href="http://blog.meituo.net.感谢" target="_blank" rel="external">http://blog.meituo.net.感谢</a> <a href="http://www.piscean.net/" target="_blank" rel="external">碧海蓝天</a>友情提供空间。大家更换定义链接吧。。。。博客稳定了，以后要好好写博客，thinks！<br><a id="more"></a><br>以下是更换博客后更新数据库的方法，网上搜的。。<br>最近想把原来的二级域名改为以前的顶级域名，原来的空间不太稳定想换个稳定点的，那么，如何才能实现网站的搬家呢？首先把原空间的wordpress目录上传到新空间，接下来就是通过phpMyAdmin导入备份数据库到新空间了。（如果你在导入数据库时遇到这样那样的错误，建议在备份MySQL数据库时用帝国备份王<a href="http://www.phome.net/ebak2010/）" target="_blank" rel="external">http://www.phome.net/ebak2010/）</a></p>
+<p>第一步：在phpMyAdmin中执行以下sql命令，就可完成域名的修改：<br>1.正常情况：<br>[code=’php’]<br>UPDATE wp_options SET option_value = replace(option_value, ‘<a href="http://www.old-domain.com" target="_blank" rel="external">http://www.old-domain.com</a>‘, ‘<a href="http://www.new-domain.com" target="_blank" rel="external">http://www.new-domain.com</a>‘)</p>
+<p>2.不正常情况：如果执行以上命令后网站主题显示不出来，而且不能登录后台的话，那么就重新上传备份的数据库或者把上面的命令网址反过来执行，然后，先修改option_value里的站点url：<br>[code=’php’]<br>UPDATE wp_options SET option_value = replace(option_value, ‘<a href="http://www.old-domain.com" target="_blank" rel="external">http://www.old-domain.com</a>‘, ‘<a href="http://www.new-domain.com" target="_blank" rel="external">http://www.new-domain.com</a>‘) WHERE option_name = ‘siteurl’;<br>[/code]<br>然后登陆新网站的后台，在“设置”“常规”中把“博客地址”改为新网站地址。之后就可以进行下一步操作了。<br>[code=’php’]<br>UPDATE wp_options SET option_value = replace(option_value, ‘<a href="http://www.old-domain.com" target="_blank" rel="external">http://www.old-domain.com</a>‘, ‘<a href="http://www.new-domain.com" target="_blank" rel="external">http://www.new-domain.com</a>‘)<br>[/code]<br>第二步：更正文章中内部链接及图片等附件的地址：<br>[code=’php’]<br>UPDATE wp_posts SET post_content = replace(post_content, ‘<a href="http://www.old-domain.com" target="_blank" rel="external">http://www.old-domain.com</a>‘, ‘<a href="http://www.new-domain.com" target="_blank" rel="external">http://www.new-domain.com</a>‘);<br>[/code]<br>第三步：更正wordpress文章默认的永久链接：<br>[code=’php’]<br>UPDATE wp_posts SET guid = replace(guid, ‘<a href="http://www.old-domain.com&#39;,&#39;http://www.new-domain.com" target="_blank" rel="external">http://www.old-domain.com&#39;,&#39;http://www.new-domain.com</a>‘);<br>[/code]</p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/WordPress/">WordPress</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

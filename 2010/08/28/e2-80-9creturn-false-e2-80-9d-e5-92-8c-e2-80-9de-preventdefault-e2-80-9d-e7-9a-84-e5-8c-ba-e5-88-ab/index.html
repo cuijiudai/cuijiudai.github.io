@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>“return false” 和”e.preventDefault”的区别 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="“return false” 和”e.preventDefault”的区别"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>“return false” 和”e.preventDefault”的区别</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/28/e2-80-9creturn-false-e2-80-9d-e5-92-8c-e2-80-9de-preventdefault-e2-80-9d-e7-9a-84-e5-8c-ba-e5-88-ab/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-28T15:10:05.000Z">
+          2010-08-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 09 Jul 2010 02:16 AM PDT</p><p></p>
+<p>这俩个我们经常见到，废话不多说，看例子</p>
+<p>[code=’js’]<br>$(“a”).click(function() {<br>   $(“body”).append($(this).attr(“href”));<br>   return false;<br>}<br>[/code]<br><a id="more"></a></p>
+<p>这个效果大家应该知道，那么他和下例有啥区别：</p>
+<p>[code=’js’]<br>$(“a”).click(function(e) {<br>   $(“body”).append($(this).attr(“href”));<br>   e.preventDefault();<br>}<br>[/code]</p>
+<p>思考一下，有啥区别那？？？<span id="more-710"></span></p>
+<p>区别是这样的，<code>return false</code>也阻止了冒泡。</p>
+<p><img src="http://blog.meituo.net/wp-content/uploads/propegationdemo.png" alt="图片示例"></p>
+<div class="download"><a href="http://css-tricks.com/examples/ReturnFalse/" target="_blank" rel="external">This demo.</a></div>
+
+<p>所以可以这样认为：</p>
+<p>[code=’js’]<br>function() {<br>  return false;<br>}</p>
+<p>// 等价于</p>
+<p>function(e) {<br>  e.preventDefault();<br>  e.stopPropagation();<br>}<br>[/code]</p>
+<p>当然这个问题没有这么简单，你最好看看这里 <a href="http://www.quirksmode.org/js/events_order.html" target="_blank" rel="external">Event order</a>的介绍。</p>
+<p>原文：<a href="http://css-tricks.com/return-false-and-prevent-default/" target="_blank" rel="external">The difference between ‘return false;’ and ‘e.preventDefault();’</a></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

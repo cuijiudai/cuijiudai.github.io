@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>typeof number 不是 number! | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="typeof number 不是 number!"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>typeof number 不是 number!</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/29/typeof-number-e4-b8-8d-e6-98-af-number/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-29T03:24:32.000Z">
+          2010-08-29
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <div><br><br>从 wtfjs<br><br>How do you determine if a number is an integer in JavaScript?<br><br>在js中你怎么判断一个数字是否是int那？<br><br><pre><br>    x = 1;<br><br>    x === Math.floor(x);<br>    // returns true<br></pre><br><br><a id="more"></a><br>But what happens if we try to add a method for this to the Number prototype?<br><br>但是如果我们试着给Number 的prototype添加一个方法那？<br><br><pre><br>    Number.prototype.isInteger = function() {<br>      return this === Math.floor(this);<br>    }<br><br>    x = 1;<br><br>    x.isInteger();<br>    // returns false!<br></pre><br><br>Why? It turns out that when you add methods to Number, the type of the number inside the method becomes “object” rather than “number”, but Math.floor returns a result of type “number”. If you use the === operator, the two values are no longer equal because they’re different types. So the method can be fixed two ways.<br><br>为什么？当你给Number添加方法，在方法里 这个number（也就是this）是 Object 而不是 Number，Math.floor返回 Number , 如果你使用全等符号 === ，这两个值就不再相等了，因为他们是不同类型，所以你可以使用下面的方法修复。<br><br>Solution 1 is to avoid comparing types:<br><br><pre><br>    Number.prototype.isInteger = function() {<br>      return this == Math.floor(this);<br>      // works but breaks if you care about 0 vs other falsy values<br>    }<br></pre><br><br>Solution 2 is better; cast “this” to the Number type and then the types are equal.<br><br><pre><br>    Number.prototype.isInteger = function() {<br>      return Number(this) === Math.floor(this);<br>    }<br></pre><br><br>如果有兴趣可以使用下面代码测试<br><br><pre><br>&lt;html&gt;<br>&lt;head&gt;<br>    &lt;meta http-equiv=”Content-type” content=”text/html; charset=utf-8”&gt;<br>    &lt;title&gt;alert&lt;/title&gt;<br>&lt;script type=”text/javascript” charset=”utf-8”&gt;<br>/<em><br>    Number.prototype.isInteger = function() {<br>     alert(“this : “+typeof this)<br>      return this === Math.floor(this);<br><br>    }<br><br>    x = 1;<br>alert (“x: “+typeof x);<br>alert( “ x.isInteger() : “+x.isInteger());<br>    // returns false!
+</em>/<br><br>    Number.prototype.isInteger = function() {<br>      return this == Math.floor(this);<br>      // works but breaks if you care about 0 vs other falsy values<br>    }<br> a = 0;<br> b = 1;<br>//alert(0.isInteger()); //报错<br>alert(a.isInteger());<br>alert(b.isInteger());<br><br>&lt;/script&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br><br>&lt;/body&gt;<br><br>&lt;/html&gt;<br></pre><br><br>那么parseInt()是否也可以那？<br><br>为搞清楚两者的区别，<br><br>参考了别人写的parseInt&amp;Number的区别：<br><br>#### parseInt<br><br>Parses a string argument and returns an integer of the specified radix or base.<br><br>解析一个string 返回一个基于radix 进制的 整形（integer）<br><br>核心函数<br><br>实现版本 Navigator 2.0: If the first character of the string specified in parseInt(string) cannot be converted to a number, returns “NaN” on Solaris and Irix and 0 on all other platforms.Navigator 3.0, LiveWire 2.0: Returns “NaN” on all platforms if the first character of the string specified in parseInt(string) cannot be converted to a number.<br><br>语法<br><br>parseInt(string,radix)<br><br>参数<br><br>string ：A string that represents the value you want to parse.字符串<br><br>radix : (Optional) An integer that represents the radix of the return value.进制<br><br>描述<br><br>The parseInt function is a built-in JavaScript function.<br><br>The parseInt function parses its first argument, a string, and attempts to return an integer of the specified radix (base). For example, a radix of 10 indicates to convert to a decimal number, 8 octal, 16 hexadecimal, and so on. For radixes above 10, the letters of the alphabet indicate numerals greater than 9. For example, for hexadecimal numbers (base 16), A through F are used.<br><br>If parseInt encounters a character that is not a numeral in the specified radix, it ignores it and all succeeding characters and returns the integer value parsed up to that point. parseInt truncates numbers to integer values.<br><br>If the radix is not specified or is specified as 0, JavaScript assumes the following:<br><br>If the input string begins with “0x”, the radix is 16 (hexadecimal).<br><br>If the input string begins with “0″, the radix is eight (octal).<br><br>If the input string begins with any other value, the radix is 10 (decimal).<br><br>If the first character cannot be converted to a number, parseInt returns “NaN”.<br><br>For arithmetic purposes, the “NaN” value is not a number in any radix. You can call the isNaN function to determine if the result of parseInt is “NaN”. If “NaN” is passed on to arithmetic operations, the operation results will also be “NaN”.<br><br>示例<br><br>The following示例 all return 15:<br><br><pre><br>parseInt(“F”, 16)<br>parseInt(“17”, 8 )<br>parseInt(“15”, 10)<br>parseInt(15.99, 10)<br>parseInt(“FXX123”, 16)<br>parseInt(“1111”, 2)<br>parseInt(“15*3”, 10)<br></pre><br><br>The following示例 all return “NaN”:<br><br><pre><br>parseInt(“Hello”, 8 )<br>parseInt(“0x7”, 10)<br>parseInt(“FFF”, 10)<br></pre><br><br>Even though the radix is specified differently, the following示例 all return 17 because the input string begins with “0x”.<br><br><pre><br>parseInt(“0x11”, 16)<br>parseInt(“0x11”, 0)<br>parseInt(“0x11”)<br></pre><br><br>#### Number()<br><br>将指定对象转换为数字。<br><br>核心函数<br><br>实现版本 Navigator 4.0, Netscape Server 3.0<br><br>语法<br><br>Number(obj)<br><br>参数<br><br>obj 一个对象。<br><br>描述<br><br>如果对象是 Date 类型的对象，Number 将返回自格林威治标准时间 1970 年 1 月 1 日起已经经过的毫秒数，在此日期之后的是正数，之前的是负数。<br><br>如果 obj 是一个没有数字格式的字符串，Number 将返回 NaN。<br><br>显然parseInt 是由 String -&gt; Number ,而 Number 是由 Object -&gt; Number<br><br>而在此例中，Number是对象，所以Number更合适。<br><br>但当我们使用<br><br><pre><br>    Number.prototype.isInteger = function() {<br>      return parseInt(this) === Math.floor(this);<br>    }<br>    var a = 0<br>    var b = 1;<br>    var c= new Object(1);<br><br>    alert(a.isInteger())<br>    alert(b.isInteger())<br>    alert(c.isInteger())<br></pre><br><br>却也没什么问题。js说你什么好那！！！<br><br>文章：<br><br><a href="http://www.jb51.net/article/21871.htm" target="_blank" rel="external">javascript parseInt与Number函数的区别</a><br><br><a href="http://wtfjs.com/2010/07/15/typeof-number-is-not-number" target="_blank" rel="external">typeof number is not number
+
+</a><br></div>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

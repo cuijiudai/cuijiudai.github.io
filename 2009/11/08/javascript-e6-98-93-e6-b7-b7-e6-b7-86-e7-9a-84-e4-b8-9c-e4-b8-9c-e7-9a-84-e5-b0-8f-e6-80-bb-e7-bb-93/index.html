@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JavaScript易混淆的东东的小总结 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="JavaScript易混淆的东东的小总结"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>JavaScript易混淆的东东的小总结</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2009/11/08/javascript-e6-98-93-e6-b7-b7-e6-b7-86-e7-9a-84-e4-b8-9c-e4-b8-9c-e7-9a-84-e5-b0-8f-e6-80-bb-e7-bb-93/" rel="bookmark">
+        <time class="entry-date published" datetime="2009-11-08T08:16:09.000Z">
+          2009-11-08
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <h3 id="1、keydown、keypress和-keyup"><a href="#1、keydown、keypress和-keyup" class="headerlink" title="1、keydown、keypress和 keyup"></a>1、keydown、keypress和 keyup</h3><p> <em>这三个是键盘事件</em><br><strong>事件按下列顺序发生： </strong></p>
+<ol>
+<li>KeyDown</li>
+<li>KeyPress</li>
+<li>KeyUp    <a id="more"></a>
+一个例子说明一切：<a href="http://blog.meituo.net/wp-content/uploads/javascript_confusions/javascript_confusions.html" title="javascript_confusions_example" target="_blank" rel="external">理解万岁</a>.</li>
+</ol>
+<h3 id="2、click-、mousedown和mouseup"><a href="#2、click-、mousedown和mouseup" class="headerlink" title="2、click 、mousedown和mouseup"></a>2、click 、mousedown和mouseup</h3><p> <em>这三个是鼠标事件</em><br><strong>而click时间是由mousedown + mouseup  = click </strong></p>
+<p>这两组实际区别很明显，但是还真容易混了。</p>
+<h3 id="3、keyCode和charCode"><a href="#3、keyCode和charCode" class="headerlink" title="3、keyCode和charCode"></a>3、keyCode和charCode</h3><p><strong>在IE下：</strong></p>
+<pre><code>_对于keyPress:
+
+表示按下按键的Unicode字符；
+_
+_对于keydown/keyup:
+
+    表示按下按键的数字代码
+_
+IE没有charCode特性，为undefined。
+</code></pre><p><strong>在Firfox下：</strong></p>
+<pre><code>_对于keyPress:
+
+charCode表示按下按键的Unicode字符；
+_
+_对于keydown/keyup:
+
+    keyCode表示按下按键的数字代码，在keydown/keyup时间中charCode始终为零。
+_
+可见keypress获得的是Unicode，keydown/keyup获得的是按键的数字代码。只不过IE只用了一个单词keyCode来表示；而Firefox用了charCode表示Unicode，用keyCode表示了数字案件的值。
+</code></pre><p>当鼠标安装不放keydown和keypress会一直触发，直到放开按键触发keyup停止。</p>
+<p>例子就上面那个，没明白么，再点击一次吧。</p>
+<h3 id="4、undefined-null-””-0和false"><a href="#4、undefined-null-””-0和false" class="headerlink" title="4、undefined,null,””,0和false"></a>4、undefined,null,””,0和false</h3><p>请看这里：<a href="http://www.cnblogs.com/birdshome/archive/2005/03/04/111991.html" target="_blank" rel="external">猛点我</a>。<br>[code=”javascript”]<br> typeof(undefined) == ‘undefined’<br> typeof(null) == ‘object’<br> typeof(“”) == ‘string’<br> typeof(0) == ‘number’<br> typeof(false) == ‘boolean’<br> [/code]<br> <em>这五个值作!运算，结果全为：true。if判断就没问题了</em></p>
+
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>

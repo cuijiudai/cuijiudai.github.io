@@ -1,0 +1,180 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>js动画(animate)类 | 美拓blog | 做个有趣的人</title>
+
+  
+  <meta name="author" content="独孤逸辰">
+  
+
+  
+  <meta name="description" content="互联网开发者，金融爱好者,关注农业民生。">
+  
+
+  
+  
+  <meta name="keywords" content="">
+  
+
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+  <meta property="og:title" content="js动画(animate)类"/>
+
+  <meta property="og:site_name" content="美拓blog"/>
+
+  
+  <meta property="og:image" content="/favicon.ico"/>
+  
+
+  <link href="/favicon.ico" rel="icon">
+  <link rel="alternate" href="/atom.xml" title="美拓blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+</head>
+
+
+<body>
+<div class="blog">
+  <div class="content">
+
+    <header>
+  <div class="site-branding">
+    <h1 class="site-title">
+      <a href="/">美拓blog</a>
+    </h1>
+    <p class="site-description">做个有趣的人</p>
+  </div>
+  <nav class="site-navigation">
+    <ul>
+      
+        <li><a href="/">主页</a></li>
+      
+        <li><a href="/archives">归档</a></li>
+      
+        <li><a href="/about">关于</a></li>
+      
+    </ul>
+  </nav>
+</header>
+
+    <main class="site-main posts-loop">
+    <article >
+
+  
+    
+    <h3 class="article-title"><span>js动画(animate)类</span></h3>
+    
+  
+
+  <div class="article-top-meta">
+    <span class="posted-on">
+      <a href="/2010/08/28/js-e5-8a-a8-e7-94-bbanimate-e7-b1-bb/" rel="bookmark">
+        <time class="entry-date published" datetime="2010-08-28T15:22:39.000Z">
+          2010-08-28
+        </time>
+      </a>
+    </span>
+  </div>
+
+
+  
+
+  <div class="article-content">
+    <div class="entry">
+      
+        <p><span>Posted:</span> 04 Jul 2010 01:28 AM PDT</p><p></p>
+<p>来自<a href="http://www.dustindiaz.com" target="_blank" rel="external">dustin diaz</a>的动画类，借鉴YUI的写法，只支持为数字形式的属性，如height, weight, font-size, top, left…像 color, background-image, text-decoration, 等则不支持.<span id="more-694"></span></p>
+<a id="more"></a>
+<p>[code=”js”]<br>/**</p>
+<ul>
+<li>@constructor Animate</li>
+<li>@param {HTMLElement} el the element we want to animate</li>
+<li>@param {String} prop the CSS property we will be animating</li>
+<li>@param {Object} opts a configuration object</li>
+<li>object properties include</li>
+<li>from {Int}</li>
+<li>to {Int}</li>
+<li>time {Int} time in milliseconds 动画所用时间</li>
+<li>callback {Function}<br>*/<br>function Animate(el, prop, opts) {<br>this.el = el;<br>this.prop = prop;<br>this.from = opts.from;<br>this.to = opts.to;<br>this.time = opts.time;<br>this.callback = opts.callback;<br>this.animDiff = this.to - this.from;<br>}</li>
+</ul>
+<p>/**</p>
+<ul>
+<li>@private</li>
+<li><p>@param {String} val the CSS value we will set on the property<br><em>/<br>Animate.prototype._setStyle = function(val) {<br>switch (this.prop) {<br>case ‘opacity’:<br>  this.el.style[this.prop] = val;<br>  this.el.style.filter = ‘alpha(opacity=’ + val </em> 100 + ‘)’;<br>  break;</p>
+<p>default:<br>  this.el.style[this.prop] = val + ‘px’;<br>  break;<br>};<br>};</p>
+</li>
+</ul>
+<p>/**</p>
+<ul>
+<li>@private</li>
+<li>this is the tweening function</li>
+<li><p>_animate函数连续执行形成动画<br>*/<br>Animate.prototype._animate = function() {<br>var that = this;<br>this.now = new Date(); //每次执行获得新的时间<br>this.diff = this.now - this.startTime; //现在和开始的时间差<br>//执行时间超过设定时间了么？<br>if (this.diff &gt; this.time) {<br>this._setStyle(this.to);</p>
+<p>if (this.callback) {<br>  this.callback.call(this);<br>}<br>clearInterval(this.timer);<br>return;<br>}<br>//没有超过设定时间<br>this.percentage = (Math.floor((this.diff / this.time) <em> 100) / 100);<br>  //现在的状态<br>this.val = (this.animDiff </em> this.percentage) + this.from;<br>this._setStyle(this.val);<br>};</p>
+</li>
+</ul>
+<p>/**</p>
+<ul>
+<li>@public</li>
+<li><p>begins the animation<br>*/<br>Animate.prototype.start = function() {<br>var that = this;<br>this.startTime = new Date();</p>
+<p>this.timer = setInterval(function() {<br>that._animate.call(that);<br>}, 4);<br>};<br>[/code]</p>
+</li>
+</ul>
+<p>通常我们应该尽量使用css3 的transitions ，可以添加一个方法，检测是否支持transitions，如果不支持则使用我们的_animate方法。 </p>
+<p>[code=”js”]<br>/**</p>
+<ul>
+<li>@static</li>
+<li>@boolean</li>
+<li>allows us to check if native CSS transitions are possible<br>*/<br>Animate.canTransition = function() {<br>var el = document.createElement(‘foo’);<br>el.style.cssText = ‘-webkit-transition: all .5s linear;’;<br>return !!el.style.webkitTransitionProperty;<br>}();<br>[/code]</li>
+</ul>
+<p>看看使用的例子吧</p>
+<p>[code=”js”]<br>if (Animate.canTransition) {<br>  el.style.webkitTransition = ‘opacity 0.5s ease-out’;<br>  el.style.opacity = 1;<br>}<br>new Animate(el, ‘opacity’, {<br>  from: 0,<br>  to: 1,<br>  time: 500,<br>  callback: done<br>}).start();<br>[/code]</p>
+<div class="download"><a href="http://www.dustindiaz.com/basement/js-animate.html" target="_blank" rel="external">测试页面</a></div>
+      
+    </div>
+  </div>
+
+  <div class="article-footer">
+    <div class="article-meta pull-left">
+
+    
+      
+
+    <span class="post-categories">
+      <i class="icon-categories"></i>
+        <a href="/categories/JavaScript/">JavaScript</a>
+    </span>
+    
+
+    
+
+    </div>
+
+    
+  </div>
+</article>
+
+  
+
+
+
+
+    </main>
+
+    <footer class="site-footer">
+  <p class="site-info">
+    Proudly powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and
+    Theme by <a href="https://github.com/CodeDaraW/Hacker" target="_blank">Hacker</a>
+    </br>
+    
+    &copy; 2016 独孤逸辰
+    
+  </p>
+</footer>
+    
+  </div>
+</div>
+</body>
+</html>
